@@ -21,7 +21,10 @@ namespace Yixing
         public Form1()
         {
             InitializeComponent();
+            
            // this.skinEngine1.SkinFile = "MP10.ssk";
+           //String a = Yixing.Properties.Resources.defaultYixingFolder;
+          //  System.Resources.ResourceManager rs = new System.Resources.ResourceManager(typeof(Form1));
            
         }
 
@@ -123,6 +126,12 @@ namespace Yixing
         {
             Jihetexing j = new Jihetexing();
             j.ShowDialog();
+        }
+
+        private void 文件保存路径ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetFileFolder s = new SetFileFolder();
+            s.ShowDialog();
         }
 
        
