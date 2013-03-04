@@ -8,6 +8,7 @@ using Yixing.UserTool;
 using Yixing.Dialog;
 using System.Drawing;
 using Yixing.model;
+using Yixing.util;
 
 namespace Yixing.UserControl
 {
@@ -724,7 +725,10 @@ namespace Yixing.UserControl
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            TemplateHelper tp = new TemplateHelper("../template/");
+            tp.Put("tu", "sddd");
+            String a = tp.BuildString("cfl3d.vm");
+            Console.WriteLine(a);
             QidongResult qidongResult = new QidongResult();
             qidongResult.Show();
             

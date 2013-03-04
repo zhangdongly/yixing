@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Yixing.Dialog;
 using Yixing.UserTool;
+using Yixing.model;
 
 namespace Yixing.UserControl
 {
@@ -121,19 +123,17 @@ namespace Yixing.UserControl
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.panel2);
-            this.panel1.Location = new System.Drawing.Point(127, 56);
+            this.panel1.Location = new System.Drawing.Point(5, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(586, 470);
+            this.panel1.Size = new System.Drawing.Size(792, 597);
             this.panel1.TabIndex = 3;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(237, 437);
+            this.button3.Location = new System.Drawing.Point(318, 459);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 5;
@@ -151,7 +151,7 @@ namespace Yixing.UserControl
             this.panel3.Controls.Add(this.groupBox2);
             this.panel3.Location = new System.Drawing.Point(6, 92);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(572, 339);
+            this.panel3.Size = new System.Drawing.Size(783, 339);
             this.panel3.TabIndex = 4;
             // 
             // button5
@@ -162,6 +162,7 @@ namespace Yixing.UserControl
             this.button5.TabIndex = 6;
             this.button5.Text = "全部删除";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button4
             // 
@@ -171,16 +172,18 @@ namespace Yixing.UserControl
             this.button4.TabIndex = 5;
             this.button4.Text = "删除";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // exListView2
             // 
             this.exListView2.ControlPadding = 4;
             this.exListView2.FullRowSelect = true;
+            this.exListView2.GridLines = true;
             this.exListView2.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.exListView2.Location = new System.Drawing.Point(312, 37);
             this.exListView2.Name = "exListView2";
             this.exListView2.OwnerDraw = true;
-            this.exListView2.Size = new System.Drawing.Size(208, 251);
+            this.exListView2.Size = new System.Drawing.Size(449, 277);
             this.exListView2.TabIndex = 4;
             this.exListView2.UseCompatibleStateImageBehavior = false;
             this.exListView2.View = System.Windows.Forms.View.Details;
@@ -232,7 +235,7 @@ namespace Yixing.UserControl
             this.panel4.Controls.Add(this.textBox3);
             this.panel4.Location = new System.Drawing.Point(8, 50);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(211, 100);
+            this.panel4.Size = new System.Drawing.Size(211, 84);
             this.panel4.TabIndex = 41;
             // 
             // radioButton2
@@ -262,6 +265,7 @@ namespace Yixing.UserControl
             // 
             this.textBox5.Location = new System.Drawing.Point(92, 57);
             this.textBox5.Name = "textBox5";
+            this.textBox5.ReadOnly = true;
             this.textBox5.Size = new System.Drawing.Size(100, 21);
             this.textBox5.TabIndex = 26;
             // 
@@ -404,7 +408,7 @@ namespace Yixing.UserControl
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 5;
-            this.button2.Text = "浏览...";
+            this.button2.Text = "....";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -431,7 +435,6 @@ namespace Yixing.UserControl
             // 
             // Sanwei
             // 
-            this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.Controls.Add(this.panel1);
             this.Name = "Sanwei";
             this.Size = new System.Drawing.Size(800, 600);
@@ -451,30 +454,81 @@ namespace Yixing.UserControl
 
         private void button3_Click(object sender, EventArgs e)
         {
+            SanweiModel sanwei = new SanweiModel();
+            sanwei.mahell = this.textBox1.Text;
+            sanwei.xiancheng = this.textBox2.Text;
+            sanwei.yixing = this.textBox10.Text;
+            List<SanweiStatusModel> statusList = new List<SanweiStatusModel>();
+            for(int i=0;i<this.exListView2.Items.Count;i++)
+            {
+               //处理Item   
+               ListViewItem item = exListView2.Items[i];
+
+               SanweiStatusModel sanweistatus = new SanweiStatusModel();
+               sanweistatus.mahe=item.SubItems[0].Text;
+               sanweistatus.dyj = item.SubItems[1].Text;
+               sanweistatus.dslxs = item.SubItems[2].Text;
+               sanweistatus.lsgs = item.SubItems[3].Text;
+               sanweistatus.dlmx = item.SubItems[4].Text;
+               sanweistatus.xzs = item.SubItems[5].Text;
+               statusList.Add(sanweistatus);
+            }
+            sanwei.statusList = statusList;
+            //填充完毕
+
             SanweiStatus status =new SanweiStatus();
             status.ShowDialog();
         }
 
         private void Sanwei_Load(object sender, EventArgs e)
         {
-            this.exListView2.Columns.Add("马赫数");
-            this.exListView2.Columns.Add("迎角");
+            this.exListView2.Columns.Add("马赫数", 50, HorizontalAlignment.Center);
+            this.exListView2.Columns.Add("定迎角", 50, HorizontalAlignment.Center);
+            this.exListView2.Columns.Add("定升力系数", 80, HorizontalAlignment.Center);
+            this.exListView2.Columns.Add("空间离散格式", 90, HorizontalAlignment.Center);
+            this.exListView2.Columns.Add("湍流模型", 80, HorizontalAlignment.Center);
+            this.exListView2.Columns.Add("熵修正", 50, HorizontalAlignment.Center);
+            
             this.comboBox1.Text = this.comboBox1.Items[0].ToString();
             this.comboBox2.Text = this.comboBox2.Items[0].ToString(); 
         }
 
         private void addMethodAndStatus()
         {
+
+            //需要详细模型，再次修改验证
             if (String.IsNullOrWhiteSpace(this.textBox2.Text) || String.IsNullOrWhiteSpace(this.textBox3.Text))
             {
                 MessageBox.Show("请输入");
                 return;
             }
             EXListViewItem item = new EXListViewItem(this.textBox2.Text);
-            item.SubItems.Add(this.textBox3.Text);
+            if (this.radioButton1.Checked)
+            {
+                item.SubItems.Add(this.textBox3.Text);
+            } else {
+                item.SubItems.Add("无");
+            }
 
+            if (this.radioButton2.Checked)
+            {
+                item.SubItems.Add(this.textBox5.Text);
+            } else{
+                item.SubItems.Add("无");
+            }
+            
+            item.SubItems.Add(this.comboBox1.Text);
+            item.SubItems.Add(this.comboBox2.Text);
+
+            if (this.radioButton4.Checked)
+            {
+                item.SubItems.Add(this.textBox8.Text);
+            }
+            else
+            {
+                item.SubItems.Add("无");
+            }
             this.exListView2.Items.Add(item);
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -497,6 +551,21 @@ namespace Yixing.UserControl
             RadioButton r = (RadioButton)sender;
             this.textBox3.ReadOnly = !r.Checked;
             this.textBox5.ReadOnly = r.Checked;
+        }
+       
+        //单行删除按钮
+        private void button4_Click(object sender, EventArgs e)
+        {
+            for (int i = this.exListView2.SelectedItems.Count - 1; i >= 0; i--)
+            {
+                ListViewItem item = this.exListView2.SelectedItems[i];
+                this.exListView2.Items.Remove(item);
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            this.exListView2.Items.Clear();
         }
     }
 }
