@@ -1,0 +1,504 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C8861B54-B78C-459B-8A55-779B6EB7D7F2}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Yixing</RootNamespace>
+    <AssemblyName>Yixing</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>发布\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="IrisSkin2">
+      <HintPath>.\IrisSkin2.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Messaging" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Dialog\BuDingchangStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\BuDingchangStatus.Designer.cs">
+      <DependentUpon>BuDingchangStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\CST.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\CST.Designer.cs">
+      <DependentUpon>CST.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\Daili.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\Daili.Designer.cs">
+      <DependentUpon>Daili.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\DailiZhuangtai.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\DailiZhuangtai.Designer.cs">
+      <DependentUpon>DailiZhuangtai.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\DingChangGaoji.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\DingChangGaoji.Designer.cs">
+      <DependentUpon>DingChangGaoji.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\FFD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\FFD.Designer.cs">
+      <DependentUpon>FFD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\JiankongTu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\JiankongTu.Designer.cs">
+      <DependentUpon>JiankongTu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\ShowResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\ShowResult.Designer.cs">
+      <DependentUpon>ShowResult.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\Texingpingu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\Texingpingu.Designer.cs">
+      <DependentUpon>Texingpingu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\WanggeJiaoyan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\WanggeJiaoyan.Designer.cs">
+      <DependentUpon>WanggeJiaoyan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\Wanggeshezhi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\Wanggeshezhi.Designer.cs">
+      <DependentUpon>Wanggeshezhi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\XK.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\XK.Designer.cs">
+      <DependentUpon>XK.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\Yangbenjiaoyan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\Yangbenjiaoyan.Designer.cs">
+      <DependentUpon>Yangbenjiaoyan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\YixingTianjia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\YixingTianjia.Designer.cs">
+      <DependentUpon>YixingTianjia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\Yixingjihetu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\Yixingjihetu.Designer.cs">
+      <DependentUpon>Yixingjihetu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\YouhuaStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\YouhuaStatus.Designer.cs">
+      <DependentUpon>YouhuaStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\YundongGuilv.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\YundongGuilv.Designer.cs">
+      <DependentUpon>YundongGuilv.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\zhuannie.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\zhuannie.Designer.cs">
+      <DependentUpon>zhuannie.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\SanweiStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\SanweiStatus.Designer.cs">
+      <DependentUpon>SanweiStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form2.Designer.cs">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="model\ResultModel.cs" />
+    <Compile Include="model\User.cs" />
+    <Compile Include="Dialog\Jihetexing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\Jihetexing.Designer.cs">
+      <DependentUpon>Jihetexing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="model\YixingModel.cs" />
+    <Compile Include="UserControl\Qidong\Dingchang.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\Qidong\Qidong.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\Qidong\QidongResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControl\Qidong\QidongTitle.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\Qidong\BuDingchang.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\Qidong\Sanwei.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\Qidong\Dingchang1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\Youhua\Chuli.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\Youhua\Jiankong.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\Youhua\Model.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\Youhua\Parameter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\Youhua\Youhua.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\Youhua\YouhuaMethod.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTool\CommonUtil.cs" />
+    <Compile Include="UserTool\EXComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserTool\EXListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserTool\FileDialogUtil.cs" />
+    <Compile Include="UserTool\ListViewEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="util\JSONUtil.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Dialog\BuDingchangStatus.resx">
+      <DependentUpon>BuDingchangStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\CST.resx">
+      <DependentUpon>CST.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\Daili.resx">
+      <DependentUpon>Daili.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\DailiZhuangtai.resx">
+      <DependentUpon>DailiZhuangtai.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\DingChangGaoji.resx">
+      <DependentUpon>DingChangGaoji.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\FFD.resx">
+      <DependentUpon>FFD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\JiankongTu.resx">
+      <DependentUpon>JiankongTu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\ShowResult.resx">
+      <DependentUpon>ShowResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\Texingpingu.resx">
+      <DependentUpon>Texingpingu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\WanggeJiaoyan.resx">
+      <DependentUpon>WanggeJiaoyan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\Wanggeshezhi.resx">
+      <DependentUpon>Wanggeshezhi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\XK.resx">
+      <DependentUpon>XK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\Yangbenjiaoyan.resx">
+      <DependentUpon>Yangbenjiaoyan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\YixingTianjia.resx">
+      <DependentUpon>YixingTianjia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\Yixingjihetu.resx">
+      <DependentUpon>Yixingjihetu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\YouhuaStatus.resx">
+      <DependentUpon>YouhuaStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\YundongGuilv.resx">
+      <DependentUpon>YundongGuilv.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\zhuannie.resx">
+      <DependentUpon>zhuannie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\SanweiStatus.resx">
+      <DependentUpon>SanweiStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form2.resx">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Dialog\Jihetexing.resx">
+      <DependentUpon>Jihetexing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\Qidong\Dingchang.resx">
+      <DependentUpon>Dingchang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\Qidong\Qidong.resx">
+      <DependentUpon>Qidong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\Qidong\QidongResult.resx">
+      <DependentUpon>QidongResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\Qidong\QidongTitle.resx">
+      <DependentUpon>QidongTitle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\Qidong\BuDingchang.resx">
+      <DependentUpon>BuDingchang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\Qidong\Sanwei.resx">
+      <DependentUpon>Sanwei.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\Qidong\Dingchang1.resx">
+      <DependentUpon>Dingchang1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\Youhua\Chuli.resx">
+      <DependentUpon>Chuli.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\Youhua\Jiankong.resx">
+      <DependentUpon>Jiankong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\Youhua\Model.resx">
+      <DependentUpon>Model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\Youhua\Parameter.resx">
+      <DependentUpon>Parameter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\Youhua\Youhua.resx">
+      <DependentUpon>Youhua.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\Youhua\YouhuaMethod.resx">
+      <DependentUpon>YouhuaMethod.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\DataSources\Form1.datasource" />
+    <None Include="Properties\DataSources\Form2.datasource" />
+    <None Include="Properties\DataSources\JSONUtil.datasource" />
+    <None Include="Properties\DataSources\Program.datasource" />
+    <None Include="Properties\DataSources\Yixing.Dialog.Daili.datasource" />
+    <None Include="Properties\DataSources\Yixing.Dialog.DailiZhuangtai.datasource" />
+    <None Include="Properties\DataSources\Yixing.Dialog.DingChangGaoji.datasource" />
+    <None Include="Properties\DataSources\Yixing.Dialog.ShowResult.datasource" />
+    <None Include="Properties\DataSources\Yixing.Dialog.Texingpingu.datasource" />
+    <None Include="Properties\DataSources\Yixing.Dialog.Wanggeshezhi.datasource" />
+    <None Include="Properties\DataSources\Yixing.Dialog.Yangbenjiaoyan.datasource" />
+    <None Include="Properties\DataSources\Yixing.model.ResultModel.datasource" />
+    <None Include="Properties\DataSources\Yixing.model.User.datasource" />
+    <None Include="Properties\DataSources\Yixing.Properties.Resources.datasource" />
+    <None Include="Properties\DataSources\Yixing.Properties.Settings.datasource" />
+    <None Include="Properties\DataSources\Yixing.UserControl.BuDingchang.datasource" />
+    <None Include="Properties\DataSources\Yixing.UserControl.Dingchang.datasource" />
+    <None Include="Properties\DataSources\Yixing.UserControl.Qidong.datasource" />
+    <None Include="Properties\DataSources\Yixing.UserControl.QidongResult.datasource" />
+    <None Include="Properties\DataSources\Yixing.UserControl.QidongTitle.datasource" />
+    <None Include="Properties\DataSources\Yixing.UserControl.Sanwei.datasource" />
+    <None Include="Properties\DataSources\Yixing.UserControl.Youhua.Model.datasource" />
+    <None Include="Properties\DataSources\Yixing.UserControl.Youhua.Parameter.datasource" />
+    <None Include="Properties\DataSources\Yixing.UserControl.Youhua.Youhua.datasource" />
+    <None Include="Properties\DataSources\Yixing.UserControl.Youhua.YouhuaMethod.datasource" />
+    <None Include="Properties\DataSources\Yixing.UserTool.EXBoolColumnHeader.datasource" />
+    <None Include="Properties\DataSources\Yixing.UserTool.EXBoolListViewSubItem.datasource" />
+    <None Include="Properties\DataSources\Yixing.UserTool.EXColumnHeader.datasource" />
+    <None Include="Properties\DataSources\Yixing.UserTool.EXComboBox+EXImageItem.datasource" />
+    <None Include="Properties\DataSources\Yixing.UserTool.EXComboBox+EXItem.datasource" />
+    <None Include="Properties\DataSources\Yixing.UserTool.EXComboBox+EXMultipleImagesItem.datasource" />
+    <None Include="Properties\DataSources\Yixing.UserTool.EXComboBox.datasource" />
+    <None Include="Properties\DataSources\Yixing.UserTool.EXControlListViewSubItem.datasource" />
+    <None Include="Properties\DataSources\Yixing.UserTool.EXEditableColumnHeader.datasource" />
+    <None Include="Properties\DataSources\Yixing.UserTool.EXImageListViewItem.datasource" />
+    <None Include="Properties\DataSources\Yixing.UserTool.EXImageListViewSubItem.datasource" />
+    <None Include="Properties\DataSources\Yixing.UserTool.EXListView.datasource" />
+    <None Include="Properties\DataSources\Yixing.UserTool.EXListViewItem.datasource" />
+    <None Include="Properties\DataSources\Yixing.UserTool.EXListViewSubItem.datasource" />
+    <None Include="Properties\DataSources\Yixing.UserTool.EXListViewSubItemAB.datasource" />
+    <None Include="Properties\DataSources\Yixing.UserTool.EXMultipleImagesListViewItem.datasource" />
+    <None Include="Properties\DataSources\Yixing.UserTool.EXMultipleImagesListViewSubItem.datasource" />
+    <None Include="Properties\DataSources\Yixing.UserTool.ListViewEx.datasource" />
+    <None Include="Properties\DataSources\Yixing.UserTool.SubItemEndEditingEventArgs.datasource" />
+    <None Include="Properties\DataSources\Yixing.UserTool.SubItemEventArgs.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="resources\polar.res" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Pic\Symbol1.bmp" />
+    <Content Include="Pic\Symbol2.bmp" />
+    <Content Include="Pic\Symbol4.bmp" />
+    <Content Include="Pic\Symbol3.bmp" />
+    <Content Include="Pic\Symbol5.bmp" />
+    <Content Include="Pic\Symbol6.bmp" />
+    <Content Include="Pic\Symbol7.bmp" />
+    <Content Include="Pic\Symbol8.bmp" />
+    <Content Include="Pic\Symbol9.bmp" />
+    <Content Include="Pic\Symbol10.bmp" />
+    <Content Include="Pic\Symbol11.bmp" />
+    <Content Include="Pic\Symbol12.bmp" />
+    <Content Include="Pic\Symbol13.bmp" />
+    <Content Include="Pic\Symbol14.bmp" />
+    <Content Include="Pic\Symbol15.bmp" />
+    <Content Include="Pic\Symbol16.bmp" />
+    <Content Include="Pic\true.png" />
+    <Content Include="resources\16.png" />
+    <Content Include="resources\fangda.jpg" />
+    <Content Include="resources\file.bmp" />
+    <Content Include="resources\openFile.ico" />
+    <Content Include="resources\suoxiao.jpeg" />
+    <Content Include="resources\tu.png" />
+    <Content Include="resources\xiyingfenxi.bmp" />
+    <Content Include="resources\yixing.bmp" />
+    <Content Include="resources\qidong.bmp" />
+    <Content Include="resources\you.bmp" />
+    <Content Include="resources\hou.bmp" />
+    <Content Include="resources\tu.bmp" />
+    <Content Include="resources\add.bmp" />
+    <Content Include="resources\delete.bmp" />
+    <Content Include="resources\modify.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
