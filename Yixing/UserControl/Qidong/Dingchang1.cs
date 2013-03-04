@@ -725,7 +725,8 @@ namespace Yixing.UserControl
 
         private void button3_Click(object sender, EventArgs e)
         {
-            TemplateHelper tp = new TemplateHelper("../template/");
+            //测试代码，VM文件都放置于@"..//..//template"
+            TemplateHelper tp = new TemplateHelper();
             tp.Put("tu", "sddd");
             String a = tp.BuildString("cfl3d.vm");
             Console.WriteLine(a);

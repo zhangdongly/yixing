@@ -11,12 +11,13 @@ namespace Yixing.util
         private VelocityEngine velocity = null;
         private IContext context = null;
 
-        public TemplateHelper(string templatePath)
+        public TemplateHelper()
         {
+           string templatePath =  @"..//..//template";
             velocity = new VelocityEngine();
 
-            velocity.AddProperty(RuntimeConstants_Fields.FILE_RESOURCE_LOADER_PATH, templatePath);
-            velocity.AddProperty(RuntimeConstants_Fields.INPUT_ENCODING, "utf-8");
+            velocity.AddProperty(RuntimeConstants.FILE_RESOURCE_LOADER_PATH, templatePath);
+            velocity.AddProperty(RuntimeConstants.INPUT_ENCODING, "utf-8");
 
             //   props.AddProperty(RuntimeConstants.OUTPUT_ENCODING, "gb2312");
             //    props.AddProperty(RuntimeConstants.RESOURCE_LOADER, "file");
