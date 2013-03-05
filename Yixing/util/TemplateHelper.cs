@@ -56,8 +56,8 @@ namespace Yixing.util
             //合并模板
             StringWriter writer = new StringWriter();
             template.Merge(context, writer);
-
-          using (StreamWriter writer2 = new StreamWriter("d:/test.vm", false, Encoding.UTF8, 200))
+            
+          using (StreamWriter writer2 = new StreamWriter(Yixing.Properties.Settings.Default.defaultFileFolder+"/test.inp", false, Encoding.UTF8, 200))
           {
             writer2.Write(writer);
             writer2.Flush();
