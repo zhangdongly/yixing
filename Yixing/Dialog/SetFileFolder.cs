@@ -23,13 +23,17 @@ namespace Yixing.Dialog
             {
                 MessageBox.Show(this.folderBrowserDialog1.SelectedPath);
                 this.textBox1.Text = this.folderBrowserDialog1.SelectedPath;
-               // Yixing.Properties.Resources.defaultYixingFolder = this.folderBrowserDialog1.SelectedPath;
+                Yixing.Properties.Settings.Default.defaultFileFolder = this.folderBrowserDialog1.SelectedPath;
+                Yixing.Properties.Settings.Default.Save();
             }
         }
 
         private void SetFileFolder_Load(object sender, EventArgs e)
         {
-            this.textBox1.Text = Yixing.Properties.Resources.defaultYixingFolder;
+
+
+            this.textBox1.Text = Yixing.Properties.Settings.Default.defaultFileFolder;
+           // Yixing.Properties.Settings.Default.
         }
     }
 }
