@@ -23,12 +23,15 @@ namespace Yixing.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("./resources")]
+        [global::System.Configuration.DefaultSettingValueAttribute("./resources/abc")]
         public string defaultFileFolder {
             get {
                 return ((string)(this["defaultFileFolder"]));
+            }
+            set {
+                this["defaultFileFolder"] = value;
             }
         }
     }
