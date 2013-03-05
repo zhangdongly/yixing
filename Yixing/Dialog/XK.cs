@@ -32,6 +32,9 @@ namespace Yixing.Dialog
             this.exListView2.Columns.Add("xk序号", 100);
             this.exListView2.Columns.Add("下表面", 110);          
             this.exListView2.SmallImageList = iList;
+
+            this.addItem(this.exListView1,this.textBox1);
+            this.addItem(this.exListView2,this.textBox2);
           
         }
         public void setCount(int count)
@@ -53,17 +56,37 @@ namespace Yixing.Dialog
             this.Close();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void addUp_Click(object sender, EventArgs e)
         {
-            EXListViewItem item = new EXListViewItem((this.exListView1.Items.Count+1).ToString());
-            TextBox t = new TextBox();
-            EXControlListViewSubItem exc = new EXControlListViewSubItem();
-            item.SubItems.Add(exc);
-            this.exListView1.AddControlToSubItem(t, exc);
-            this.exListView1.Items.Add(item);
+            this.addItem(this.exListView1,this.textBox1);
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void addItem(EXListView ex,TextBox text)
+        {
+            String upNumberStr = text.Text;
+            ex.Items.Clear();
+            try
+            {
+                int upNumber = Int32.Parse(upNumberStr);
+                for (int i = 0; i < upNumber; i++)
+                {
+                    EXListViewItem item = new EXListViewItem((ex.Items.Count + 1).ToString());
+                    TextBox t = new TextBox();
+                    EXControlListViewSubItem exc = new EXControlListViewSubItem();
+                    double value = 1.0 / (upNumber + 1) * (i + 1);
+                    t.Text = string.Format("{0:#0.0000}", value);
+                    item.SubItems.Add(exc);
+                    ex.AddControlToSubItem(t, exc);
+                   ex.Items.Add(item);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("请输入数字." + exception.Message);
+            }
+        }
+
+        private void deleteUp_Click(object sender, EventArgs e)
         {
             foreach (EXListViewItem item in this.exListView1.Items)
             {
@@ -74,17 +97,12 @@ namespace Yixing.Dialog
             }
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void addDown_Click(object sender, EventArgs e)
         {
-            EXListViewItem item = new EXListViewItem((this.exListView2.Items.Count + 1).ToString());
-            TextBox t = new TextBox();
-            EXControlListViewSubItem exc = new EXControlListViewSubItem();
-            item.SubItems.Add(exc);
-            this.exListView2.AddControlToSubItem(t, exc);
-            this.exListView2.Items.Add(item);
+            this.addItem(this.exListView2,this.textBox2);
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void deleteDown_Click(object sender, EventArgs e)
         {
             foreach (EXListViewItem item in this.exListView2.Items)
             {
