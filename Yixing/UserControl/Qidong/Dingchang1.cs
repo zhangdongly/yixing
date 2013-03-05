@@ -70,6 +70,18 @@ namespace Yixing.UserControl
         private ToolStripButton toolStripButton3;
         private Panel panel9;
         private System.Windows.Forms.Panel panel1;
+
+        Boolean isznOpened = false;
+        Boolean isgjOpened = false;
+        int znkey = 0;
+        int gjkey = 0;
+        int ztkey = 0;
+        //记录单独状态的DIC 包括高级和转涅
+        Dictionary<int, DCStatus> ztDic = new Dictionary<int, DCStatus>();
+        //记录单独转涅的DIC 包括高级和转涅
+        Dictionary<int, DCZhuannie> znDic = new Dictionary<int, DCZhuannie>();
+        //记录单独高级的DIC 包括高级和转涅
+        Dictionary<int, DCGaoji> gjDic = new Dictionary<int, DCGaoji>();
     
         public Dingchang1()
         {
@@ -464,6 +476,7 @@ namespace Yixing.UserControl
             this.radioButton3.TabStop = true;
             this.radioButton3.Text = "定升力系数";
             this.radioButton3.UseVisualStyleBackColor = true;
+            
             // 
             // textBox2
             // 
@@ -498,6 +511,7 @@ namespace Yixing.UserControl
             this.button11.TabIndex = 10;
             this.button11.Text = "全部删除";
             this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // button10
             // 
@@ -538,6 +552,7 @@ namespace Yixing.UserControl
             this.button7.TabIndex = 9;
             this.button7.Text = "删除";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button1
             // 
@@ -725,15 +740,41 @@ namespace Yixing.UserControl
 
         private void button3_Click(object sender, EventArgs e)
         {
+            float mhln;
+            if(!float.TryParse(this.textBox1.Text, out mhln))
+            {
+                MessageBox.Show("马赫雷诺数必须为数字，且必填");
+                return;
+            }
             //测试代码，VM文件都放置于@"..//..//template"
-            TemplateHelper tp = new TemplateHelper();
-            tp.Put("tu", "sddd");
-            String a = tp.BuildString("cfl3d.vm");
-            Console.WriteLine(a);
+            foreach(int key in ztDic.Keys)
+            {
+                DCStatus dcs = ztDic[key];
+                DCGaoji gj = gjDic[dcs.gjKey];
+                DCZhuannie zn = null;
+                if (dcs.znKey != 0)
+                {
+                    zn = znDic[dcs.znKey];
+                }
+               
+                TemplateHelper tp = new TemplateHelper();
+                if (zn != null)
+                {
+                    float tke0 = dcs.mahe * dcs.mahe * zn.fddls * zn.fddls * 1.5f;
+                    float tke1 = tke0 / zn.wnxb;
+                    tp.Put("tke0", tke0);
+                    tp.Put("tke1", tke1);
+                }
+                tp.Put("gj", gj);
+                tp.Put("zn", zn);
+                tp.Put("s", dcs);
+                tp.Put("mhln",mhln);
+                String a = tp.BuildString("cfl3d.vm");
+            }
+            
             QidongResult qidongResult = new QidongResult();
             qidongResult.Show();
-            
-           
+
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -741,10 +782,20 @@ namespace Yixing.UserControl
            // this.textBox7.Text = this.selectFile();
         }
 
+        //点击高级
         private void button2_Click(object sender, EventArgs e)
         {
             DingChangGaoji dcgj = new DingChangGaoji();
             dcgj.ShowDialog();
+            isgjOpened = true;
+            gjkey++;
+            DCGaoji gj = new DCGaoji();
+            gj.cfl = dcgj.cfl;
+            gj.onedd = dcgj.onedd;
+            gj.secdd = dcgj.secdd;
+            gj.thirdd = dcgj.thirdd;
+            gj.xzs = dcgj.xzs;
+            gjDic.Add(gjkey, gj);
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -774,65 +825,150 @@ namespace Yixing.UserControl
 
         private void addMethodAndStatus()
         {
-            String mahe = this.textBox2.Text;
-
-            if (String.IsNullOrEmpty(mahe))
-            {
-                MessageBox.Show("请输入马赫数");
+            float mahe=0;
+            if(!float.TryParse(this.textBox2.Text,out mahe)){
+                MessageBox.Show("马赫数不能为空，且必须为数字");
                 return;
             }
-            String y = textBox3.Text;
+            
+            String dslxs = textBox3.Text;
+            String dyj = "";
             float low=0;
             float high=0;
             float step=0;
+            //rd3 定升力系数 rd4 定迎角
+            //rd5 单个  rd6 范围
             if (!radioButton3.Checked)
             {
                 if (radioButton5.Checked)
                 {
-                    y = textBox8.Text;
+                    float dyjf;
+                    dyj = textBox8.Text;
+                    if (!float.TryParse(this.textBox8.Text,out dyjf))
+                    {
+                        MessageBox.Show("定迎角不能为空，且必须为数字");
+                        return;
+                    }
+                    DCStatus dc = setDcStatus(mahe, dyjf, 0f);
+                    ztkey++;
+                    ztDic.Add(ztkey, dc);
+
+                    this.addToList(mahe,dyjf, 0f);
                 }
                 else
                 {
                     try
                     {
-                         low =float.Parse(this.textBox5.Text);
-                         high = float.Parse(this.textBox4.Text);
-                         step = float.Parse(this.textBox6.Text);
-                       
+                        low = float.Parse(this.textBox5.Text);
+                        high = float.Parse(this.textBox4.Text);
+                        step = float.Parse(this.textBox6.Text);
+
                     }
                     catch (Exception e)
                     {
                         MessageBox.Show("上限，下限，步长请输入数字");
                     }
-                }
-            }
-            if (radioButton6.Checked)
-            {
-                for (float yl = low; yl < high; yl += step)
-                {
-                    EXListViewItem item = new EXListViewItem(mahe);
-                    item.SubItems.Add(string.Format("{0:#0.00}",yl));
-                    CheckBox c = new CheckBox();
-                    c.Checked = this.checkBox1.Checked;
-                    EXControlListViewSubItem clv = new EXControlListViewSubItem();
-                    item.SubItems.Add(clv);
-                    this.exListView2.AddControlToSubItem(c, clv);
-                    this.exListView2.Items.Add(item);
+                    for (float yl = low; yl <= high; yl += step)
+                    {
+                        DCStatus dc = setDcStatus(mahe, yl, 0f);
+                        ztkey++;
+                        ztDic.Add(ztkey, dc);
+                        
+                        this.addToList(mahe, yl, 0f);
+
+                    }
                 }
             }
             else
             {
-                EXListViewItem item = new EXListViewItem(mahe);
-                item.SubItems.Add(y);
-                CheckBox c = new CheckBox();
-                c.Checked = this.checkBox1.Checked;
-                EXControlListViewSubItem clv = new EXControlListViewSubItem();
-                item.SubItems.Add(clv);
-                this.exListView2.AddControlToSubItem(c, clv);
-                this.exListView2.Items.Add(item);
+                float slxs;
+                if (!float.TryParse(this.textBox3.Text,out slxs))
+                {
+                    MessageBox.Show("定升力系数不能为空，且必须为数字");
+                    return;
+                }
+                DCStatus dc = setDcStatus(mahe,0f,slxs);
+                ztkey++;
+                ztDic.Add(ztkey, dc);
+
+                this.addToList(mahe, 0f, slxs);
+               
             }
 
+            isznOpened = false;
+            isgjOpened = false;
+        }
+        //添加一跳记录到ListView2
+        private void addToList(float mahe, float dyj, float dslxs)
+        {
+            EXListViewItem item = new EXListViewItem(mahe.ToString());
+            if (dyj > 0)
+            {
+                item.SubItems.Add(dyj.ToString());
+            }
+            else
+            {
+                item.SubItems.Add(dslxs.ToString());
+            }
+            CheckBox c = new CheckBox();
+            c.Checked = this.checkBox1.Checked;
+            EXControlListViewSubItem clv = new EXControlListViewSubItem();
+            item.SubItems.Add(clv);
+            //使用tag来保存对应的高级和转涅的配置
+            item.Tag = ztkey;
+            this.exListView2.AddControlToSubItem(c, clv);
+            this.exListView2.Items.Add(item);
+        }
 
+        private DCStatus setDcStatus(float mahe,float dyj,float dslxs)
+        {
+            DCStatus dc = new DCStatus();
+            dc.mahe = mahe;
+            dc.dslxs = dslxs;
+            dc.dyj = dyj;
+
+            String lsgs = this.comboBox1.Text;
+            if (lsgs.Equals("Roe"))
+            {
+                dc.lsgs = 1;
+            }
+            else
+            {
+                dc.lsgs = 0;
+            }
+
+            //这两个key用于从dic中取属性对象
+            //转涅若选中才有这个key
+            if (this.checkBox1.Checked && isznOpened)
+            {
+                dc.znKey = znkey;
+            }
+            else
+            {
+                dc.znKey = 0;
+                String dlmx = this.comboBox2.Text;
+                if (dlmx.Equals("SA"))
+                {
+                    dc.dlmx = 5;
+                }
+                else
+                {
+                    dc.dlmx = 7;
+                }
+            }
+            if (!isgjOpened)
+            {
+                gjkey++;
+                DCGaoji gj = new DCGaoji();
+                gj.cfl = 1000;
+                gj.onedd =1000;
+                gj.secdd = 1000;
+                gj.thirdd = 5000;
+                gj.xzs = 0;
+                gjDic.Add(gjkey, gj);
+            }
+            dc.gjKey = gjkey;
+            return dc;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -893,14 +1029,42 @@ namespace Yixing.UserControl
             }
            
         }
-
+        
+        //点击转涅
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox c = (CheckBox)sender;
+            //如果不断的选中取消只会导致key增大，而不会对象增多
             if (c.Checked)
             {
-                zhuannie z = new zhuannie();
+                zhuannie z;
+                if (isznOpened)
+                {
+                    DCZhuannie zn = znDic[znkey];
+                    z = new zhuannie(zn.fddls,zn.wnxb);
+                }
+                else
+                {
+                    z = new zhuannie();
+                }
+                
+                this.comboBox2.Enabled = false;
                 z.ShowDialog();
+                if (z.sure)
+                {
+                    //若是打开过并且点了确定，才算
+                    isznOpened = true;
+                    //先加一次在作为key来存对象
+                    znkey++;
+                    DCZhuannie zn = new DCZhuannie();
+                    zn.fddls = z.fddls;
+                    zn.wnxb = z.wnxb;
+                    znDic.Add(znkey, zn);
+                }
+            }else {
+                this.comboBox2.Enabled = true;
+                //取消的时候不removed，让其存在，影响不大，且有用
+                //znDic.Remove(znkey);
             }
         }
 
@@ -971,9 +1135,36 @@ namespace Yixing.UserControl
             }
         }
 
-        
+        private void button7_Click(object sender, EventArgs e)
+        {
+            for (int i = this.exListView2.SelectedItems.Count - 1; i >= 0; i--)
+            {
+                ListViewItem item = this.exListView2.SelectedItems[i];
+                String ztKeyStr = item.Tag.ToString();
+                int ztKey;
+                if (int.TryParse(ztKeyStr, out ztKey))
+                {
+                    DCStatus zt = ztDic[ztKey];
+                    gjDic.Remove(zt.gjKey);
+                    znDic.Remove(zt.znKey);
+                    ztDic.Remove(ztKey);
 
+                }
+                this.exListView2.Items.Remove(item);
+            }
+        }
 
+        private void button11_Click(object sender, EventArgs e)
+        {
+            this.exListView2.Items.Clear();
+            //清除所有缓存数据，并将key置为0
+            gjDic.Clear();
+            znDic.Clear();
+            ztDic.Clear();
+            ztkey = 0;
+            znkey = 0;
+            gjkey = 0;
+        }
        
     }
 }

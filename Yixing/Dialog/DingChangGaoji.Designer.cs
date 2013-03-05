@@ -87,13 +87,13 @@
             this.radioButton4.Name = "radioButton4";
             this.radioButton4.Size = new System.Drawing.Size(14, 13);
             this.radioButton4.TabIndex = 2;
-            this.radioButton4.TabStop = true;
             this.radioButton4.UseVisualStyleBackColor = true;
             this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
             // 
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
+            this.radioButton3.Checked = true;
             this.radioButton3.Location = new System.Drawing.Point(56, 13);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(59, 16);
@@ -121,7 +121,6 @@
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.label1);
-            this.panel2.Enabled = false;
             this.panel2.Location = new System.Drawing.Point(13, 21);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(244, 143);
@@ -141,7 +140,7 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(99, 21);
             this.textBox3.TabIndex = 17;
-            this.textBox3.Text = "2000";
+            this.textBox3.Text = "1000";
             // 
             // textBox2
             // 

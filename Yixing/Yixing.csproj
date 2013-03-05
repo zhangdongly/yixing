@@ -212,6 +212,8 @@
     <Compile Include="Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
+    <Compile Include="model\DCGaoji.cs" />
+    <Compile Include="model\DCStatus.cs" />
     <Compile Include="model\ResultModel.cs" />
     <Compile Include="model\SanweiModel.cs" />
     <Compile Include="model\SanweiStatusModel.cs" />
@@ -223,6 +225,7 @@
       <DependentUpon>Jihetexing.cs</DependentUpon>
     </Compile>
     <Compile Include="model\YixingModel.cs" />
+    <Compile Include="model\DCZhuannie.cs" />
     <Compile Include="UserControl\Qidong\Dingchang.cs">
       <SubType>UserControl</SubType>
     </Compile>

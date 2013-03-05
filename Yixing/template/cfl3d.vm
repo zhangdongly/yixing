@@ -13,31 +13,33 @@ ovrlp.bin
 patch.bin
 restart.bin
 >
-pke_tu ${tu} 
-tke0 2.16
-tke1 0.216
-epsa_r 0.3
-cltarg 0.6
+#if($zn)
+pke_tu $!{zn.fddls} 
+tke0 $!{tke0}
+tke1 $!{tke1}
+#end
+#if($gj)
+#if($!{gj.xzs} && $!{gj.xzs}>0)
+epsa_r $!{gj.xzs}
+#end
+#end
+#if($!{s.dslxs}>0)
+cltarg $!{s.dslxs}
 dalim 0.2
+#end
 <                                                
- Robust Optimazition Based on CFD                                                
+ Robust Optimazition Based on CFD
+ #set($reue=$!{s.mahe}*$!{mhln})                                                
       Mach     alpha      beta      ReUe   Tinf,dR     ialph    ihstry
-   0.60000   3.50000   0.00000   7.00000 500.00000         1         0
+   $!{s.mahe}   $!{s.dyj}   0.00000   $!{reue} 500.00000         1         0
       sref      cref      bref       xmc       ymc       zmc
      1.000    1.0000    1.0000    0.2500    0.0000    0.0000
         dt     irest   iflagts      fmax     iunst   cfl_tau
-  -2.50000         0       000    2.0000         0  10.00000
+  $!{gj.cfl}         0       000    2.0000         1  10.00000
      NGRID   NPLOT3D    NPRINT    NWREST      ICHK       I2D    NTSTEP       ITA
         -8         8         0      9900         0         1         1        -2
        NCG       IEM  IADVANCE    IFORCE  IVISC(I)  IVISC(J)  IVISC(K)
-         2         0         0       333        19        19        19
-         2         0         0       333        19        19        19
-         2         0         0       333        19        19        19
-         2         0         0       333        19        19        19
-         2         0         0       333        19        19        19
-         2         0         0       333        19        19        19
-         2         0         0       333        19        19        19
-         2         0         0       333        19        19        19
+         2         0         0       333        #if($zn)19#else$!{s.dlmx}#end        #if($zn)19#else$!{s.dlmx}#end        #if($zn)19#else$!{s.dlmx}#end      
       IDIM      JDIM      KDIM
          2        61        85
          2        61        85
@@ -166,9 +168,9 @@ KDIM: GRID   SEGMENT    BCTYPE      ISTA      IEND      JSTA      JEND     NDATA
       ISSC EPSSSC(1) EPSSSC(2) EPSSSC(3)      ISSR EPSSSR(1) EPSSSR(2) EPSSSR(3)
          0    0.3000    0.3000    0.3000         0    0.3000    0.3000    0.3000
       NCYC    MGLEVG     NEMGL     NITFO
-      1000         1         0         0
-      1000         2         0         0
-      2500         3         0         0
+      $!{gj.onedd}         1         0         0
+      $!{gj.secdd}         2         0         0
+      $!{gj.thirdd}         3         0         0
       MIT1      MIT2      MIT3      MIT4      MIT5      MIT6      MIT7     MIT8
          1         1         1         1         1         1         1        1
          1         1         1         1         1         1         1        1

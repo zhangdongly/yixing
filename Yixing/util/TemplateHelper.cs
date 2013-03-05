@@ -3,6 +3,7 @@ using NVelocity.App;
 using NVelocity.Context;
 using System.IO;
 using NVelocity.Runtime;
+using System.Text;
 
 namespace Yixing.util
 {
@@ -55,6 +56,14 @@ namespace Yixing.util
             //合并模板
             StringWriter writer = new StringWriter();
             template.Merge(context, writer);
+
+          using (StreamWriter writer2 = new StreamWriter("d:/test.vm", false, Encoding.UTF8, 200))
+          {
+            writer2.Write(writer);
+            writer2.Flush();
+            writer2.Close();
+          }
+  
             return writer.ToString();
         }
     }
