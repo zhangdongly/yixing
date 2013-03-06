@@ -37,37 +37,85 @@ namespace Yixing.Dialog
             for (int i = 0; i < XList.Length; i++)
             {
                 lineSeries.Points.Add(new DataPoint(XList[i],YList[i]));
+                if (upMax < YList[i])
+                {
+                    upMax = YList[i];
+                }
+
+                if (downMax > YList[i])
+                {
+                    downMax = YList[i];
+                }
             }
             this.chart1.Series.Add(lineSeries);
-            series=new Series();
+            this.addMaxPoint();
+            this.addDefaultPoint();
+        }
+
+        private void addDefaultPoint()
+        {
+            series = new Series();
             series.ChartType = SeriesChartType.Point;
             series.MarkerStyle = MarkerStyle.Square;
             series.MarkerSize = 10;
             series.Color = System.Drawing.Color.Red;
             series.Name = "Default";
-            
-            Random r = new Random();
-            for (int i = 1; i <= 5; i++)
-            {
-                int p = r.Next(XList.Length-1);
-                double x = XList[p];
-                double y = YList[p];
-                x = double.Parse(String.Format("{0:#0.000}", x));
-                y = double.Parse(String.Format("{0:#0.000}", y));
-                EXListViewItem item = new EXListViewItem(i.ToString());
-                item.SubItems.Add(x+"");
-                item.SubItems.Add(y+"");
-                CheckBox c = new CheckBox();
-                EXControlListViewSubItem exc = new EXControlListViewSubItem();
-                item.SubItems.Add(exc);
-                this.exListView1.AddControlToSubItem(c, exc);
-                this.exListView1.Items.Add(item);
-                DataPoint point = new DataPoint(x, y);
-                point.Tag = item;
-                point.MarkerColor = Color.Red;
-                series.Points.Add(point);
-            }
+            this.addPoint(series, this.textBox1);
             this.chart1.Series.Add(series);
+        }
+
+        private void addPoint(Series series, TextBox t)
+        {
+            series.Points.Clear();
+            String countStr = this.textBox1.Text;
+            try
+            {
+                int count = Int32.Parse(countStr)/2;
+                for (int i = 1; i <= count; i++)
+                {
+
+                    this.addPoint(1.0 / (count + 1) * i, upMax+0.005, series);
+                    this.addPoint(1.0 / (count + 1) * i, downMax-0.005, series);
+                }
+                
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("变量个数必须为数字. "+exception.Message);
+            }
+        }
+
+        private void addMaxPoint()
+        {
+            series = new Series();
+            series.ChartType = SeriesChartType.Point;
+            series.MarkerStyle = MarkerStyle.Square;
+            series.MarkerSize = 10;
+            series.Color = System.Drawing.Color.Red;
+            series.Name = "Max";
+            this.addPoint(0, upMax + 0.005, series);
+            this.addPoint(1, upMax + 0.005, series);
+            this.addPoint(0, downMax - 0.005, series);
+            this.addPoint(1, downMax - 0.005, series);
+            this.chart1.Series.Add(series);
+        }
+
+        private void addPoint(double x, double y,Series series)
+        {
+            x = double.Parse(String.Format("{0:#0.000}", x));
+            y = double.Parse(String.Format("{0:#0.000}", y));
+            EXListViewItem item = new EXListViewItem((this.exListView1.Items.Count+1).ToString());
+            item.SubItems.Add(x + "");
+            item.SubItems.Add(y + "");
+            CheckBox c = new CheckBox();
+            EXControlListViewSubItem exc = new EXControlListViewSubItem();
+            item.SubItems.Add(exc);
+            this.exListView1.AddControlToSubItem(c, exc);
+            this.exListView1.Items.Add(item);
+            DataPoint point = new DataPoint(x, y);
+            point.Tag = item;
+            point.MarkerColor = Color.Red;
+            series.Points.Add(point);
         }
 
         private void addPoint(object sender, EventArgs e)
@@ -203,7 +251,10 @@ namespace Yixing.Dialog
                        }
                        else
                        {
-                           this.selectedPoint = dataPoint;
+                           if (!this.chart1.Series["Max"].Points.Contains(dataPoint))
+                           {
+                               this.selectedPoint = dataPoint;
+                           }
                        }
                    }
                }
@@ -249,12 +300,24 @@ namespace Yixing.Dialog
             xValue = Math.Max(xValue, this.chart1.ChartAreas["Default"].AxisX.Minimum);
             yValue = double.Parse(String.Format("{0:#0.000}", yValue));
             xValue = double.Parse(String.Format("{0:#0.000}", xValue));
-            this.selectedPoint.XValue = xValue;
-            this.selectedPoint.YValues[0] = yValue;
-            EXListViewItem item = (EXListViewItem)this.selectedPoint.Tag;
-            item.SubItems[1].Text = xValue+"";
-            item.SubItems[2].Text = yValue+"";
-            
+
+            this.movePoint(this.selectedPoint, xValue, yValue);
+
+        }
+        private void movePoint(DataPoint point, double xValue, double yValue)
+        {
+            point.XValue = xValue;
+            //现要求只动x值，y值不动，所以暂时去掉
+            //this.selectedPoint.YValues[0] = yValue;
+            EXListViewItem item = (EXListViewItem)point.Tag;
+            item.SubItems[1].Text = xValue + "";
+            // item.SubItems[2].Text = yValue+"";
+            int index=this.chart1.Series["Default"].Points.IndexOf(point);
+            int otherPointIndex = index % 2 == 0 ? index + 1 : index - 1;
+            DataPoint otherPoint = this.chart1.Series["Default"].Points[otherPointIndex];
+            otherPoint.XValue = xValue;
+            item = (EXListViewItem)otherPoint.Tag;
+            item.SubItems[1].Text = xValue + "";
 
         }
 
@@ -306,6 +369,11 @@ namespace Yixing.Dialog
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
             this.selectPoint(sender, e);
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            this.addPoint(this.chart1.Series["Default"], this.textBox1);
         }
     }
 }
