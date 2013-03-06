@@ -214,6 +214,7 @@
     </Compile>
     <Compile Include="model\DCGaoji.cs" />
     <Compile Include="model\DCStatus.cs" />
+    <Compile Include="model\DCYixing.cs" />
     <Compile Include="model\ResultModel.cs" />
     <Compile Include="model\SanweiModel.cs" />
     <Compile Include="model\SanweiStatusModel.cs" />

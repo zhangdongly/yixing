@@ -48,7 +48,7 @@ namespace Yixing.util
         /// 生成字符
         /// </summary>
         /// <param name="templatFileName">模板文件名</param>
-        public string BuildString(string templatFileName)
+        public string BuildString(string templatFileName,string yxName,string mahe,string zhuangtai)
         {
             //从文件中读取模板
             Template template = velocity.GetTemplate(templatFileName);
@@ -56,15 +56,24 @@ namespace Yixing.util
             //合并模板
             StringWriter writer = new StringWriter();
             template.Merge(context, writer);
-            
-          using (StreamWriter writer2 = new StreamWriter(Yixing.Properties.Settings.Default.defaultFileFolder+"/test.inp", false, Encoding.UTF8, 200))
-          {
-            writer2.Write(writer);
-            writer2.Flush();
-            writer2.Close();
-          }
+            string outpath = Yixing.Properties.Settings.Default.defaultFileFolder + "/" + yxName + "/" + mahe + "/";
+            if (!Directory.Exists(outpath))
+            {
+                Directory.CreateDirectory(outpath);
+            }
+            using (StreamWriter writer2 = new StreamWriter(outpath + zhuangtai + ".inp", false, Encoding.Default, 200))
+              {
+                writer2.Write(writer);
+                writer2.Flush();
+                writer2.Close();
+              }
   
             return writer.ToString();
+        }
+
+        internal string BuildString(string p, string yxname, string mahe)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
