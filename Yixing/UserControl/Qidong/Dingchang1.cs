@@ -746,6 +746,7 @@ namespace Yixing.UserControl
                 MessageBox.Show("马赫雷诺数必须为数字，且必填");
                 return;
             }
+
             //测试代码，VM文件都放置于@"..//..//template"
             foreach(int key in ztDic.Keys)
             {
@@ -756,20 +757,38 @@ namespace Yixing.UserControl
                 {
                     zn = znDic[dcs.znKey];
                 }
-               
-                TemplateHelper tp = new TemplateHelper();
-                if (zn != null)
+                List<DCYixing> yxList = dcs.yxList;
+                foreach (DCYixing yx in yxList)
                 {
-                    float tke0 = dcs.mahe * dcs.mahe * zn.fddls * zn.fddls * 1.5f;
-                    float tke1 = tke0 / zn.wnxb;
-                    tp.Put("tke0", tke0);
-                    tp.Put("tke1", tke1);
+                    TemplateHelper tp = new TemplateHelper();
+                    if (zn != null)
+                    {
+                        float tke0 = dcs.mahe * dcs.mahe * zn.fddls * zn.fddls * 1.5f;
+                        float tke1 = tke0 / zn.wnxb;
+                        tp.Put("tke0", tke0);
+                        tp.Put("tke1", tke1);
+                    }
+                    tp.Put("gj", gj);
+                    tp.Put("zn", zn);
+                    tp.Put("s", dcs);
+                    tp.Put("mhln", mhln);
+                    String yxname =yx.name.Substring(0,yx.name.IndexOf("."));
+                    String mahe = string.Format("{0:0.000}", dcs.mahe);
+                    mahe = mahe.Replace(".","");
+                    String zt;
+                    if (dcs.dyj > 0)
+                    {
+                        zt = string.Format("{0:0.000}", dcs.dyj);
+                        zt = "a" + zt.Replace(".", "");
+                    }
+                    else
+                    {
+                        zt = string.Format("{0:0.000}", dcs.dslxs);
+                        zt = "cl" + zt.Replace(".", "");
+                    }
+
+                    String a = tp.BuildString("cfl3d.vm", yxname, mahe, zt);
                 }
-                tp.Put("gj", gj);
-                tp.Put("zn", zn);
-                tp.Put("s", dcs);
-                tp.Put("mhln",mhln);
-                String a = tp.BuildString("cfl3d.vm");
             }
             
             QidongResult qidongResult = new QidongResult();
@@ -968,6 +987,31 @@ namespace Yixing.UserControl
                 gjDic.Add(gjkey, gj);
             }
             dc.gjKey = gjkey;
+            
+            List<DCYixing> yxList = new List<DCYixing>();
+            //将选中的翼型读出来
+            for (int i = 0; i < this.exListView1.Items.Count; i++)
+            {
+                //处理Item   
+                ListViewItem item = exListView1.Items[i];
+
+                DCYixing yx = new DCYixing();
+                yx.name = item.SubItems[0].Text;
+                yx.filePath = item.SubItems[1].Text;
+                EXControlListViewSubItem sub = (EXControlListViewSubItem)item.SubItems[2];
+                CheckBox ck = (CheckBox)sub.MyControl;
+                if (ck.Checked)
+                {
+                    yxList.Add(yx);
+                }
+            }
+
+            if(yxList.Count>0){
+                dc.yxList = yxList;
+            }else{
+                MessageBox.Show("添加状态时至少选中一个 翼型文件");
+            }
+
             return dc;
         }
 

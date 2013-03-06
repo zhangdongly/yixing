@@ -38,9 +38,12 @@ dalim 0.2
   $!{gj.cfl}         0       000    2.0000         1  10.00000
      NGRID   NPLOT3D    NPRINT    NWREST      ICHK       I2D    NTSTEP       ITA
         -8         8         0      9900         0         1         1        -2
-       NCG       IEM  IADVANCE    IFORCE  IVISC(I)  IVISC(J)  IVISC(K)
-         2         0         0       333        #if($zn)19#else$!{s.dlmx}#end        #if($zn)19#else$!{s.dlmx}#end        #if($zn)19#else$!{s.dlmx}#end      
-      IDIM      JDIM      KDIM
+       NCG       IEM  IADVANCE    IFORCE  IVISC(I)  IVISC(J)  IVISC(K) 
+       #foreach($i in [1..8])     
+      2         0         0       333        #if($zn)19#else$!{s.dlmx}#end        #if($zn)19#else$!{s.dlmx}#end        #if($zn)19#else$!{s.dlmx}#end
+
+       #end
+	 IDIM      JDIM      KDIM
          2        61        85
          2        61        85
          2        61        85

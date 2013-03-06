@@ -25,5 +25,8 @@ namespace Yixing.model
 
         //高级相关
         public int gjKey { get; set; }
+
+        //该状态所对应的翼型文件数据
+        public List<DCYixing> yxList { get; set; }
     }
 }
