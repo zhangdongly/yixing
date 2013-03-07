@@ -9,6 +9,7 @@ using Yixing.Dialog;
 using System.Drawing;
 using Yixing.model;
 using Yixing.util;
+using System.Globalization;
 
 namespace Yixing.UserControl
 {
@@ -849,7 +850,8 @@ namespace Yixing.UserControl
                 MessageBox.Show("马赫数不能为空，且必须为数字");
                 return;
             }
-            
+            mahe.ToString("0:0.0000");
+
             String dslxs = textBox3.Text;
             String dyj = "";
             float low=0;
@@ -894,7 +896,6 @@ namespace Yixing.UserControl
                         ztDic.Add(ztkey, dc);
                         
                         this.addToList(mahe, yl, 0f);
-
                     }
                 }
             }
@@ -960,7 +961,10 @@ namespace Yixing.UserControl
             //转涅若选中才有这个key
             if (this.checkBox1.Checked && isznOpened)
             {
-                dc.znKey = znkey;
+                dc.znKey = znkey; 
+                //如果选择了转涅，这个断流模型只能选择sst 所以值为7
+                dc.dlmx = 7;
+
             }
             else
             {
@@ -982,7 +986,7 @@ namespace Yixing.UserControl
                 gj.cfl = 1000;
                 gj.onedd =1000;
                 gj.secdd = 1000;
-                gj.thirdd = 5000;
+                gj.thirdd = 1500;
                 gj.xzs = 0;
                 gjDic.Add(gjkey, gj);
             }

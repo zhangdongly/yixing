@@ -31,16 +31,16 @@ dalim 0.2
  Robust Optimazition Based on CFD
  #set($reue=$!{s.mahe}*$!{mhln})                                                
       Mach     alpha      beta      ReUe   Tinf,dR     ialph    ihstry
-   $!{s.mahe}   $!{s.dyj}   0.00000   $!{reue} 500.00000         1         0
+  $s.mahe.ToString("0.00000")   $s.dyj.ToString("0.00000")   0.00000   $reue.ToString("0.00000") 500.00000         1         0
       sref      cref      bref       xmc       ymc       zmc
      1.000    1.0000    1.0000    0.2500    0.0000    0.0000
         dt     irest   iflagts      fmax     iunst   cfl_tau
-  $!{gj.cfl}         0       000    2.0000         1  10.00000
+  $gj.cfl.ToString("0.00000")       0       000    2.0000         1  10.00000
      NGRID   NPLOT3D    NPRINT    NWREST      ICHK       I2D    NTSTEP       ITA
         -8         8         0      9900         0         1         1        -2
        NCG       IEM  IADVANCE    IFORCE  IVISC(I)  IVISC(J)  IVISC(K) 
        #foreach($i in [1..8])     
-      2         0         0       333        #if($zn)19#else$!{s.dlmx}#end        #if($zn)19#else$!{s.dlmx}#end        #if($zn)19#else$!{s.dlmx}#end
+		 2         0         0       333        #if($zn)19#else$!{s.dlmx}#end        #if($zn)19#else$!{s.dlmx}#end        #if($zn)19#else$!{s.dlmx}#end
 
        #end
 	 IDIM      JDIM      KDIM

@@ -18,7 +18,7 @@ namespace Yixing.Dialog
         public int cfl  =1000;
         public int onedd = 1000;
         public int secdd = 1000;
-        public int thirdd = 5000;
+        public int thirdd = 1500;
         public float xzs;
 
         public DingChangGaoji()
