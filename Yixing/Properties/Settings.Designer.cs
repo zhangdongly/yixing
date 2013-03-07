@@ -25,7 +25,7 @@ namespace Yixing.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("./resources/abc")]
+        [global::System.Configuration.DefaultSettingValueAttribute("./resources")]
         public string defaultFileFolder {
             get {
                 return ((string)(this["defaultFileFolder"]));

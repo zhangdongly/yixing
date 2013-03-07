@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="defaultFileFolder" Type="System.String" Scope="User">
-      <Value Profile="(Default)">./resources/abc</Value>
+      <Value Profile="(Default)">./resources</Value>
     </Setting>
     <Setting Name="vmFolder" Type="System.String" Scope="User">
       <Value Profile="(Default)">./template</Value>
