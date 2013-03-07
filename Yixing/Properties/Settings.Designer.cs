@@ -34,5 +34,17 @@ namespace Yixing.Properties {
                 this["defaultFileFolder"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("./template")]
+        public string vmFolder {
+            get {
+                return ((string)(this["vmFolder"]));
+            }
+            set {
+                this["vmFolder"] = value;
+            }
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace Yixing.util
 
         public TemplateHelper()
         {
-           string templatePath =  @"..//..//template";
+            string templatePath = Yixing.Properties.Settings.Default.vmFolder;
             velocity = new VelocityEngine();
 
             velocity.AddProperty(RuntimeConstants.FILE_RESOURCE_LOADER_PATH, templatePath);
