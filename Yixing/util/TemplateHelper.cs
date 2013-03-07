@@ -56,12 +56,12 @@ namespace Yixing.util
             //合并模板
             StringWriter writer = new StringWriter();
             template.Merge(context, writer);
-            string outpath = Yixing.Properties.Settings.Default.defaultFileFolder + "/" + yxName + "/" + mahe + "/";
+            string outpath = Yixing.Properties.Settings.Default.defaultFileFolder + "/" + yxName + "/m" + mahe + "/" + zhuangtai;
             if (!Directory.Exists(outpath))
             {
                 Directory.CreateDirectory(outpath);
             }
-            using (StreamWriter writer2 = new StreamWriter(outpath + zhuangtai + ".inp", false, Encoding.Default, 200))
+            using (StreamWriter writer2 = new StreamWriter(outpath + "/cfl3d.inp", false, Encoding.Default, 200))
               {
                 writer2.Write(writer);
                 writer2.Flush();
