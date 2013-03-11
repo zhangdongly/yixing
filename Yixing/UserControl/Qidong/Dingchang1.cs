@@ -477,7 +477,6 @@ namespace Yixing.UserControl
             this.radioButton3.TabStop = true;
             this.radioButton3.Text = "定升力系数";
             this.radioButton3.UseVisualStyleBackColor = true;
-            
             // 
             // textBox2
             // 
@@ -581,7 +580,7 @@ namespace Yixing.UserControl
             this.panel7.Controls.Add(this.label11);
             this.panel7.Location = new System.Drawing.Point(3, 3);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(297, 465);
+            this.panel7.Size = new System.Drawing.Size(297, 468);
             this.panel7.TabIndex = 6;
             this.panel7.TabStop = false;
             // 
