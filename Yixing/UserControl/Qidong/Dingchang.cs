@@ -379,7 +379,7 @@ namespace Yixing.UserControl
 
         private void button4_Click(object sender, EventArgs e)
         {
-            this.textBox7.Text = this.selectFile();
+           // this.textBox7.Text = this.selectFile();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -403,101 +403,16 @@ namespace Yixing.UserControl
             iList.ImageSize = new Size(1, 25);
             this.exListView2.SmallImageList = iList;
 
-            this.comboBox1.Text = this.comboBox1.Items[0].ToString();
-            this.comboBox2.Text = this.comboBox2.Items[0].ToString();
-            this.radioButton1.Checked = true;
+           // this.comboBox1.Text = this.comboBox1.Items[0].ToString();
+            //this.comboBox2.Text = this.comboBox2.Items[0].ToString();
+            //this.radioButton1.Checked = true;
            // this.checkBox1.Checked = true;
 
             this.exListView1.Columns.Add("文件名",50);
             this.exListView1.Columns.Add("路径",180);
         }
 
-        private void addMethodAndStatus()
-        {
-            String mahe = this.textBox2.Text;
 
-            if (String.IsNullOrEmpty(mahe))
-            {
-                MessageBox.Show("请输入马赫数");
-                return;
-            }
-            String y = textBox3.Text;
-            float low=0;
-            float high=0;
-            float step=0;
-            if (!radioButton3.Checked)
-            {
-                if (radioButton5.Checked)
-                {
-                    y = textBox8.Text;
-                }
-                else
-                {
-                    try
-                    {
-                         low =float.Parse(this.textBox5.Text);
-                         high = float.Parse(this.textBox4.Text);
-                         step = float.Parse(this.textBox6.Text);
-                       
-                    }
-                    catch (Exception e)
-                    {
-                        MessageBox.Show("上限，下限，步长请输入数字");
-                    }
-                }
-            }
-            if (radioButton6.Checked)
-            {
-                for (float yl = low; yl < high; yl += step)
-                {
-                    EXListViewItem item = new EXListViewItem(mahe);
-                    item.SubItems.Add(string.Format("{0:#0.00}",yl));
-                    CheckBox c = new CheckBox();
-                    c.Checked = this.checkBox1.Checked;
-                    EXControlListViewSubItem clv = new EXControlListViewSubItem();
-                    item.SubItems.Add(clv);
-                    this.exListView2.AddControlToSubItem(c, clv);
-                    this.exListView2.Items.Add(item);
-                }
-            }
-            else
-            {
-                EXListViewItem item = new EXListViewItem(mahe);
-                item.SubItems.Add(y);
-                CheckBox c = new CheckBox();
-                c.Checked = this.checkBox1.Checked;
-                EXControlListViewSubItem clv = new EXControlListViewSubItem();
-                item.SubItems.Add(clv);
-                this.exListView2.AddControlToSubItem(c, clv);
-                this.exListView2.Items.Add(item);
-            }
-
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            this.addMethodAndStatus();
-        }
-
-        private void radioButton4_CheckedChanged(object sender, EventArgs e)
-        {
-            RadioButton r = (RadioButton)sender;
-            if (r.Checked)
-            {
-                this.radioButton5.Checked = true;
-                this.panel5.Enabled = true;
-            }
-            else
-            {
-                this.panel5.Enabled = false; 
-            }
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            this.textBox10.Text = this.selectFile();
-        }
 
         private String selectFile()
         {
@@ -520,21 +435,7 @@ namespace Yixing.UserControl
 
         }
 
-        private void radioButton5_CheckedChanged(object sender, EventArgs e)
-        {
-            RadioButton r = (RadioButton)sender;
-            if (r.Checked)
-            {
-                textBox8.Enabled = true;
-                this.panel6.Enabled = false;
-            }
-            else
-            {
-                textBox8.Enabled = false;
-                this.panel6.Enabled = true;
-            }
-        }
-
+       
         private void button8_Click(object sender, EventArgs e)
         {
             Yixingjihetu y = new Yixingjihetu();
