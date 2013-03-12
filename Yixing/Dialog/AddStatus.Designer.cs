@@ -28,7 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+<<<<<<< HEAD
             this.components = new System.ComponentModel.Container();
+=======
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.panel5 = new System.Windows.Forms.Panel();
+>>>>>>> 13c456e11b894ffd5ebe84fa9aaa271ef2f85d07
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -55,6 +61,7 @@
             this.button11 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+<<<<<<< HEAD
             this.button7 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -104,6 +111,66 @@
             this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
+=======
+            this.exListView2 = new Yixing.UserTool.EXListView();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.panel3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.panel8.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.groupBox2);
+            this.panel3.Location = new System.Drawing.Point(12, 13);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(734, 518);
+            this.panel3.TabIndex = 5;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.button3);
+            this.groupBox2.Controls.Add(this.panel5);
+            this.groupBox2.Controls.Add(this.button9);
+            this.groupBox2.Controls.Add(this.button11);
+            this.groupBox2.Controls.Add(this.button10);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.exListView2);
+            this.groupBox2.Controls.Add(this.button7);
+            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.groupBox2.Location = new System.Drawing.Point(5, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(712, 502);
+            this.groupBox2.TabIndex = 0;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "编辑计算状态";
+            // 
+            // panel5
+            // 
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel5.Controls.Add(this.comboBox2);
+            this.panel5.Controls.Add(this.comboBox1);
+            this.panel5.Controls.Add(this.panel6);
+            this.panel5.Controls.Add(this.button2);
+            this.panel5.Controls.Add(this.label9);
+            this.panel5.Controls.Add(this.label8);
+            this.panel5.Controls.Add(this.checkBox1);
+            this.panel5.Controls.Add(this.textBox3);
+            this.panel5.Controls.Add(this.radioButton4);
+            this.panel5.Controls.Add(this.radioButton3);
+            this.panel5.Controls.Add(this.textBox2);
+            this.panel5.Controls.Add(this.label4);
+            this.panel5.Location = new System.Drawing.Point(25, 73);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(286, 381);
+            this.panel5.TabIndex = 11;
+            // 
+>>>>>>> 13c456e11b894ffd5ebe84fa9aaa271ef2f85d07
             // comboBox2
             // 
             this.comboBox2.FormattingEnabled = true;
@@ -157,7 +224,11 @@
             this.panel8.Controls.Add(this.label6);
             this.panel8.Controls.Add(this.label5);
             this.panel8.Enabled = false;
+<<<<<<< HEAD
             this.panel8.Location = new System.Drawing.Point(28, 62);
+=======
+            this.panel8.Location = new System.Drawing.Point(31, 62);
+>>>>>>> 13c456e11b894ffd5ebe84fa9aaa271ef2f85d07
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(129, 85);
             this.panel8.TabIndex = 9;
@@ -195,7 +266,11 @@
             // label6
             // 
             this.label6.AutoSize = true;
+<<<<<<< HEAD
             this.label6.Location = new System.Drawing.Point(12, 32);
+=======
+            this.label6.Location = new System.Drawing.Point(14, 32);
+>>>>>>> 13c456e11b894ffd5ebe84fa9aaa271ef2f85d07
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(29, 12);
             this.label6.TabIndex = 10;
@@ -204,7 +279,11 @@
             // label5
             // 
             this.label5.AutoSize = true;
+<<<<<<< HEAD
             this.label5.Location = new System.Drawing.Point(12, 6);
+=======
+            this.label5.Location = new System.Drawing.Point(12, 2);
+>>>>>>> 13c456e11b894ffd5ebe84fa9aaa271ef2f85d07
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 12);
             this.label5.TabIndex = 9;
@@ -228,7 +307,10 @@
             this.radioButton5.TabStop = true;
             this.radioButton5.Text = "单个";
             this.radioButton5.UseVisualStyleBackColor = true;
+<<<<<<< HEAD
             this.radioButton5.CheckedChanged += new System.EventHandler(this.radioButton5_CheckedChanged);
+=======
+>>>>>>> 13c456e11b894ffd5ebe84fa9aaa271ef2f85d07
             // 
             // button2
             // 
@@ -238,7 +320,10 @@
             this.button2.TabIndex = 31;
             this.button2.Text = "高级选项";
             this.button2.UseVisualStyleBackColor = true;
+<<<<<<< HEAD
             this.button2.Click += new System.EventHandler(this.button3_Click);
+=======
+>>>>>>> 13c456e11b894ffd5ebe84fa9aaa271ef2f85d07
             // 
             // label9
             // 
@@ -267,7 +352,10 @@
             this.checkBox1.TabIndex = 28;
             this.checkBox1.Text = "自由转捩";
             this.checkBox1.UseVisualStyleBackColor = true;
+<<<<<<< HEAD
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+=======
+>>>>>>> 13c456e11b894ffd5ebe84fa9aaa271ef2f85d07
             // 
             // textBox3
             // 
@@ -283,9 +371,15 @@
             this.radioButton4.Name = "radioButton4";
             this.radioButton4.Size = new System.Drawing.Size(65, 16);
             this.radioButton4.TabIndex = 26;
+<<<<<<< HEAD
             this.radioButton4.Text = "定迎角:";
             this.radioButton4.UseVisualStyleBackColor = true;
             this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
+=======
+            this.radioButton4.TabStop = true;
+            this.radioButton4.Text = "定迎角:";
+            this.radioButton4.UseVisualStyleBackColor = true;
+>>>>>>> 13c456e11b894ffd5ebe84fa9aaa271ef2f85d07
             // 
             // radioButton3
             // 
@@ -317,7 +411,11 @@
             // 
             // button9
             // 
+<<<<<<< HEAD
             this.button9.Location = new System.Drawing.Point(155, 429);
+=======
+            this.button9.Location = new System.Drawing.Point(557, 473);
+>>>>>>> 13c456e11b894ffd5ebe84fa9aaa271ef2f85d07
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(100, 23);
             this.button9.TabIndex = 7;
@@ -326,7 +424,11 @@
             // 
             // button11
             // 
+<<<<<<< HEAD
             this.button11.Location = new System.Drawing.Point(553, 429);
+=======
+            this.button11.Location = new System.Drawing.Point(333, 304);
+>>>>>>> 13c456e11b894ffd5ebe84fa9aaa271ef2f85d07
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(63, 23);
             this.button11.TabIndex = 10;
@@ -335,9 +437,15 @@
             // 
             // button10
             // 
+<<<<<<< HEAD
             this.button10.Location = new System.Drawing.Point(352, 429);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(75, 23);
+=======
+            this.button10.Location = new System.Drawing.Point(411, 473);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(104, 23);
+>>>>>>> 13c456e11b894ffd5ebe84fa9aaa271ef2f85d07
             this.button10.TabIndex = 6;
             this.button10.Text = "保存计算状态";
             this.button10.UseVisualStyleBackColor = true;
@@ -345,15 +453,38 @@
             // label3
             // 
             this.label3.AutoSize = true;
+<<<<<<< HEAD
             this.label3.Location = new System.Drawing.Point(294, 17);
+=======
+            this.label3.Location = new System.Drawing.Point(495, 64);
+>>>>>>> 13c456e11b894ffd5ebe84fa9aaa271ef2f85d07
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(113, 12);
             this.label3.TabIndex = 2;
             this.label3.Text = "计算状态总数：5 个";
             // 
+<<<<<<< HEAD
             // button7
             // 
             this.button7.Location = new System.Drawing.Point(195, 234);
+=======
+            // exListView2
+            // 
+            this.exListView2.ControlPadding = 4;
+            this.exListView2.FullRowSelect = true;
+            this.exListView2.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.exListView2.Location = new System.Drawing.Point(402, 90);
+            this.exListView2.Name = "exListView2";
+            this.exListView2.OwnerDraw = true;
+            this.exListView2.Size = new System.Drawing.Size(304, 364);
+            this.exListView2.TabIndex = 4;
+            this.exListView2.UseCompatibleStateImageBehavior = false;
+            this.exListView2.View = System.Windows.Forms.View.Details;
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(342, 207);
+>>>>>>> 13c456e11b894ffd5ebe84fa9aaa271ef2f85d07
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(42, 23);
             this.button7.TabIndex = 9;
@@ -362,7 +493,11 @@
             // 
             // button1
             // 
+<<<<<<< HEAD
             this.button1.Location = new System.Drawing.Point(196, 150);
+=======
+            this.button1.Location = new System.Drawing.Point(341, 157);
+>>>>>>> 13c456e11b894ffd5ebe84fa9aaa271ef2f85d07
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(43, 23);
             this.button1.TabIndex = 3;
@@ -370,6 +505,7 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+<<<<<<< HEAD
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.button13);
@@ -743,20 +879,43 @@
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Visible = false;
             this.button13.Click += new System.EventHandler(this.button13_Click);
+=======
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(321, 263);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 12;
+            this.button3.Text = "修改";
+            this.button3.UseVisualStyleBackColor = true;
+>>>>>>> 13c456e11b894ffd5ebe84fa9aaa271ef2f85d07
             // 
             // AddStatus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+<<<<<<< HEAD
             this.ClientSize = new System.Drawing.Size(863, 547);
             this.Controls.Add(this.groupBox2);
             this.Name = "AddStatus";
             this.Text = "计算状态编辑";
             this.Load += new System.EventHandler(this.AddStatus_Load);
+=======
+            this.ClientSize = new System.Drawing.Size(758, 543);
+            this.Controls.Add(this.panel3);
+            this.Name = "AddStatus";
+            this.Text = "编辑计算状态";
+            this.panel3.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+>>>>>>> 13c456e11b894ffd5ebe84fa9aaa271ef2f85d07
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
+<<<<<<< HEAD
             this.groupBox2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -764,12 +923,20 @@
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+=======
+>>>>>>> 13c456e11b894ffd5ebe84fa9aaa271ef2f85d07
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
+<<<<<<< HEAD
+=======
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Panel panel5;
+>>>>>>> 13c456e11b894ffd5ebe84fa9aaa271ef2f85d07
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Panel panel6;
@@ -796,6 +963,7 @@
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Label label3;
+<<<<<<< HEAD
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -837,5 +1005,11 @@
         private System.Windows.Forms.ColumnHeader CFL;
         private System.Windows.Forms.ColumnHeader 修正熵;
         private System.Windows.Forms.Button button13;
+=======
+        private UserTool.EXListView exListView2;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button3;
+>>>>>>> 13c456e11b894ffd5ebe84fa9aaa271ef2f85d07
     }
 }

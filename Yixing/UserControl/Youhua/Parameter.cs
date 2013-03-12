@@ -258,6 +258,7 @@ namespace Yixing.UserControl.Youhua
             try
             {
                 int varCount = Convert.ToInt32(this.textBox2.Text);
+                this.exListView1.Items.Clear();
            
             for (int i = 1; i <= varCount; i++)
             {
@@ -291,9 +292,54 @@ namespace Yixing.UserControl.Youhua
             }
             catch (Exception exception)
             {
-                MessageBox.Show("请输入设计变量个数");
+                MessageBox.Show("请输入设计变量个数 "+exception.Message);
             }
 
+        }
+
+        private void addParameter(double begin,double end,double currentValue)
+        {
+            
+            try
+            {
+                int varCount = Convert.ToInt32(this.textBox2.Text);
+                this.exListView1.Items.Clear();
+                for (int i = 1; i <= varCount; i++)
+                {
+                    EXListViewItem item = new EXListViewItem(i + "");
+                    item.SubItems.Add("x" + i);
+                    EXControlListViewSubItem lower = new EXControlListViewSubItem();
+                    TextBox t = new TextBox();
+                    t.Text = begin.ToString();
+                    item.SubItems.Add(lower);
+                    this.exListView1.AddControlToSubItem(t, lower);
+
+                    item.SubItems.Add("<=");
+
+                    EXControlListViewSubItem current = new EXControlListViewSubItem();
+
+                    TextBox c = new TextBox();
+                    c.Text = currentValue.ToString();
+                    item.SubItems.Add(current);
+                    this.exListView1.AddControlToSubItem(c, current);
+
+                    item.SubItems.Add("<=");
+
+                    EXControlListViewSubItem up = new EXControlListViewSubItem();
+                    TextBox u = new TextBox();
+                    u.Text = end.ToString();
+                    item.SubItems.Add(up);
+                    this.exListView1.AddControlToSubItem(u, up);
+
+                    this.exListView1.Items.Add(item);
+
+
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("请输入设计变量个数 " + exception.Message);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -319,6 +365,7 @@ namespace Yixing.UserControl.Youhua
                 if (f.ShowDialog() == DialogResult.OK)
                 {
                     this.textBox2.Text = f.count.ToString();
+                    this.addParameter(-0.02, 0.02, 0);
                 }
             }
             else if (this.comboBox1.Text.Equals("CST"))
@@ -327,6 +374,7 @@ namespace Yixing.UserControl.Youhua
                 if (cst.ShowDialog() == DialogResult.OK)
                 {
                     this.textBox2.Text = cst.count.ToString();
+                    this.addParameter(-0.006, 0.006, 0);
                 }
             }else
             {

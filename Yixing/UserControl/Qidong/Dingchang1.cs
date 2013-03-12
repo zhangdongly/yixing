@@ -295,6 +295,7 @@ namespace Yixing.UserControl
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "添加状态";
             // 
+<<<<<<< HEAD
             // edit
             // 
             this.edit.Location = new System.Drawing.Point(296, 24);
@@ -331,6 +332,223 @@ namespace Yixing.UserControl
             this.mahe.Width = 51;
             // 
             // yj
+=======
+            // panel5
+            // 
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel5.Controls.Add(this.comboBox2);
+            this.panel5.Controls.Add(this.comboBox1);
+            this.panel5.Controls.Add(this.panel6);
+            this.panel5.Controls.Add(this.button2);
+            this.panel5.Controls.Add(this.label9);
+            this.panel5.Controls.Add(this.label8);
+            this.panel5.Controls.Add(this.checkBox1);
+            this.panel5.Controls.Add(this.textBox3);
+            this.panel5.Controls.Add(this.radioButton4);
+            this.panel5.Controls.Add(this.radioButton3);
+            this.panel5.Controls.Add(this.textBox2);
+            this.panel5.Controls.Add(this.label4);
+            this.panel5.Location = new System.Drawing.Point(7, 25);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(184, 381);
+            this.panel5.TabIndex = 11;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "SA",
+            "kw sst"});
+            this.comboBox2.Location = new System.Drawing.Point(91, 311);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(78, 20);
+            this.comboBox2.TabIndex = 34;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Roe",
+            "Van Leer"});
+            this.comboBox1.Location = new System.Drawing.Point(91, 284);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(78, 20);
+            this.comboBox1.TabIndex = 33;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.radioButton6);
+            this.panel6.Controls.Add(this.panel8);
+            this.panel6.Controls.Add(this.textBox8);
+            this.panel6.Controls.Add(this.radioButton5);
+            this.panel6.Enabled = false;
+            this.panel6.Location = new System.Drawing.Point(5, 106);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(164, 163);
+            this.panel6.TabIndex = 32;
+            // 
+            // radioButton6
+            // 
+            this.radioButton6.AutoSize = true;
+            this.radioButton6.Location = new System.Drawing.Point(9, 34);
+            this.radioButton6.Name = "radioButton6";
+            this.radioButton6.Size = new System.Drawing.Size(47, 16);
+            this.radioButton6.TabIndex = 10;
+            this.radioButton6.Text = "范围";
+            this.radioButton6.UseVisualStyleBackColor = true;
+            // 
+            // panel8
+            // 
+            this.panel8.Controls.Add(this.textBox6);
+            this.panel8.Controls.Add(this.textBox5);
+            this.panel8.Controls.Add(this.textBox4);
+            this.panel8.Controls.Add(this.label7);
+            this.panel8.Controls.Add(this.label6);
+            this.panel8.Controls.Add(this.label5);
+            this.panel8.Enabled = false;
+            this.panel8.Location = new System.Drawing.Point(31, 62);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(129, 85);
+            this.panel8.TabIndex = 9;
+            // 
+            // textBox6
+            // 
+            this.textBox6.Location = new System.Drawing.Point(55, 58);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(71, 21);
+            this.textBox6.TabIndex = 14;
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(54, 30);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(72, 21);
+            this.textBox5.TabIndex = 13;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(54, 3);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(72, 21);
+            this.textBox4.TabIndex = 12;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(12, 61);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(29, 12);
+            this.label7.TabIndex = 11;
+            this.label7.Text = "步长";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(14, 32);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(29, 12);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "下限";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 2);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(29, 12);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "上限";
+            // 
+            // textBox8
+            // 
+            this.textBox8.Location = new System.Drawing.Point(83, 4);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(78, 21);
+            this.textBox8.TabIndex = 8;
+            // 
+            // radioButton5
+            // 
+            this.radioButton5.AutoSize = true;
+            this.radioButton5.Checked = true;
+            this.radioButton5.Location = new System.Drawing.Point(9, 3);
+            this.radioButton5.Name = "radioButton5";
+            this.radioButton5.Size = new System.Drawing.Size(47, 16);
+            this.radioButton5.TabIndex = 0;
+            this.radioButton5.TabStop = true;
+            this.radioButton5.Text = "单个";
+            this.radioButton5.UseVisualStyleBackColor = true;
+            this.radioButton5.CheckedChanged += new System.EventHandler(this.radioButton5_CheckedChanged);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(90, 340);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 31;
+            this.button2.Text = "高级选项";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(5, 311);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(53, 12);
+            this.label9.TabIndex = 30;
+            this.label9.Text = "湍流模型";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(3, 284);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(77, 12);
+            this.label8.TabIndex = 29;
+            this.label8.Text = "空间离散格式";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(5, 344);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(72, 16);
+            this.checkBox1.TabIndex = 28;
+            this.checkBox1.Text = "自由转捩";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(90, 57);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(76, 21);
+            this.textBox3.TabIndex = 27;
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Location = new System.Drawing.Point(5, 83);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(65, 16);
+            this.radioButton4.TabIndex = 26;
+            this.radioButton4.TabStop = true;
+            this.radioButton4.Text = "定迎角:";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Checked = true;
+            this.radioButton3.Location = new System.Drawing.Point(5, 59);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(83, 16);
+            this.radioButton3.TabIndex = 25;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "定升力系数";
+            this.radioButton3.UseVisualStyleBackColor = true;
+>>>>>>> 13c456e11b894ffd5ebe84fa9aaa271ef2f85d07
             // 
             this.yj.Text = "迎角/升力系数";
             this.yj.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -426,7 +644,7 @@ namespace Yixing.UserControl
             this.panel7.Controls.Add(this.label11);
             this.panel7.Location = new System.Drawing.Point(3, 3);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(297, 465);
+            this.panel7.Size = new System.Drawing.Size(297, 468);
             this.panel7.TabIndex = 6;
             this.panel7.TabStop = false;
             // 
