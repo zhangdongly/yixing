@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Yixing.model;
 
 namespace Yixing.Dialog
 {
@@ -22,6 +23,23 @@ namespace Yixing.Dialog
         public zhuannie()
         {
             InitializeComponent();
+        }
+
+        public zhuannie(DCZhuannie zn ,StatusEditAble editAble)
+        {
+            InitializeComponent();
+            if (editAble.fddld )
+            {
+                if (zn != null) { this.textBox1.Text = zn.fddls.ToString(); }
+                
+            }
+            else { this.textBox1.Enabled = false; }
+
+            if (editAble.wnxb)
+            {
+                if (zn != null) { this.textBox2.Text = zn.wnxb.ToString(); }
+            }
+            else { this.textBox2.Enabled = false; }
         }
 
         public zhuannie(float fddls,float wnxb)

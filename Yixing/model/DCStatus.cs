@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Yixing.model
 {
-    class DCStatus
+    public class DCStatus
     {
         //马赫数
         public float mahe { get; set; }
@@ -27,6 +27,6 @@ namespace Yixing.model
         public int gjKey { get; set; }
 
         //该状态所对应的翼型文件数据
-        public List<DCYixing> yxList { get; set; }
+        public DCYixing yx { get; set; }
     }
 }

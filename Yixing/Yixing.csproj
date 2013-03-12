@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Yixing</RootNamespace>
     <AssemblyName>Yixing</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>发布\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -48,6 +49,13 @@
     <WarningLevel>4</WarningLevel>
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="IrisSkin2">
       <HintPath>.\IrisSkin2.dll</HintPath>
@@ -74,6 +82,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="constant\Constant .cs" />
+    <Compile Include="Dialog\AddStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\AddStatus.Designer.cs">
+      <DependentUpon>AddStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialog\BuDingchangStatus.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -218,6 +233,7 @@
     <Compile Include="model\ResultModel.cs" />
     <Compile Include="model\SanweiModel.cs" />
     <Compile Include="model\SanweiStatusModel.cs" />
+    <Compile Include="model\StatusEditAble.cs" />
     <Compile Include="model\User.cs" />
     <Compile Include="Dialog\Jihetexing.cs">
       <SubType>Form</SubType>
@@ -277,10 +293,14 @@
     <Compile Include="UserTool\ListViewEx.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="util\CheckEdit.cs" />
     <Compile Include="util\JSONUtil.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="util\TemplateHelper.cs" />
+    <EmbeddedResource Include="Dialog\AddStatus.resx">
+      <DependentUpon>AddStatus.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialog\BuDingchangStatus.resx">
       <DependentUpon>BuDingchangStatus.cs</DependentUpon>
     </EmbeddedResource>
@@ -401,6 +421,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControl\Youhua\YouhuaMethod.resx">
       <DependentUpon>YouhuaMethod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTool\EXListView.resx">
+      <DependentUpon>EXListView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\DataSources\Form1.datasource" />
     <None Include="Properties\DataSources\Form2.datasource" />

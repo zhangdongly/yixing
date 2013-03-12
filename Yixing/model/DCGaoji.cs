@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Yixing.model
 {
-    class DCGaoji
+    public class DCGaoji
     {
         //CFL
         public int cfl { get; set; }

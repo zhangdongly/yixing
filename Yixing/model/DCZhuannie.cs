@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Yixing.model
 {
-    class DCZhuannie
+    public class DCZhuannie
     {
         //风洞端流速
         public float fddls{ get;set;}

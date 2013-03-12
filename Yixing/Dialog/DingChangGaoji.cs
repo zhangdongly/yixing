@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Yixing.model;
 
 namespace Yixing.Dialog
 {
@@ -24,6 +25,59 @@ namespace Yixing.Dialog
         public DingChangGaoji()
         {
             InitializeComponent();
+        }
+
+        public DingChangGaoji(DCGaoji gj,StatusEditAble editAble)
+        {
+            InitializeComponent();
+            if (editAble.cfl)
+            {
+                this.textBox1.Text = gj.cfl.ToString();
+            }
+            else
+            {
+                this.textBox1.Enabled = false;
+            }
+
+            if (editAble.onedd)
+            {
+                this.textBox2.Text = gj.onedd.ToString();
+            }
+            else
+            {
+                this.textBox2.Enabled = false;
+            }
+
+            if (editAble.secdd)
+            {
+                this.textBox3.Text = gj.secdd.ToString();
+            }
+            else
+            {
+                this.textBox3.Enabled = false;
+
+            }
+
+            if (editAble.thirdd)
+            {
+                this.textBox4.Text = gj.thirdd.ToString();
+            }
+            else
+            {
+                this.textBox4.Enabled = false;
+
+            }
+
+            if (editAble.xzs)
+            {
+                this.textBox5.Text = gj.xzs.ToString();
+            }
+            else
+            {
+                this.panel3.Enabled = false;
+
+            }
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -56,6 +110,7 @@ namespace Yixing.Dialog
                     return;
                 }
             }
+            this.DialogResult = DialogResult.OK;
             this.Close();
         }
 

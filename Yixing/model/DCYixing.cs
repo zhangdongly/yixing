@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Yixing.model
 {
-    class DCYixing
+    public class DCYixing
     {
         //翼型文件名
         public String name { get; set; }
