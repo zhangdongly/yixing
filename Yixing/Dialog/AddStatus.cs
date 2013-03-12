@@ -580,8 +580,25 @@ namespace Yixing.Dialog
 
         private void button13_Click(object sender, EventArgs e)
         {
-            this.button14.Visible = true;
-            this.button13.Visible = false;
+            //这个方法是修改所有的转涅和高级的
+            this.changeAllstatus();
+            this.exListView2.Items.Clear();
+
+            foreach (int ztKey in ztList)
+            {
+                DCStatus dcs = ztDic[ztKey];
+                this.addToList(dcs, ztKey);
+            }
+
+            //将左侧所有控件初始化为不可用状态
+            foreach (Control c in this.panel1.Controls)
+            {
+                c.Enabled = false;
+            }
+        }
+
+        private void exListView2_SelectedIndexChanged(object sender, EventArgs e)
+        {
             //将左侧所有控件初始化为可用状态
             foreach (Control c in this.panel1.Controls)
             {
@@ -724,27 +741,6 @@ namespace Yixing.Dialog
             if (!canedit)
             {
                 MessageBox.Show("选中的条目没有可编辑的项，请退出！");
-            }
-        }
-
-        private void button14_Click(object sender, EventArgs e)
-        {
-            //这个方法是修改所有的转涅和高级的
-            this.changeAllstatus();
-            this.exListView2.Items.Clear();
-
-            foreach (int ztKey in ztList)
-            {
-                DCStatus dcs = ztDic[ztKey];
-                this.addToList(dcs, ztKey);
-            }
-            this.button14.Visible = false;
-            this.button13.Visible = true;
-
-            //将左侧所有控件初始化为不可用状态
-            foreach (Control c in this.panel1.Controls)
-            {
-                c.Enabled = false;
             }
         }
     }

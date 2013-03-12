@@ -96,7 +96,6 @@
             this.button12 = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.button14 = new System.Windows.Forms.Button();
             this.panel6.SuspendLayout();
             this.panel8.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -373,7 +372,6 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button14);
             this.groupBox2.Controls.Add(this.button13);
             this.groupBox2.Controls.Add(this.exListView2);
             this.groupBox2.Controls.Add(this.panel1);
@@ -421,6 +419,7 @@
             this.exListView2.TabIndex = 12;
             this.exListView2.UseCompatibleStateImageBehavior = false;
             this.exListView2.View = System.Windows.Forms.View.Details;
+            this.exListView2.SelectedIndexChanged += new System.EventHandler(this.exListView2_SelectedIndexChanged);
             // 
             // mahe
             // 
@@ -746,17 +745,6 @@
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.Size = new System.Drawing.Size(61, 4);
             // 
-            // button14
-            // 
-            this.button14.Location = new System.Drawing.Point(197, 92);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(63, 23);
-            this.button14.TabIndex = 14;
-            this.button14.Text = "修改确认";
-            this.button14.UseVisualStyleBackColor = true;
-            this.button14.Visible = false;
-            this.button14.Click += new System.EventHandler(this.button14_Click);
-            // 
             // AddStatus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -850,6 +838,5 @@
         private System.Windows.Forms.ColumnHeader CFL;
         private System.Windows.Forms.ColumnHeader 修正熵;
         private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.Button button14;
     }
 }
