@@ -48,7 +48,6 @@ namespace Yixing.UserControl
         private ToolStripButton toolStripButton5;
         private ToolStripSeparator toolStripSeparator4;
         private ToolStripButton toolStripButton6;
-        private Button button16;
         private Label label11;
         private Label label10;
         private EXListView exListView2;
@@ -69,6 +68,8 @@ namespace Yixing.UserControl
         //记录单独转涅的DIC 包括高级和转涅
         Dictionary<int, DCZhuannie> znDic = new Dictionary<int, DCZhuannie>();
         private Button edit;
+        private Panel panel5;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         //记录单独高级的DIC 包括高级和转涅
         Dictionary<int, DCGaoji> gjDic = new Dictionary<int, DCGaoji>();
 
@@ -80,6 +81,9 @@ namespace Yixing.UserControl
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dingchang1));
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
@@ -99,6 +103,24 @@ namespace Yixing.UserControl
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.edit = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel7 = new System.Windows.Forms.GroupBox();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.exListView2 = new Yixing.UserTool.EXListView();
             this.mahe = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.yj = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -107,24 +129,7 @@ namespace Yixing.UserControl
             this.wnxb = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CFL = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.修正熵 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.button9 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel7 = new System.Windows.Forms.GroupBox();
             this.exListView1 = new Yixing.UserTool.EXListView();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
-            this.button16 = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             this.panel4.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -133,6 +138,8 @@ namespace Yixing.UserControl
             this.panel7.SuspendLayout();
             this.panel9.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStripButton1
@@ -280,6 +287,7 @@ namespace Yixing.UserControl
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.panel5);
             this.groupBox2.Controls.Add(this.edit);
             this.groupBox2.Controls.Add(this.exListView2);
             this.groupBox2.Controls.Add(this.button9);
@@ -297,74 +305,17 @@ namespace Yixing.UserControl
             // 
             // edit
             // 
-            this.edit.Location = new System.Drawing.Point(296, 24);
+            this.edit.Location = new System.Drawing.Point(302, 101);
             this.edit.Name = "edit";
-            this.edit.Size = new System.Drawing.Size(75, 23);
+            this.edit.Size = new System.Drawing.Size(100, 23);
             this.edit.TabIndex = 12;
-            this.edit.Text = "编辑";
+            this.edit.Text = "编辑计算状态 ";
             this.edit.UseVisualStyleBackColor = true;
             this.edit.Click += new System.EventHandler(this.edit_Click_1);
             // 
-            // exListView2
-            // 
-            this.exListView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.mahe,
-            this.yj,
-            this.lsgs,
-            this.端流模型,
-            this.wnxb,
-            this.CFL,
-            this.修正熵});
-            this.exListView2.ControlPadding = 4;
-            this.exListView2.FullRowSelect = true;
-            this.exListView2.Location = new System.Drawing.Point(6, 92);
-            this.exListView2.Name = "exListView2";
-            this.exListView2.OwnerDraw = true;
-            this.exListView2.Size = new System.Drawing.Size(436, 313);
-            this.exListView2.TabIndex = 11;
-            this.exListView2.UseCompatibleStateImageBehavior = false;
-            this.exListView2.View = System.Windows.Forms.View.Details;
-            // 
-            // mahe
-            // 
-            this.mahe.Text = "马赫数";
-            this.mahe.Width = 51;
-            // 
-            // yj
-            // 
-            this.yj.Text = "迎角/升力系数";
-            this.yj.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.yj.Width = 93;
-            // 
-            // lsgs
-            // 
-            this.lsgs.Text = "离散格式";
-            this.lsgs.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // 端流模型
-            // 
-            this.端流模型.Text = "端流模型";
-            this.端流模型.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // wnxb
-            // 
-            this.wnxb.Text = "转涅";
-            this.wnxb.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.wnxb.Width = 52;
-            // 
-            // CFL
-            // 
-            this.CFL.Text = "CFL";
-            this.CFL.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // 修正熵
-            // 
-            this.修正熵.Text = "修正熵";
-            this.修正熵.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(69, 429);
+            this.button9.Location = new System.Drawing.Point(302, 16);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(100, 23);
             this.button9.TabIndex = 7;
@@ -373,9 +324,9 @@ namespace Yixing.UserControl
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(296, 429);
+            this.button11.Location = new System.Drawing.Point(302, 130);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(63, 23);
+            this.button11.Size = new System.Drawing.Size(100, 23);
             this.button11.TabIndex = 10;
             this.button11.Text = "全部删除";
             this.button11.UseVisualStyleBackColor = true;
@@ -383,30 +334,30 @@ namespace Yixing.UserControl
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(194, 429);
+            this.button10.Location = new System.Drawing.Point(302, 44);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(75, 23);
+            this.button10.Size = new System.Drawing.Size(100, 23);
             this.button10.TabIndex = 6;
             this.button10.Text = "保存计算状态";
             this.button10.UseVisualStyleBackColor = true;
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(391, 63);
+            this.button7.Location = new System.Drawing.Point(302, 162);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(42, 23);
+            this.button7.Size = new System.Drawing.Size(100, 23);
             this.button7.TabIndex = 9;
-            this.button7.Text = "删除";
+            this.button7.Text = "删除计算状态";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(390, 24);
+            this.button1.Location = new System.Drawing.Point(302, 73);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(43, 23);
+            this.button1.Size = new System.Drawing.Size(100, 23);
             this.button1.TabIndex = 3;
-            this.button1.Text = "添加";
+            this.button1.Text = "添加计算状态";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -422,25 +373,12 @@ namespace Yixing.UserControl
             // 
             this.panel7.Controls.Add(this.exListView1);
             this.panel7.Controls.Add(this.panel9);
-            this.panel7.Controls.Add(this.button16);
             this.panel7.Controls.Add(this.label11);
             this.panel7.Location = new System.Drawing.Point(3, 3);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(297, 465);
             this.panel7.TabIndex = 6;
             this.panel7.TabStop = false;
-            // 
-            // exListView1
-            // 
-            this.exListView1.ControlPadding = 4;
-            this.exListView1.FullRowSelect = true;
-            this.exListView1.Location = new System.Drawing.Point(0, 31);
-            this.exListView1.Name = "exListView1";
-            this.exListView1.OwnerDraw = true;
-            this.exListView1.Size = new System.Drawing.Size(291, 339);
-            this.exListView1.TabIndex = 9;
-            this.exListView1.UseCompatibleStateImageBehavior = false;
-            this.exListView1.View = System.Windows.Forms.View.Details;
             // 
             // panel9
             // 
@@ -504,16 +442,6 @@ namespace Yixing.UserControl
             this.toolStripButton6.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton6.Text = "编辑计算翼型";
             // 
-            // button16
-            // 
-            this.button16.Location = new System.Drawing.Point(73, 426);
-            this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(151, 25);
-            this.button16.TabIndex = 7;
-            this.button16.Text = "显示翼型几何形状";
-            this.button16.UseVisualStyleBackColor = true;
-            this.button16.Click += new System.EventHandler(this.show_Click);
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -531,6 +459,99 @@ namespace Yixing.UserControl
             this.label10.Size = new System.Drawing.Size(101, 12);
             this.label10.TabIndex = 23;
             this.label10.Text = "计算状态的线程数";
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.chart1);
+            this.panel5.Location = new System.Drawing.Point(10, 20);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(245, 170);
+            this.panel5.TabIndex = 13;
+            // 
+            // chart1
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(9, 11);
+            this.chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(223, 156);
+            this.chart1.TabIndex = 0;
+            this.chart1.Text = "chart1";
+            // 
+            // exListView2
+            // 
+            this.exListView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.mahe,
+            this.yj,
+            this.lsgs,
+            this.端流模型,
+            this.wnxb,
+            this.CFL,
+            this.修正熵});
+            this.exListView2.ControlPadding = 4;
+            this.exListView2.FullRowSelect = true;
+            this.exListView2.Location = new System.Drawing.Point(10, 196);
+            this.exListView2.Name = "exListView2";
+            this.exListView2.OwnerDraw = true;
+            this.exListView2.Size = new System.Drawing.Size(436, 263);
+            this.exListView2.TabIndex = 11;
+            this.exListView2.UseCompatibleStateImageBehavior = false;
+            this.exListView2.View = System.Windows.Forms.View.Details;
+            // 
+            // mahe
+            // 
+            this.mahe.Text = "马赫数";
+            this.mahe.Width = 51;
+            // 
+            // yj
+            // 
+            this.yj.Text = "迎角/升力系数";
+            this.yj.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.yj.Width = 93;
+            // 
+            // lsgs
+            // 
+            this.lsgs.Text = "离散格式";
+            this.lsgs.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // 端流模型
+            // 
+            this.端流模型.Text = "端流模型";
+            this.端流模型.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // wnxb
+            // 
+            this.wnxb.Text = "转涅";
+            this.wnxb.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.wnxb.Width = 52;
+            // 
+            // CFL
+            // 
+            this.CFL.Text = "CFL";
+            this.CFL.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // 修正熵
+            // 
+            this.修正熵.Text = "修正熵";
+            this.修正熵.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // exListView1
+            // 
+            this.exListView1.ControlPadding = 4;
+            this.exListView1.FullRowSelect = true;
+            this.exListView1.Location = new System.Drawing.Point(0, 31);
+            this.exListView1.Name = "exListView1";
+            this.exListView1.OwnerDraw = true;
+            this.exListView1.Size = new System.Drawing.Size(291, 339);
+            this.exListView1.TabIndex = 9;
+            this.exListView1.UseCompatibleStateImageBehavior = false;
+            this.exListView1.View = System.Windows.Forms.View.Details;
             // 
             // Dingchang1
             // 
@@ -551,6 +572,8 @@ namespace Yixing.UserControl
             this.panel9.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -635,8 +658,8 @@ namespace Yixing.UserControl
             iList.ImageSize = new Size(1, 25);
 
             this.exListView1.Columns.Add("文件名", 50);
-            this.exListView1.Columns.Add("路径", 180);
-            this.exListView1.Columns.Add("添加状态", 60);
+            this.exListView1.Columns.Add("路径", 240);
+           // this.exListView1.Columns.Add("添加状态", 60);
             this.exListView1.SmallImageList = iList;
         }
 
@@ -665,11 +688,11 @@ namespace Yixing.UserControl
                     EXListViewItem item = new EXListViewItem(fileName);
                     item.SubItems.Add(yixing.filePath);
                     item.Tag = yixing;
-                    CheckBox c = new CheckBox();
-                    c.Checked = true;
-                    EXControlListViewSubItem exc = new EXControlListViewSubItem();
-                    item.SubItems.Add(exc);
-                    this.exListView1.AddControlToSubItem(c, exc);
+                  //  CheckBox c = new CheckBox();
+                  // c.Checked = true;
+                  //  EXControlListViewSubItem exc = new EXControlListViewSubItem();
+                  //  item.SubItems.Add(exc);
+                  //  this.exListView1.AddControlToSubItem(c, exc);
                     this.exListView1.Items.Add(item);
                 }
             }
