@@ -82,10 +82,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="constant\Constant .cs" />
-=======
->>>>>>> 13c456e11b894ffd5ebe84fa9aaa271ef2f85d07
     <Compile Include="Dialog\AddStatus.cs">
       <SubType>Form</SubType>
     </Compile>

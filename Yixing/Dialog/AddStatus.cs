@@ -48,7 +48,6 @@ namespace Yixing.Dialog
             InitializeComponent();
         }
 
-<<<<<<< HEAD
         public AddStatus(List<int> ztKeyList, Dictionary<int, DCStatus> ztDic_, Dictionary<int, DCZhuannie> znDic_, Dictionary<int, DCGaoji> gjDic_)
         {
             InitializeComponent();
@@ -698,11 +697,6 @@ namespace Yixing.Dialog
                 DCStatus dcs = ztDic[ztKey];
                 this.addToList(dcs, ztKey);
             }
-=======
-        private void button1_Click(object sender, EventArgs e)
-        {
-
->>>>>>> 13c456e11b894ffd5ebe84fa9aaa271ef2f85d07
         }
     }
 }
