@@ -28,5 +28,8 @@ namespace Yixing.model
 
         //该状态所对应的翼型文件数据
         public DCYixing yx { get; set; }
+
+        //在dic中的key
+        public int key { get; set; }
     }
 }

@@ -12,5 +12,9 @@ namespace Yixing.model
         public String name { get; set; }
         //翼型文件所在位置
         public String filePath { get; set; }
+        //翼型所包含的状态List
+        public List<DCStatus> dcList { get; set; }
+        //翼型所包含的状态List
+        public int key { get; set; }
     }
 }

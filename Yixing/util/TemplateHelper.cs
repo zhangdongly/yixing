@@ -62,11 +62,11 @@ namespace Yixing.util
                 Directory.CreateDirectory(outpath);
             }
             using (StreamWriter writer2 = new StreamWriter(outpath + "/cfl3d.inp", false, Encoding.Default, 200))
-              {
-                writer2.Write(writer);
-                writer2.Flush();
-                writer2.Close();
-              }
+            {
+            writer2.Write(writer);
+            writer2.Flush();
+            writer2.Close();
+            }
   
             return writer.ToString();
         }
