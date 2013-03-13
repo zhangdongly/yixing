@@ -10,6 +10,7 @@ using System.Drawing;
 using Yixing.model;
 using Yixing.util;
 using System.Globalization;
+using Yixing.constant;
 
 namespace Yixing.UserControl
 {
@@ -762,6 +763,7 @@ namespace Yixing.UserControl
         //添加计算状态的按钮
         private void button1_Click(object sender, EventArgs e)
         {
+
             List<DCYixing> yxList = new List<DCYixing>();
             //将选中的翼型读出来
             int count = this.exListView1.SelectedItems.Count;
@@ -780,7 +782,7 @@ namespace Yixing.UserControl
 
             if (yxList.Count > 0)
             {
-                AddStatus add = new AddStatus(yxList);
+                AddStatus add = new AddStatus(yxList,gjDic);
                 if (add.ShowDialog() == DialogResult.OK)
                 {
                     //给翼型添加DcList
@@ -890,15 +892,19 @@ namespace Yixing.UserControl
                 item.SubItems.Add(dslxs.ToString());
             }
 
-            item.SubItems.Add(dc.lsgs.ToString());
-
-            if (dc.dlmx != 0f)
+            if (dc.lsgs == Constant.LSGS_ROE)
             {
-                item.SubItems.Add(dc.dlmx.ToString());
+                item.SubItems.Add("Roe");
+            }
+            else { item.SubItems.Add("Van Leer"); }
+
+            if (dc.dlmx == Constant.DLMX_SA)
+            {
+                item.SubItems.Add("Sa");
             }
             else
             {
-                item.SubItems.Add("无");
+                item.SubItems.Add("kw sst");
             }
 
             //处理转涅相关参数

@@ -39,14 +39,10 @@ namespace Yixing.Dialog
         //本页选中需要修改的状态key的List
         List<int> editztList = new List<int>();
 
-        ////新增时，需要将老的字典传递过来，
-        ////而根据最初始的逻辑，新生产的状态存放的dictionary，中的key，和原始的key是不同的
-        ////这个仅用于展示不做其他作用
-        //public Dictionary<int, DCStatus> oldztDic = new Dictionary<int, DCStatus>();
-        ////记录单独转涅的DIC 包括高级和转涅
-        //public Dictionary<int, DCZhuannie> oldznDic = new Dictionary<int, DCZhuannie>();
-        ////记录单独高级的DIC 包括高级和转涅
-        //public Dictionary<int, DCGaoji> oldgjDic = new Dictionary<int, DCGaoji>();
+        //新增时，需要将老的字典传递过来，
+        //而根据最初始的逻辑，新生产的状态存放的dictionary，中的key，和原始的key是不同的
+        //这个仅用于展示不做其他作用
+        public Dictionary<int, DCStatus> oldztDic = new Dictionary<int, DCStatus>();
 
         //修改时专用，用作记录修改后的一个转涅对象
         DCZhuannie editZn = null;
@@ -71,19 +67,29 @@ namespace Yixing.Dialog
             this.znDic = znDic_;
             this.gjDic = gjDic_;
             //需要两两比较 确定哪些项目不能编辑
-            
+
             foreach (int ztKey in ztKeyList)
             {
                 DCStatus dcs = ztDic[ztKey];
-                this.addToList(dcs,ztKey);
+                this.addToList(dcs, ztKey);
             }
 
         }
 
-        public AddStatus(List<DCYixing> yxList1)
+        public AddStatus(List<DCYixing> yxList1,Dictionary<int, DCGaoji> gjDic)
         {
             InitializeComponent();
             yxList = yxList1;
+            foreach(DCYixing yx in yxList){
+                List<DCStatus> statusList = yx.dcList;
+                if (statusList != null)
+                {
+                    foreach (DCStatus dc in statusList)
+                    {
+                        this.addToList(dc, dc.key, gjDic);
+                    }
+                } 
+            }
         }
 
         private void addMethodAndStatus()
@@ -115,6 +121,10 @@ namespace Yixing.Dialog
                         return;
                     }
                     dcList = setDcStatus(mahe, dyjf, 0f);
+                    if (dcList.Count == 0)
+                    {
+                        MessageBox.Show("马赫数：" + mahe + " 定迎角：" + dyjf + " 存在重复状态，重复状态会被自动忽略，请修改定马赫数，或者定迎角度");
+                    }
                 }
                 else
                 {
@@ -129,9 +139,19 @@ namespace Yixing.Dialog
                     {
                         MessageBox.Show("上限，下限，步长请输入数字");
                     }
+                    //
+                    int count = 0;
+                    int yxcount = this.yxList.Count;
                     for (float yl = low; yl <= high; yl += step)
                     {
-                        dcList = setDcStatus(mahe, yl, 0f);
+                        count++;
+                        List<DCStatus> dcList1 = setDcStatus(mahe, yl, 0f);
+                        dcList.AddRange(dcList1);
+                    }
+                    //如果最终生产出来的list的长度小于循环次数 证明有些定迎角重复了被忽略掉了
+                    if (dcList.Count < count*yxcount)
+                    {
+                        MessageBox.Show("按范围添加定迎角，存在重复状态，重复状态会被自动忽略");
                     }
                 }
             }
@@ -158,8 +178,15 @@ namespace Yixing.Dialog
             isznOpened = false;
             isgjOpened = false;
         }
+
         //添加一跳记录到ListView2
-        private void addToList(DCStatus dc,int key)
+        private void addToList(DCStatus dc, int key)
+        {
+            addToList(dc, key, gjDic);
+        }
+
+        //添加一跳记录到ListView2,
+        private void addToList(DCStatus dc,int key,Dictionary<int,DCGaoji> gjDic_)
         {
             float mahe; float dyj; float dslxs;
             mahe = dc.mahe;
@@ -184,16 +211,19 @@ namespace Yixing.Dialog
             //CheckBox c = new CheckBox();
             //c.Checked = this.checkBox1.Checked;
             //EXControlListViewSubItem clv = new EXControlListViewSubItem();
-            item.SubItems.Add(dc.lsgs.ToString());
-           
-
-            if (dc.dlmx != 0f)
+            if (dc.lsgs == Constant.LSGS_ROE)
             {
-                item.SubItems.Add(dc.dlmx.ToString());
+                item.SubItems.Add("Roe");
+            }
+            else { item.SubItems.Add("Van Leer"); }
+
+            if (dc.dlmx ==Constant.DLMX_SA)
+            {
+                item.SubItems.Add("Sa");
             }
             else
             {
-                item.SubItems.Add("无");
+                item.SubItems.Add("kw sst");
             }
 
             //处理转涅相关参数
@@ -213,7 +243,7 @@ namespace Yixing.Dialog
             
             if (gjkey!=0)
             {
-                DCGaoji gj = gjDic[gjkey];
+                DCGaoji gj = gjDic_[gjkey];
                 item.SubItems.Add(gj.cfl.ToString());
                 if (gj.xzs!=0)
                     item.SubItems.Add(gj.xzs.ToString());
@@ -238,6 +268,7 @@ namespace Yixing.Dialog
             dc.dslxs = dslxs;
             dc.dyj = dyj;
 
+            //先验证当前添加的
             foreach (int skey in ztDic.Keys)
             {
                 DCStatus olddc = ztDic[skey];
@@ -248,10 +279,30 @@ namespace Yixing.Dialog
                 }
                 if (olddc.mahe == mahe && olddc.dyj == dyj && dyj != 0)
                 {
-                    MessageBox.Show("马赫数："+mahe+"  定迎角："+dyj+" 该条状态重复，请修改定马赫数，或者定迎角度");
                     return dcList;
                 }
                 
+            }
+
+            //再验证老的传递过来的有没有
+            foreach (DCYixing yx in yxList)
+            {
+                List<DCStatus> statusList = yx.dcList;
+                if (statusList != null)
+                {
+                    foreach (DCStatus olddc in statusList)
+                    {
+                        if (olddc.mahe == mahe && olddc.dslxs == dslxs && dslxs != 0)
+                        {
+                            MessageBox.Show("马赫数：" + mahe + "  定升力系数：" + dslxs + " 该条状态重复，请修改定升力系数，或者定马赫数");
+                            return dcList;
+                        }
+                        if (olddc.mahe == mahe && olddc.dyj == dyj && dyj != 0)
+                        {
+                            return dcList;
+                        }
+                    }
+                }
             }
 
             String lsgs = this.comboBox1.Text;
