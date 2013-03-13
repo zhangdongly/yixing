@@ -353,6 +353,7 @@ namespace Yixing.UserControl
             this.修正熵});
             this.exListView2.ControlPadding = 4;
             this.exListView2.FullRowSelect = true;
+            this.exListView2.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.exListView2.Location = new System.Drawing.Point(10, 196);
             this.exListView2.Name = "exListView2";
             this.exListView2.OwnerDraw = true;
@@ -469,20 +470,21 @@ namespace Yixing.UserControl
             // 
             this.exListView1.ControlPadding = 4;
             this.exListView1.FullRowSelect = true;
-            this.exListView1.Location = new System.Drawing.Point(0, 31);
+            this.exListView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.exListView1.Location = new System.Drawing.Point(3, 31);
             this.exListView1.Name = "exListView1";
             this.exListView1.OwnerDraw = true;
-            this.exListView1.Size = new System.Drawing.Size(291, 339);
+            this.exListView1.Size = new System.Drawing.Size(291, 401);
             this.exListView1.TabIndex = 9;
             this.exListView1.UseCompatibleStateImageBehavior = false;
             this.exListView1.View = System.Windows.Forms.View.Details;
-            this.exListView1.SelectedIndexChanged += new System.EventHandler(this.exListView1_SelectedIndexChanged);
+            this.exListView1.DoubleClick += new System.EventHandler(this.exListView1_SelectedIndexChanged);
             // 
             // panel9
             // 
             this.panel9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel9.Controls.Add(this.toolStrip1);
-            this.panel9.Location = new System.Drawing.Point(3, 376);
+            this.panel9.Location = new System.Drawing.Point(3, 431);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(291, 30);
             this.panel9.TabIndex = 8;
@@ -969,6 +971,14 @@ namespace Yixing.UserControl
 
         private void exListView1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //更改颜色。
+            foreach (EXListViewItem i in this.exListView1.Items)
+            {
+                i.BackColor = Color.White;
+            }          
+            this.exListView1.SelectedItems[0].BackColor = Color.DodgerBlue;
+            //更改颜色
+
             int count = this.exListView1.SelectedItems.Count;
             if (count > 0)
             {

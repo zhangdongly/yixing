@@ -14,6 +14,7 @@ namespace Yixing.UserControl
         private Sanwei sanwei;
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.TreeNode oldSelectNode;
         
         public Qidong()
         {
@@ -25,6 +26,8 @@ namespace Yixing.UserControl
         private void InitializeComponent()
         {
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("定常");
+            treeNode1.BackColor = Color.DodgerBlue;
+            this.oldSelectNode = treeNode1;
             System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("非定常");
             System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("二维", new System.Windows.Forms.TreeNode[] {
             treeNode1,
@@ -123,6 +126,19 @@ namespace Yixing.UserControl
         {
             this.splitContainer1.Panel2.Controls.Clear();
             String name = e.Node.Name;
+            if (oldSelectNode == null)
+            {
+                oldSelectNode = this.treeView1.SelectedNode;
+            }
+            else
+            {
+                oldSelectNode.BackColor = Color.White;
+                oldSelectNode = this.treeView1.SelectedNode;
+            }
+            
+            this.treeView1.SelectedNode.BackColor = Color.DodgerBlue;
+
+            
             if (name.Equals("dingchang"))
             {
                 this.splitContainer1.Panel2.Controls.Add(dingchang1);
