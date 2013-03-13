@@ -883,7 +883,7 @@ namespace Yixing.UserControl
 
             if (dyj > 0)
             {
-                item.SubItems.Add(dyj.ToString());
+                item.SubItems.Add(dyj.ToString(), Color.Red, Color.White, null);
             }
             else
             {

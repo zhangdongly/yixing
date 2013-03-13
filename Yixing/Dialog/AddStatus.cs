@@ -39,6 +39,15 @@ namespace Yixing.Dialog
         //本页选中需要修改的状态key的List
         List<int> editztList = new List<int>();
 
+        ////新增时，需要将老的字典传递过来，
+        ////而根据最初始的逻辑，新生产的状态存放的dictionary，中的key，和原始的key是不同的
+        ////这个仅用于展示不做其他作用
+        //public Dictionary<int, DCStatus> oldztDic = new Dictionary<int, DCStatus>();
+        ////记录单独转涅的DIC 包括高级和转涅
+        //public Dictionary<int, DCZhuannie> oldznDic = new Dictionary<int, DCZhuannie>();
+        ////记录单独高级的DIC 包括高级和转涅
+        //public Dictionary<int, DCGaoji> oldgjDic = new Dictionary<int, DCGaoji>();
+
         //修改时专用，用作记录修改后的一个转涅对象
         DCZhuannie editZn = null;
 
@@ -166,7 +175,7 @@ namespace Yixing.Dialog
 
             if (dyj > 0)
             {
-                item.SubItems.Add(dyj.ToString());
+                item.SubItems.Add(dyj.ToString(),Color.Red,Color.White,null);
             }
             else
             {
@@ -228,6 +237,22 @@ namespace Yixing.Dialog
             dc.mahe = mahe;
             dc.dslxs = dslxs;
             dc.dyj = dyj;
+
+            foreach (int skey in ztDic.Keys)
+            {
+                DCStatus olddc = ztDic[skey];
+                if (olddc.mahe == mahe && olddc.dslxs == dslxs && dslxs != 0)
+                {
+                    MessageBox.Show("马赫数：" + mahe + "  定升力系数：" + dslxs + " 该条状态重复，请修改定升力系数，或者定马赫数");
+                    return dcList;
+                }
+                if (olddc.mahe == mahe && olddc.dyj == dyj && dyj != 0)
+                {
+                    MessageBox.Show("马赫数："+mahe+"  定迎角："+dyj+" 该条状态重复，请修改定马赫数，或者定迎角度");
+                    return dcList;
+                }
+                
+            }
 
             String lsgs = this.comboBox1.Text;
             if (lsgs.Equals("Roe"))
@@ -452,11 +477,13 @@ namespace Yixing.Dialog
             RadioButton r = (RadioButton)sender;
             if (r.Checked)
             {
+                this.textBox3.Enabled = false;
                 this.radioButton5.Checked = true;
                 this.panel6.Enabled = true;
             }
             else
             {
+                this.textBox3.Enabled = false;
                 this.radioButton3.Checked = true;
                 this.panel6.Enabled = false;
             }
