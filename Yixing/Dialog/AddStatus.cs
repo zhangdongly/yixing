@@ -534,7 +534,7 @@ namespace Yixing.Dialog
             }
             else
             {
-                this.textBox3.Enabled = false;
+                this.textBox3.Enabled = true;
                 this.radioButton3.Checked = true;
                 this.panel6.Enabled = false;
             }
@@ -677,6 +677,11 @@ namespace Yixing.Dialog
 
         private void exListView2_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (this.exListView2.SelectedItems.Count == 0)
+            {
+                return;
+            }
+
             //将左侧所有控件初始化为可用状态
             foreach (Control c in this.panel1.Controls)
             {
@@ -722,20 +727,22 @@ namespace Yixing.Dialog
             {
                 editAble.dslxs = false;
                 this.textBox3.Enabled = false;
+                this.radioButton3.Enabled = false;
             }
             else
             {
                 if (ds.dslxs != 0)
                 {
-                    this.radioButton4.Checked = false;
                     this.textBox3.Text = ds.dslxs.ToString();
                 }
+                this.radioButton4.Checked = false;
                 canedit = true;
             }
 
-            if (!ck.checkdyj() && this.radioButton3.Checked)
+            if (!ck.checkdyj())
             {
                 editAble.dyj = false;
+                this.radioButton4.Checked = false;
                 this.radioButton4.Enabled = false;
                 this.panel6.Enabled = false;
             }

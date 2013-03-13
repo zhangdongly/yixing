@@ -49,6 +49,14 @@ namespace Yixing.util
         //检查升力系数
         public Boolean checkslxs()
         {
+            if (ztKeyList.Count == 1)
+            {
+                int ztKey = ztKeyList[0];
+                DCStatus dcs = ztDic[ztKey];
+                if (dcs.dslxs == 0)
+                  return false; 
+                return true;
+            }
             for (int i = 0; i < ztKeyList.Count; i++)
             {
                 int ztKey = ztKeyList[i];
@@ -58,7 +66,7 @@ namespace Yixing.util
                     int ztKey1 = ztKeyList[j];
                     DCStatus dcs1 = ztDic[ztKey1];
                     //若为0，证明没有设定升力系数，则不可用
-                    if (dcs1.dslxs == 0)
+                    if (dcs1.dslxs == 0 || dcs.dslxs==0)
                     { return false; }
                     if (dcs.dslxs != dcs1.dslxs)
                     {return false;}
@@ -70,6 +78,14 @@ namespace Yixing.util
         //检查定迎角
         public Boolean checkdyj()
         {
+            if (ztKeyList.Count == 1)
+            {
+                int ztKey = ztKeyList[0];
+                DCStatus dcs = ztDic[ztKey];
+                if (dcs.dyj == 0)
+                    return false;
+                return true;
+            }
             for (int i = 0; i < ztKeyList.Count; i++)
             {
                 int ztKey = ztKeyList[i];
@@ -79,7 +95,7 @@ namespace Yixing.util
                     int ztKey1 = ztKeyList[j];
                     DCStatus dcs1 = ztDic[ztKey1];
                     //若为0，证明没有设定升力系数，则不可用
-                    if (dcs1.dyj == 0)
+                    if (dcs1.dyj == 0 || dcs.dyj == 0)
                     { return false; }
                     if (dcs.dyj != dcs1.dyj)
                     { return false; }
