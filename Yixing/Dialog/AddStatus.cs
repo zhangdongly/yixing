@@ -434,7 +434,15 @@ namespace Yixing.Dialog
                 }
                 else
                 {
-                    z = new zhuannie();
+                    if (znkey != 0)
+                    {
+                        DCZhuannie zn = znDic[znkey];
+                        z = new zhuannie(zn.fddls, zn.wnxb);
+                    }
+                    else
+                    {
+                        z = new zhuannie();
+                    }
                 }
 
                 this.comboBox2.Text = "kw sst";
