@@ -88,7 +88,6 @@ namespace Yixing.UserControl
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dingchang1));
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -314,7 +313,7 @@ namespace Yixing.UserControl
             this.panel5.Controls.Add(this.chart1);
             this.panel5.Location = new System.Drawing.Point(10, 20);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(245, 170);
+            this.panel5.Size = new System.Drawing.Size(275, 170);
             this.panel5.TabIndex = 13;
             // 
             // chart1
@@ -322,11 +321,8 @@ namespace Yixing.UserControl
             this.chart1.BorderlineColor = System.Drawing.Color.Silver;
             this.chart1.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
             chartArea1.Name = "ChartArea1";
+            chartArea1.AxisX.LabelStyle.Format = "{0.00}";
             this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Alignment = System.Drawing.StringAlignment.Center;
-            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(9, 11);
             this.chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
@@ -334,7 +330,7 @@ namespace Yixing.UserControl
             series1.Legend = "Legend1";
             series1.Name = "翼型几何形状";
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(223, 156);
+            this.chart1.Size = new System.Drawing.Size(249, 156);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
