@@ -57,7 +57,7 @@ namespace Yixing.Dialog
             }
             if (yixing == null)
             {
-                yixing = new YixingModel();
+                yixing = new DCYixing();
             }
             yixing.type = type;
             yixing.filePath = filePath;

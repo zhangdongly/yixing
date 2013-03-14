@@ -230,7 +230,7 @@ namespace Yixing.Dialog
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.Panel panel2;
-        public YixingModel  yixing;
+        public DCYixing  yixing;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
