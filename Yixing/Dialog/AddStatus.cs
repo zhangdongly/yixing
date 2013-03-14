@@ -53,6 +53,7 @@ namespace Yixing.Dialog
         public AddStatus()
         {
             InitializeComponent();
+            this.exListView2.SelectedIndexChanged -= new EventHandler(this.exListView2_SelectedIndexChanged);
         }
 
         public AddStatus(List<int> ztKeyList, Dictionary<int, DCStatus> ztDic_, Dictionary<int, DCZhuannie> znDic_, Dictionary<int, DCGaoji> gjDic_)
@@ -103,6 +104,7 @@ namespace Yixing.Dialog
                     }
                 } 
             }
+            this.exListView2.SelectedIndexChanged -= new EventHandler(this.exListView2_SelectedIndexChanged);
         }
 
         private void addMethodAndStatus()
@@ -165,6 +167,7 @@ namespace Yixing.Dialog
                     if (dcList.Count < count*yxcount)
                     {
                         MessageBox.Show("按范围添加定迎角，存在重复状态，重复状态会被自动忽略");
+                        return;
                     }
                 }
             }
@@ -180,6 +183,12 @@ namespace Yixing.Dialog
                
 
             }
+
+            //如果需要处理的，状态为0条直接返回，不错操作
+            //此处一般是由于状态重复导致发生的country=0
+            //如果不做这个return，会导致CheckBox1的选中被取消
+            if (dcList.Count == 0) return;
+
             foreach (DCStatus dc in dcList)
             {
                 ztkey++;
@@ -188,8 +197,10 @@ namespace Yixing.Dialog
                 this.addToList(dc,ztkey);
             }
 
+
             //添加完后 去掉对转涅的选中
             this.checkBox1.Checked = false;
+
             isznOpened = false;
             isgjOpened = false;
         }
