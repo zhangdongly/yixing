@@ -12,7 +12,7 @@ namespace Yixing.UserTool
         public static String getSelectFileName(OpenFileDialog openFileDialog){
              openFileDialog.InitialDirectory = @"D:\";
             openFileDialog.FileName = null;
-            openFileDialog.Filter = "(*.txt,*.res)|*.jpg;*gif;*jpeg;*bmp|所有文件(*.*)|*.*";
+            openFileDialog.Filter = "所有文件(*.*)|*.*";
             openFileDialog.RestoreDirectory = true;
             openFileDialog.FilterIndex = 1;
             if (openFileDialog.ShowDialog() == DialogResult.OK)
