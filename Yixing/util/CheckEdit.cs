@@ -154,7 +154,7 @@ namespace Yixing.util
                     {
                         int ztKey1 = ztKeyList[j];
                         DCStatus dcs1 = ztDic[ztKey1];
-                        int znkey1 = dcs.znKey;
+                        int znkey1 = dcs1.znKey;
                         //如果key为0，证明没有，直接继续
                         if (znkey1 == 0) { continue; } else { return false; }
                     }
@@ -192,7 +192,7 @@ namespace Yixing.util
                     {
                         int ztKey1 = ztKeyList[j];
                         DCStatus dcs1 = ztDic[ztKey1];
-                        int znkey1 = dcs.znKey;
+                        int znkey1 = dcs1.znKey;
                         //如果key为0，证明没有，直接继续
                         if (znkey1 == 0) { continue; } else { return false; }
                     }
@@ -231,7 +231,7 @@ namespace Yixing.util
                     {
                         int ztKey1 = ztKeyList[j];
                         DCStatus dcs1 = ztDic[ztKey1];
-                        int gjkey1 = dcs.gjKey;
+                        int gjkey1 = dcs1.gjKey;
                         //如果key为0，证明没有，直接继续
                         if (gjkey1 == 0) { continue; } else { return false; }
                     }
@@ -242,7 +242,7 @@ namespace Yixing.util
                 {
                     int ztKey1 = ztKeyList[j];
                     DCStatus dcs1 = ztDic[ztKey1];
-                    int gjkey1 = dcs.gjKey;
+                    int gjkey1 = dcs1.gjKey;
                     //如果key为0，证明没有，直接继续
                     if (gjkey1 == 0) { return false; }
                     DCGaoji gj1 = gjDic[gjkey1];
@@ -270,7 +270,7 @@ namespace Yixing.util
                     {
                         int ztKey1 = ztKeyList[j];
                         DCStatus dcs1 = ztDic[ztKey1];
-                        int gjkey1 = dcs.gjKey;
+                        int gjkey1 = dcs1.gjKey;
                         //如果key为0，证明没有，直接继续
                         if (gjkey1 == 0) { continue; } else { return false; }
                     }
@@ -281,7 +281,7 @@ namespace Yixing.util
                 {
                     int ztKey1 = ztKeyList[j];
                     DCStatus dcs1 = ztDic[ztKey1];
-                    int gjkey1 = dcs.gjKey;
+                    int gjkey1 = dcs1.gjKey;
                     //如果key为0，证明没有，直接继续，走到此处 为0，必定和gj不同
                     if (gjkey1 == 0) { return false; }
                     DCGaoji gj1 = gjDic[gjkey1];
@@ -309,7 +309,7 @@ namespace Yixing.util
                     {
                         int ztKey1 = ztKeyList[j];
                         DCStatus dcs1 = ztDic[ztKey1];
-                        int gjkey1 = dcs.gjKey;
+                        int gjkey1 = dcs1.gjKey;
                         //如果key为0，证明没有，直接继续
                         if (gjkey1 == 0) { continue; } else { return false; }
                     }
@@ -320,7 +320,7 @@ namespace Yixing.util
                 {
                     int ztKey1 = ztKeyList[j];
                     DCStatus dcs1 = ztDic[ztKey1];
-                    int gjkey1 = dcs.gjKey;
+                    int gjkey1 = dcs1.gjKey;
                     //如果key为0，证明没有，直接继续
                     if (gjkey1 == 0) { return false; }
                     DCGaoji gj1 = gjDic[gjkey1];
@@ -349,7 +349,7 @@ namespace Yixing.util
                     {
                         int ztKey1 = ztKeyList[j];
                         DCStatus dcs1 = ztDic[ztKey1];
-                        int gjkey1 = dcs.gjKey;
+                        int gjkey1 = dcs1.gjKey;
                         //如果key为0，证明没有，直接继续
                         if (gjkey1 == 0) { continue; } else { return false; }
                     }
@@ -360,7 +360,7 @@ namespace Yixing.util
                 {
                     int ztKey1 = ztKeyList[j];
                     DCStatus dcs1 = ztDic[ztKey1];
-                    int gjkey1 = dcs.gjKey;
+                    int gjkey1 = dcs1.gjKey;
                     //如果key为0，证明没有，直接继续
                     if (gjkey1 == 0) { return false; }
                     DCGaoji gj1 = gjDic[gjkey1];
@@ -387,7 +387,7 @@ namespace Yixing.util
                     {
                         int ztKey1 = ztKeyList[j];
                         DCStatus dcs1 = ztDic[ztKey1];
-                        int gjkey1 = dcs.gjKey;
+                        int gjkey1 = dcs1.gjKey;
                         //如果key为0，证明没有，直接继续
                         if (gjkey1 == 0) { continue; } else { return false; }
                     }
@@ -398,7 +398,7 @@ namespace Yixing.util
                 {
                     int ztKey1 = ztKeyList[j];
                     DCStatus dcs1 = ztDic[ztKey1];
-                    int gjkey1 = dcs.gjKey;
+                    int gjkey1 = dcs1.gjKey;
                     //如果key为0，证明没有，直接继续
                     if (gjkey1 == 0) { return false; }
                     DCGaoji gj1 = gjDic[gjkey1];

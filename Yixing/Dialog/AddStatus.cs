@@ -58,15 +58,28 @@ namespace Yixing.Dialog
         public AddStatus(List<int> ztKeyList, Dictionary<int, DCStatus> ztDic_, Dictionary<int, DCZhuannie> znDic_, Dictionary<int, DCGaoji> gjDic_)
         {
             InitializeComponent();
+            
+            //编辑初始化，整个左边先不可用，需要选中后才可以
+            this.panel1.Enabled = false;
+           
             //将添加隐藏，将修改展现
             this.button12.Visible = false;
             this.button13.Visible = true;
+            //修改按钮先不可用
+            this.button13.Enabled = true;
 
             this.ztList = ztKeyList;
             this.ztDic = ztDic_;
             this.znDic = znDic_;
             this.gjDic = gjDic_;
             //需要两两比较 确定哪些项目不能编辑
+
+            //编辑时的某些按钮的事件处理与添加时不一样 做出调整
+            this.checkBox1.CheckedChanged -= new System.EventHandler(this.checkBox2_CheckedChanged);
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.znEdit_CheckedChanged);
+
+            this.button2.Click -= new System.EventHandler(this.button3_Click);
+            this.button2.Click += new System.EventHandler(this.gjEdit_Click);
 
             foreach (int ztKey in ztKeyList)
             {
@@ -476,13 +489,7 @@ namespace Yixing.Dialog
             //如果不断的选中取消只会导致key增大，而不会对象增多
             if (c.Checked)
             {
-                int znKey = ds.znKey;
-                DCZhuannie zn=null;
-                if (znKey != 0)
-                {
-                    zn = this.znDic[znKey];
-                }
-                zhuannie z = new zhuannie(zn, editAble);
+                zhuannie z = new zhuannie(editZn, editAble);
                 z.ShowDialog();
                 //如果修改后点击确认，则需要循环将 需要改的zn全部改了
                 if (z.sure)
@@ -491,6 +498,7 @@ namespace Yixing.Dialog
                     editZn.fddls = z.fddls;
                     editZn.wnxb = z.wnxb;
                 }
+                else { this.checkBox1.Checked = false; }
             }
         }
 
@@ -513,13 +521,8 @@ namespace Yixing.Dialog
         //点击高级
         private void gjEdit_Click(object sender, EventArgs e)
         {
-            int gjKey = ds.gjKey;
-            DCGaoji gj = null;
-            if (gjKey != 0)
-            {
-                gj = this.gjDic[gjKey];
-            }
-            DingChangGaoji gjDialog = new DingChangGaoji(gj, editAble);
+            
+            DingChangGaoji gjDialog = new DingChangGaoji(editGj, editAble);
 
             //如果修改后点击确认，则需要循环将 需要改的zn全部改了
             if ( gjDialog.ShowDialog() == DialogResult.OK)
@@ -650,6 +653,34 @@ namespace Yixing.Dialog
                         zn1.wnxb = editZn.wnxb;
                     }
                 }
+                //如果原来没有转涅，这个地方添加了
+                if (znkey == 0 && editZn != null)
+                {
+                    //先获取 最大的转涅的key，然后将这个加入到dic中，并修改状态的转涅key
+                    int newznkey = 1;
+                    foreach(int key in znDic.Keys){
+                        if (key > newznkey)
+                        {
+                            newznkey = key;
+                        }
+                    }
+                    newznkey++;
+
+                    //必须要new一个 做clone，因为editzn会被多次修改
+                    DCZhuannie zn1 = new DCZhuannie();
+                    //如果应为返回的是各个项的值，所以还得判定，如果是可以修改的才改
+                    if (editAble.fddld)
+                    {
+                        zn1.fddls = editZn.fddls;
+                    }
+                    if (editAble.wnxb)
+                    {
+                        zn1.wnxb = editZn.wnxb;
+                    }
+
+                    znDic.Add(newznkey, zn1);
+                    dcs.znKey = newznkey;
+                }
 
                 //这一块是修改高级的东西
                 int gjkey = dcs.gjKey;
@@ -662,7 +693,29 @@ namespace Yixing.Dialog
                     if (editAble.thirdd) gj.thirdd = editGj.thirdd;
                     if (editAble.xzs) gj.xzs = editGj.xzs;
                 }
-                
+                if (gjkey == 0 && editGj != null)
+                {
+                    //先获取 最大的转涅的key，然后将这个加入到dic中，并修改状态的转涅key
+                    int newgjkey = 1;
+                    foreach (int key in znDic.Keys)
+                    {
+                        if (key > newgjkey)
+                        {
+                            newgjkey = key;
+                        }
+                    }
+                    newgjkey++;
+
+                    DCGaoji gj = new DCGaoji();
+                    if (editAble.cfl) gj.cfl = editGj.cfl;
+                    if (editAble.onedd) gj.onedd = editGj.onedd;
+                    if (editAble.secdd) gj.secdd = editGj.secdd;
+                    if (editAble.thirdd) gj.thirdd = editGj.thirdd;
+                    if (editAble.xzs) gj.xzs = editGj.xzs;
+
+                    gjDic.Add(newgjkey, gj);
+                    dcs.gjKey = newgjkey;
+                }
             }
         }
 
@@ -670,6 +723,11 @@ namespace Yixing.Dialog
         {
             //这个方法是修改所有的转涅和高级的
             this.changeAllstatus();
+            //循环修改完成后将，editzn 和 editgj置为null，以便下次点击时处理
+            //只能在此处置为null，其他地方修改会影响点击高级 转涅时候的 初始化
+            editZn = null;
+            editGj = null;
+
             this.exListView2.Items.Clear();
 
             foreach (int ztKey in ztList)
@@ -689,8 +747,14 @@ namespace Yixing.Dialog
         {
             if (this.exListView2.SelectedItems.Count == 0)
             {
+                //修改按钮先不可用
+                this.panel1.Enabled = false;
+                this.button13.Enabled = false;
                 return;
             }
+
+            this.button13.Enabled = true;
+            this.panel1.Enabled = true;
 
             //将左侧所有控件初始化为可用状态
             foreach (Control c in this.panel1.Controls)
@@ -810,8 +874,6 @@ namespace Yixing.Dialog
                 }
                 else
                 {
-                    this.checkBox1.CheckedChanged -= new System.EventHandler(this.checkBox2_CheckedChanged);
-                    this.checkBox1.CheckedChanged += new System.EventHandler(this.znEdit_CheckedChanged);
                     canedit = true;
                 }
 
@@ -828,8 +890,6 @@ namespace Yixing.Dialog
             }
             else
             {
-                this.button2.Click -= new System.EventHandler(this.button3_Click);
-                this.button2.Click += new System.EventHandler(this.gjEdit_Click);
                 canedit = true;
             }
 

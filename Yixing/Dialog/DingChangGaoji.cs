@@ -30,6 +30,9 @@ namespace Yixing.Dialog
         public DingChangGaoji(DCGaoji gj,StatusEditAble editAble)
         {
             InitializeComponent();
+            if (gj == null)
+                 return;
+
             if (editAble.cfl)
             {
                 this.textBox1.Text = gj.cfl.ToString();
