@@ -64,7 +64,7 @@
             this.yj = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lsgs = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.端流模型 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.转涅 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.转捩 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CFL = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.修正熵 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel1 = new System.Windows.Forms.Panel();
@@ -407,7 +407,7 @@
             this.yj,
             this.lsgs,
             this.端流模型,
-            this.转涅,
+            this.转捩,
             this.CFL,
             this.修正熵});
             this.exListView2.ControlPadding = 4;
@@ -441,11 +441,11 @@
             this.端流模型.Text = "端流模型";
             this.端流模型.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // 转涅
+            // 转捩
             // 
-            this.转涅.Text = "转涅";
-            this.转涅.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.转涅.Width = 74;
+            this.转捩.Text = "转捩";
+            this.转捩.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.转捩.Width = 74;
             // 
             // CFL
             // 
@@ -834,7 +834,7 @@
         private System.Windows.Forms.ColumnHeader yj;
         private System.Windows.Forms.ColumnHeader lsgs;
         private System.Windows.Forms.ColumnHeader 端流模型;
-        private System.Windows.Forms.ColumnHeader 转涅;
+        private System.Windows.Forms.ColumnHeader 转捩;
         private System.Windows.Forms.ColumnHeader CFL;
         private System.Windows.Forms.ColumnHeader 修正熵;
         private System.Windows.Forms.Button button13;
