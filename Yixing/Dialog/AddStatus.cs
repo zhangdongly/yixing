@@ -175,6 +175,8 @@ namespace Yixing.Dialog
                 this.addToList(dc,ztkey);
             }
 
+            //添加完后 去掉对转涅的选中
+            this.checkBox1.Checked = false;
             isznOpened = false;
             isgjOpened = false;
         }
@@ -449,7 +451,7 @@ namespace Yixing.Dialog
                     zn.wnxb = z.wnxb;
                     znDic.Add(znkey, zn);
                 }
-                else { this.checkBox2.Checked = false; }
+                else { this.checkBox1.Checked = false; }
             }
             else
             {
