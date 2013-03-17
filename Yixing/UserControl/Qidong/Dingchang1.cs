@@ -75,6 +75,7 @@ namespace Yixing.UserControl
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         //记录单独高级的DIC 包括高级和转涅
         Dictionary<int, DCGaoji> gjDic = new Dictionary<int, DCGaoji>();
+        private ColumnHeader flag;
 
         //用于保存添加了多少个翼型
         Dictionary<int, DCYixing> yxDic = new Dictionary<int, DCYixing>();
@@ -135,6 +136,7 @@ namespace Yixing.UserControl
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.flag = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel4.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -320,8 +322,8 @@ namespace Yixing.UserControl
             // 
             this.chart1.BorderlineColor = System.Drawing.Color.Silver;
             this.chart1.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            chartArea1.Name = "ChartArea1";
             chartArea1.AxisX.LabelStyle.Format = "{0.00}";
+            chartArea1.Name = "ChartArea1";
             this.chart1.ChartAreas.Add(chartArea1);
             this.chart1.Location = new System.Drawing.Point(9, 11);
             this.chart1.Name = "chart1";
@@ -349,6 +351,7 @@ namespace Yixing.UserControl
             this.exListView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.mahe,
             this.yj,
+            this.flag,
             this.lsgs,
             this.端流模型,
             this.转捩,
@@ -378,27 +381,32 @@ namespace Yixing.UserControl
             // 
             // lsgs
             // 
+            this.lsgs.DisplayIndex = 2;
             this.lsgs.Text = "离散格式";
             this.lsgs.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // 端流模型
             // 
+            this.端流模型.DisplayIndex = 3;
             this.端流模型.Text = "端流模型";
             this.端流模型.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // 转捩
             // 
+            this.转捩.DisplayIndex = 4;
             this.转捩.Text = "转捩";
             this.转捩.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.转捩.Width = 52;
             // 
             // CFL
             // 
+            this.CFL.DisplayIndex = 5;
             this.CFL.Text = "CFL";
             this.CFL.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // 修正熵
             // 
+            this.修正熵.DisplayIndex = 6;
             this.修正熵.Text = "修正熵";
             this.修正熵.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -564,6 +572,12 @@ namespace Yixing.UserControl
             this.label10.Size = new System.Drawing.Size(101, 12);
             this.label10.TabIndex = 23;
             this.label10.Text = "计算状态的线程数";
+            // 
+            // flag
+            // 
+            this.flag.DisplayIndex = 7;
+            this.flag.Text = "flag";
+            this.flag.Width = 0;
             // 
             // Dingchang1
             // 
@@ -818,9 +832,39 @@ namespace Yixing.UserControl
                             dcs.gjKey = gjkey;
                         }
                         this.ztDic.Add(ztkey, dcs);
-                        this.addToList(dcs, ztkey);
+                        this.addToList(dcs, dcs.key);
                         dcList.Add(dcs);
                     }
+
+                    //将添加的状态一个个写入 本类的DIC中，并改写其他key
+                    foreach (int key in add.delZtkey)
+                    {
+                        DCStatus zt = ztDic[key];
+                        gjDic.Remove(zt.gjKey);
+                        znDic.Remove(zt.znKey);
+                        ztDic.Remove(key);
+                        int ztdicKey = zt.key;
+                        DCYixing yx = zt.yx;
+                        int yxkey = yx.key;
+                        if (yx.key != 0)
+                        {
+                           List<DCStatus > ztList= yx.dcList;
+                           if (ztList != null)
+                           {
+                               for (int j = 0; j < ztList.Count; j++)
+                               {
+                                   DCStatus sta=ztList[j];
+                                   if (sta.key == ztdicKey)
+                                   {
+                                       ztList.Remove(sta);
+                                   }
+                              
+                               }
+                           }
+                        }
+                    }
+                    if (add.delZtkey.Count>0)
+                        removefromlist(add.delZtkey);
 
                     //将本次添加的，状态写到yx中去
                     foreach (DCYixing yx in yxList)
@@ -833,12 +877,28 @@ namespace Yixing.UserControl
                        yxdcList.AddRange(dcList);
                        yx.dcList = yxdcList; 
                     }
-
                 }
             }
             else
             {
                 MessageBox.Show("请至少选中一个翼型");
+            }
+        }
+
+        private void removefromlist(List<int> removekeyList)
+        {
+            for (int i = this.exListView2.Items.Count - 1; i >= 0; i--)
+            {
+                ListViewItem item = this.exListView2.Items[i];
+                String ztKeyStr = item.Tag.ToString();
+                int ztKey;
+                if (int.TryParse(ztKeyStr, out ztKey))
+                {
+                    if (removekeyList.Contains(ztKey))
+                    {
+                        this.exListView2.Items.Remove(item);
+                    }
+                }
             }
         }
 
@@ -856,7 +916,25 @@ namespace Yixing.UserControl
                     gjDic.Remove(zt.gjKey);
                     znDic.Remove(zt.znKey);
                     ztDic.Remove(ztKey);
-
+                    int ztdicKey = zt.key;
+                    DCYixing yx = zt.yx;
+                    int yxkey = yx.key;
+                    if (yx.key != 0)
+                    {
+                       List<DCStatus > ztList= yx.dcList;
+                       if (ztList != null)
+                       {
+                           for (int j = 0; j < ztList.Count; j++)
+                           {
+                               DCStatus sta=ztList[j];
+                               if (sta.key == ztdicKey)
+                               {
+                                   ztList.Remove(sta);
+                               }
+                              
+                           }
+                       }
+                    }
                 }
                 this.exListView2.Items.Remove(item);
             }
@@ -865,14 +943,39 @@ namespace Yixing.UserControl
         //全部清除
         private void button11_Click(object sender, EventArgs e)
         {
-            this.exListView2.Items.Clear();
-            //清除所有缓存数据，并将key置为0
-            gjDic.Clear();
-            znDic.Clear();
-            ztDic.Clear();
-            ztkey = 0;
-            znkey = 0;
-            gjkey = 0;
+            for (int i = this.exListView2.Items.Count - 1; i >= 0; i--)
+            {
+                ListViewItem item = this.exListView2.Items[i];
+                String ztKeyStr = item.Tag.ToString();
+                int ztKey;
+                if (int.TryParse(ztKeyStr, out ztKey))
+                {
+                    DCStatus zt = ztDic[ztKey];
+                    gjDic.Remove(zt.gjKey);
+                    znDic.Remove(zt.znKey);
+                    ztDic.Remove(ztKey);
+                    int ztdicKey = zt.key;
+                    DCYixing yx = zt.yx;
+                    int yxkey = yx.key;
+                    if (yx.key != 0)
+                    {
+                        List<DCStatus> ztList = yx.dcList;
+                        if (ztList != null)
+                        {
+                            for (int j = 0; j < ztList.Count; j++)
+                            {
+                                DCStatus sta = ztList[j];
+                                if (sta.key == ztdicKey)
+                                {
+                                    ztList.Remove(sta);
+                                }
+
+                            }
+                        }
+                    }
+                }
+                this.exListView2.Items.Remove(item);
+            }   
         }
 
         //添加一跳记录到ListView2
@@ -892,11 +995,18 @@ namespace Yixing.UserControl
 
             if (dyj > 0)
             {
-                item.SubItems.Add(dyj.ToString(), Color.Red, Color.White, null);
+                EXListViewSubItem sub = new EXListViewSubItem(dyj.ToString("0.00"));
+                item.SubItems.Add(sub);
+                EXListViewSubItem subflag = new EXListViewSubItem("1");
+                item.SubItems.Add(subflag);
             }
             else
             {
-                item.SubItems.Add(dslxs.ToString());
+                EXListViewSubItem sub = new EXListViewSubItem(dslxs.ToString("0.00"), Color.Red, Color.White);
+                item.SubItems.Add(sub);
+                EXListViewSubItem subflag = new EXListViewSubItem("2");
+                item.SubItems.Add(subflag);
+
             }
 
             if (dc.lsgs == Constant.LSGS_ROE)
@@ -946,6 +1056,9 @@ namespace Yixing.UserControl
             //使用tag来保存对应的高级和转涅的配置
             item.Tag = key;
             this.exListView2.Items.Add(item);
+
+            //排序
+            this.exListView2.sort();
         }
 
         private void edit_Click_1(object sender, EventArgs e)

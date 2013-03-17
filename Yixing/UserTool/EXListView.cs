@@ -309,7 +309,7 @@ namespace Yixing.UserTool{
             }
         }
         
-        private void this_ColumnClick(object sender, ColumnClickEventArgs e) {
+        public void this_ColumnClick(object sender, ColumnClickEventArgs e) {
             EXListView elv=(EXListView) sender;
             if (this.Items.Count == 0||!elv.AutoArrange) return;
             for (int i = 0; i < this.Columns.Count; i++) {
@@ -466,9 +466,8 @@ namespace Yixing.UserTool{
                 if (_order == SortOrder.Descending) returnVal *= -1;
                 return returnVal;
             }
-        
         }
-	
+
 	    class ListViewItemComparerValue : System.Collections.IComparer {
             
             private int _col;
@@ -508,6 +507,59 @@ namespace Yixing.UserTool{
         
         }
         
+        public void sort()
+        {
+            if (this.Items.Count == 0) return;
+            this.ListViewItemSorter = new ComparerText();
+            this.Sort();
+        }
+
+        class ComparerText : System.Collections.IComparer
+        {
+            int[] col = new int[] { 0,2, 1};
+            public int Compare(object x, object y)
+            { 
+                string compStrX = "", compStrY="";
+                for (int i = 0; i < col.Length; i++)
+                {
+                    if (col[i] == 0)
+                    {
+                        compStrX += ((EXListViewItem)x).Text + "*";
+                        compStrY += ((EXListViewItem)y).Text + "*";
+                    }
+                    else
+                    {
+                        //,如果你的字段值有*号，你可以换成别的分割符号
+                        compStrX += ((EXListViewSubItemAB)((ListViewItem)x).SubItems[col[i]]).MyValue + "*";
+                        compStrY += ((EXListViewSubItemAB)((ListViewItem)y).SubItems[col[i]]).MyValue + "*";
+                    }
+                   
+                }
+
+                // 从小到大排序
+                return myStrCmp(compStrX.Trim(), compStrY.Trim());
+
+                ////要将x,y反过来比较
+                //return myStrCmp(compStrY.Trim(),compStrX.Trim());
+        }
+            /*
+             * 逐个比较用*分开的字符串 
+             */
+            private int myStrCmp(string strA,string strB)
+            {
+                string[] SA = strA.Split(new char[] {'*'});
+                string[] SB = strB.Split(new char[] {'*'});
+                for (int i = 0; i < SA.Length; i++)
+                {
+                   if(String.Compare(SA[i],SB[i])!=0)
+                   {
+                       return String.Compare(SA[i], SB[i]);
+                   }
+     
+                }
+                return 0;
+            }
+         }
     }
     
     public class EXColumnHeader : ColumnHeader {
@@ -652,9 +704,17 @@ namespace Yixing.UserTool{
         }
         
         public EXListViewSubItem(string text) {
+            this.MyValue = text;
             this.Text = text;
         }
-        
+        public EXListViewSubItem(string text, Color foreColor, Color backColor)
+        {
+            this.MyValue = text;
+            this.Text = text;
+            this.ForeColor = foreColor;
+            this.BackColor = backColor;
+        }
+
         public override int DoDraw(DrawListViewSubItemEventArgs e, int x, EXColumnHeader ch) {
             return x;
         }
@@ -816,6 +876,7 @@ namespace Yixing.UserTool{
         }
         
         public EXListViewItem(string text) {
+            this._value = text;
             this.Text = text;
         }
 	
@@ -859,7 +920,7 @@ namespace Yixing.UserTool{
         }
         
     }
-    
+
     public class EXMultipleImagesListViewItem : EXListViewItem {
         
         private ArrayList _images;
@@ -893,5 +954,7 @@ namespace Yixing.UserTool{
         }
         
     }    
+
+
 
 }

@@ -50,6 +50,9 @@ namespace Yixing.Dialog
         //修改时专用，用作记录修改后的一个高级对象
         DCGaoji editGj = null;
 
+        //用于记录本类删除的 由父窗口传递过来的状态
+        public List<int> delZtkey = new List<int>();
+
         public AddStatus()
         {
             InitializeComponent();
@@ -115,9 +118,9 @@ namespace Yixing.Dialog
                 MessageBox.Show("马赫数不能为空，且必须为数字");
                 return;
             }
-            mahe.ToString("0:0.0000");
+            
             List<DCStatus> dcList = new List<DCStatus>();
-            String dslxs = textBox3.Text;
+            String dslxs = this.textBox3.Text;
             String dyj = "";
             float low = 0;
             float high = 0;
@@ -147,6 +150,14 @@ namespace Yixing.Dialog
                     {
                         low = float.Parse(this.textBox5.Text);
                         high = float.Parse(this.textBox4.Text);
+                        
+                        if (low > high)
+                        {
+                            float tem = low;
+                            low = high;
+                            high = tem;
+                        }
+
                         step = float.Parse(this.textBox6.Text);
 
                     }
@@ -174,7 +185,7 @@ namespace Yixing.Dialog
             else
             {
                 float slxs;
-                if (!float.TryParse(this.textBox3.Text, out slxs))
+                if (!float.TryParse(dslxs, out slxs))
                 {
                     MessageBox.Show("定升力系数不能为空，且必须为数字");
                     return;
@@ -196,8 +207,6 @@ namespace Yixing.Dialog
 
                 this.addToList(dc,ztkey);
             }
-
-
             //添加完后 去掉对转涅的选中
             this.checkBox1.Checked = false;
 
@@ -209,6 +218,8 @@ namespace Yixing.Dialog
         private void addToList(DCStatus dc, int key)
         {
             addToList(dc, key, gjDic);
+
+            this.exListView2.sort();
         }
 
         //添加一跳记录到ListView2,
@@ -228,11 +239,18 @@ namespace Yixing.Dialog
 
             if (dyj > 0)
             {
-                item.SubItems.Add(dyj.ToString(),Color.Red,Color.White,null);
+                EXListViewSubItem sub = new EXListViewSubItem(dyj.ToString("0.00"));
+                item.SubItems.Add(sub);
+                EXListViewSubItem subflag = new EXListViewSubItem("1");
+                item.SubItems.Add(subflag);
             }
             else
             {
-                item.SubItems.Add(dslxs.ToString());
+                EXListViewSubItem sub = new EXListViewSubItem(dslxs.ToString("0.00"), Color.Red, Color.White);
+                item.SubItems.Add(sub);
+                EXListViewSubItem subflag = new EXListViewSubItem("2");
+                item.SubItems.Add(subflag);
+                
             }
             //CheckBox c = new CheckBox();
             //c.Checked = this.checkBox1.Checked;
@@ -422,11 +440,39 @@ namespace Yixing.Dialog
                 int ztKey;
                 if (int.TryParse(ztKeyStr, out ztKey))
                 {
-                    DCStatus zt = ztDic[ztKey];
+                    DCStatus zt =null;
+                    try
+                    {
+                        zt = ztDic[ztKey];
+                    }catch(Exception ex){
+                        //如果是由上级传过来的，直接remove掉item，然后记录返回给上级处理
+                        this.delZtkey.Add(ztKey);
+                        this.exListView2.Items.Remove(item);
+                        continue;
+                    }
+                    
                     gjDic.Remove(zt.gjKey);
                     znDic.Remove(zt.znKey);
                     ztDic.Remove(ztKey);
+                    int ztdicKey = zt.key;
+                    DCYixing yx = zt.yx;
+                    int yxkey = yx.key;
+                    if (yx.key != 0)
+                    {
+                        List<DCStatus> ztList = yx.dcList;
+                        if (ztList != null)
+                        {
+                            for (int j = 0; j < ztList.Count; j++)
+                            {
+                                DCStatus sta = ztList[j];
+                                if (sta.key == ztdicKey)
+                                {
+                                    ztList.Remove(sta);
+                                }
 
+                            }
+                        }
+                    }
                 }
                 this.exListView2.Items.Remove(item);
             }
@@ -434,14 +480,49 @@ namespace Yixing.Dialog
 
         private void button5_Click_1(object sender, EventArgs e)
         {
-            this.exListView2.Items.Clear();
-            //清除所有缓存数据，并将key置为0
-            gjDic.Clear();
-            znDic.Clear();
-            ztDic.Clear();
-            ztkey = 0;
-            znkey = 0;
-            gjkey = 0;
+            for (int i = this.exListView2.Items.Count - 1; i >= 0; i--)
+            {
+                ListViewItem item = this.exListView2.Items[i];
+                String ztKeyStr = item.Tag.ToString();
+                int ztKey;
+                if (int.TryParse(ztKeyStr, out ztKey))
+                {
+                    DCStatus zt = null;
+                    try
+                    {
+                        zt = ztDic[ztKey];
+                    }
+                    catch (Exception ex)
+                    {
+                        this.delZtkey.Add(ztKey);
+                        this.exListView2.Items.Remove(item);
+                        continue;
+                    }
+                    gjDic.Remove(zt.gjKey);
+                    znDic.Remove(zt.znKey);
+                    ztDic.Remove(ztKey);
+                    int ztdicKey = zt.key;
+                    DCYixing yx = zt.yx;
+                    int yxkey = yx.key;
+                    if (yx.key != 0)
+                    {
+                        List<DCStatus> ztList = yx.dcList;
+                        if (ztList != null)
+                        {
+                            for (int j = 0; j < ztList.Count; j++)
+                            {
+                                DCStatus sta = ztList[j];
+                                if (sta.key == ztdicKey)
+                                {
+                                    ztList.Remove(sta);
+                                }
+
+                            }
+                        }
+                    }
+                }
+                this.exListView2.Items.Remove(item);
+            }
         }
         //点击转涅
         private void checkBox2_CheckedChanged(object sender, EventArgs e)

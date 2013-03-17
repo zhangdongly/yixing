@@ -59,14 +59,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button13 = new System.Windows.Forms.Button();
-            this.exListView2 = new Yixing.UserTool.EXListView();
-            this.mahe = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.yj = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lsgs = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.端流模型 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.转捩 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.CFL = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.修正熵 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel1 = new System.Windows.Forms.Panel();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.comboBox4 = new System.Windows.Forms.ComboBox();
@@ -96,6 +88,15 @@
             this.button12 = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.exListView2 = new Yixing.UserTool.EXListView();
+            this.mahe = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.yj = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.flag = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lsgs = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.端流模型 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.转捩 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.CFL = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.修正熵 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel6.SuspendLayout();
             this.panel8.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -399,64 +400,6 @@
             this.button13.Visible = false;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
-            // exListView2
-            // 
-            this.exListView2.CheckBoxes = true;
-            this.exListView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.mahe,
-            this.yj,
-            this.lsgs,
-            this.端流模型,
-            this.转捩,
-            this.CFL,
-            this.修正熵});
-            this.exListView2.ControlPadding = 4;
-            this.exListView2.FullRowSelect = true;
-            this.exListView2.Location = new System.Drawing.Point(266, 25);
-            this.exListView2.Name = "exListView2";
-            this.exListView2.OwnerDraw = true;
-            this.exListView2.Size = new System.Drawing.Size(555, 381);
-            this.exListView2.TabIndex = 12;
-            this.exListView2.UseCompatibleStateImageBehavior = false;
-            this.exListView2.View = System.Windows.Forms.View.Details;
-            this.exListView2.SelectedIndexChanged += new System.EventHandler(this.exListView2_SelectedIndexChanged);
-            // 
-            // mahe
-            // 
-            this.mahe.Text = "马赫数";
-            // 
-            // yj
-            // 
-            this.yj.Text = "迎角/升力系数";
-            this.yj.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.yj.Width = 93;
-            // 
-            // lsgs
-            // 
-            this.lsgs.Text = "离散格式";
-            this.lsgs.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // 端流模型
-            // 
-            this.端流模型.Text = "端流模型";
-            this.端流模型.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // 转捩
-            // 
-            this.转捩.Text = "转捩";
-            this.转捩.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.转捩.Width = 74;
-            // 
-            // CFL
-            // 
-            this.CFL.Text = "CFL";
-            this.CFL.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // 修正熵
-            // 
-            this.修正熵.Text = "修正熵";
-            this.修正熵.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -745,6 +688,71 @@
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.Size = new System.Drawing.Size(61, 4);
             // 
+            // exListView2
+            // 
+            this.exListView2.CheckBoxes = true;
+            this.exListView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.mahe,
+            this.yj,
+            this.flag,
+            this.lsgs,
+            this.端流模型,
+            this.转捩,
+            this.CFL,
+            this.修正熵});
+            this.exListView2.ControlPadding = 4;
+            this.exListView2.FullRowSelect = true;
+            this.exListView2.Location = new System.Drawing.Point(266, 25);
+            this.exListView2.Name = "exListView2";
+            this.exListView2.OwnerDraw = true;
+            this.exListView2.Size = new System.Drawing.Size(555, 381);
+            this.exListView2.TabIndex = 12;
+            this.exListView2.UseCompatibleStateImageBehavior = false;
+            this.exListView2.View = System.Windows.Forms.View.Details;
+            this.exListView2.SelectedIndexChanged += new System.EventHandler(this.exListView2_SelectedIndexChanged);
+            // 
+            // mahe
+            // 
+            this.mahe.Text = "马赫数";
+            // 
+            // yj
+            // 
+            this.yj.Text = "迎角/升力系数";
+            this.yj.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.yj.Width = 93;
+            // 
+            // flag
+            // 
+            this.flag.Text = "flag";
+            this.flag.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.flag.Width = 0;
+            // 
+            // lsgs
+            // 
+            this.lsgs.Text = "离散格式";
+            this.lsgs.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // 端流模型
+            // 
+            this.端流模型.Text = "端流模型";
+            this.端流模型.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // 转捩
+            // 
+            this.转捩.Text = "转捩";
+            this.转捩.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.转捩.Width = 74;
+            // 
+            // CFL
+            // 
+            this.CFL.Text = "CFL";
+            this.CFL.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // 修正熵
+            // 
+            this.修正熵.Text = "修正熵";
+            this.修正熵.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // AddStatus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -838,5 +846,6 @@
         private System.Windows.Forms.ColumnHeader CFL;
         private System.Windows.Forms.ColumnHeader 修正熵;
         private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.ColumnHeader flag;
     }
 }
