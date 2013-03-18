@@ -10,13 +10,20 @@ namespace Yixing.UserTool
     class FileDialogUtil
     {
         public static String getSelectFileName(OpenFileDialog openFileDialog){
-             openFileDialog.InitialDirectory = @"D:\";
+           String lastFileFolder=Properties.Settings.Default.lastFileFolder;
+
+           if (!String.IsNullOrWhiteSpace(lastFileFolder))
+           {
+               openFileDialog.InitialDirectory = lastFileFolder;
+           }
             openFileDialog.FileName = null;
             openFileDialog.Filter = "所有文件(*.*)|*.*";
             openFileDialog.RestoreDirectory = true;
             openFileDialog.FilterIndex = 1;
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
+                Properties.Settings.Default.lastFileFolder = CommonUtil.getFilePathByPath(openFileDialog.FileName);
+                Properties.Settings.Default.Save();
                 try
                 {
                    return  openFileDialog.FileName;

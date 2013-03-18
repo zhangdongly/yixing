@@ -8,5 +8,8 @@
     <Setting Name="vmFolder" Type="System.String" Scope="User">
       <Value Profile="(Default)">./template</Value>
     </Setting>
+    <Setting Name="lastFileFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

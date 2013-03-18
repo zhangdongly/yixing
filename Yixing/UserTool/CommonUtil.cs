@@ -20,5 +20,19 @@ namespace Yixing.UserTool
             }
            return   filePath.Substring(index+1);
         }
+
+        public static String getFilePathByPath(String filePath)
+        {
+            if (String.IsNullOrWhiteSpace(filePath))
+            {
+                return null;
+            }
+            int index = filePath.LastIndexOf("\\");
+            if (index < 0 || index >= filePath.Length)
+            {
+                return null;
+            }
+            return filePath.Substring(0,index + 1);
+        }
     }
 }
