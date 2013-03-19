@@ -114,6 +114,7 @@ namespace Yixing.UserControl
             this.exListView2 = new Yixing.UserTool.EXListView();
             this.mahe = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.yj = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.flag = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lsgs = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.端流模型 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.转捩 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -136,7 +137,6 @@ namespace Yixing.UserControl
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.flag = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel4.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -232,6 +232,7 @@ namespace Yixing.UserControl
             this.textBox11.Name = "textBox11";
             this.textBox11.Size = new System.Drawing.Size(100, 21);
             this.textBox11.TabIndex = 26;
+            this.textBox11.Text = "1";
             // 
             // label12
             // 
@@ -283,6 +284,7 @@ namespace Yixing.UserControl
             this.textBox9.Name = "textBox9";
             this.textBox9.Size = new System.Drawing.Size(121, 21);
             this.textBox9.TabIndex = 24;
+            this.textBox9.Text = "5";
             // 
             // panel3
             // 
@@ -378,6 +380,12 @@ namespace Yixing.UserControl
             this.yj.Text = "迎角/升力系数";
             this.yj.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.yj.Width = 93;
+            // 
+            // flag
+            // 
+            this.flag.DisplayIndex = 7;
+            this.flag.Text = "flag";
+            this.flag.Width = 0;
             // 
             // lsgs
             // 
@@ -572,12 +580,6 @@ namespace Yixing.UserControl
             this.label10.Size = new System.Drawing.Size(101, 12);
             this.label10.TabIndex = 23;
             this.label10.Text = "计算状态的线程数";
-            // 
-            // flag
-            // 
-            this.flag.DisplayIndex = 7;
-            this.flag.Text = "flag";
-            this.flag.Width = 0;
             // 
             // Dingchang1
             // 
