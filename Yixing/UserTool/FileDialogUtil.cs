@@ -34,6 +34,24 @@ namespace Yixing.UserTool
             }
             return null;
         }
+
+        public static String getSelectFolder(FolderBrowserDialog folderDlg)
+        {
+           String lastFileFolder = Properties.Settings.Default.defaultFileFolder;
+           String resultStr = "";
+           if (!String.IsNullOrWhiteSpace(lastFileFolder))
+           {
+               folderDlg.SelectedPath = lastFileFolder;
+           }
+           folderDlg.ShowNewFolderButton = true;
+            if (folderDlg.ShowDialog() == DialogResult.OK)
+            {
+                Properties.Settings.Default.defaultFileFolder = folderDlg.SelectedPath;
+                Properties.Settings.Default.Save();
+               resultStr = folderDlg.SelectedPath;
+            }
+            return resultStr;
+        }
     }
 
 }

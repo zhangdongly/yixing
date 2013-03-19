@@ -132,7 +132,7 @@
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(99, 21);
             this.textBox4.TabIndex = 18;
-            this.textBox4.Text = "1500";
+            this.textBox4.Text = "2500";
             // 
             // textBox3
             // 
@@ -156,7 +156,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(99, 21);
             this.textBox1.TabIndex = 11;
-            this.textBox1.Text = "1000";
+            this.textBox1.Text = "2";
             // 
             // label4
             // 

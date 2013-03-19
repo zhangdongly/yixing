@@ -16,10 +16,10 @@ namespace Yixing.Dialog
         //用于确认是否点击确认完成的
         //public Boolean sure = false;
 
-        public int cfl  =1000;
+        public int cfl  =2;
         public int onedd = 1000;
         public int secdd = 1000;
-        public int thirdd = 1500;
+        public int thirdd = 2500;
         public float xzs;
 
         public DingChangGaoji()

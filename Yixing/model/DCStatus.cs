@@ -31,5 +31,8 @@ namespace Yixing.model
 
         //在dic中的key
         public int key { get; set; }
+
+        //用于判断是选中了迎角还是定升力系数
+        public Boolean isyj { get; set; }
     }
 }

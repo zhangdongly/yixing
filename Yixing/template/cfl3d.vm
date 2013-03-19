@@ -12,6 +12,7 @@ cfl3d.out20
 ovrlp.bin
 patch.bin
 restart.bin
+#if($flag)
 >
 #if($zn)
 pke_tu $!{zn.fddls} 
@@ -27,7 +28,8 @@ epsa_r $!{gj.xzs}
 cltarg $!{s.dslxs}
 dalim 0.2
 #end
-<                                                
+<  
+#end                                              
  Robust Optimazition Based on CFD
  #set($reue=$!{s.mahe}*$!{mhln})                                                
       Mach     alpha      beta      ReUe   Tinf,dR     ialph    ihstry
@@ -35,7 +37,7 @@ dalim 0.2
       sref      cref      bref       xmc       ymc       zmc
      1.000    1.0000    1.0000    0.2500    0.0000    0.0000
         dt     irest   iflagts      fmax     iunst   cfl_tau
-  $gj.cfl.ToString("0.00000")       0       000    2.0000         1  10.00000
+  -$gj.cfl.ToString("0.00000")       0       000    2.0000         1  10.00000
      NGRID   NPLOT3D    NPRINT    NWREST      ICHK       I2D    NTSTEP       ITA
         -8         8         0      9900         0         1         1        -2
        NCG       IEM  IADVANCE    IFORCE  IVISC(I)  IVISC(J)  IVISC(K) 

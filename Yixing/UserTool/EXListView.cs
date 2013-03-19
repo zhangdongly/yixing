@@ -524,14 +524,43 @@ namespace Yixing.UserTool{
                 {
                     if (col[i] == 0)
                     {
-                        compStrX += ((EXListViewItem)x).Text + "*";
-                        compStrY += ((EXListViewItem)y).Text + "*";
+                        String xs = ((EXListViewItem)x).Text + "*";
+                        String ys = ((EXListViewItem)y).Text + "*";
+                        float xf;
+                        float yf;
+                        if (float.TryParse(xs, out xf))
+                        {
+                            if (xf > 0)
+                                xs = "+" + xs;
+                        }
+                        if (float.TryParse(ys, out yf))
+                        {
+                            if (yf > 0)
+                                ys = "+" + ys;
+                        }
+                        //,如果你的字段值有*号，你可以换成别的分割符号
+                        compStrX += xs + "*";
+                        compStrY += ys + "*";
                     }
                     else
                     {
+                        String xs = ((EXListViewSubItemAB)((ListViewItem)x).SubItems[col[i]]).MyValue;
+                        String ys = ((EXListViewSubItemAB)((ListViewItem)y).SubItems[col[i]]).MyValue;
+                        float xf;
+                        float yf;
+                        if (float.TryParse(xs, out xf))
+                        {
+                            if (xf > 0)
+                                xs = "+" + xs;
+                        }
+                        if (float.TryParse(ys, out yf))
+                        {
+                            if (yf > 0)
+                                ys = "+" + ys;
+                        }
                         //,如果你的字段值有*号，你可以换成别的分割符号
-                        compStrX += ((EXListViewSubItemAB)((ListViewItem)x).SubItems[col[i]]).MyValue + "*";
-                        compStrY += ((EXListViewSubItemAB)((ListViewItem)y).SubItems[col[i]]).MyValue + "*";
+                        compStrX += xs + "*";
+                        compStrY += ys + "*";
                     }
                    
                 }

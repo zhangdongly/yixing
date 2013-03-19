@@ -638,6 +638,11 @@ namespace Yixing.UserControl
                 tp.Put("zn", zn);
                 tp.Put("s", dcs);
                 tp.Put("mhln", mhln);
+                tp.Put("flag", true);
+                if (zn == null && gj.xzs==0 && dcs.isyj)
+                {
+                    tp.Put("flag",false);
+                }
                 String yxname = yx.name.Substring(0, yx.name.IndexOf("."));
                 String mahe = string.Format("{0:0.000}", dcs.mahe);
                 mahe = mahe.Replace(".", "");
@@ -652,8 +657,24 @@ namespace Yixing.UserControl
                     zt = string.Format("{0:0.000}", dcs.dslxs);
                     zt = "cl" + zt.Replace(".", "");
                 }
-
-                String a = tp.BuildString("cfl3d.vm", yxname, mahe, zt);
+                FolderBrowserDialog folderDlg = new FolderBrowserDialog();
+                String lastFileFolder = Properties.Settings.Default.defaultFileFolder;
+                if (!String.IsNullOrWhiteSpace(lastFileFolder))
+                {
+                    folderDlg.SelectedPath = lastFileFolder;
+                }
+                folderDlg.ShowNewFolderButton = true;
+                if (folderDlg.ShowDialog() == DialogResult.OK)
+                {
+                    Properties.Settings.Default.defaultFileFolder = folderDlg.SelectedPath;
+                    Properties.Settings.Default.Save();
+                    String a = tp.BuildString("cfl3d.vm", yxname, mahe, zt);
+                }
+                else
+                {
+                    MessageBox.Show("你必须选中一个输出路径,否则不进行计算");
+                    return;
+                }
             }
 
             QidongResult qidongResult = new QidongResult();
@@ -993,7 +1014,7 @@ namespace Yixing.UserControl
             //item.SubItems.Add(exc);
             //this.exListView2.AddControlToSubItem(c, exc);
 
-            if (dyj > 0)
+            if (dc.isyj)
             {
                 EXListViewSubItem sub = new EXListViewSubItem(dyj.ToString("0.00"));
                 item.SubItems.Add(sub);

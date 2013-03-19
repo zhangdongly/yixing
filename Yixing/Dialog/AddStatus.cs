@@ -23,8 +23,11 @@ namespace Yixing.Dialog
         //用于记录哪些项可以编辑的对象
         StatusEditAble editAble = new StatusEditAble();
 
-        Boolean isznOpened = false;
         Boolean isgjOpened = false;
+
+        //用于判断是选中了迎角还是定升力系数
+        Boolean isdyj = false;
+
         int znkey = 0;
         int gjkey = 0;
         int ztkey = 0;
@@ -129,6 +132,7 @@ namespace Yixing.Dialog
             //rd5 单个  rd6 范围
             if (!radioButton3.Checked)
             {
+                isdyj = true;
                 if (radioButton5.Checked)
                 {
                     float dyjf;
@@ -190,6 +194,7 @@ namespace Yixing.Dialog
                     MessageBox.Show("定升力系数不能为空，且必须为数字");
                     return;
                 }
+                isdyj = false;
                 dcList = setDcStatus(mahe, 0f, slxs);
                
 
@@ -207,10 +212,6 @@ namespace Yixing.Dialog
 
                 this.addToList(dc,ztkey);
             }
-            //添加完后 去掉对转涅的选中
-            this.checkBox1.Checked = false;
-
-            isznOpened = false;
             isgjOpened = false;
         }
 
@@ -237,7 +238,7 @@ namespace Yixing.Dialog
             //item.SubItems.Add(exc);
             //this.exListView2.AddControlToSubItem(c, exc);
 
-            if (dyj > 0)
+            if (dc.isyj)
             {
                 EXListViewSubItem sub = new EXListViewSubItem(dyj.ToString("0.00"));
                 item.SubItems.Add(sub);
@@ -311,17 +312,21 @@ namespace Yixing.Dialog
             dc.mahe = mahe;
             dc.dslxs = dslxs;
             dc.dyj = dyj;
+            if (isdyj)
+                dc.isyj = true;
+            else
+                dc.isyj = false;
 
             //先验证当前添加的
             foreach (int skey in ztDic.Keys)
             {
                 DCStatus olddc = ztDic[skey];
-                if (olddc.mahe == mahe && olddc.dslxs == dslxs && dslxs != 0)
+                if (olddc.mahe == mahe && olddc.dslxs == dslxs && !isdyj)
                 {
                     MessageBox.Show("马赫数：" + mahe + "  定升力系数：" + dslxs + " 该条状态重复，请修改定升力系数，或者定马赫数");
                     return dcList;
                 }
-                if (olddc.mahe == mahe && olddc.dyj == dyj && dyj != 0)
+                if (olddc.mahe == mahe && olddc.dyj == dyj && isdyj)
                 {
                     return dcList;
                 }
@@ -336,12 +341,12 @@ namespace Yixing.Dialog
                 {
                     foreach (DCStatus olddc in statusList)
                     {
-                        if (olddc.mahe == mahe && olddc.dslxs == dslxs && dslxs != 0)
+                        if (olddc.mahe == mahe && olddc.dslxs == dslxs && !isdyj)
                         {
                             MessageBox.Show("马赫数：" + mahe + "  定升力系数：" + dslxs + " 该条状态重复，请修改定升力系数，或者定马赫数");
                             return dcList;
                         }
-                        if (olddc.mahe == mahe && olddc.dyj == dyj && dyj != 0)
+                        if (olddc.mahe == mahe && olddc.dyj == dyj && isdyj)
                         {
                             return dcList;
                         }
@@ -361,7 +366,7 @@ namespace Yixing.Dialog
 
             //这两个key用于从dic中取属性对象
             //转涅若选中才有这个key
-            if (this.checkBox1.Checked && isznOpened)
+            if (this.checkBox1.Checked)
             {
                 dc.znKey = znkey;
                 //如果选择了转涅，这个断流模型只能选择sst 所以值为7
@@ -385,10 +390,12 @@ namespace Yixing.Dialog
             {
                 gjkey++;
                 DCGaoji gj = new DCGaoji();
-                gj.cfl = 1000;
+                gj.cfl = 2;
                 gj.onedd = 1000;
                 gj.secdd = 1000;
-                gj.thirdd = 1500;
+                gj.thirdd = 600;
+                if(dc.znKey!=0 )
+                    gj.thirdd = 2500;
                 gj.xzs = 0;
                 gjDic.Add(gjkey, gj);
             }
@@ -532,22 +539,15 @@ namespace Yixing.Dialog
             if (c.Checked)
             {
                 zhuannie z;
-                if (isznOpened)
+
+                if (znkey != 0)
                 {
                     DCZhuannie zn = znDic[znkey];
                     z = new zhuannie(zn.fddls, zn.wnxb);
                 }
                 else
                 {
-                    if (znkey != 0)
-                    {
-                        DCZhuannie zn = znDic[znkey];
-                        z = new zhuannie(zn.fddls, zn.wnxb);
-                    }
-                    else
-                    {
-                        z = new zhuannie();
-                    }
+                    z = new zhuannie();
                 }
 
                 this.comboBox2.Text = "kw sst";
@@ -555,8 +555,6 @@ namespace Yixing.Dialog
                 //若点击确定，则修改数据，若没有则取消本次选中
                 if (z.sure)
                 {
-                    //若是打开过并且点了确定，才算
-                    isznOpened = true;
                     //先加一次在作为key来存对象
                     znkey++;
                     DCZhuannie zn = new DCZhuannie();
