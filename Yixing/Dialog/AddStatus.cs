@@ -325,11 +325,20 @@ namespace Yixing.Dialog
                     MessageBox.Show("马赫数：" + mahe + "  定升力系数：" + dslxs + " 该条状态重复，请修改定升力系数，或者定马赫数");
                     return dcList;
                 }
-                if (olddc.mahe == mahe && olddc.dyj == dyj && isdyj && olddc.isyj && olddc.dyj==0)
+                if (dyj == 0)
                 {
-                    return dcList;
+                    if (olddc.mahe == mahe && olddc.dyj == dyj && isdyj && olddc.isyj && olddc.dyj == 0)
+                    {
+                        return dcList;
+                    }
                 }
-                
+                else
+                {
+                    if (olddc.mahe == mahe && olddc.dyj == dyj && isdyj)
+                    {
+                        return dcList;
+                    }
+                }
             }
 
             //再验证老的传递过来的有没有
@@ -345,9 +354,19 @@ namespace Yixing.Dialog
                             MessageBox.Show("马赫数：" + mahe + "  定升力系数：" + dslxs + " 该条状态重复，请修改定升力系数，或者定马赫数");
                             return dcList;
                         }
-                        if (olddc.mahe == mahe && olddc.dyj == dyj && isdyj && olddc.isyj && olddc.dyj == 0)
+                        if (dyj == 0)
                         {
-                            return dcList;
+                            if (olddc.mahe == mahe && olddc.dyj == dyj && isdyj && olddc.isyj && olddc.dyj == 0)
+                            {
+                                return dcList;
+                            }
+                        }
+                        else
+                        {
+                            if (olddc.mahe == mahe && olddc.dyj == dyj && isdyj)
+                            {
+                                return dcList;
+                            }
                         }
                     }
                 }
