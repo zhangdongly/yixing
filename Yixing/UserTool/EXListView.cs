@@ -310,46 +310,47 @@ namespace Yixing.UserTool{
         }
         
         public void this_ColumnClick(object sender, ColumnClickEventArgs e) {
-            EXListView elv=(EXListView) sender;
-            if (this.Items.Count == 0||!elv.AutoArrange) return;
-            for (int i = 0; i < this.Columns.Count; i++) {
-                this.Columns[i].ImageKey = null;
-            }
-            for (int i = 0; i < this.Items.Count; i++) {
-                this.Items[i].Tag = null;
-            }
-            if (e.Column != _sortcol) {
-                _sortcol = e.Column;
-                this.Sorting = SortOrder.Ascending;
-                this.Columns[e.Column].ImageKey = "up";
-            } else {
-                if (this.Sorting == SortOrder.Ascending) {
-                    this.Sorting = SortOrder.Descending;
-                    this.Columns[e.Column].ImageKey = "down";
-                } else {
-                    this.Sorting = SortOrder.Ascending;
-                    this.Columns[e.Column].ImageKey = "up";
-                }
-            }
-            if (_sortcol == 0) {
-                //ListViewItem
-                if (this.Items[0].GetType() == typeof(EXListViewItem)) {
-                    //sorting on text
-                    this.ListViewItemSorter = new ListViewItemComparerText(e.Column, this.Sorting);
-                } else {
-                    //sorting on value
-                    this.ListViewItemSorter = new ListViewItemComparerValue(e.Column, this.Sorting);
-                }
-            } else {
-                //ListViewSubItem
-                if (this.Items[0].SubItems[_sortcol].GetType() == typeof(EXListViewSubItemAB)) {
-                    //sorting on text
-                    this.ListViewItemSorter = new ListViewSubItemComparerText(e.Column, this.Sorting);
-                } else {
-                    //sorting on value
-                    this.ListViewItemSorter = new ListViewSubItemComparerValue(e.Column, this.Sorting);
-                }
-            }
+            return;
+            //EXListView elv=(EXListView) sender;
+            //if (this.Items.Count == 0||!elv.AutoArrange) return;
+            //for (int i = 0; i < this.Columns.Count; i++) {
+            //    this.Columns[i].ImageKey = null;
+            //}
+            //for (int i = 0; i < this.Items.Count; i++) {
+            //    this.Items[i].Tag = null;
+            //}
+            //if (e.Column != _sortcol) {
+            //    _sortcol = e.Column;
+            //    this.Sorting = SortOrder.Ascending;
+            //    this.Columns[e.Column].ImageKey = "up";
+            //} else {
+            //    if (this.Sorting == SortOrder.Ascending) {
+            //        this.Sorting = SortOrder.Descending;
+            //        this.Columns[e.Column].ImageKey = "down";
+            //    } else {
+            //        this.Sorting = SortOrder.Ascending;
+            //        this.Columns[e.Column].ImageKey = "up";
+            //    }
+            //}
+            //if (_sortcol == 0) {
+            //    //ListViewItem
+            //    if (this.Items[0].GetType() == typeof(EXListViewItem)) {
+            //        //sorting on text
+            //        this.ListViewItemSorter = new ListViewItemComparerText(e.Column, this.Sorting);
+            //    } else {
+            //        //sorting on value
+            //        this.ListViewItemSorter = new ListViewItemComparerValue(e.Column, this.Sorting);
+            //    }
+            //} else {
+            //    //ListViewSubItem
+            //    if (this.Items[0].SubItems[_sortcol].GetType() == typeof(EXListViewSubItemAB)) {
+            //        //sorting on text
+            //        this.ListViewItemSorter = new ListViewSubItemComparerText(e.Column, this.Sorting);
+            //    } else {
+            //        //sorting on value
+            //        this.ListViewItemSorter = new ListViewSubItemComparerValue(e.Column, this.Sorting);
+            //    }
+            //}
         }
         
         class ListViewSubItemComparerText : System.Collections.IComparer {
