@@ -615,6 +615,24 @@ namespace Yixing.UserControl
                 return;
             }
 
+            FolderBrowserDialog folderDlg = new FolderBrowserDialog();
+            String lastFileFolder = Properties.Settings.Default.defaultFileFolder;
+            if (!String.IsNullOrWhiteSpace(lastFileFolder))
+            {
+                folderDlg.SelectedPath = lastFileFolder;
+            }
+            folderDlg.ShowNewFolderButton = true;
+            if (folderDlg.ShowDialog() == DialogResult.OK)
+            {
+                Properties.Settings.Default.defaultFileFolder = folderDlg.SelectedPath;
+                Properties.Settings.Default.Save();
+            }
+            else
+            {
+                MessageBox.Show("你必须选中一个输出路径,否则不进行计算");
+                return;
+            }
+
             //测试代码，VM文件都放置于@"..//..//template"
             foreach (int key in ztDic.Keys)
             {
@@ -659,24 +677,7 @@ namespace Yixing.UserControl
                     zt = string.Format("{0:0.000}", dcs.dslxs);
                     zt = "cl" + zt.Replace(".", "");
                 }
-                FolderBrowserDialog folderDlg = new FolderBrowserDialog();
-                String lastFileFolder = Properties.Settings.Default.defaultFileFolder;
-                if (!String.IsNullOrWhiteSpace(lastFileFolder))
-                {
-                    folderDlg.SelectedPath = lastFileFolder;
-                }
-                folderDlg.ShowNewFolderButton = true;
-                if (folderDlg.ShowDialog() == DialogResult.OK)
-                {
-                    Properties.Settings.Default.defaultFileFolder = folderDlg.SelectedPath;
-                    Properties.Settings.Default.Save();
-                    String a = tp.BuildString("cfl3d.vm", yxname, mahe, zt);
-                }
-                else
-                {
-                    MessageBox.Show("你必须选中一个输出路径,否则不进行计算");
-                    return;
-                }
+                String a = tp.BuildString("cfl3d.vm", yxname, mahe, zt);
             }
 
             QidongResult qidongResult = new QidongResult();

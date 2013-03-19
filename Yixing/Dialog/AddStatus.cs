@@ -182,7 +182,6 @@ namespace Yixing.Dialog
                     if (dcList.Count < count*yxcount)
                     {
                         MessageBox.Show("按范围添加定迎角，存在重复状态，重复状态会被自动忽略");
-                        return;
                     }
                 }
             }
@@ -326,7 +325,7 @@ namespace Yixing.Dialog
                     MessageBox.Show("马赫数：" + mahe + "  定升力系数：" + dslxs + " 该条状态重复，请修改定升力系数，或者定马赫数");
                     return dcList;
                 }
-                if (olddc.mahe == mahe && olddc.dyj == dyj && isdyj)
+                if (olddc.mahe == mahe && olddc.dyj == dyj && isdyj && olddc.isyj && olddc.dyj==0)
                 {
                     return dcList;
                 }
@@ -346,7 +345,7 @@ namespace Yixing.Dialog
                             MessageBox.Show("马赫数：" + mahe + "  定升力系数：" + dslxs + " 该条状态重复，请修改定升力系数，或者定马赫数");
                             return dcList;
                         }
-                        if (olddc.mahe == mahe && olddc.dyj == dyj && isdyj)
+                        if (olddc.mahe == mahe && olddc.dyj == dyj && isdyj && olddc.isyj && olddc.dyj == 0)
                         {
                             return dcList;
                         }
