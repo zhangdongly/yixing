@@ -523,47 +523,36 @@ namespace Yixing.UserTool{
                 string compStrX = "", compStrY="";
                 for (int i = 0; i < col.Length; i++)
                 {
+                    String xs;
+                    String ys;
                     if (col[i] == 0)
                     {
-                        String xs = ((EXListViewItem)x).Text + "*";
-                        String ys = ((EXListViewItem)y).Text + "*";
-                        float xf;
-                        float yf;
-                        if (float.TryParse(xs, out xf))
-                        {
-                            if (xf > 0)
-                                xs = "+" + xs;
-                        }
-                        if (float.TryParse(ys, out yf))
-                        {
-                            if (yf > 0)
-                                ys = "+" + ys;
-                        }
-                        //,如果你的字段值有*号，你可以换成别的分割符号
-                        compStrX += xs + "*";
-                        compStrY += ys + "*";
+                        xs = ((EXListViewItem)x).Text + "*";
+                        ys = ((EXListViewItem)y).Text + "*";
+                     
                     }
                     else
                     {
-                        String xs = ((EXListViewSubItemAB)((ListViewItem)x).SubItems[col[i]]).MyValue;
-                        String ys = ((EXListViewSubItemAB)((ListViewItem)y).SubItems[col[i]]).MyValue;
-                        float xf;
-                        float yf;
-                        if (float.TryParse(xs, out xf))
-                        {
-                            if (xf > 0)
-                                xs = "+" + xs;
-                        }
-                        if (float.TryParse(ys, out yf))
-                        {
-                            if (yf > 0)
-                                ys = "+" + ys;
-                        }
-                        //,如果你的字段值有*号，你可以换成别的分割符号
-                        compStrX += xs + "*";
-                        compStrY += ys + "*";
+                        xs = ((EXListViewSubItemAB)((ListViewItem)x).SubItems[col[i]]).MyValue;
+                        ys = ((EXListViewSubItemAB)((ListViewItem)y).SubItems[col[i]]).MyValue;
                     }
-                   
+                    float xf;
+                    float yf;
+                    if (float.TryParse(xs, out xf))
+                    {
+                        xs = xf.ToString("00000.000000");
+                        if (xf > 0)
+                            xs = "+" + xs;
+                    }
+                    if (float.TryParse(ys, out yf))
+                    {
+                        ys = yf.ToString("00000.000000");
+                        if (yf > 0)
+                            ys = "+" + ys;
+                    }
+                    //,如果你的字段值有*号，你可以换成别的分割符号
+                    compStrX += xs + "*";
+                    compStrY += ys + "*";
                 }
 
                 // 从小到大排序

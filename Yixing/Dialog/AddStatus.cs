@@ -239,14 +239,14 @@ namespace Yixing.Dialog
 
             if (dc.isyj)
             {
-                EXListViewSubItem sub = new EXListViewSubItem(dyj.ToString("0.00"));
+                EXListViewSubItem sub = new EXListViewSubItem(dyj.ToString("0.000"));
                 item.SubItems.Add(sub);
                 EXListViewSubItem subflag = new EXListViewSubItem("1");
                 item.SubItems.Add(subflag);
             }
             else
             {
-                EXListViewSubItem sub = new EXListViewSubItem(dslxs.ToString("0.00"), Color.Red, Color.White);
+                EXListViewSubItem sub = new EXListViewSubItem(dslxs.ToString("0.000"), Color.Red, Color.White);
                 item.SubItems.Add(sub);
                 EXListViewSubItem subflag = new EXListViewSubItem("2");
                 item.SubItems.Add(subflag);
