@@ -633,9 +633,11 @@ namespace Yixing.UserControl
                 return;
             }
 
+            DateTime dt = DateTime.Now;
             //测试代码，VM文件都放置于@"..//..//template"
             foreach (int key in ztDic.Keys)
             {
+                DateTime dt1 = DateTime.Now;
                 DCStatus dcs = ztDic[key];
                 DCGaoji gj = gjDic[dcs.gjKey];
                 DCZhuannie zn = null;
@@ -677,9 +679,10 @@ namespace Yixing.UserControl
                     zt = string.Format("{0:0.000}", dcs.dslxs);
                     zt = "cl" + zt.Replace(".", "");
                 }
+                Console.WriteLine(DateTime.Now - dt1);
                 String a = tp.BuildString("cfl3d.vm", yxname, mahe, zt);
             }
-
+            Console.WriteLine(DateTime.Now - dt);
             QidongResult qidongResult = new QidongResult();
             qidongResult.Show();
 

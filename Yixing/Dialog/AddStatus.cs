@@ -82,8 +82,8 @@ namespace Yixing.Dialog
             //需要两两比较 确定哪些项目不能编辑
 
             //编辑时的某些按钮的事件处理与添加时不一样 做出调整
-            this.checkBox1.CheckedChanged -= new System.EventHandler(this.checkBox2_CheckedChanged);
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.znEdit_CheckedChanged);
+            //this.checkBox1.CheckedChanged -= new System.EventHandler(this.checkBox2_CheckedChanged);
+            //this.checkBox1.CheckedChanged += new System.EventHandler(this.znEdit_CheckedChanged);
 
             this.button2.Click -= new System.EventHandler(this.button3_Click);
             this.button2.Click += new System.EventHandler(this.gjEdit_Click);
@@ -437,6 +437,30 @@ namespace Yixing.Dialog
         
         private void button1_Click(object sender, EventArgs e)
         {
+            Boolean znCheck = this.checkBox1.Checked;
+            if (znCheck)
+            {
+                float fddls;
+                float wnxb;
+
+                if (!float.TryParse(this.txt_fddls.Text, out fddls))
+                {
+                    MessageBox.Show("风洞湍流度必须为数字");
+                    return;
+                }
+                if (!float.TryParse(this.txt_wnxb.Text, out wnxb))
+                {
+                    MessageBox.Show("涡粘性比必须为数字");
+                    return;
+                }
+
+                DCZhuannie zn = new DCZhuannie();
+                znkey++;
+                zn.fddls = fddls;
+                zn.wnxb = wnxb;
+                znDic.Add(znkey, zn);
+            }
+
             if (this.yxList.Count > 0)
             {
                 this.addMethodAndStatus();
@@ -506,6 +530,7 @@ namespace Yixing.Dialog
         private void button5_Click_1(object sender, EventArgs e)
         {
             for (int i = this.exListView2.Items.Count - 1; i >= 0; i--)
+
             {
                 ListViewItem item = this.exListView2.Items[i];
                 String ztKeyStr = item.Tag.ToString();
@@ -556,35 +581,13 @@ namespace Yixing.Dialog
             //如果不断的选中取消只会导致key增大，而不会对象增多
             if (c.Checked)
             {
-                zhuannie z;
-
-                if (znkey != 0)
-                {
-                    DCZhuannie zn = znDic[znkey];
-                    z = new zhuannie(zn.fddls, zn.wnxb);
-                }
-                else
-                {
-                    z = new zhuannie();
-                }
-
+                this.panel4.Enabled = true;
+                
                 this.comboBox2.Text = "kw sst";
-                z.ShowDialog();
-                //若点击确定，则修改数据，若没有则取消本次选中
-                if (z.sure)
-                {
-                    //先加一次在作为key来存对象
-                    znkey++;
-                    DCZhuannie zn = new DCZhuannie();
-                    zn.fddls = z.fddls;
-                    zn.wnxb = z.wnxb;
-                    znDic.Add(znkey, zn);
-                }
-                else { this.checkBox1.Checked = false; }
             }
             else
             {
-                this.comboBox2.Enabled = true;
+                this.panel4.Enabled = false;
                 //取消的时候不removed，让其存在，影响不大，且有用
                 //znDic.Remove(znkey);
             }
@@ -597,17 +600,29 @@ namespace Yixing.Dialog
             //如果不断的选中取消只会导致key增大，而不会对象增多
             if (c.Checked)
             {
-                zhuannie z = new zhuannie(editZn, editAble);
-                z.ShowDialog();
-                //如果修改后点击确认，则需要循环将 需要改的zn全部改了
-                if (z.sure)
-                {
-                    editZn = new DCZhuannie();
-                    editZn.fddls = z.fddls;
-                    editZn.wnxb = z.wnxb;
+                float fddls;
+                float wnxb;
+
+                editZn = new DCZhuannie();
+                if(editAble.fddld){
+                     if (!float.TryParse(this.txt_fddls.Text, out fddls))
+                    {
+                        MessageBox.Show("风洞湍流度必须为数字");
+                        return;
+                    }
+                    editZn.fddls = fddls;
                 }
-                else { this.checkBox1.Checked = false; }
-            }
+                if(editAble.wnxb){
+                        if (!float.TryParse(this.txt_wnxb.Text, out wnxb))
+                    {
+                        MessageBox.Show("涡粘性比必须为数字");
+                        return;
+                    }
+               
+                    editZn.wnxb = wnxb;
+                }
+               
+             } else { this.checkBox1.Checked = false; }
         }
 
         //点击高级
@@ -829,6 +844,33 @@ namespace Yixing.Dialog
 
         private void button13_Click(object sender, EventArgs e)
         {
+            editZn = null;
+            if (this.checkBox1.Checked)
+            {
+                float fddls;
+                float wnxb;
+
+                editZn = new DCZhuannie();
+                if (editAble.fddld)
+                {
+                    if (!float.TryParse(this.txt_fddls.Text, out fddls))
+                    {
+                        MessageBox.Show("风洞湍流度必须为数字");
+                        return;
+                    }
+                    editZn.fddls = fddls;
+                }
+                if (editAble.wnxb)
+                {
+                    if (!float.TryParse(this.txt_wnxb.Text, out wnxb))
+                    {
+                        MessageBox.Show("涡粘性比必须为数字");
+                        return;
+                    }
+
+                    editZn.wnxb = wnxb;
+                }
+            }
             //这个方法是修改所有的转涅和高级的
             this.changeAllstatus();
             //循环修改完成后将，editzn 和 editgj置为null，以便下次点击时处理
@@ -968,12 +1010,17 @@ namespace Yixing.Dialog
 
             editAble.fddld = ck.checkznfd();
             editAble.wnxb = ck.checkznwnxb();
+            this.checkBox1.Checked = false;
+            this.txt_wnxb.Text = "";
+            this.txt_fddls.Text = "";
             if (!editAble.fddld && !editAble.wnxb)
             {
                 this.checkBox1.Enabled = false;
+                this.panel4.Enabled = false;
             }
             else
             {
+                this.panel4.Enabled = true;
                 //因为选中转涅的时候，端流模型只能是sst
                 //所以如果端流模型不能编辑，那么转涅也不能编辑
                 if (!editAble.dlmx)
@@ -982,9 +1029,42 @@ namespace Yixing.Dialog
                 }
                 else
                 {
+                    Boolean checkClickAble = true;
+                    this.checkBox1.Enabled = false;
+                    int znkey2 = ds.znKey;
+                    if (znkey2 != 0)
+                    {
+                        DCZhuannie zn = znDic[znkey2];
+                        if (!editAble.fddld)
+                        {
+                            this.txt_fddls.Enabled = false;
+                            checkClickAble = false;
+                        }
+                        else
+                        {
+                            this.checkBox1.Checked = true;
+                            this.txt_fddls.Enabled = true;
+                            this.txt_fddls.Text = zn.fddls.ToString();
+                        }
+
+                        if (!editAble.wnxb)
+                        {
+                            this.txt_wnxb.Enabled = false;
+                            checkClickAble = false;
+                        }
+                        else
+                        {
+                            this.checkBox1.Checked = true;
+                            this.txt_wnxb.Enabled = true;
+                            this.txt_wnxb.Text = zn.wnxb.ToString();
+                        }
+                    }
+                    if (checkClickAble)
+                    {
+                        this.checkBox1.Enabled = true;
+                    }
                     canedit = true;
                 }
-
             }
 
             editAble.cfl = ck.checkgjcfl();
@@ -1005,6 +1085,21 @@ namespace Yixing.Dialog
             {
                 MessageBox.Show("选中的条目没有可编辑的项，请退出！");
             }
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.comboBox2.Enabled)
+            {
+                if (this.checkBox1.Checked)
+                {
+                    String text = this.comboBox2.Text;
+                    if (!text.Equals("kw sst"))
+                    {
+                        this.comboBox2.Text = "kw sst";
+                    }
+                }
+            } 
         }
     }
 }

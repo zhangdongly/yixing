@@ -4,6 +4,7 @@ using NVelocity.Context;
 using System.IO;
 using NVelocity.Runtime;
 using System.Text;
+using System;
 
 namespace Yixing.util
 {
@@ -63,11 +64,10 @@ namespace Yixing.util
             }
             using (StreamWriter writer2 = new StreamWriter(outpath + "/cfl3d.inp", false, Encoding.Default, 200))
             {
-            writer2.Write(writer);
-            writer2.Flush();
-            writer2.Close();
+                writer2.Write(writer);
+                writer2.Flush();
+                writer2.Close();
             }
-  
             return writer.ToString();
         }
 
