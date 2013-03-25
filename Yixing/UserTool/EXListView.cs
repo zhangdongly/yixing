@@ -541,13 +541,13 @@ namespace Yixing.UserTool{
                     if (float.TryParse(xs, out xf))
                     {
                         xs = xf.ToString("00000.000000");
-                        if (xf > 0)
+                        if (xf >= 0)
                             xs = "+" + xs;
                     }
                     if (float.TryParse(ys, out yf))
                     {
                         ys = yf.ToString("00000.000000");
-                        if (yf > 0)
+                        if (yf >= 0)
                             ys = "+" + ys;
                     }
                     //,如果你的字段值有*号，你可以换成别的分割符号
