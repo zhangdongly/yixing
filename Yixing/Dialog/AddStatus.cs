@@ -629,16 +629,23 @@ namespace Yixing.Dialog
         private void button3_Click(object sender, EventArgs e)
         {
             DingChangGaoji dcgj = new DingChangGaoji();
-            dcgj.ShowDialog();
-            isgjOpened = true;
-            gjkey++;
-            DCGaoji gj = new DCGaoji();
-            gj.cfl = dcgj.cfl;
-            gj.onedd = dcgj.onedd;
-            gj.secdd = dcgj.secdd;
-            gj.thirdd = dcgj.thirdd;
-            gj.xzs = dcgj.xzs;
-            gjDic.Add(gjkey, gj);
+            if (isgjOpened)
+            {
+                DCGaoji gjold = gjDic[gjkey];
+                dcgj = new DingChangGaoji(gjold, new StatusEditAble());
+            }
+            if (dcgj.ShowDialog() == DialogResult.OK)
+            {
+                isgjOpened = true;
+                gjkey++;
+                DCGaoji gj = new DCGaoji();
+                gj.cfl = dcgj.cfl;
+                gj.onedd = dcgj.onedd;
+                gj.secdd = dcgj.secdd;
+                gj.thirdd = dcgj.thirdd;
+                gj.xzs = dcgj.xzs;
+                gjDic.Add(gjkey, gj);
+            }
         }
 
         //点击高级
@@ -933,6 +940,7 @@ namespace Yixing.Dialog
             //再定义一个对象用来存储哪一项可以编辑。
 
             CheckEdit ck = new CheckEdit(editztList, ztDic, znDic, gjDic);
+            
 
             editAble = new StatusEditAble();
 
@@ -1065,6 +1073,14 @@ namespace Yixing.Dialog
                     }
                     canedit = true;
                 }
+            }
+
+            int randomkey = editztList[0];
+            DCStatus dcs = ztDic[randomkey];
+            int gjkey = dcs.gjKey;
+            if (gjkey != 0)
+            {
+                editGj = gjDic[gjkey];
             }
 
             editAble.cfl = ck.checkgjcfl();
