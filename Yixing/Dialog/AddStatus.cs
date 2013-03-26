@@ -628,11 +628,23 @@ namespace Yixing.Dialog
         //点击高级
         private void button3_Click(object sender, EventArgs e)
         {
-            DingChangGaoji dcgj = new DingChangGaoji();
+            DingChangGaoji dcgj;
             if (isgjOpened)
             {
                 DCGaoji gjold = gjDic[gjkey];
                 dcgj = new DingChangGaoji(gjold, new StatusEditAble());
+            }
+            else
+            {
+                DCGaoji gj = new DCGaoji();
+                gj.cfl = 2;
+                gj.onedd = 1000;
+                gj.secdd = 1000;
+                gj.thirdd = 600;
+                if (this.checkBox1.Checked)
+                    gj.thirdd = 2500;
+                gj.xzs = 0;
+                dcgj = new DingChangGaoji(gj, new StatusEditAble());
             }
             if (dcgj.ShowDialog() == DialogResult.OK)
             {
