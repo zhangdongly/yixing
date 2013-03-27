@@ -527,8 +527,8 @@ namespace Yixing.UserTool{
                     String ys;
                     if (col[i] == 0)
                     {
-                        xs = ((EXListViewItem)x).Text + "*";
-                        ys = ((EXListViewItem)y).Text + "*";
+                        xs = ((EXListViewItem)x).Text;
+                        ys = ((EXListViewItem)y).Text;
                      
                     }
                     else
@@ -538,21 +538,37 @@ namespace Yixing.UserTool{
                     }
                     float xf;
                     float yf;
-                    if (float.TryParse(xs, out xf))
-                    {
-                        xs = xf.ToString("00000.000000");
-                        if (xf >= 0)
-                            xs = "+" + xs;
-                    }
-                    if (float.TryParse(ys, out yf))
-                    {
-                        ys = yf.ToString("00000.000000");
-                        if (yf >= 0)
-                            ys = "+" + ys;
-                    }
+                    float.TryParse(xs, out xf);
+                    float.TryParse(ys, out yf);
+                    #region
+                    //if (float.TryParse(xs, out xf))
+                //{
+                //    xs = xf.ToString("00000.000000");
+                //    if (xf >= 0)
+                //        xs = "+" + xs;
+                //}
+                //if (float.TryParse(ys, out yf))
+                //{
+                //    ys = yf.ToString("00000.000000");
+                //    if (yf >= 0)
+                //        ys = "+" + ys;
+                    //}
                     //,如果你的字段值有*号，你可以换成别的分割符号
                     compStrX += xs + "*";
                     compStrY += ys + "*";
+                    #endregion
+                    if (xf != yf)
+                    {
+                        if (xf > yf)
+                            return 1;
+                        else
+                            return -1;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                    
                 }
 
                 // 从小到大排序
@@ -574,7 +590,6 @@ namespace Yixing.UserTool{
                    {
                        return String.Compare(SA[i], SB[i]);
                    }
-     
                 }
                 return 0;
             }

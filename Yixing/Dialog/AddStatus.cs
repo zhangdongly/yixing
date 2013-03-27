@@ -168,6 +168,7 @@ namespace Yixing.Dialog
                     catch (Exception e)
                     {
                         MessageBox.Show("上限，下限，步长请输入数字");
+                        return;
                     }
                     //
                     int count = 0;

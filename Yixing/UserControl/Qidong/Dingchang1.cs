@@ -669,7 +669,7 @@ namespace Yixing.UserControl
                 String mahe = string.Format("{0:0.000}", dcs.mahe);
                 mahe = mahe.Replace(".", "");
                 String zt;
-                if (dcs.dyj > 0)
+                if (dcs.isyj)
                 {
                     zt = string.Format("{0:0.000}", dcs.dyj);
                     zt = "a" + zt.Replace(".", "");
