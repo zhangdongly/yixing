@@ -76,6 +76,10 @@ namespace Yixing.UserControl
         //记录单独高级的DIC 包括高级和转涅
         Dictionary<int, DCGaoji> gjDic = new Dictionary<int, DCGaoji>();
         private ColumnHeader flag;
+        private TextBox txt_wnxb;
+        private TextBox txt_fddls;
+        private Label label14;
+        private Label label15;
 
         //用于保存添加了多少个翼型
         Dictionary<int, DCYixing> yxDic = new Dictionary<int, DCYixing>();
@@ -88,8 +92,8 @@ namespace Yixing.UserControl
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dingchang1));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
@@ -137,6 +141,10 @@ namespace Yixing.UserControl
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.txt_wnxb = new System.Windows.Forms.TextBox();
+            this.txt_fddls = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             this.panel4.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -296,6 +304,10 @@ namespace Yixing.UserControl
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.txt_wnxb);
+            this.groupBox2.Controls.Add(this.txt_fddls);
+            this.groupBox2.Controls.Add(this.label14);
+            this.groupBox2.Controls.Add(this.label15);
             this.groupBox2.Controls.Add(this.panel5);
             this.groupBox2.Controls.Add(this.edit);
             this.groupBox2.Controls.Add(this.exListView2);
@@ -324,16 +336,16 @@ namespace Yixing.UserControl
             // 
             this.chart1.BorderlineColor = System.Drawing.Color.Silver;
             this.chart1.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            chartArea1.AxisX.LabelStyle.Format = "{0.00}";
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
+            chartArea2.AxisX.LabelStyle.Format = "{0.00}";
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
             this.chart1.Location = new System.Drawing.Point(9, 11);
             this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Legend = "Legend1";
-            series1.Name = "翼型几何形状";
-            this.chart1.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Legend = "Legend1";
+            series2.Name = "翼型几何形状";
+            this.chart1.Series.Add(series2);
             this.chart1.Size = new System.Drawing.Size(249, 156);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
@@ -362,10 +374,10 @@ namespace Yixing.UserControl
             this.exListView2.ControlPadding = 4;
             this.exListView2.FullRowSelect = true;
             this.exListView2.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.exListView2.Location = new System.Drawing.Point(10, 196);
+            this.exListView2.Location = new System.Drawing.Point(10, 229);
             this.exListView2.Name = "exListView2";
             this.exListView2.OwnerDraw = true;
-            this.exListView2.Size = new System.Drawing.Size(436, 263);
+            this.exListView2.Size = new System.Drawing.Size(436, 230);
             this.exListView2.TabIndex = 11;
             this.exListView2.UseCompatibleStateImageBehavior = false;
             this.exListView2.View = System.Windows.Forms.View.Details;
@@ -581,6 +593,38 @@ namespace Yixing.UserControl
             this.label10.TabIndex = 23;
             this.label10.Text = "计算状态的线程数";
             // 
+            // txt_wnxb
+            // 
+            this.txt_wnxb.Location = new System.Drawing.Point(302, 200);
+            this.txt_wnxb.Name = "txt_wnxb";
+            this.txt_wnxb.Size = new System.Drawing.Size(78, 21);
+            this.txt_wnxb.TabIndex = 17;
+            // 
+            // txt_fddls
+            // 
+            this.txt_fddls.Location = new System.Drawing.Point(88, 200);
+            this.txt_fddls.Name = "txt_fddls";
+            this.txt_fddls.Size = new System.Drawing.Size(79, 21);
+            this.txt_fddls.TabIndex = 16;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(218, 206);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(53, 12);
+            this.label14.TabIndex = 15;
+            this.label14.Text = "涡粘性比";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(17, 206);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(65, 12);
+            this.label15.TabIndex = 14;
+            this.label15.Text = "风洞湍流度";
+            // 
             // Dingchang1
             // 
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -593,6 +637,7 @@ namespace Yixing.UserControl
             this.panel1.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.panel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.panel2.ResumeLayout(false);
@@ -608,6 +653,24 @@ namespace Yixing.UserControl
 
         private void button3_Click(object sender, EventArgs e)
         {
+            float fddls;
+            float wnxb;
+
+            if (!float.TryParse(this.txt_fddls.Text, out fddls))
+            {
+                MessageBox.Show("风洞湍流度必须为数字");
+                return;
+            }
+            if (!float.TryParse(this.txt_wnxb.Text, out wnxb))
+            {
+                MessageBox.Show("涡粘性比必须为数字");
+                return;
+            }
+
+            DCZhuannie znFinally = new DCZhuannie();
+            znFinally.fddls = fddls;
+            znFinally.wnxb = wnxb;
+
             float mhln;
             if (!float.TryParse(this.textBox1.Text, out mhln))
             {
@@ -643,7 +706,8 @@ namespace Yixing.UserControl
                 DCZhuannie zn = null;
                 if (dcs.znKey != 0)
                 {
-                    zn = znDic[dcs.znKey];
+                    //zn = znDic[dcs.znKey];
+                    zn = znFinally;
                 }
 
                 DCYixing yx = dcs.yx;

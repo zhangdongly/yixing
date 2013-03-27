@@ -53,7 +53,7 @@ namespace Yixing.util
             {
                 int ztKey = ztKeyList[0];
                 DCStatus dcs = ztDic[ztKey];
-                if (dcs.dslxs == 0)
+                if (dcs.isyj)
                   return false; 
                 return true;
             }
@@ -66,7 +66,7 @@ namespace Yixing.util
                     int ztKey1 = ztKeyList[j];
                     DCStatus dcs1 = ztDic[ztKey1];
                     //若为0，证明没有设定升力系数，则不可用
-                    if (dcs1.dslxs == 0 || dcs.dslxs==0)
+                    if (dcs1.isyj || dcs.isyj)
                     { return false; }
                     if (dcs.dslxs != dcs1.dslxs)
                     {return false;}
@@ -82,7 +82,7 @@ namespace Yixing.util
             {
                 int ztKey = ztKeyList[0];
                 DCStatus dcs = ztDic[ztKey];
-                if (dcs.dyj == 0)
+                if (!dcs.isyj)
                     return false;
                 return true;
             }
@@ -95,7 +95,7 @@ namespace Yixing.util
                     int ztKey1 = ztKeyList[j];
                     DCStatus dcs1 = ztDic[ztKey1];
                     //若为0，证明没有设定升力系数，则不可用
-                    if (dcs1.dyj == 0 || dcs.dyj == 0)
+                    if (!dcs1.isyj || !dcs.isyj)
                     { return false; }
                     if (dcs.dyj != dcs1.dyj)
                     { return false; }

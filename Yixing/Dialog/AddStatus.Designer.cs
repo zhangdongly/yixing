@@ -239,7 +239,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(19, 451);
+            this.button2.Location = new System.Drawing.Point(5, 367);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(150, 23);
             this.button2.TabIndex = 31;
@@ -390,7 +390,7 @@
             this.groupBox2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.groupBox2.Location = new System.Drawing.Point(13, 10);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(838, 525);
+            this.groupBox2.Size = new System.Drawing.Size(838, 471);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "添加状态";
@@ -423,7 +423,7 @@
             this.exListView2.Location = new System.Drawing.Point(266, 25);
             this.exListView2.Name = "exListView2";
             this.exListView2.OwnerDraw = true;
-            this.exListView2.Size = new System.Drawing.Size(555, 456);
+            this.exListView2.Size = new System.Drawing.Size(555, 397);
             this.exListView2.TabIndex = 12;
             this.exListView2.UseCompatibleStateImageBehavior = false;
             this.exListView2.View = System.Windows.Forms.View.Details;
@@ -499,7 +499,7 @@
             this.panel1.Controls.Add(this.label13);
             this.panel1.Location = new System.Drawing.Point(7, 25);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(184, 485);
+            this.panel1.Size = new System.Drawing.Size(184, 397);
             this.panel1.TabIndex = 11;
             // 
             // panel4
@@ -509,10 +509,11 @@
             this.panel4.Controls.Add(this.label14);
             this.panel4.Controls.Add(this.label15);
             this.panel4.Enabled = false;
-            this.panel4.Location = new System.Drawing.Point(14, 366);
+            this.panel4.Location = new System.Drawing.Point(7, 396);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(165, 75);
+            this.panel4.Size = new System.Drawing.Size(165, 10);
             this.panel4.TabIndex = 35;
+            this.panel4.Visible = false;
             // 
             // txt_wnxb
             // 
@@ -735,7 +736,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(321, 487);
+            this.button4.Location = new System.Drawing.Point(305, 439);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(72, 23);
             this.button4.TabIndex = 7;
@@ -755,7 +756,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(502, 487);
+            this.button6.Location = new System.Drawing.Point(529, 439);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 23);
             this.button6.TabIndex = 6;
@@ -797,7 +798,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(863, 547);
+            this.ClientSize = new System.Drawing.Size(863, 480);
             this.Controls.Add(this.groupBox2);
             this.Name = "AddStatus";
             this.Text = "计算状态编辑";

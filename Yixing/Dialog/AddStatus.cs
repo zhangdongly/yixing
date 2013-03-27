@@ -583,7 +583,8 @@ namespace Yixing.Dialog
             if (c.Checked)
             {
                 this.panel4.Enabled = true;
-                
+                this.txt_fddls.Text = "0";
+                this.txt_wnxb.Text = "0";
                 this.comboBox2.Text = "kw sst";
             }
             else
@@ -987,7 +988,7 @@ namespace Yixing.Dialog
             if (!ck.checkdyj())
             {
                 editAble.dyj = false;
-                this.radioButton4.Checked = false;
+                //this.radioButton4.Checked = false;
                 this.radioButton4.Enabled = false;
                 this.panel6.Enabled = false;
             }
