@@ -59,13 +59,13 @@ namespace Yixing.Dialog
         public AddStatus()
         {
             InitializeComponent();
+            this.radioButton4.Checked = true; 
             this.exListView2.SelectedIndexChanged -= new EventHandler(this.exListView2_SelectedIndexChanged);
         }
 
         public AddStatus(List<int> ztKeyList, Dictionary<int, DCStatus> ztDic_, Dictionary<int, DCZhuannie> znDic_, Dictionary<int, DCGaoji> gjDic_)
         {
             InitializeComponent();
-            
             //编辑初始化，整个左边先不可用，需要选中后才可以
             this.panel1.Enabled = false;
            
@@ -99,6 +99,7 @@ namespace Yixing.Dialog
         public AddStatus(List<DCYixing> yxList1,Dictionary<int, DCGaoji> gjDic)
         {
             InitializeComponent();
+            this.radioButton4.Checked = true;
             yxList = yxList1;
             foreach(DCYixing yx in yxList){
                 List<DCStatus> statusList = yx.dcList;
@@ -163,6 +164,11 @@ namespace Yixing.Dialog
                         }
 
                         step = float.Parse(this.textBox6.Text);
+                        if (step <= 0.1 || step >= 4)
+                        {
+                            MessageBox.Show("步长的范围是0.1 - 4之间，请修正！");
+                            return;
+                        }
 
                     }
                     catch (Exception e)
@@ -709,6 +715,8 @@ namespace Yixing.Dialog
             {
                 textBox8.Enabled = false;
                 this.panel8.Enabled = true;
+                if (this.textBox6.Text.Trim().Equals(""))
+                    this.textBox6.Text = "1";
             }
         }
 

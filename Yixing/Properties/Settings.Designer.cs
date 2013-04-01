@@ -58,5 +58,17 @@ namespace Yixing.Properties {
                 this["lastFileFolder"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string statusSaveFolder {
+            get {
+                return ((string)(this["statusSaveFolder"]));
+            }
+            set {
+                this["statusSaveFolder"] = value;
+            }
+        }
     }
 }

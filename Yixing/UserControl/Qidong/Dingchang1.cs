@@ -12,6 +12,8 @@ using Yixing.util;
 using System.Globalization;
 using Yixing.constant;
 using System.Windows.Forms.DataVisualization.Charting;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 namespace Yixing.UserControl
 {
@@ -92,8 +94,8 @@ namespace Yixing.UserControl
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dingchang1));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
@@ -112,6 +114,10 @@ namespace Yixing.UserControl
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txt_wnxb = new System.Windows.Forms.TextBox();
+            this.txt_fddls = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.edit = new System.Windows.Forms.Button();
@@ -141,10 +147,6 @@ namespace Yixing.UserControl
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.txt_wnxb = new System.Windows.Forms.TextBox();
-            this.txt_fddls = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
             this.panel4.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -324,6 +326,38 @@ namespace Yixing.UserControl
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "添加状态";
             // 
+            // txt_wnxb
+            // 
+            this.txt_wnxb.Location = new System.Drawing.Point(302, 200);
+            this.txt_wnxb.Name = "txt_wnxb";
+            this.txt_wnxb.Size = new System.Drawing.Size(78, 21);
+            this.txt_wnxb.TabIndex = 17;
+            // 
+            // txt_fddls
+            // 
+            this.txt_fddls.Location = new System.Drawing.Point(88, 200);
+            this.txt_fddls.Name = "txt_fddls";
+            this.txt_fddls.Size = new System.Drawing.Size(79, 21);
+            this.txt_fddls.TabIndex = 16;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(218, 206);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(53, 12);
+            this.label14.TabIndex = 15;
+            this.label14.Text = "涡粘性比";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(17, 206);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(65, 12);
+            this.label15.TabIndex = 14;
+            this.label15.Text = "风洞湍流度";
+            // 
             // panel5
             // 
             this.panel5.Controls.Add(this.chart1);
@@ -336,16 +370,16 @@ namespace Yixing.UserControl
             // 
             this.chart1.BorderlineColor = System.Drawing.Color.Silver;
             this.chart1.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            chartArea2.AxisX.LabelStyle.Format = "{0.00}";
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
+            chartArea1.AxisX.LabelStyle.Format = "{0.00}";
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
             this.chart1.Location = new System.Drawing.Point(9, 11);
             this.chart1.Name = "chart1";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.Legend = "Legend1";
-            series2.Name = "翼型几何形状";
-            this.chart1.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
+            series1.Name = "翼型几何形状";
+            this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(249, 156);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
@@ -438,6 +472,7 @@ namespace Yixing.UserControl
             this.button9.TabIndex = 7;
             this.button9.Text = "导入计算状态 ";
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button11
             // 
@@ -457,6 +492,7 @@ namespace Yixing.UserControl
             this.button10.TabIndex = 6;
             this.button10.Text = "保存计算状态";
             this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // button7
             // 
@@ -593,38 +629,6 @@ namespace Yixing.UserControl
             this.label10.TabIndex = 23;
             this.label10.Text = "计算状态的线程数";
             // 
-            // txt_wnxb
-            // 
-            this.txt_wnxb.Location = new System.Drawing.Point(302, 200);
-            this.txt_wnxb.Name = "txt_wnxb";
-            this.txt_wnxb.Size = new System.Drawing.Size(78, 21);
-            this.txt_wnxb.TabIndex = 17;
-            // 
-            // txt_fddls
-            // 
-            this.txt_fddls.Location = new System.Drawing.Point(88, 200);
-            this.txt_fddls.Name = "txt_fddls";
-            this.txt_fddls.Size = new System.Drawing.Size(79, 21);
-            this.txt_fddls.TabIndex = 16;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(218, 206);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(53, 12);
-            this.label14.TabIndex = 15;
-            this.label14.Text = "涡粘性比";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(17, 206);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(65, 12);
-            this.label15.TabIndex = 14;
-            this.label15.Text = "风洞湍流度";
-            // 
             // Dingchang1
             // 
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -664,6 +668,16 @@ namespace Yixing.UserControl
             if (!float.TryParse(this.txt_wnxb.Text, out wnxb))
             {
                 MessageBox.Show("涡粘性比必须为数字");
+                return;
+            }
+            if (fddls <= 0 || fddls >= 0.05)
+            {
+                MessageBox.Show("风洞湍流度范围在0—0.05之间，请修改！");
+                return;
+            }
+            if (wnxb <=0 || wnxb >= 100)
+            {
+                MessageBox.Show("风洞湍流度范围在0—100之间，请修改！");
                 return;
             }
 
@@ -715,7 +729,7 @@ namespace Yixing.UserControl
                 TemplateHelper tp = new TemplateHelper();
                 if (zn != null)
                 {
-                    float tke0 = dcs.mahe * dcs.mahe * zn.fddls * zn.fddls * 1.5f;
+                    float tke0 = dcs.mahe * dcs.mahe * zn.fddls * zn.fddls * 1.5f*1000000;
                     float tke1 = tke0 / zn.wnxb;
                     tp.Put("tke0", tke0);
                     tp.Put("tke1", tke1);
@@ -1234,6 +1248,197 @@ namespace Yixing.UserControl
                     }
                 }
             }
+        }
+
+        //保存计算状态
+        private void button10_Click(object sender, EventArgs e)
+        {
+            if (this.exListView2.Items.Count == 0)
+            {
+                MessageBox.Show("选中翼型没有状态，不进行保存！");
+                return;
+            }
+            #region 选择输出路径
+            FolderBrowserDialog folderDlg = new FolderBrowserDialog();
+            String lastFileFolder = Properties.Settings.Default.statusSaveFolder;
+            if (!String.IsNullOrWhiteSpace(lastFileFolder))
+            {
+                folderDlg.SelectedPath = lastFileFolder;
+            }
+            folderDlg.ShowNewFolderButton = true;
+            if (folderDlg.ShowDialog() == DialogResult.OK)
+            {
+                Properties.Settings.Default.statusSaveFolder = folderDlg.SelectedPath;
+                Properties.Settings.Default.Save();
+            }
+            else
+            {
+                MessageBox.Show("你必须选中一个输出路径.");
+                return;
+            }
+            #endregion
+
+            List<StautsSerializeObj> serializeList = new List<StautsSerializeObj>();
+            #region 循环取出需要存储的状态
+            String fileName = "status.info";
+            for (int i = 0; i < this.exListView2.Items.Count; i++)
+            {
+                ListViewItem item = this.exListView2.Items[i];
+                String ztKeyStr = item.Tag.ToString();
+                int ztKey;
+                if (int.TryParse(ztKeyStr, out ztKey))
+                {
+                    DCStatus dcs = ztDic[ztKey];
+                    StautsSerializeObj obj = new StautsSerializeObj();
+                    obj.mahe = dcs.mahe;
+                    obj.isyj = dcs.isyj;
+                    obj.dyj = dcs.dyj;
+                    obj.dslxs = dcs.dslxs;
+                    obj.lsgs = dcs.lsgs;
+                    obj.dlmx = dcs.dlmx;
+                    obj.iszn = false;
+                    if (dcs.znKey != 0)
+                    {
+                        obj.iszn = true;
+                    }
+                    if (dcs.gjKey != 0)
+                    {
+                        DCGaoji gj = gjDic[dcs.gjKey];
+                        obj.cfl = gj.cfl;
+                        obj.onedd = gj.onedd;
+                        obj.secdd = gj.secdd;
+                        obj.thirdd = gj.thirdd;
+                        obj.xzs = gj.xzs;
+                    }
+                    serializeList.Add(obj);
+                    DCYixing yx = dcs.yx;
+                    fileName = yx.name.Substring(0,yx.name.IndexOf(".")) + "_stutas.info";
+                }
+            }
+            #endregion
+        
+            BinaryFormatter bf = new BinaryFormatter();
+            using (FileStream fs = new FileStream
+            (Properties.Settings.Default.statusSaveFolder + "/" + fileName, FileMode.Create))
+            {
+                bf.Serialize(fs, serializeList);
+            }
+            MessageBox.Show("保存完成");
+        }
+         
+        //读取文件添加状态的东西
+        private void button9_Click(object sender, EventArgs e)
+        {
+            DCYixing yx = null;
+            //将选中的翼型读出来
+            int count = this.exListView1.SelectedItems.Count;
+            if (count > 0)
+            {
+                ListViewItem item = this.exListView1.SelectedItems[0];
+                String yxkey = item.Tag.ToString();
+                int key = 0;
+                int.TryParse(yxkey, out key);
+                if (int.TryParse(yxkey, out key) && key != 0)
+                {
+                    yx = yxDic[key];
+                }
+            }
+            if (yx == null)
+            {
+                MessageBox.Show("请选中一个翼型！");
+                return;
+            }
+
+            List<DCStatus> dcList = new List<DCStatus>();
+            String filePath = FileDialogUtil.getSelectFileName(this.openFileDialog1, "翼型状态(*.info)|*.info");
+            BinaryFormatter bf = new BinaryFormatter();
+            //用于标识是否有重复的状态
+            Boolean isrepeat = false;
+            using (FileStream fs = File.Open(filePath, FileMode.Open))
+            {
+                List<StautsSerializeObj> serializeList = (List<StautsSerializeObj>)bf.Deserialize(fs);
+                #region 循环处理，转化为本类需要的对象
+                foreach (StautsSerializeObj obj in serializeList)
+                {
+                    DCStatus dcs = new DCStatus();
+                    dcs.mahe = obj.mahe;
+                    dcs.isyj = obj.isyj;
+                    dcs.dyj = obj.dyj;
+                    dcs.dslxs = obj.dslxs ;
+                    dcs.lsgs = obj.lsgs;
+                    dcs.dlmx = obj.dlmx;
+                    if (obj.iszn)
+                    {
+                        DCZhuannie zn = new DCZhuannie();
+                        znkey++;
+                        this.znDic.Add(znkey, zn);
+                        dcs.znKey = znkey;
+                    }
+                    else
+                    {
+                        dcs.znKey = 0;
+                    }
+
+                    DCGaoji gj = new DCGaoji();
+                    gj.cfl = obj.cfl;
+                    gj.onedd = obj.onedd;
+                    gj.secdd = obj.secdd;
+                    gj.thirdd = obj.thirdd;
+                    gj.xzs = obj.xzs;
+                    gjkey++;
+                    this.gjDic.Add(gjkey,gj);
+                    dcs.gjKey = gjkey;
+                    dcs.yx = yx;
+                    if (isStatusExites(dcs, yx.dcList))
+                    {
+                        dcList.Add(dcs);
+                        ztkey++;
+                        ztDic.Add(ztkey, dcs);
+                        this.addToList(dcs, ztkey);
+                    }
+                    else { isrepeat = true; }
+                }
+                #endregion
+            }
+            if (isrepeat) { MessageBox.Show("包含重复状态，重复状态将被自动忽略！"); }
+            if (yx.dcList != null)
+            {
+                yx.dcList.AddRange(dcList);
+            }
+            else { yx.dcList = dcList; }
+            
+        }
+
+        private Boolean isStatusExites(DCStatus dc ,List<DCStatus> statusList)
+        {
+            if (statusList == null || statusList.Count == 0)
+            {
+                return true;
+            }
+            //先验证当前添加的
+            foreach (DCStatus olddc in statusList)
+            {
+                if (olddc.mahe == dc.mahe && olddc.dslxs == dc.dslxs && !dc.isyj)
+                {
+                    //MessageBox.Show("马赫数：" + mahe + "  定升力系数：" + dc.dslxs + " 该条状态重复，请修改定升力系数，或者定马赫数");
+                    return false;
+                }
+                if (dc.dyj == 0)
+                {
+                    if (olddc.mahe == dc.mahe && olddc.dyj == dc.dyj && dc.isyj && olddc.isyj && olddc.dyj == 0)
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (olddc.mahe == dc.mahe && olddc.dyj == dc.dyj && dc.isyj)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
     }
 }

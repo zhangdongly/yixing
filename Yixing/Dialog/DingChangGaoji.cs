@@ -73,7 +73,19 @@ namespace Yixing.Dialog
 
             if (editAble.xzs)
             {
-                this.textBox5.Text = gj.xzs.ToString();
+                if (gj.xzs != 0)
+                {
+                    this.radioButton4.Checked = true;
+                    this.textBox5.Enabled = true;
+                    this.textBox5.Text = gj.xzs.ToString();
+                }
+                else
+                {
+                    this.radioButton3.Checked = true;
+                    this.textBox5.Enabled = false;
+                    this.radioButton4.Checked = false;
+                }
+                
             }
             else
             {

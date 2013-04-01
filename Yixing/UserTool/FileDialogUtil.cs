@@ -52,6 +52,33 @@ namespace Yixing.UserTool
             }
             return resultStr;
         }
+
+        public static String getSelectFileName(OpenFileDialog openFileDialog,String filter)
+        {
+            String lastFileFolder = Properties.Settings.Default.lastFileFolder;
+
+            if (!String.IsNullOrWhiteSpace(lastFileFolder))
+            {
+                openFileDialog.InitialDirectory = lastFileFolder;
+            }
+            openFileDialog.FileName = null;
+            openFileDialog.Filter =filter;
+            openFileDialog.RestoreDirectory = true;
+            openFileDialog.FilterIndex = 1;
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                Properties.Settings.Default.lastFileFolder = CommonUtil.getFilePathByPath(openFileDialog.FileName);
+                Properties.Settings.Default.Save();
+                try
+                {
+                    return openFileDialog.FileName;
+                }
+                catch
+                {
+                }
+            }
+            return null;
+        }
     }
 
 }
