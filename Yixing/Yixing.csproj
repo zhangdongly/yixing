@@ -227,6 +227,7 @@
     <Compile Include="Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
+    <Compile Include="model\CalcModel.cs" />
     <Compile Include="model\DCGaoji.cs" />
     <Compile Include="model\DCStatus.cs" />
     <Compile Include="model\DCYixing.cs" />
@@ -295,6 +296,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="util\CheckEdit.cs" />
+    <Compile Include="util\InpFactory.cs" />
     <Compile Include="util\JSONUtil.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -481,6 +483,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="resources\polar.res" />
+    <None Include="template\cfl3d.alpha" />
     <None Include="template\cfl3d.vm" />
   </ItemGroup>
   <ItemGroup>

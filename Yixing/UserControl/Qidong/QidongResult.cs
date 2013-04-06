@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Yixing.Dialog;
+using Yixing.model;
 using Yixing.UserTool;
+using Yixing.util;
 
 namespace Yixing.UserControl
 {
@@ -22,12 +26,23 @@ namespace Yixing.UserControl
         private UserTool.EXListView exListView1;
         private Label label5;
         private System.Windows.Forms.Panel panel1;
-    
+
+        private List<CalcModel> cmList;
+        private DCYixing yx;
+
+        private int znCl = 10;
+
         public QidongResult()
         {
             this.InitializeComponent();
         }
 
+        public QidongResult(List<CalcModel> cmList, DCYixing yx)
+        {
+            this.InitializeComponent();
+            this.cmList =cmList;
+            this.yx = yx;
+        }
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
@@ -166,17 +181,17 @@ namespace Yixing.UserControl
         {
             saveFileDialog1.Filter = " txt files(*.txt)|*.txt|All files(*.*)|*.*";  
   
-    //设置默认文件类型显示顺序  
-    saveFileDialog1.FilterIndex = 2;  
+            //设置默认文件类型显示顺序  
+            saveFileDialog1.FilterIndex = 2;  
   
-    //保存对话框是否记忆上次打开的目录  
-    saveFileDialog1.RestoreDirectory = true;  
+            //保存对话框是否记忆上次打开的目录  
+            saveFileDialog1.RestoreDirectory = true;  
   
-    //点了保存按钮进入  
-    if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-    {
-        MessageBox.Show(saveFileDialog1.FileName);
-    }
+            //点了保存按钮进入  
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                MessageBox.Show(saveFileDialog1.FileName);
+            }
 
         }
 
@@ -197,20 +212,125 @@ namespace Yixing.UserControl
             this.exListView1.Columns.Add("cm",100);
             this.exListView1.Columns.Add("k",100);
             this.exListView1.Columns.Add("计算是否成功",200);
-            
-            for(int i=1;i<10;i++){
-                EXListViewItem item = new EXListViewItem(i.ToString());
-                item.SubItems.Add("0.5");
-                item.SubItems.Add("0");
-                item.SubItems.Add(" 0.06741300 ");
-                item.SubItems.Add("0.00835220");
-                item.SubItems.Add("0.00070531");
-                item.SubItems.Add("8.07128661");
-                item.SubItems.Add("是");
-                this.exListView1.Items.Add(item);
+            ThreadStart ts = new ThreadStart(this.startCalc);
+            Thread t = new Thread(ts);
+            // 启动.
+            t.Start();
 
+        }
+
+        private void startCalc()
+        {
+            for (int i = 0; i < cmList.Count(); i++)
+            {
+                CalcModel cm = cmList[i];
+                String inpPath = cm.inpPath;
+                Boolean iszn = cm.isZn;
+                String path = Path.GetDirectoryName(inpPath);
+                //移动xyz文件到，inp所在的文件夹
+                InpFactory.MoveFileTo(yx.xyzPath, path);
+                //移动alpha文件到，inp所在的文件夹
+                InpFactory.MoveFileTo("./template/cfl3d.alpha", path);
+                if (iszn)
+                {
+                    InpFactory.processCommand("Mpiexec  cfd2.exe   cfl3d.inp");
+                }
+                else
+                {
+                    InpFactory.processCommand("Mpiexec  cfd1.exe   cfl3d.inp");
+                }
+                EXListViewItem item = new EXListViewItem(i.ToString());
+                item.SubItems.Add("" + cm.mahe);
+                #region 处理alpha
+                if (cm.isyj)
+                {
+                    item.SubItems.Add("" + cm.yj.ToString("E5"));
+                }
+                else
+                {
+                    List<String> alphaList = InpFactory.readFile("./template/cfl3d.alpha");
+                    if (alphaList != null && alphaList.Count() > 0)
+                    {
+                        String line = alphaList[alphaList.Count - 1];
+                        List<String> lineList = this.processLine(line);
+                        String str = lineList[4];
+                        item.SubItems.Add(Convert.ToDouble(str).ToString("E5"));
+                    }
+                }
+                #endregion
+
+                #region 处理输出结果文件
+                List<String> resList = InpFactory.readFile(path + "/cfl3d.res");
+                if (resList != null && resList.Count() > 0)
+                {
+                    int count = resList.Count();
+                    double cl = 0; double cd = 0; double cmz = 0;
+                    for (int j = count - znCl; j < count; j++)
+                    {
+                        String line = resList[j];
+                        List<String> lineList = this.processLine(line);
+                        cl += Convert.ToDouble(lineList[3]);
+                        cd += Convert.ToDouble(lineList[4]);
+                        if (!iszn)
+                        {
+                            cmz += Convert.ToDouble(lineList[6]);
+                        }
+                        else
+                        {
+                            cmz += Convert.ToDouble(lineList[10]);
+                        }
+                    }
+                    cl = cl / znCl;
+                    cd = cd / znCl;
+                    item.SubItems.Add(cl.ToString("E5"));
+                    item.SubItems.Add(cd.ToString("E5"));
+                    item.SubItems.Add((cmz / znCl).ToString("E5"));
+                    item.SubItems.Add((cl / cd).ToString("E5"));
+                }
+                #endregion
+
+                if (iszn)
+                {
+                    item.SubItems.Add("0");
+                }
+                else
+                {
+                    item.SubItems.Add("1");
+                }
+                item.SubItems.Add("0");
+                this.setItem(item);
             }
-           
+        }
+        private delegate void FlushClient(EXListViewItem item);
+        private void setItem(EXListViewItem item)
+        {
+            if (exListView1.InvokeRequired)
+            {
+                FlushClient fc = new FlushClient(setItem);
+                this.Invoke(fc, new object[] {item});
+            }
+            else
+            {
+                this.exListView1.Items.Add(item);
+            }
+        }
+
+        private List<String> processLine(String line)
+        {
+            List<String> result = new List<string>();
+            char[] separator = { ' ' };
+            String[] lineArr = line.Split(separator);
+            if (lineArr != null)
+            {
+                foreach (String str in lineArr)
+                {
+                    if (!str.Equals(""))
+                    {
+                        result.Add(str);
+                    }
+                }
+            }
+            return result;
         }
     }
 }

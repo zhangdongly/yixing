@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yixing", "Yixing\Yixing.csproj", "{C8861B54-B78C-459B-8A55-779B6EB7D7F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rwtest", "..\..\test\rwtest\rwtest.csproj", "{EE7723FB-459A-4C55-948D-F007C50E0613}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{C8861B54-B78C-459B-8A55-779B6EB7D7F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8861B54-B78C-459B-8A55-779B6EB7D7F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8861B54-B78C-459B-8A55-779B6EB7D7F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE7723FB-459A-4C55-948D-F007C50E0613}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE7723FB-459A-4C55-948D-F007C50E0613}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE7723FB-459A-4C55-948D-F007C50E0613}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE7723FB-459A-4C55-948D-F007C50E0613}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

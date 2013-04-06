@@ -13,9 +13,9 @@ namespace Yixing.util
         private VelocityEngine velocity = null;
         private IContext context = null;
 
-        public TemplateHelper()
+        public TemplateHelper(String templatePath)
         {
-            string templatePath = Yixing.Properties.Settings.Default.vmFolder;
+           // string templatePath = Yixing.Properties.Settings.Default.vmFolder;
             velocity = new VelocityEngine();
 
             velocity.AddProperty(RuntimeConstants.FILE_RESOURCE_LOADER_PATH, templatePath);
@@ -68,12 +68,8 @@ namespace Yixing.util
                 writer2.Flush();
                 writer2.Close();
             }
-            return writer.ToString();
-        }
-
-        internal string BuildString(string p, string yxname, string mahe)
-        {
-            throw new System.NotImplementedException();
+            
+            return outpath + "/cfl3d.inp";
         }
     }
 }

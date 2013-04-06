@@ -16,6 +16,10 @@ namespace Yixing.model
         public List<DCStatus> dcList { get; set; }
         //翼型所包含的状态List
         public int key { get; set; }
+        //翼型所对应的inp文件路径
+        public String inpPath {get; set; }
+        //翼型所对应的网格文件所在的路劲
+        public String xyzPath { get; set; }
 
         public int type { get; set; }
     }

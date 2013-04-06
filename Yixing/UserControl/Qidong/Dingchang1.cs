@@ -710,12 +710,50 @@ namespace Yixing.UserControl
                 return;
             }
 
-            DateTime dt = DateTime.Now;
-            //测试代码，VM文件都放置于@"..//..//template"
-            foreach (int key in ztDic.Keys)
+            List<CalcModel> cmList = new List<CalcModel>();
+
+            int count = this.exListView1.SelectedItems.Count;
+            DCYixing yx;
+            if (count > 0)
             {
-                DateTime dt1 = DateTime.Now;
-                DCStatus dcs = ztDic[key];
+                ListViewItem item = this.exListView1.SelectedItems[0];
+                String yxkey = item.Tag.ToString();
+                int key = 0;
+                int.TryParse(yxkey, out key);
+                if (int.TryParse(yxkey, out key) && key != 0)
+                {
+                    yx = yxDic[key];
+                }
+                else
+                {
+                    MessageBox.Show("请选中一个翼型！");
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show("请选中一个翼型！");
+                return;
+            }
+
+            yx.inpPath = "D:\\cfl3d.inp";
+            yx.xyzPath = "D:\\cfl3d.xyz";
+
+            //构建模版文件
+            String vmpath = InpFactory.convertInp(yx.inpPath);
+            vmpath = CommonUtil.getFilePathByPath(vmpath);
+            //根据模版文件生成，对应的inp文件
+            TemplateHelper tp = new TemplateHelper(vmpath);
+
+            //测试代码，VM文件都放置于@"..//..//template"
+            foreach (DCStatus dcs in yx.dcList)
+            {
+                CalcModel cm = new CalcModel();
+                cm.mahe = dcs.mahe;
+                cm.isZn = false;
+                cm.isyj = dcs.isyj;
+                cm.yj = dcs.dyj;
+                //DCStatus dcs = ztDic[key];
                 DCGaoji gj = gjDic[dcs.gjKey];
                 DCZhuannie zn = null;
                 if (dcs.znKey != 0)
@@ -724,11 +762,9 @@ namespace Yixing.UserControl
                     zn = znFinally;
                 }
 
-                DCYixing yx = dcs.yx;
-
-                TemplateHelper tp = new TemplateHelper();
                 if (zn != null)
                 {
+                    cm.isZn = true;
                     float tke0 = dcs.mahe * dcs.mahe * zn.fddls * zn.fddls * 1.5f*1000000;
                     float tke1 = tke0 / zn.wnxb;
                     tp.Put("tke0", tke0);
@@ -757,11 +793,12 @@ namespace Yixing.UserControl
                     zt = string.Format("{0:0.000}", dcs.dslxs);
                     zt = "cl" + zt.Replace(".", "");
                 }
-                Console.WriteLine(DateTime.Now - dt1);
                 String a = tp.BuildString("cfl3d.vm", yxname, mahe, zt);
+                cm.inpPath = a;
+                cmList.Add(cm);
             }
-            Console.WriteLine(DateTime.Now - dt);
-            QidongResult qidongResult = new QidongResult();
+
+            QidongResult qidongResult = new QidongResult(cmList, yx);
             qidongResult.Show();
 
         }
