@@ -248,7 +248,7 @@ namespace Yixing.UserControl
                 }
                 else
                 {
-                    List<String> alphaList = InpFactory.readFile("./template/cfl3d.alpha");
+                    List<String> alphaList = InpFactory.readFile(path+"/cfl3d.alpha");
                     if (alphaList != null && alphaList.Count() > 0)
                     {
                         String line = alphaList[alphaList.Count - 1];
