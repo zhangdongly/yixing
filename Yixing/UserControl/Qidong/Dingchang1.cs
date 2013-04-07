@@ -692,6 +692,12 @@ namespace Yixing.UserControl
                 MessageBox.Show("马赫雷诺数必须为数字，且必填");
                 return;
             }
+            int xc;
+            if (!int.TryParse(this.textBox9.Text, out xc))
+            {
+                MessageBox.Show("计算线程数数字，且必填");
+                return;
+            }
 
             FolderBrowserDialog folderDlg = new FolderBrowserDialog();
             String lastFileFolder = Properties.Settings.Default.defaultFileFolder;
@@ -743,7 +749,6 @@ namespace Yixing.UserControl
 
             //构建模版文件
             String vmpath = InpFactory.convertInp(yx.inpPath);
-            //String vmpath=CommonUtil.getFilePathByPath(vmpath);
             vmpath = Path.GetDirectoryName(vmpath);
             //根据模版文件生成，对应的inp文件
             TemplateHelper tp = new TemplateHelper(vmpath);
@@ -756,6 +761,7 @@ namespace Yixing.UserControl
                 cm.isZn = false;
                 cm.isyj = dcs.isyj;
                 cm.yj = dcs.dyj;
+                cm.xc = xc;
                 //DCStatus dcs = ztDic[key];
                 DCGaoji gj = gjDic[dcs.gjKey];
                 DCZhuannie zn = null;
@@ -929,7 +935,6 @@ namespace Yixing.UserControl
         //添加计算状态的按钮
         private void button1_Click(object sender, EventArgs e)
         {
-
             List<DCYixing> yxList = new List<DCYixing>();
             //将选中的翼型读出来
             int count = this.exListView1.SelectedItems.Count;

@@ -17,5 +17,7 @@ namespace Yixing.model
         public Boolean isyj { get; set; }
         //第一重迭代
         public float yj { get; set; }
+        //线程数
+        public int xc { get; set; }
     }
 }

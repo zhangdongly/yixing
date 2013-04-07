@@ -234,11 +234,11 @@ namespace Yixing.UserControl
               //  InpFactory.MoveFileTo("./template/cfl3d.res", path);
                 if (iszn)
                 {
-                    InpFactory.processCommand("Mpiexec cfd2.exe cfl3d.inp", path);
+                    InpFactory.processCommand("mpiexec -n "+cm.xc+" cfd2.exe cfl3d.inp", path);
                 }
                 else
                 {
-                    InpFactory.processCommand("Mpiexec cfd1.exe cfl3d.inp", path);
+                    InpFactory.processCommand("mpiexec -np " + cm.xc + " cfd1.exe", path);
                 }
                 EXListViewItem item = new EXListViewItem(i.ToString());
                 item.SubItems.Add("" + cm.mahe);
@@ -249,7 +249,7 @@ namespace Yixing.UserControl
                 }
                 else
                 {
-                    List<String> alphaList = InpFactory.readFile("./template/cfl3d.alpha");
+                    List<String> alphaList = InpFactory.readFile(path+"/cfl3d.alpha");
                     if (alphaList != null && alphaList.Count() > 0)
                     {
                         String line = alphaList[alphaList.Count - 1];
@@ -261,6 +261,10 @@ namespace Yixing.UserControl
                 #endregion
 
                 #region 处理输出结果文件
+                if (!Directory.Exists(path + "/cfl3d.res"))
+                {
+                    MessageBox.Show( cm.mahe+"没有生成结果文件，该状态自动忽略");
+                }
                 List<String> resList = InpFactory.readFile(path + "/cfl3d.res");
                 if (resList != null && resList.Count() > 0)
                 {
