@@ -742,7 +742,8 @@ namespace Yixing.UserControl
 
             //构建模版文件
             String vmpath = InpFactory.convertInp(yx.inpPath);
-            vmpath = CommonUtil.getFilePathByPath(vmpath);
+           // vmpath = CommonUtil.getFilePathByPath(vmpath);
+            vmpath = Path.GetDirectoryName(vmpath);
             //根据模版文件生成，对应的inp文件
             TemplateHelper tp = new TemplateHelper(vmpath);
 

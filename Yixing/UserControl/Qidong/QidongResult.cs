@@ -260,6 +260,10 @@ namespace Yixing.UserControl
                 #endregion
 
                 #region 处理输出结果文件
+                if (!Directory.Exists(path + "/cfl3d.res"))
+                {
+                    MessageBox.Show( cm.mahe+"没有生成结果文件，该状态自动忽略");
+                }
                 List<String> resList = InpFactory.readFile(path + "/cfl3d.res");
                 if (resList != null && resList.Count() > 0)
                 {
