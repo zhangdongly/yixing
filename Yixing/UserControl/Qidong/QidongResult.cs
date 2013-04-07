@@ -233,11 +233,11 @@ namespace Yixing.UserControl
                 InpFactory.MoveFileTo("./template/cfl3d.alpha", path);
                 if (iszn)
                 {
-                    InpFactory.processCommand("Mpiexec cfd2.exe cfl3d.inp", path);
+                    InpFactory.processCommand("mpiexec -n "+cm.xc+" cfd2.exe cfl3d.inp", path);
                 }
                 else
                 {
-                    InpFactory.processCommand("Mpiexec cfd1.exe cfl3d.inp", path);
+                    InpFactory.processCommand("mpiexec -np " + cm.xc + " cfd1.exe", path);
                 }
                 EXListViewItem item = new EXListViewItem(i.ToString());
                 item.SubItems.Add("" + cm.mahe);
