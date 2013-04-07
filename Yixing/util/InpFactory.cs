@@ -318,7 +318,7 @@ namespace Yixing.util
         public static void processCommand(String command)
         {
             Process cmd = new Process();
-            cmd.StartInfo.FileName = "javac";
+            cmd.StartInfo.FileName = command;
             cmd.StartInfo.RedirectStandardOutput = true;
             cmd.StartInfo.RedirectStandardInput = true;
             cmd.StartInfo.UseShellExecute = false;
