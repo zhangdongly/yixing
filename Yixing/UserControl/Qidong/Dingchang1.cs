@@ -235,6 +235,7 @@ namespace Yixing.UserControl
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(787, 576);
             this.panel1.TabIndex = 4;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // textBox11
             // 
@@ -1477,6 +1478,11 @@ namespace Yixing.UserControl
                 }
             }
             return true;
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

@@ -315,7 +315,7 @@ namespace Yixing.util
             return result;
         }
 
-        public static void processCommand(String command)
+        public static void processCommand(String command,String path)
         {
             Process cmd = new Process();
             cmd.StartInfo.FileName = command;
@@ -323,6 +323,7 @@ namespace Yixing.util
             cmd.StartInfo.RedirectStandardInput = true;
             cmd.StartInfo.UseShellExecute = false;
             cmd.StartInfo.CreateNoWindow = true ;
+            cmd.StartInfo.WorkingDirectory = path;
             cmd.Start();
             //string info = cmd.StandardOutput.ReadToEnd();
             //cmd.WaitForExit();
