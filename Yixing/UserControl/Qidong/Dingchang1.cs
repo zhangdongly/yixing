@@ -736,8 +736,9 @@ namespace Yixing.UserControl
                 return;
             }
 
-            yx.inpPath = "D:\\cfl3d.inp";
-            yx.xyzPath = "D:\\cfl3d.xyz";
+            //临时的
+            yx.inpPath = @"template/cfl3d.inp";
+            yx.xyzPath = @"template/cfl3d.xyz";
 
             //构建模版文件
             String vmpath = InpFactory.convertInp(yx.inpPath);
