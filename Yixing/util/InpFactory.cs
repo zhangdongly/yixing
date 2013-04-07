@@ -319,8 +319,8 @@ namespace Yixing.util
         {
             Process cmd = new Process();
             //没有这个命令。暂时改为cd吧。
-            //cmd.StartInfo.FileName = command;
-            cmd.StartInfo.FileName = @"java";
+            cmd.StartInfo.FileName = command;
+            //cmd.StartInfo.FileName = @"java";
             cmd.StartInfo.RedirectStandardOutput = true;
             cmd.StartInfo.RedirectStandardInput = true;
             cmd.StartInfo.UseShellExecute = false;
