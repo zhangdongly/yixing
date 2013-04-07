@@ -743,9 +743,12 @@ namespace Yixing.UserControl
                 return;
             }
 
-            //临时的
-            yx.inpPath = @"template/cfl3d.inp";
-            yx.xyzPath = @"template/cfl3d.xyz";
+            //临时的。如果type为1,则是默认生成，否则不是
+            if (yx.type == 1)
+            {
+                yx.inpPath = @"template/cfl3d.inp";
+                yx.xyzPath = @"template/cfl3d.xyz";
+            }
 
             //构建模版文件
             String vmpath = InpFactory.convertInp(yx.inpPath);

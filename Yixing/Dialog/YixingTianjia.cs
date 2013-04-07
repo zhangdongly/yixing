@@ -40,27 +40,45 @@ namespace Yixing.Dialog
         {
             int type;
             String filePath;
-            if (this.radioButton1.Checked)
-            {
-                type = 1;
-                filePath = this.textBox7.Text;
-            }
-            else
-            {
-                type = 2;
-                filePath = this.textBox10.Text;
-            }
-            if (String.IsNullOrWhiteSpace(filePath))
-            {
-                MessageBox.Show("请选择文件");
-                return;
-            }
+            String xyzPath;
+            String inpPath;
             if (yixing == null)
             {
                 yixing = new DCYixing();
             }
-            yixing.type = type;
-            yixing.filePath = filePath;
+            if (this.radioButton1.Checked)
+            {
+                type = 1;
+                filePath = this.textBox7.Text;
+                if (String.IsNullOrWhiteSpace(filePath))
+                {
+                    MessageBox.Show("请选择文件");
+                    return;
+                }
+                yixing.type = type;
+                yixing.filePath = filePath;
+            }
+            else
+            {
+                type = 2;
+                //filePath = this.textBox10.Text;
+                xyzPath = this.textBox10.Text;
+                inpPath = this.textBox1.Text;
+                if (String.IsNullOrWhiteSpace(xyzPath))
+                {
+                    MessageBox.Show("请选择翼型风格文件");
+                    return;
+                }
+                if (String.IsNullOrWhiteSpace(inpPath))
+                {
+                    MessageBox.Show("请选择边界文件");
+                    return;
+                }
+                yixing.type = 2;
+                yixing.filePath = inpPath;
+                yixing.xyzPath = xyzPath;
+                yixing.inpPath = inpPath;
+            }                              
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -100,6 +118,12 @@ namespace Yixing.Dialog
         {
             Yixingjihetu y = new Yixingjihetu();
             y.ShowDialog();
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            this.textBox1.Text = FileDialogUtil.getSelectFileName(this.openFileDialog1);
+
         }
     }
 }
