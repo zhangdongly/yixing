@@ -231,7 +231,7 @@ namespace Yixing.UserControl
                 InpFactory.MoveFileTo(yx.xyzPath, path);
                 //移动alpha文件到，inp所在的文件夹
                 InpFactory.MoveFileTo("./template/cfl3d.alpha", path);
-              //  InpFactory.MoveFileTo("./template/cfl3d.res", path);
+                //InpFactory.MoveFileTo("./template/cfl3d.res", path);
                 if (iszn)
                 {
                     InpFactory.processCommand("mpiexec -n "+cm.xc+" cfd2.exe cfl3d.inp", path);

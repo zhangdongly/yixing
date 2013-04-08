@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace Yixing.util
 {
@@ -114,7 +115,10 @@ namespace Yixing.util
                                             {
                                                 line.Append("$reue.ToString(\"0.00000\")");
                                             }
-                                            else { line.Append(str); }
+                                            else {
+                                                line.Append(separator);
+                                                line.Append(str);
+                                            }
                                             datacount++;
                                         }
                                         else { line.Append(" "); }
@@ -319,17 +323,22 @@ namespace Yixing.util
         {
             Process cmd = new Process();
             //没有这个命令。暂时改为cd吧。
-            cmd.StartInfo.FileName = command;
-            //cmd.StartInfo.FileName = @"java";
+           // cmd.StartInfo.FileName = command;
+            MessageBox.Show("begin");
+            cmd.StartInfo.FileName = @"cmd.exe";
             cmd.StartInfo.RedirectStandardOutput = true;
             cmd.StartInfo.RedirectStandardInput = true;
             cmd.StartInfo.UseShellExecute = false;
             cmd.StartInfo.CreateNoWindow = true ;
             cmd.StartInfo.WorkingDirectory = path;
+            //cmd.StartInfo.f
             cmd.Start();
-            //string info = cmd.StandardOutput.ReadToEnd();
-            //cmd.WaitForExit();
+            cmd.StandardInput.WriteLine(command);
+            cmd.StandardInput.WriteLine("exit");         
+            cmd.WaitForExit();
+            string info = cmd.StandardOutput.ReadToEnd();
             cmd.Close();
+            MessageBox.Show(info);
         }
     }
 }

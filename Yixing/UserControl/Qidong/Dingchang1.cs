@@ -797,7 +797,8 @@ namespace Yixing.UserControl
                 String zt;
                 if (dcs.isyj)
                 {
-                    zt = string.Format("{0:0.000}", dcs.dyj);
+                    //迎角应该是x100
+                    zt = string.Format("{0:00.00}", dcs.dyj);
                     zt = "a" + zt.Replace(".", "");
                 }
                 else
