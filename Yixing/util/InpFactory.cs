@@ -90,7 +90,7 @@ namespace Yixing.util
                             #region 为mach 那一行,然后后续处理
                             if (count > 3)
                             {
-                                sw.WriteLine("#set($reue=$!{s.mahe}*$!{mhln}) ");
+                                sw.WriteLine("#set($reue=$!{s.mahe}*$!{mhln}/100) ");
                                 sw.WriteLine("     XMACH     ALPHA      BETA  REUE,MIL   TINF,DR     IALPH     IHIST");
                                 sLine = objReader.ReadLine();
                                 String[] mlineArr = sLine.Split(separator);
@@ -317,28 +317,6 @@ namespace Yixing.util
                 sLine = objReader.ReadLine();
             }
             return result;
-        }
-
-        public static void processCommand(String command,String path)
-        {
-            Process cmd = new Process();
-            //没有这个命令。暂时改为cd吧。
-           // cmd.StartInfo.FileName = command;
-           // MessageBox.Show("begin");
-            cmd.StartInfo.FileName = @"cmd.exe";
-            cmd.StartInfo.RedirectStandardOutput = true;
-            cmd.StartInfo.RedirectStandardInput = true;
-            cmd.StartInfo.UseShellExecute = false;
-            cmd.StartInfo.CreateNoWindow = true ;
-            cmd.StartInfo.WorkingDirectory = path;
-            //cmd.StartInfo.f
-            cmd.Start();
-            cmd.StandardInput.WriteLine(command);
-            cmd.StandardInput.WriteLine("exit");         
-            cmd.WaitForExit();
-            string info = cmd.StandardOutput.ReadToEnd();
-            cmd.Close();
-           // MessageBox.Show(info);
         }
     }
 }

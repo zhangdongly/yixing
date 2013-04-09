@@ -53,7 +53,7 @@ namespace Yixing.util
         {
             //从文件中读取模板
             Template template = velocity.GetTemplate(templatFileName);
-
+            string fileName = templatFileName.Substring(0, templatFileName.IndexOf("."));
             //合并模板
             StringWriter writer = new StringWriter();
             template.Merge(context, writer);
@@ -62,14 +62,14 @@ namespace Yixing.util
             {
                 Directory.CreateDirectory(outpath);
             }
-            using (StreamWriter writer2 = new StreamWriter(outpath + "/cfl3d.inp", false, Encoding.Default, 200))
+            using (StreamWriter writer2 = new StreamWriter(outpath + "/" + fileName + ".inp", false, Encoding.Default, 200))
             {
                 writer2.Write(writer);
                 writer2.Flush();
                 writer2.Close();
             }
-            
-            return outpath + "/cfl3d.inp";
+
+            return outpath + "/" + fileName + ".inp";
         }
     }
 }

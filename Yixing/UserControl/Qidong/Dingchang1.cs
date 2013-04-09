@@ -752,9 +752,10 @@ namespace Yixing.UserControl
 
             //构建模版文件
             String vmpath = InpFactory.convertInp(yx.inpPath);
-            vmpath = Path.GetDirectoryName(vmpath);
+            String vmDirpath = Path.GetDirectoryName(vmpath);
             //根据模版文件生成，对应的inp文件
-            TemplateHelper tp = new TemplateHelper(vmpath);
+            TemplateHelper tp = new TemplateHelper(vmDirpath);
+            String vmname = Path.GetFileName(vmpath);
 
             //测试代码，VM文件都放置于@"..//..//template"
             foreach (DCStatus dcs in yx.dcList)
@@ -806,7 +807,7 @@ namespace Yixing.UserControl
                     zt = string.Format("{0:0.000}", dcs.dslxs);
                     zt = "cl" + zt.Replace(".", "");
                 }
-                String a = tp.BuildString("cfl3d.vm", yxname, mahe, zt);
+                String a = tp.BuildString(vmname, yxname, mahe, zt);
                 cm.inpPath = a;
                 cmList.Add(cm);
             }

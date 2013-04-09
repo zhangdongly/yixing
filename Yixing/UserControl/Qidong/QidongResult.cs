@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -29,6 +30,11 @@ namespace Yixing.UserControl
 
         private List<CalcModel> cmList;
         private DCYixing yx;
+        ThreadStart ts;
+        Thread t;
+        private RichTextBox rtb_info;
+        private ContextMenuStrip contextMenuStrip1;
+        private System.ComponentModel.IContainer components;
 
         private int znCl = 10;
 
@@ -45,17 +51,20 @@ namespace Yixing.UserControl
         }
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.rtb_info = new System.Windows.Forms.RichTextBox();
             this.exListView1 = new Yixing.UserTool.EXListView();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.label5 = new System.Windows.Forms.Label();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -70,6 +79,15 @@ namespace Yixing.UserControl
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(769, 44);
             this.panel1.TabIndex = 0;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(465, 16);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(191, 12);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "当前计算状态：Ma=0.6，alpha=2.0";
             // 
             // label4
             // 
@@ -100,14 +118,23 @@ namespace Yixing.UserControl
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.rtb_info);
             this.panel2.Controls.Add(this.exListView1);
             this.panel2.Controls.Add(this.button5);
             this.panel2.Controls.Add(this.button4);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Location = new System.Drawing.Point(4, 65);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(793, 535);
+            this.panel2.Size = new System.Drawing.Size(777, 595);
             this.panel2.TabIndex = 1;
+            // 
+            // rtb_info
+            // 
+            this.rtb_info.Location = new System.Drawing.Point(8, 417);
+            this.rtb_info.Name = "rtb_info";
+            this.rtb_info.Size = new System.Drawing.Size(760, 132);
+            this.rtb_info.TabIndex = 6;
+            this.rtb_info.Text = "";
             // 
             // exListView1
             // 
@@ -124,7 +151,7 @@ namespace Yixing.UserControl
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(602, 446);
+            this.button5.Location = new System.Drawing.Point(592, 555);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 3;
@@ -134,7 +161,7 @@ namespace Yixing.UserControl
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(122, 446);
+            this.button4.Location = new System.Drawing.Point(110, 555);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 2;
@@ -152,18 +179,14 @@ namespace Yixing.UserControl
             this.label1.TabIndex = 1;
             this.label1.Text = "计算结果";
             // 
-            // label5
+            // contextMenuStrip1
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(465, 16);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(191, 12);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "当前计算状态：Ma=0.6，alpha=2.0";
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // QidongResult
             // 
-            this.ClientSize = new System.Drawing.Size(784, 562);
+            this.ClientSize = new System.Drawing.Size(784, 692);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "QidongResult";
@@ -212,8 +235,8 @@ namespace Yixing.UserControl
             this.exListView1.Columns.Add("cm",100);
             this.exListView1.Columns.Add("k",100);
             this.exListView1.Columns.Add("计算是否成功",200);
-            ThreadStart ts = new ThreadStart(this.startCalc);
-            Thread t = new Thread(ts);
+            ts = new ThreadStart(this.startCalc);
+            t = new Thread(ts);
             // 启动.
             t.Start();
 
@@ -227,18 +250,20 @@ namespace Yixing.UserControl
                 String inpPath = cm.inpPath;
                 Boolean iszn = cm.isZn;
                 String path = Path.GetDirectoryName(inpPath);
+                String inpName = Path.GetFileName(inpPath);
+                String inpNameWithout = inpName.Substring(0, inpName.IndexOf("."));
                 //移动xyz文件到，inp所在的文件夹
                 InpFactory.MoveFileTo(yx.xyzPath, path);
                 //移动alpha文件到，inp所在的文件夹
-                InpFactory.MoveFileTo("./template/cfl3d.alpha", path);
+                //InpFactory.MoveFileTo("./template/cfl3d.alpha", path);
                 //InpFactory.MoveFileTo("./template/cfl3d.res", path);
                 if (iszn)
                 {
-                    InpFactory.processCommand("mpiexec -n "+cm.xc+" cfd2.exe cfl3d.inp", path);
+                    processCommand(" -n " + cm.xc + " cfd2.exe " + inpName, path);
                 }
                 else
                 {
-                    InpFactory.processCommand("mpiexec -np " + cm.xc + " cfd1.exe", path);
+                    processCommand(" -np " + cm.xc + " cfd1.exe", path);
                 }
                 EXListViewItem item = new EXListViewItem(i.ToString());
                 item.SubItems.Add("" + cm.mahe);
@@ -249,7 +274,7 @@ namespace Yixing.UserControl
                 }
                 else
                 {
-                    List<String> alphaList = InpFactory.readFile(path+"/cfl3d.alpha");
+                    List<String> alphaList = InpFactory.readFile(path + "/" + inpNameWithout + ".alpha");
                     if (alphaList != null && alphaList.Count() > 0)
                     {
                         String line = alphaList[alphaList.Count - 1];
@@ -261,11 +286,12 @@ namespace Yixing.UserControl
                 #endregion
 
                 #region 处理输出结果文件
-                if (!Directory.Exists(path + "/cfl3d.res"))
+                if (!Directory.Exists(path + "/" + inpNameWithout + "res"))
                 {
                     MessageBox.Show( cm.mahe+"没有生成结果文件，该状态自动忽略");
+                    continue;
                 }
-                List<String> resList = InpFactory.readFile(path + "/cfl3d.res");
+                List<String> resList = InpFactory.readFile(path + "/" + inpNameWithout + "res");
                 if (resList != null && resList.Count() > 0)
                 {
                     int count = resList.Count();
@@ -305,8 +331,12 @@ namespace Yixing.UserControl
                 item.SubItems.Add("0");
                 this.setItem(item);
             }
+            if(t.IsAlive)
+                t.Abort(); 
         }
+
         private delegate void FlushClient(EXListViewItem item);
+
         private void setItem(EXListViewItem item)
         {
             if (exListView1.InvokeRequired)
@@ -336,6 +366,58 @@ namespace Yixing.UserControl
                 }
             }
             return result;
+        }
+
+        public void processCommand(String command, String path)
+        {
+            Process cmd = new Process();
+            //没有这个命令。暂时改为cd吧。
+            //cmd.StartInfo.FileName = command;
+            // MessageBox.Show("begin");
+            cmd.StartInfo.FileName = @"mpiexec.exe";
+            cmd.StartInfo.Arguments = command;
+            cmd.StartInfo.RedirectStandardOutput = true;
+            cmd.StartInfo.RedirectStandardInput = true;
+            cmd.StartInfo.UseShellExecute = false;
+            cmd.StartInfo.CreateNoWindow = false;
+            cmd.StartInfo.WorkingDirectory = path;
+            //cmd.StartInfo.UserName = "sueely";
+            //cmd.StartInfo.Password = "123";
+
+            cmd.Start();
+            cmd.BeginOutputReadLine();
+            cmd.OutputDataReceived += new DataReceivedEventHandler(SortOutputHandler);
+           // cmd.StandardInput.WriteLine(command);
+           // cmd.StandardInput.WriteLine("");
+           
+            //string info = cmd.StandardOutput.ReadToEnd();
+            //cmd.Close();
+            // MessageBox.Show(info);
+        }
+
+        private delegate void ProcessInfoClient(String msg);
+
+        private void setProcessInfo(String msg)
+        {
+            if (rtb_info.InvokeRequired)
+            {
+                ProcessInfoClient fc = new ProcessInfoClient(setProcessInfo);
+                if (msg == null)
+                    msg = "===";
+                this.Invoke(fc, new object[] {msg});
+            }
+            else
+            {
+                this.rtb_info.AppendText(msg);
+                this.rtb_info.Focus();
+                this.rtb_info.Select(this.rtb_info.Text.Length, 0);
+                this.rtb_info.ScrollToCaret();
+            }
+        }
+
+        private void SortOutputHandler(object sendingProcess, DataReceivedEventArgs outLine)
+        {
+            this.setProcessInfo(outLine.Data+"\r\n");
         }
     }
 }
