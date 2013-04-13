@@ -24,7 +24,7 @@ namespace Yixing.util
             string sLine = objReader.ReadLine();
             while (sLine != null)
             {
-                if (sLine != null && !sLine.Equals(""))
+                if (!sLine.Equals(""))
                 {
                     #region 处理开始的<>之间的部分
                     if (sLine.ToLower().Equals("restart.bin"))
@@ -46,7 +46,6 @@ namespace Yixing.util
                         sw.WriteLine("cltarg $!{s.dslxs}");
                         sw.WriteLine("dalim 0.2#end");
                         sw.WriteLine("< #end");
-                        sw.WriteLine("");
                     }
                     #endregion
 
@@ -115,7 +114,8 @@ namespace Yixing.util
                                             {
                                                 line.Append("$reue.ToString(\"0.00000\")");
                                             }
-                                            else {
+                                            else
+                                            {
                                                 line.Append(separator);
                                                 line.Append(str);
                                             }
@@ -284,6 +284,7 @@ namespace Yixing.util
                     }
                     #endregion
                 }
+                else { sw.WriteLine(""); }
                 sLine = objReader.ReadLine();
             }
             //清空缓冲区
@@ -309,6 +310,10 @@ namespace Yixing.util
         public static List<String> readFile(String filePath)
         {
             List<String> result = new List<String>();
+            if (!File.Exists(filePath))
+            {
+                return result;
+            }
             StreamReader objReader = new StreamReader(filePath);
             string sLine = objReader.ReadLine();
             while (sLine != null)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -37,6 +38,12 @@ namespace Yixing.UserControl
         private System.ComponentModel.IContainer components;
 
         private int znCl = 10;
+        //用于判定进程是否结束
+        bool isExist = false;
+        //计算时的等待次数，每次等待为3秒种
+        int waitcount = 10;
+        //计算时的等待时间,这个是毫秒级别
+        int waittime =3000;
 
         public QidongResult()
         {
@@ -59,12 +66,12 @@ namespace Yixing.UserControl
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.rtb_info = new System.Windows.Forms.RichTextBox();
-            this.exListView1 = new Yixing.UserTool.EXListView();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.exListView1 = new Yixing.UserTool.EXListView();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -136,19 +143,6 @@ namespace Yixing.UserControl
             this.rtb_info.TabIndex = 6;
             this.rtb_info.Text = "";
             // 
-            // exListView1
-            // 
-            this.exListView1.ControlPadding = 4;
-            this.exListView1.FullRowSelect = true;
-            this.exListView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.exListView1.Location = new System.Drawing.Point(8, 47);
-            this.exListView1.Name = "exListView1";
-            this.exListView1.OwnerDraw = true;
-            this.exListView1.Size = new System.Drawing.Size(760, 364);
-            this.exListView1.TabIndex = 4;
-            this.exListView1.UseCompatibleStateImageBehavior = false;
-            this.exListView1.View = System.Windows.Forms.View.Details;
-            // 
             // button5
             // 
             this.button5.Location = new System.Drawing.Point(592, 555);
@@ -184,6 +178,19 @@ namespace Yixing.UserControl
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
+            // exListView1
+            // 
+            this.exListView1.ControlPadding = 4;
+            this.exListView1.FullRowSelect = true;
+            this.exListView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.exListView1.Location = new System.Drawing.Point(8, 47);
+            this.exListView1.Name = "exListView1";
+            this.exListView1.OwnerDraw = true;
+            this.exListView1.Size = new System.Drawing.Size(760, 364);
+            this.exListView1.TabIndex = 4;
+            this.exListView1.UseCompatibleStateImageBehavior = false;
+            this.exListView1.View = System.Windows.Forms.View.Details;
+            // 
             // QidongResult
             // 
             this.ClientSize = new System.Drawing.Size(784, 692);
@@ -191,6 +198,7 @@ namespace Yixing.UserControl
             this.Controls.Add(this.panel1);
             this.Name = "QidongResult";
             this.Text = "气动特性评估计算过程";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.QidongResult_FormClosing);
             this.Load += new System.EventHandler(this.QidongResult_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -239,14 +247,36 @@ namespace Yixing.UserControl
             t = new Thread(ts);
             // 启动.
             t.Start();
-
+        }
+        private delegate void setStatus(String total, String completed, String failCount, String mahe, String yj);
+        private void setCalcStatus(String total,String completed,String failCount,String mahe,String yj)
+        {
+            if (exListView1.InvokeRequired)
+            {
+                setStatus fc = new setStatus(setCalcStatus);
+                this.Invoke(fc, new object[] { total, completed, failCount, mahe, yj });
+            }
+            else
+            {
+                if(!total.Equals(""))
+                    this.label2.Text = "总状态数：" + total;
+                if (!completed.Equals(""))
+                this.label3.Text = "已完成状态数：" + completed;
+                if (!failCount.Equals(""))
+                this.label4.Text = "计算失败失败状态数：" + failCount;
+                if (!mahe.Equals(""))
+                this.label5.Text = "当前计算状态：Ma=" + mahe + " alpha=" + yj;
+            }
         }
 
+        int failedcount = 0;
         private void startCalc()
         {
+            this.setCalcStatus("" + cmList.Count(), "", "", "", "");
             for (int i = 0; i < cmList.Count(); i++)
             {
                 CalcModel cm = cmList[i];
+                this.setCalcStatus("", "" + (i + 1), "", "" + cm.mahe, "" + cm.yj);
                 String inpPath = cm.inpPath;
                 Boolean iszn = cm.isZn;
                 String path = Path.GetDirectoryName(inpPath);
@@ -265,7 +295,15 @@ namespace Yixing.UserControl
                 {
                     processCommand(" -np " + cm.xc + " cfd1.exe", path);
                 }
-                EXListViewItem item = new EXListViewItem(i.ToString());
+                #region 处理输出结果文件
+                if (!File.Exists(path + "/" + inpNameWithout + ".res"))
+                {
+                    failedcount++;
+                    MessageBox.Show(cm.mahe + "没有生成结果文件，该状态自动忽略");
+                    continue;
+                }
+
+                EXListViewItem item = new EXListViewItem(""+(i+1));
                 item.SubItems.Add("" + cm.mahe);
                 #region 处理alpha
                 if (cm.isyj)
@@ -284,14 +322,7 @@ namespace Yixing.UserControl
                     }
                 }
                 #endregion
-
-                #region 处理输出结果文件
-                if (!Directory.Exists(path + "/" + inpNameWithout + "res"))
-                {
-                    MessageBox.Show( cm.mahe+"没有生成结果文件，该状态自动忽略");
-                    continue;
-                }
-                List<String> resList = InpFactory.readFile(path + "/" + inpNameWithout + "res");
+                List<String> resList = InpFactory.readFile(path + "/" + inpNameWithout + ".res");
                 if (resList != null && resList.Count() > 0)
                 {
                     int count = resList.Count();
@@ -300,15 +331,15 @@ namespace Yixing.UserControl
                     {
                         String line = resList[j];
                         List<String> lineList = this.processLine(line);
-                        cl += Convert.ToDouble(lineList[3]);
-                        cd += Convert.ToDouble(lineList[4]);
+                        cl += Convert.ToDouble(lineList[2]);
+                        cd += Convert.ToDouble(lineList[3]);
                         if (!iszn)
                         {
-                            cmz += Convert.ToDouble(lineList[6]);
+                            cmz += Convert.ToDouble(lineList[5]);
                         }
                         else
                         {
-                            cmz += Convert.ToDouble(lineList[10]);
+                            cmz += Convert.ToDouble(lineList[9]);
                         }
                     }
                     cl = cl / znCl;
@@ -330,6 +361,7 @@ namespace Yixing.UserControl
                 }
                 item.SubItems.Add("0");
                 this.setItem(item);
+                this.setCalcStatus("" , "", "" + failedcount, "", "");
             }
             if(t.IsAlive)
                 t.Abort(); 
@@ -371,34 +403,61 @@ namespace Yixing.UserControl
         public void processCommand(String command, String path)
         {
             Process cmd = new Process();
-            //没有这个命令。暂时改为cd吧。
-            //cmd.StartInfo.FileName = command;
-            // MessageBox.Show("begin");
-            cmd.StartInfo.FileName = @"mpiexec.exe";
-            cmd.StartInfo.Arguments = command;
-            cmd.StartInfo.RedirectStandardOutput = true;
-            cmd.StartInfo.RedirectStandardInput = true;
-            cmd.StartInfo.UseShellExecute = false;
-            cmd.StartInfo.CreateNoWindow = false;
-            cmd.StartInfo.WorkingDirectory = path;
-            //cmd.StartInfo.UserName = "sueely";
-            //cmd.StartInfo.Password = "123";
+            try {
+                //没有这个命令。暂时改为cd吧。
+                //cmd.StartInfo.FileName = command;
+                // MessageBox.Show("begin");
+                cmd.StartInfo.FileName = @"mpiexec.exe";
+                cmd.StartInfo.Arguments = command;
+                cmd.StartInfo.RedirectStandardOutput = true;
+                cmd.StartInfo.RedirectStandardInput = true;
+                cmd.StartInfo.UseShellExecute = false;
+                cmd.StartInfo.CreateNoWindow = true;
+                cmd.StartInfo.WorkingDirectory = path;
+                cmd.EnableRaisingEvents = true;
+                //cmd.StartInfo.UserName = "sueely";
+                //SecureString s = new SecureString();
+                //s.AppendChar('1');
+                //s.AppendChar('2');
+                //s.AppendChar('3');
+                //cmd.StartInfo.Password =s;
 
-            cmd.Start();
-            cmd.BeginOutputReadLine();
-            cmd.OutputDataReceived += new DataReceivedEventHandler(SortOutputHandler);
-           // cmd.StandardInput.WriteLine(command);
-           // cmd.StandardInput.WriteLine("");
-           
-            //string info = cmd.StandardOutput.ReadToEnd();
-            //cmd.Close();
-            // MessageBox.Show(info);
+                cmd.Start();
+                cmd.BeginOutputReadLine();
+                cmd.OutputDataReceived += new DataReceivedEventHandler(SortOutputHandler);
+                // cmd.StandardInput.WriteLine(command);
+                // cmd.StandardInput.WriteLine("");
+                //判断程序是否在运行
+                //cmd.WaitForExit();
+
+                //判断程序是否在运行
+                while (!isExist)
+                {
+                    waitcount++;
+                    if (waitcount > 15)
+                    {
+                        cmd.Dispose();
+                        cmd.Kill();
+                    }
+                    else
+                    {
+                        cmd.WaitForExit(waittime);
+                    }
+                }
+                //string info = cmd.StandardOutput.ReadToEnd();
+                isExist = false;
+                cmd.Dispose();
+                cmd.Kill();
+                // MessageBox.Show(info);
+            }catch(Exception ex){
+            }
         }
-
+        
         private delegate void ProcessInfoClient(String msg);
-
+        int lincount = 0;
         private void setProcessInfo(String msg)
         {
+            lincount++;
             if (rtb_info.InvokeRequired)
             {
                 ProcessInfoClient fc = new ProcessInfoClient(setProcessInfo);
@@ -408,6 +467,11 @@ namespace Yixing.UserControl
             }
             else
             {
+                if (lincount > 3200)
+                {
+                    lincount = 0;
+                    this.rtb_info.Clear();
+                }
                 this.rtb_info.AppendText(msg);
                 this.rtb_info.Focus();
                 this.rtb_info.Select(this.rtb_info.Text.Length, 0);
@@ -417,7 +481,20 @@ namespace Yixing.UserControl
 
         private void SortOutputHandler(object sendingProcess, DataReceivedEventArgs outLine)
         {
-            this.setProcessInfo(outLine.Data+"\r\n");
+            waitcount = 0;
+            if (outLine == null || outLine.Data==null)
+                return;
+            String result = outLine.Data;
+            if (result.Contains("programme finished"))
+            {
+                isExist = true;
+            }
+            this.setProcessInfo(result + "\r\n");
+        }
+
+        private void QidongResult_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            t.Abort();
         }
     }
 }
