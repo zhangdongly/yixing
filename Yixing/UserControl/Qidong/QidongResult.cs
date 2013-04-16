@@ -485,7 +485,7 @@ namespace Yixing.UserControl
             if (outLine == null || outLine.Data==null)
                 return;
             String result = outLine.Data;
-            if (result.Contains("programme finished"))
+            if (result.Contains("program finished"))
             {
                 isExist = true;
             }

@@ -34,9 +34,9 @@ namespace Yixing.util
                         sw.WriteLine("#if($flag)");
                         sw.WriteLine(">");
                         sw.WriteLine("#if($zn)");
-                        sw.WriteLine("pke_tu $!{zn.fddls}");
-                        sw.WriteLine("tke0 $!{tke0}");
-                        sw.WriteLine("tke1 $!{tke1}");
+                        sw.WriteLine("tu_inf $!{zn.fddls}");
+                        sw.WriteLine("tk_inf $!{tke0}");
+                        sw.WriteLine("w_inf $!{tke1}");
                         sw.WriteLine("#end");
                         sw.WriteLine("#if($gj)");
                         sw.WriteLine("#if($!{gj.xzs} && $!{gj.xzs}>0)");
@@ -314,13 +314,25 @@ namespace Yixing.util
             {
                 return result;
             }
-            StreamReader objReader = new StreamReader(filePath);
-            string sLine = objReader.ReadLine();
-            while (sLine != null)
+            StreamReader objReader=null;
+            try
             {
-                result.Add(sLine);
-                sLine = objReader.ReadLine();
+                objReader = new StreamReader(filePath);
+                string sLine = objReader.ReadLine();
+                while (sLine != null)
+                {
+                    result.Add(sLine);
+                    sLine = objReader.ReadLine();
+                }
+                objReader.Close();
             }
+            catch (Exception ex) {
+                if (objReader!=null)
+                    objReader.Close();
+                return result;
+            }
+            if (objReader != null)
+                objReader.Close();
             return result;
         }
     }

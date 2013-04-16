@@ -71,6 +71,8 @@ namespace Yixing.Dialog
            
             //将添加隐藏，将修改展现
             this.button12.Visible = false;
+            this.button8.Visible = false;
+            this.button5.Visible = false;
             this.button13.Visible = true;
             //修改按钮先不可用
             this.button13.Enabled = true;
