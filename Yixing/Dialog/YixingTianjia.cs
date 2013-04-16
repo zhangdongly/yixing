@@ -109,7 +109,8 @@ namespace Yixing.Dialog
                 else
                 {
                     this.radioButton2.Checked = true;
-                    this.textBox10.Text = yixing.filePath;
+                    this.textBox10.Text = yixing.xyzPath;
+                    this.textBox1.Text = yixing.inpPath;
                 }
             }
         }
