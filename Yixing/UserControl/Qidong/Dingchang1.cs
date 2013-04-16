@@ -333,6 +333,7 @@ namespace Yixing.UserControl
             this.txt_wnxb.Name = "txt_wnxb";
             this.txt_wnxb.Size = new System.Drawing.Size(78, 21);
             this.txt_wnxb.TabIndex = 17;
+            this.txt_wnxb.Text = "10";
             // 
             // txt_fddls
             // 
@@ -340,6 +341,7 @@ namespace Yixing.UserControl
             this.txt_fddls.Name = "txt_fddls";
             this.txt_fddls.Size = new System.Drawing.Size(79, 21);
             this.txt_fddls.TabIndex = 16;
+            this.txt_fddls.Text = "0.004";
             // 
             // label14
             // 
@@ -357,7 +359,7 @@ namespace Yixing.UserControl
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(65, 12);
             this.label15.TabIndex = 14;
-            this.label15.Text = "风洞湍流度";
+            this.label15.Text = "来流湍流度";
             // 
             // panel5
             // 
