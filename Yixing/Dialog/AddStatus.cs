@@ -694,7 +694,11 @@ namespace Yixing.Dialog
             if (r.Checked)
             {
                 this.textBox3.Enabled = false;
-                this.radioButton5.Checked = true;
+                this.textBox8.Enabled = false;
+                this.radioButton6.Checked = true;
+                this.panel8.Enabled = true;
+                if (this.textBox6.Text.Trim().Equals(""))
+                    this.textBox6.Text = "1";
                 this.panel6.Enabled = true;
             }
             else

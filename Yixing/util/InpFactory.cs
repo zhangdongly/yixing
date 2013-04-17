@@ -46,7 +46,8 @@ namespace Yixing.util
                         sw.WriteLine("cltarg $!{s.dslxs}");
                         sw.WriteLine("dalim 0.2");
                         sw.WriteLine("#end");
-                        sw.WriteLine("< #end");
+                        sw.WriteLine("<");
+                        sw.WriteLine("#end");
                     }
                     #endregion
 

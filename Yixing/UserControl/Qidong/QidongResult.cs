@@ -37,7 +37,7 @@ namespace Yixing.UserControl
         private ContextMenuStrip contextMenuStrip1;
         private System.ComponentModel.IContainer components;
 
-        private int znCl = 10;
+        private int znCl = 1;
         //用于判定进程是否结束
         bool isExist = false;
         //计算时的等待次数，每次等待为3秒种
@@ -287,19 +287,21 @@ namespace Yixing.UserControl
                 //移动alpha文件到，inp所在的文件夹
                 //InpFactory.MoveFileTo("./template/cfl3d.alpha", path);
                 //InpFactory.MoveFileTo("./template/cfl3d.res", path);
+                Boolean isSucess = false;
                 if (iszn)
                 {
-                    processCommand(" -n " + cm.xc + " cfd2.exe " + inpName, path);
+                    isSucess = processCommand(" -n " + cm.xc + " cfd2.exe " + inpName, path);
                 }
                 else
                 {
-                    processCommand(" -np " + cm.xc + " cfd1.exe", path);
+                    isSucess = processCommand(" -np " + cm.xc + " cfd1.exe", path);
                 }
+
                 #region 处理输出结果文件
-                if (!File.Exists(path + "/" + inpNameWithout + ".res"))
+                if (!isSucess || !File.Exists(path + "/" + inpNameWithout + ".res"))
                 {
                     failedcount++;
-                    MessageBox.Show(cm.mahe + "没有生成结果文件，该状态自动忽略");
+                    MessageBox.Show("Ma:="+cm.mahe+" alpha:="+cm.yj + "没有生成结果文件，该状态自动忽略");
                     continue;
                 }
 
@@ -400,7 +402,7 @@ namespace Yixing.UserControl
             return result;
         }
 
-        public void processCommand(String command, String path)
+        public Boolean processCommand(String command, String path)
         {
             Process cmd = new Process();
             try {
@@ -438,6 +440,7 @@ namespace Yixing.UserControl
                     {
                         cmd.Dispose();
                         cmd.Kill();
+                        return false;
                     }
                     else
                     {
@@ -451,6 +454,7 @@ namespace Yixing.UserControl
                 // MessageBox.Show(info);
             }catch(Exception ex){
             }
+            return true;
         }
         
         private delegate void ProcessInfoClient(String msg);
