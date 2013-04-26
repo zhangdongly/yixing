@@ -228,6 +228,7 @@
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
     <Compile Include="model\CalcModel.cs" />
+    <Compile Include="model\CalcResult.cs" />
     <Compile Include="model\DCGaoji.cs" />
     <Compile Include="model\DCStatus.cs" />
     <Compile Include="model\DCYixing.cs" />

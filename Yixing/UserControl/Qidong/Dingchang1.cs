@@ -758,6 +758,16 @@ namespace Yixing.UserControl
             //根据模版文件生成，对应的inp文件
             TemplateHelper tp = new TemplateHelper(vmDirpath);
             String vmname = Path.GetFileName(vmpath);
+            String yxname = yx.name.Substring(0, yx.name.IndexOf("."));
+            string outpath = Yixing.Properties.Settings.Default.defaultFileFolder + "/" + yxname;
+            if (!Directory.Exists(outpath))
+            {
+                Directory.CreateDirectory(outpath);
+            }
+            else
+            {
+                Directory.Delete(outpath,true);
+            }
 
             //测试代码，VM文件都放置于@"..//..//template"
             foreach (DCStatus dcs in yx.dcList)
@@ -794,7 +804,7 @@ namespace Yixing.UserControl
                 {
                     tp.Put("flag",false);
                 }
-                String yxname = yx.name.Substring(0, yx.name.IndexOf("."));
+               
                 String mahe = string.Format("{0:0.000}", dcs.mahe);
                 mahe = mahe.Replace(".", "");
                 String zt;

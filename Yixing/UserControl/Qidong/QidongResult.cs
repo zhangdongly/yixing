@@ -242,6 +242,7 @@ namespace Yixing.UserControl
             this.exListView1.Columns.Add("cd",100);
             this.exListView1.Columns.Add("cm",100);
             this.exListView1.Columns.Add("k",100);
+            this.exListView1.Columns.Add("是否转捩", 100);
             this.exListView1.Columns.Add("计算是否成功",200);
             ts = new ThreadStart(this.startCalc);
             t = new Thread(ts);
@@ -272,14 +273,17 @@ namespace Yixing.UserControl
         int failedcount = 0;
         private void startCalc()
         {
+            List<CalcResult> resultList = new List<CalcResult>();
             this.setCalcStatus("" + cmList.Count(), "", "", "", "");
             for (int i = 0; i < cmList.Count(); i++)
             {
+                CalcResult re = new CalcResult();
                 CalcModel cm = cmList[i];
                 this.setCalcStatus("", "" + (i + 1), "", "" + cm.mahe, "" + cm.yj);
                 String inpPath = cm.inpPath;
                 Boolean iszn = cm.isZn;
                 String path = Path.GetDirectoryName(inpPath);
+                re.inpPath = path;
                 String inpName = Path.GetFileName(inpPath);
                 String inpNameWithout = inpName.Substring(0, inpName.IndexOf("."));
                 //移动xyz文件到，inp所在的文件夹
@@ -307,10 +311,12 @@ namespace Yixing.UserControl
 
                 EXListViewItem item = new EXListViewItem(""+(i+1));
                 item.SubItems.Add("" + cm.mahe);
+                re.ma = cm.mahe;
                 #region 处理alpha
                 if (cm.isyj)
                 {
                     item.SubItems.Add("" + cm.yj.ToString("E5"));
+                    re.alpha = cm.yj;
                 }
                 else
                 {
@@ -321,6 +327,7 @@ namespace Yixing.UserControl
                         List<String> lineList = this.processLine(line);
                         String str = lineList[4];
                         item.SubItems.Add(Convert.ToDouble(str).ToString("E5"));
+                        re.alpha = Convert.ToDouble(str);
                     }
                 }
                 #endregion
@@ -350,23 +357,85 @@ namespace Yixing.UserControl
                     item.SubItems.Add(cd.ToString("E5"));
                     item.SubItems.Add((cmz / znCl).ToString("E5"));
                     item.SubItems.Add((cl / cd).ToString("E5"));
+                    re.cl = cl;
+                    re.cd = cd;
+                    re.cm = cmz;
+                    re.k = (cl / cd);
                 }
                 #endregion
 
                 if (iszn)
                 {
+                    re.transe = 0;
                     item.SubItems.Add("0");
                 }
                 else
                 {
+                    re.transe = 1;
                     item.SubItems.Add("1");
                 }
                 item.SubItems.Add("0");
+                re.sucess = 0;
                 this.setItem(item);
                 this.setCalcStatus("" , "", "" + failedcount, "", "");
+                resultList.Add(re);
             }
+            processResult(resultList);
             if(t.IsAlive)
                 t.Abort(); 
+        }
+
+        private void processResult(List<CalcResult> resultList)
+        {
+            if (resultList == null || resultList.Count <= 0)
+            {
+                return;
+            }
+            for (int i = 0; i < resultList.Count; i++)
+            {
+                CalcResult result = resultList[i];
+                String path = result.inpPath+".res";
+                //这次取到的位置是 yx + mahe
+                String tempmapath = Path.GetDirectoryName(path)+".dat";
+                String mafileName = Path.GetFileName(tempmapath);
+                String mapath = Path.GetDirectoryName(path) + "/" + mafileName;
+                　
+                String tempyxpath = Path.GetDirectoryName(mapath) + ".dat";
+                tempyxpath = Path.GetDirectoryName(tempyxpath) + ".dat";
+                String yxfileName = Path.GetFileName(tempyxpath);
+                String yxpath = tempyxpath.Substring(0,tempyxpath.IndexOf(".")) + "/" + yxfileName;
+
+                
+                if (!File.Exists(mapath))
+                {
+                    File.Create(mapath).Close();
+                    this.writeLine(mapath, "Ma   alpha   Cl   Cd    Cm    K    transe  sucess");
+                }
+                if (!File.Exists(yxpath))
+                {
+                    File.Create(yxpath).Close();
+                    this.writeLine(yxpath, "Ma   alpha   Cl   Cd    Cm    K    transe  sucess");
+                }
+                String line = result.ma+"  "+ result.alpha +"  "+result.cl +"  "
+                    +result.cd +"  "+result.cm +"  "+result.k +"  "+result.transe +"  "+result.sucess;
+                this.writeLine(mapath, line);
+                this.writeLine(yxpath, line);
+            }
+        }
+        private void writeLine(String path ,string value)
+        {
+
+            //实例化一个文件流--->与写入文件相关联
+            FileStream fs = new FileStream(path, FileMode.Append);
+            //实例化一个StreamWriter-->与fs相关联
+            StreamWriter sw = new StreamWriter(fs);
+            //开始写入
+            sw.WriteLine(value);
+            //清空缓冲区
+            sw.Flush();
+            //关闭流
+            sw.Close();
+            fs.Close();
         }
 
         private delegate void FlushClient(EXListViewItem item);
@@ -438,6 +507,7 @@ namespace Yixing.UserControl
                     waitcount++;
                     if (waitcount > 15)
                     {
+                        isExist = false;
                         cmd.Dispose();
                         cmd.Kill();
                         return false;
