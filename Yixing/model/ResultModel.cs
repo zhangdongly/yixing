@@ -56,6 +56,7 @@ namespace Yixing.model
                         for (int i = 0; i < matches.Count; i++)
                         {
                             String var=matches[i].Groups[1].Value;
+                          //  MessageBox.Show(var);
                             rm.varsArray[i] = var;
                             List<double> varList = new List<double>();
                             rm.resultMap.Add(var,varList);
@@ -67,10 +68,15 @@ namespace Yixing.model
                 {
                     if (rm.resultMap != null)
                     {
-                        Regex hr = new Regex(@"(-?[0-9]*[.][0-9]*)", RegexOptions.IgnoreCase);
+                        Regex hr = new Regex(@"(-?[0-9]+.?[0-9]*)", RegexOptions.IgnoreCase);
+                       // Regex hr = new Regex(@"(-?\d+)(\.\d+)?$)", RegexOptions.IgnoreCase);
+                      //  Regex hr = new Regex(@"([0-9|\.]+)?$)", RegexOptions.IgnoreCase);
+                        
+
                         MatchCollection matches = hr.Matches(line);
                         for (int i = 0; i < matches.Count; i++)
                         {
+                           // MessageBox.Show(rm.varsArray[i]+"="+matches[i].Groups[1].Value);
                             rm.resultMap[rm.varsArray[i]].Add(Convert.ToDouble(matches[i].Groups[1].Value));
                         }
                     }
