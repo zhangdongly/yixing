@@ -285,6 +285,9 @@
     <Compile Include="UserControl\Youhua\YouhuaMethod.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserControl\Youhua\Parameter1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UserTool\CommonUtil.cs" />
     <Compile Include="UserTool\EXComboBox.cs">
       <SubType>Component</SubType>
@@ -425,6 +428,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControl\Youhua\YouhuaMethod.resx">
       <DependentUpon>YouhuaMethod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\Youhua\Parameter1.resx">
+      <DependentUpon>Parameter1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTool\EXListView.resx">
       <DependentUpon>EXListView.cs</DependentUpon>

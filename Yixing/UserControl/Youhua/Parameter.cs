@@ -74,7 +74,7 @@ namespace Yixing.UserControl.Youhua
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(53, 127);
+            this.button4.Location = new System.Drawing.Point(53, 173);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 4;
@@ -84,7 +84,7 @@ namespace Yixing.UserControl.Youhua
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(631, 128);
+            this.button3.Location = new System.Drawing.Point(631, 174);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(124, 23);
             this.button3.TabIndex = 3;
@@ -93,7 +93,7 @@ namespace Yixing.UserControl.Youhua
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(198, 128);
+            this.button2.Location = new System.Drawing.Point(198, 174);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(143, 23);
             this.button2.TabIndex = 2;
@@ -104,9 +104,9 @@ namespace Yixing.UserControl.Youhua
             // panel4
             // 
             this.panel4.Controls.Add(this.exListView1);
-            this.panel4.Location = new System.Drawing.Point(24, 157);
+            this.panel4.Location = new System.Drawing.Point(24, 210);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(755, 337);
+            this.panel4.Size = new System.Drawing.Size(755, 284);
             this.panel4.TabIndex = 1;
             // 
             // exListView1
@@ -116,7 +116,7 @@ namespace Yixing.UserControl.Youhua
             this.exListView1.Location = new System.Drawing.Point(29, 21);
             this.exListView1.Name = "exListView1";
             this.exListView1.OwnerDraw = true;
-            this.exListView1.Size = new System.Drawing.Size(702, 299);
+            this.exListView1.Size = new System.Drawing.Size(702, 237);
             this.exListView1.TabIndex = 0;
             this.exListView1.UseCompatibleStateImageBehavior = false;
             this.exListView1.View = System.Windows.Forms.View.Details;
@@ -127,7 +127,7 @@ namespace Yixing.UserControl.Youhua
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Location = new System.Drawing.Point(3, 4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(791, 100);
+            this.panel2.Size = new System.Drawing.Size(791, 163);
             this.panel2.TabIndex = 0;
             // 
             // groupBox1
@@ -189,7 +189,7 @@ namespace Yixing.UserControl.Youhua
             this.panel3.Controls.Add(this.label1);
             this.panel3.Location = new System.Drawing.Point(3, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(348, 94);
+            this.panel3.Size = new System.Drawing.Size(348, 148);
             this.panel3.TabIndex = 0;
             // 
             // button1

@@ -17,7 +17,7 @@ namespace Yixing.UserControl.Youhua
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.SplitContainer splitContainer1;
 
-        private Parameter p;
+        private Parameter1 p;
         private Model m;
         private Panel panel1;
         private Jiankong j;
@@ -47,7 +47,7 @@ namespace Yixing.UserControl.Youhua
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.p = new Yixing.UserControl.Youhua.Parameter();
+            this.p = new Yixing.UserControl.Youhua.Parameter1();
             this.m = new Yixing.UserControl.Youhua.Model();
             this.ym = new Yixing.UserControl.Youhua.YouhuaMethod();
             this.j = new Yixing.UserControl.Youhua.Jiankong();
@@ -123,7 +123,7 @@ namespace Yixing.UserControl.Youhua
             // 
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(790, 594);
+            this.panel1.Size = new System.Drawing.Size(786, 594);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
