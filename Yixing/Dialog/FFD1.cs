@@ -12,22 +12,20 @@ using Yixing.UserTool;
 
 namespace Yixing.Dialog
 {
-    public partial class FFD: Form
+    public partial class FFD1 : Form
     {
-        public FFD()
+        public FFD1()
         {
             InitializeComponent();
         }
 
         private void FFD_Load(object sender, EventArgs e)
         {
-            this.exListView1.Columns.Add("序号",40);
-            this.exListView1.Columns.Add("X", 60);
-            this.exListView1.Columns.Add("Y",60);
-            this.exListView1.Columns.Add("是否为设计变量",100);
-            ImageList iList = new ImageList();
-            iList.ImageSize = new Size(1, 25);
-            this.exListView1.SmallImageList = iList;
+            this.exListView1.Columns.Add("序号",100);
+            this.exListView1.Columns.Add("X", 100);
+
+            this.exListView2.Columns.Add("序号", 100);
+            this.exListView2.Columns.Add("X", 100);
 
             Series lineSeries = new Series();
             lineSeries.ChartType = SeriesChartType.Line;
@@ -60,17 +58,20 @@ namespace Yixing.Dialog
             series.MarkerSize = 10;
             series.Color = System.Drawing.Color.Red;
             series.Name = "Default";
-            this.addPoint(series, this.textBox1);
+            //this.addPoint(series);
+            this.addItem(this.exListView1, this.textBox2, upMax + 0.005);
+
+            this.addItem(this.exListView2, this.textBox3, downMax - 0.005);
+
             this.chart1.Series.Add(series);
         }
 
-        private void addPoint(Series series, TextBox t)
+        private void addPoint(Series series)
         {
             series.Points.Clear();
-            String countStr = this.textBox1.Text;
             try
             {
-                int count = Int32.Parse(countStr)/2;
+                int count = 12;
                 for (int i = 1; i <= count; i++)
                 {
 
@@ -100,22 +101,23 @@ namespace Yixing.Dialog
             this.chart1.Series.Add(series);
         }
 
-        private void addPoint(double x, double y,Series series)
+        private DataPoint addPoint(double x, double y, Series series)
         {
             x = double.Parse(String.Format("{0:#0.000}", x));
             y = double.Parse(String.Format("{0:#0.000}", y));
-            EXListViewItem item = new EXListViewItem((this.exListView1.Items.Count+1).ToString());
-            item.SubItems.Add(x + "");
-            item.SubItems.Add(y + "");
-            CheckBox c = new CheckBox();
-            EXControlListViewSubItem exc = new EXControlListViewSubItem();
-            item.SubItems.Add(exc);
-            this.exListView1.AddControlToSubItem(c, exc);
-            this.exListView1.Items.Add(item);
-            DataPoint point = new DataPoint(x, y);
-            point.Tag = item;
-            point.MarkerColor = Color.Red;
-            series.Points.Add(point);
+            if (x == 0 || x == 1)
+            {
+                DataPoint point = new DataPoint(x, y);
+                point.MarkerColor = Color.Red;
+                series.Points.Add(point);
+                return point;
+            }
+       
+            DataPoint point1 = new DataPoint(x, y);
+            //point1.Tag = this.addItem(x, y); 
+            point1.MarkerColor = Color.Red;
+            series.Points.Add(point1);
+            return point1;
         }
 
         private void addPoint(object sender, EventArgs e)
@@ -130,15 +132,12 @@ namespace Yixing.Dialog
             {
                 this.clean();
                 this.operatorType = 1;
-                this.label1.Text = "当然状态：添加点...";
                 this.chart1.Cursor = Cursors.Hand;
-
             }
         }
 
         private void clean()
         {
-            this.label1.Text = "当前状态 ：";
             this.chart1.Cursor = Cursors.Default;          
         }
 
@@ -170,109 +169,67 @@ namespace Yixing.Dialog
             {
                 this.clean();
                 operatorType = 3;
-                this.label1.Text = "当前状态:删除点...";
                 this.chart1.Cursor = Cursors.Hand;
             }
         }
 
-        private void deletePointByRightMouse(object sender, EventArgs e)
+        private void addItem(EXListView ex, TextBox text,double y)
         {
-            DataPoint dataPoint =(DataPoint)this.delete.Tag;
-            this.series.Points.Remove(dataPoint);
-            // this.series.Points.RemoveAt((int)dataPoint.Tag);
-            this.exListView1.Items.Remove((EXListViewItem)dataPoint.Tag);
-           
-        }
+            String upNumberStr = text.Text;
+            for (int i = 0; i < ex.Items.Count; i++)
+            {
+                ListViewItem item = ex.Items[i];
+                this.series.Points.Remove((DataPoint)item.Tag);
+            }
 
-        private void chart1_MouseDown(object sender, MouseEventArgs e)
-       {
-           if (e.Button == MouseButtons.Right)
-           {
-               HitTestResult hitResult = chart1.HitTest(e.X, e.Y);
-               if (hitResult.ChartElementType == ChartElementType.DataPoint)
-               {
-                   DataPoint dataPoint = (DataPoint)hitResult.Object;
-                   this.delete.Tag = dataPoint;
-                   this.delete.Show(this.chart1, e.X, e.Y);
-               }              
-           }
-           else
-           {
-
-               HitTestResult hitResult = chart1.HitTest(e.X, e.Y);
-               // 增加点
-               if (operatorType == 1)
-               {
-                   double yValue = this.chart1.ChartAreas[0].AxisY.PixelPositionToValue(e.Y);
-                   double xValue = this.chart1.ChartAreas[0].AxisX.PixelPositionToValue(e.X);
-                   yValue = double.Parse(String.Format("{0:#0.000}", yValue));
-                   xValue = double.Parse(String.Format("{0:#0.000}", xValue));
-                   //增加点
-                   DataPoint point = new DataPoint(xValue, yValue);
-                   point.Tag = this.addItem(xValue, yValue);
-                   point.MarkerColor = Color.Red;
-                   this.series.Points.Add(point);
-               }
-               else
-               {
-                   if (hitResult.ChartElementType == ChartElementType.DataPoint)
-                   {
-                       DataPoint dataPoint = (DataPoint)hitResult.Object;
-                       if (operatorType == 3)
-                       {
-                           this.series.Points.Remove(dataPoint);
-                           // this.series.Points.RemoveAt((int)dataPoint.Tag);
-                           this.exListView1.Items.Remove((EXListViewItem)dataPoint.Tag);
-                       }
-                       else if (operatorType == 4)
-                       {
-                           if (this.selectedPointList == null)
-                           {
-                               selectedPointList = new List<DataPoint>();
-                           }
-                           if (dataPoint.MarkerColor == Color.Black)
-                           {
-                               dataPoint.MarkerColor = Color.Red;
-                               this.selectedPointList.Remove(dataPoint);
-                               EXListViewItem item = (EXListViewItem)dataPoint.Tag;
-                               EXControlListViewSubItem exc = (EXControlListViewSubItem)item.SubItems[3];
-                               CheckBox c = exc.MyControl as CheckBox;
-                               c.Checked = false;
-                           }
-                           else if (dataPoint.MarkerColor == Color.Red)
-                           {
-                               dataPoint.MarkerColor = Color.Black;
-                               this.selectedPointList.Add(dataPoint);
-                               EXListViewItem item = (EXListViewItem)dataPoint.Tag;
-                               EXControlListViewSubItem exc = (EXControlListViewSubItem)item.SubItems[3];
-                               CheckBox c = exc.MyControl as CheckBox;
-                               c.Checked = true;
-                           }
-                       }
-                       else
-                       {
-                           if (!this.chart1.Series["Max"].Points.Contains(dataPoint))
-                           {
-                               this.selectedPoint = dataPoint;
-                           }
-                       }
-                   }
-               }
-           }
-        
-
+            ex.Items.Clear();
+            try
+            {
+                int upNumber = Int32.Parse(upNumberStr);
+                for (int i = 0; i < upNumber; i++)
+                {
+                    EXListViewItem item = new EXListViewItem((ex.Items.Count + 1).ToString());
+                    TextBox t = new TextBox();
+                    EXControlListViewSubItem exc = new EXControlListViewSubItem();
+                    double value = 1.0 / (upNumber + 1) * (i + 1);
+                    t.Text = string.Format("{0:#0.0000}", value);
+                    item.SubItems.Add(exc);
+                    ex.AddControlToSubItem(t, exc);
+                    item.Tag = this.addPoint(value, y, this.series);
+                    ex.Items.Add(item);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("请输入数字." + exception.Message);
+            }
         }
 
         private EXListViewItem addItem(double x,double y)
         {
-            EXListViewItem item = new EXListViewItem((this.exListView1.Items.Count+1).ToString());
-            item.SubItems.Add(x + "");
-            item.SubItems.Add(y + "");
-            CheckBox c = new CheckBox();
-            EXControlListViewSubItem exc = new EXControlListViewSubItem();
-            item.SubItems.Add(exc);
-            this.exListView1.AddControlToSubItem(c, exc);
-            this.exListView1.Items.Add(item);
+            EXListViewItem item;
+            //CheckBox c = new CheckBox();
+            //EXControlListViewSubItem exc = new EXControlListViewSubItem();
+            //item.SubItems.Add(exc);
+            //this.exListView1.AddControlToSubItem(c, exc);  if (y >= 0.02)
+            if(y>=0.02)
+            {
+                item = new EXListViewItem((this.exListView1.Items.Count + 1).ToString());
+                TextBox c = new TextBox();
+                c.Text = x+"";
+                EXControlListViewSubItem exc = new EXControlListViewSubItem();
+                item.SubItems.Add(exc);
+                this.exListView1.AddControlToSubItem(c, exc); 
+                item.SubItems.Add(y + "");
+                this.exListView1.Items.Add(item);
+            }
+            else
+            {
+                item = new EXListViewItem((this.exListView2.Items.Count + 1).ToString());
+                item.SubItems.Add(x + "");
+                item.SubItems.Add(y + "");
+                this.exListView2.Items.Add(item);
+            }
             return item;
             
         }
@@ -328,7 +285,7 @@ namespace Yixing.Dialog
 
         private void button3_Click(object sender, EventArgs e)
         {
-           count= this.exListView1.Items.Count;
+            count = this.exListView1.Items.Count + this.exListView2.Items.Count;
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -350,7 +307,6 @@ namespace Yixing.Dialog
             {
                 this.clean();
                 operatorType = 4;
-                this.label1.Text = "当前状态：选择点...";
                 this.chart1.Cursor = Cursors.Hand;
             }
 
@@ -373,7 +329,17 @@ namespace Yixing.Dialog
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            this.addPoint(this.chart1.Series["Default"], this.textBox1);
+            //this.addPoint(this.chart1.Series["Default"], this.textBox1);
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            this.addItem(this.exListView1, this.textBox2, upMax + 0.005);
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            this.addItem(this.exListView2, this.textBox3, downMax - 0.005);
         }
     }
 }

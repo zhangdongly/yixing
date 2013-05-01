@@ -215,6 +215,12 @@
     <Compile Include="Dialog\SanweiStatus.Designer.cs">
       <DependentUpon>SanweiStatus.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialog\FFD1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\FFD1.Designer.cs">
+      <DependentUpon>FFD1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -235,6 +241,7 @@
     <Compile Include="model\ResultModel.cs" />
     <Compile Include="model\SanweiModel.cs" />
     <Compile Include="model\SanweiStatusModel.cs" />
+    <Compile Include="model\Status.cs" />
     <Compile Include="model\StatusEditAble.cs" />
     <Compile Include="model\StautsSerializeObj.cs" />
     <Compile Include="model\User.cs" />
@@ -370,6 +377,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialog\SanweiStatus.resx">
       <DependentUpon>SanweiStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\FFD1.resx">
+      <DependentUpon>FFD1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

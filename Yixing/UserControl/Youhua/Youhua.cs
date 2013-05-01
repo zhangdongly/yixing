@@ -195,7 +195,7 @@ namespace Yixing.UserControl.Youhua
             this.exListView1.SmallImageList = iList;
           
            
-            EXListViewItem item = new EXListViewItem("参数优化");
+            EXListViewItem item = new EXListViewItem("参数化");
                 
            //item.SubItems.Add(new EXMultipleImagesListViewSubItem(new ArrayList(){this.imageList1.Images[0]}));
            this.exListView1.Items.Add(item);

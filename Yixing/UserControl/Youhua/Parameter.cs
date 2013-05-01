@@ -360,7 +360,7 @@ namespace Yixing.UserControl.Youhua
            
             if (this.comboBox1.Text.Equals("FFD"))
             {
-                FFD f = new FFD();
+                FFD1 f = new FFD1();
 
                 if (f.ShowDialog() == DialogResult.OK)
                 {

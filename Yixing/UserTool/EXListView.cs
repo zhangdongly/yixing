@@ -912,6 +912,7 @@ namespace Yixing.UserTool{
         public EXListViewItem(string text) {
             this._value = text;
             this.Text = text;
+            this.ForeColor = ForeColor;
         }
 	
         public string MyValue {

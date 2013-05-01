@@ -472,7 +472,7 @@ namespace Yixing.UserControl.Youhua
            
             if (this.comboBox1.Text.Equals("FFD"))
             {
-                FFD f = new FFD();
+                FFD1 f = new FFD1();
 
                 if (f.ShowDialog() == DialogResult.OK)
                 {
@@ -494,6 +494,7 @@ namespace Yixing.UserControl.Youhua
                     if (x.ShowDialog() == DialogResult.OK)
                     {
                         this.varCount =Convert.ToInt32( x.count.ToString());
+                        this.addParameter(0,1, 0);
                     }
                
             }

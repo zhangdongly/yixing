@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Yixing.model;
+using Yixing.UserTool;
 
 namespace Yixing.Dialog
 {
@@ -15,6 +17,22 @@ namespace Yixing.Dialog
         public Texingpingu()
         {
             InitializeComponent();
+        }
+
+        public Texingpingu(Dictionary<int, Status> ztDic)
+        {
+            InitializeComponent();
+            int i = 1;
+            foreach (int key in ztDic.Keys)
+            {
+                EXListViewItem item = new EXListViewItem("状态" +i);
+                Status s = ztDic[key];
+                item.SubItems.Add(s.mahe + "");
+                item.SubItems.Add(s.dslxs + "");
+                this.exListView1.Items.Add(item);
+                i++;
+            }
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -42,5 +60,22 @@ namespace Yixing.Dialog
                 z.ShowDialog();
             }
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            DingChangGaoji gj = new DingChangGaoji();
+            gj.Show();
+        }
+
+        private void exListView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //更改颜色。
+            foreach (EXListViewItem i in this.exListView1.Items)
+            {
+                i.BackColor = Color.White;
+            }
+            this.exListView1.SelectedItems[0].BackColor = Color.DodgerBlue;
+        }
+
     }
 }

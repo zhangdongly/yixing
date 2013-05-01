@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using Yixing.Dialog;
 using Yixing.UserTool;
 
@@ -60,6 +61,40 @@ namespace Yixing.UserControl.Youhua
         private Label label15;
         private ComboBox comboBox4;
         private CheckBox checkBox1;
+        private TabPage dailiModule;
+        private GroupBox groupBox4;
+        private RadioButton radioButton2;
+        private RadioButton radioButton1;
+        private Button button4;
+        private Button button3;
+        private Label label16;
+        private TextBox textBox11;
+        private TextBox textBox10;
+        private Button button5;
+        private GroupBox groupBox5;
+        private Label label19;
+        private Label label18;
+        private Label label17;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private GroupBox groupBox6;
+        private GroupBox groupBox7;
+        private Label label22;
+        private TextBox textBox13;
+        private Label label21;
+        private TextBox textBox12;
+        private Label label20;
+        private RadioButton radioButton3;
+        private ComboBox comboBox8;
+        private RadioButton radioButton4;
+        private EXListView exListView4;
+        private EXListView exListView3;
+        private EXListView exListView5;
+        private ColumnHeader columnHeader1;
+        private ColumnHeader columnHeader2;
+        private ColumnHeader columnHeader3;
+        private ColumnHeader columnHeader4;
+        private ColumnHeader columnHeader6;
+        private ColumnHeader columnHeader7;
         private System.Windows.Forms.Panel panel1;
     
         public YouhuaMethod()
@@ -69,6 +104,38 @@ namespace Yixing.UserControl.Youhua
 
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            "RBF代理模型",
+            "RBF代理模型",
+            " a"}, -1, System.Drawing.SystemColors.MenuHighlight, System.Drawing.Color.Empty, null);
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+            "Kriging代理模型",
+            "Kriging代理模型",
+            ""}, -1);
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
+            "BP神经网络",
+            "BP神经网络",
+            ""}, -1);
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("CL");
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("CD");
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("CM");
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("K");
+            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem(new string[] {
+            "状态1",
+            "0.02",
+            "2",
+            ""}, -1);
+            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem(new string[] {
+            "状态2",
+            "0.02",
+            "3",
+            ""}, -1);
+            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem(new string[] {
+            "状态3",
+            "0.04",
+            "0.65"}, -1);
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -78,6 +145,7 @@ namespace Yixing.UserControl.Youhua
             this.panel4 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.yichuan = new System.Windows.Forms.Panel();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -102,6 +170,38 @@ namespace Yixing.UserControl.Youhua
             this.comboBox4 = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
             this.exListView1 = new Yixing.UserTool.EXListView();
+            this.dailiModule = new System.Windows.Forms.TabPage();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.textBox13 = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.textBox12 = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.comboBox8 = new System.Windows.Forms.ComboBox();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.button5 = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.exListView5 = new Yixing.UserTool.EXListView();
+            this.exListView4 = new Yixing.UserTool.EXListView();
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.exListView3 = new Yixing.UserTool.EXListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.label16 = new System.Windows.Forms.Label();
+            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
@@ -117,7 +217,8 @@ namespace Yixing.UserControl.Youhua
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.exListView2 = new Yixing.UserTool.EXListView();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -128,6 +229,12 @@ namespace Yixing.UserControl.Youhua
             this.zhijiehetidu.SuspendLayout();
             this.panel3.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.dailiModule.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            this.groupBox5.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -147,6 +254,7 @@ namespace Yixing.UserControl.Youhua
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.dailiModule);
             this.tabControl1.Location = new System.Drawing.Point(12, 18);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -234,6 +342,17 @@ namespace Yixing.UserControl.Youhua
             this.yichuan.TabIndex = 4;
             this.yichuan.Visible = false;
             this.yichuan.Paint += new System.Windows.Forms.PaintEventHandler(this.yichuan_Paint);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(98, 324);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(120, 16);
+            this.checkBox1.TabIndex = 14;
+            this.checkBox1.Text = "是否使用代理模型";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // comboBox3
             // 
@@ -454,6 +573,357 @@ namespace Yixing.UserControl.Youhua
             this.exListView1.Click += new System.EventHandler(this.exListView1_DoubleClick);
             this.exListView1.DoubleClick += new System.EventHandler(this.exListView1_DoubleClick);
             // 
+            // dailiModule
+            // 
+            this.dailiModule.Controls.Add(this.groupBox4);
+            this.dailiModule.Location = new System.Drawing.Point(4, 22);
+            this.dailiModule.Name = "dailiModule";
+            this.dailiModule.Padding = new System.Windows.Forms.Padding(3);
+            this.dailiModule.Size = new System.Drawing.Size(777, 496);
+            this.dailiModule.TabIndex = 1;
+            this.dailiModule.Text = "代理模型";
+            this.dailiModule.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.groupBox6);
+            this.groupBox4.Controls.Add(this.chart1);
+            this.groupBox4.Controls.Add(this.button5);
+            this.groupBox4.Controls.Add(this.groupBox5);
+            this.groupBox4.Controls.Add(this.button4);
+            this.groupBox4.Controls.Add(this.button3);
+            this.groupBox4.Controls.Add(this.label16);
+            this.groupBox4.Controls.Add(this.textBox11);
+            this.groupBox4.Controls.Add(this.textBox10);
+            this.groupBox4.Controls.Add(this.radioButton2);
+            this.groupBox4.Controls.Add(this.radioButton1);
+            this.groupBox4.Location = new System.Drawing.Point(9, 6);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(762, 484);
+            this.groupBox4.TabIndex = 0;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "初始样本生成方法";
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.groupBox7);
+            this.groupBox6.Controls.Add(this.label20);
+            this.groupBox6.Controls.Add(this.radioButton3);
+            this.groupBox6.Controls.Add(this.comboBox8);
+            this.groupBox6.Controls.Add(this.radioButton4);
+            this.groupBox6.Location = new System.Drawing.Point(16, 235);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(266, 243);
+            this.groupBox6.TabIndex = 18;
+            this.groupBox6.TabStop = false;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.label22);
+            this.groupBox7.Controls.Add(this.textBox13);
+            this.groupBox7.Controls.Add(this.label21);
+            this.groupBox7.Controls.Add(this.textBox12);
+            this.groupBox7.Enabled = false;
+            this.groupBox7.Location = new System.Drawing.Point(6, 124);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(221, 111);
+            this.groupBox7.TabIndex = 17;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "紧耦合优化参数";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(6, 74);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(65, 12);
+            this.label22.TabIndex = 16;
+            this.label22.Text = "校核比例：";
+            // 
+            // textBox13
+            // 
+            this.textBox13.Location = new System.Drawing.Point(93, 71);
+            this.textBox13.Name = "textBox13";
+            this.textBox13.Size = new System.Drawing.Size(111, 21);
+            this.textBox13.TabIndex = 15;
+            this.textBox13.Text = "0.3";
+            this.textBox13.TextChanged += new System.EventHandler(this.textBox13_TextChanged);
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(6, 29);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(89, 12);
+            this.label21.TabIndex = 14;
+            this.label21.Text = "更新间隔代数：";
+            // 
+            // textBox12
+            // 
+            this.textBox12.Location = new System.Drawing.Point(93, 26);
+            this.textBox12.Name = "textBox12";
+            this.textBox12.Size = new System.Drawing.Size(111, 21);
+            this.textBox12.TabIndex = 13;
+            this.textBox12.Text = "1";
+            this.textBox12.TextChanged += new System.EventHandler(this.textBox12_TextChanged);
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(4, 78);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(65, 12);
+            this.label20.TabIndex = 16;
+            this.label20.Text = "优化策略：";
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(6, 49);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(95, 16);
+            this.radioButton3.TabIndex = 14;
+            this.radioButton3.Text = "自选代理模型";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged);
+            // 
+            // comboBox8
+            // 
+            this.comboBox8.FormattingEnabled = true;
+            this.comboBox8.Items.AddRange(new object[] {
+            "代理模型不更新",
+            "紧耦合优化",
+            "松耦合优化"});
+            this.comboBox8.Location = new System.Drawing.Point(6, 93);
+            this.comboBox8.Name = "comboBox8";
+            this.comboBox8.Size = new System.Drawing.Size(121, 20);
+            this.comboBox8.TabIndex = 15;
+            this.comboBox8.Text = "代理模型不更新";
+            this.comboBox8.SelectedIndexChanged += new System.EventHandler(this.comboBox8_SelectedIndexChanged);
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Checked = true;
+            this.radioButton4.Location = new System.Drawing.Point(6, 20);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(95, 16);
+            this.radioButton4.TabIndex = 13;
+            this.radioButton4.TabStop = true;
+            this.radioButton4.Text = "默认代理模型";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            // 
+            // chart1
+            // 
+            chartArea1.AxisX.Title = "CFD计算结果";
+            chartArea1.AxisY.Title = "代理模型计算结果";
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            this.chart1.Location = new System.Drawing.Point(350, 248);
+            this.chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(406, 236);
+            this.chart1.TabIndex = 17;
+            this.chart1.Text = "chart1";
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(613, 69);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(95, 23);
+            this.button5.TabIndex = 8;
+            this.button5.Text = "代理模型评估";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.exListView5);
+            this.groupBox5.Controls.Add(this.exListView4);
+            this.groupBox5.Controls.Add(this.exListView3);
+            this.groupBox5.Controls.Add(this.label19);
+            this.groupBox5.Controls.Add(this.label18);
+            this.groupBox5.Controls.Add(this.label17);
+            this.groupBox5.Location = new System.Drawing.Point(6, 115);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(750, 127);
+            this.groupBox5.TabIndex = 7;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "气动特性评估方法";
+            // 
+            // exListView5
+            // 
+            this.exListView5.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader6,
+            this.columnHeader7});
+            this.exListView5.ControlPadding = 4;
+            this.exListView5.FullRowSelect = true;
+            this.exListView5.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1,
+            listViewItem2,
+            listViewItem3});
+            this.exListView5.Location = new System.Drawing.Point(556, 15);
+            this.exListView5.Name = "exListView5";
+            this.exListView5.OwnerDraw = true;
+            this.exListView5.Size = new System.Drawing.Size(149, 97);
+            this.exListView5.TabIndex = 12;
+            this.exListView5.UseCompatibleStateImageBehavior = false;
+            this.exListView5.View = System.Windows.Forms.View.Details;
+            // 
+            // exListView4
+            // 
+            this.exListView4.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader4});
+            this.exListView4.ControlPadding = 4;
+            this.exListView4.FullRowSelect = true;
+            this.exListView4.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem4,
+            listViewItem5,
+            listViewItem6,
+            listViewItem7});
+            this.exListView4.Location = new System.Drawing.Point(355, 15);
+            this.exListView4.Name = "exListView4";
+            this.exListView4.OwnerDraw = true;
+            this.exListView4.Size = new System.Drawing.Size(94, 97);
+            this.exListView4.TabIndex = 11;
+            this.exListView4.UseCompatibleStateImageBehavior = false;
+            this.exListView4.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "气动特性";
+            // 
+            // exListView3
+            // 
+            this.exListView3.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3});
+            this.exListView3.ControlPadding = 4;
+            this.exListView3.FullRowSelect = true;
+            this.exListView3.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem8,
+            listViewItem9,
+            listViewItem10});
+            this.exListView3.Location = new System.Drawing.Point(76, 20);
+            this.exListView3.Name = "exListView3";
+            this.exListView3.OwnerDraw = true;
+            this.exListView3.Size = new System.Drawing.Size(200, 97);
+            this.exListView3.TabIndex = 10;
+            this.exListView3.UseCompatibleStateImageBehavior = false;
+            this.exListView3.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "状态";
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Ma";
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "a/cl";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(488, 59);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(65, 12);
+            this.label19.TabIndex = 9;
+            this.label19.Text = "评估方法：";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(295, 59);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(65, 12);
+            this.label18.TabIndex = 7;
+            this.label18.Text = "气动特性：";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(14, 59);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(65, 12);
+            this.label17.TabIndex = 5;
+            this.label17.Text = "计算状态：";
+            // 
+            // button4
+            // 
+            this.button4.Enabled = false;
+            this.button4.Location = new System.Drawing.Point(432, 75);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(91, 23);
+            this.button4.TabIndex = 6;
+            this.button4.Text = "……";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(432, 25);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(91, 23);
+            this.button3.TabIndex = 5;
+            this.button3.Text = "样本计算";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(171, 34);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(65, 12);
+            this.label16.TabIndex = 4;
+            this.label16.Text = "样本数量：";
+            // 
+            // textBox11
+            // 
+            this.textBox11.Enabled = false;
+            this.textBox11.Location = new System.Drawing.Point(197, 75);
+            this.textBox11.Name = "textBox11";
+            this.textBox11.Size = new System.Drawing.Size(215, 21);
+            this.textBox11.TabIndex = 3;
+            // 
+            // textBox10
+            // 
+            this.textBox10.Location = new System.Drawing.Point(242, 25);
+            this.textBox10.Name = "textBox10";
+            this.textBox10.Size = new System.Drawing.Size(170, 21);
+            this.textBox10.TabIndex = 2;
+            this.textBox10.Text = "800";
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(32, 76);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(95, 16);
+            this.radioButton2.TabIndex = 1;
+            this.radioButton2.Text = "从文件中读取";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
+            this.radioButton1.Location = new System.Drawing.Point(32, 32);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(71, 16);
+            this.radioButton1.TabIndex = 0;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "随机生成";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
             // tabPage2
             // 
             this.tabPage2.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
@@ -598,16 +1068,15 @@ namespace Yixing.UserControl.Youhua
             this.exListView2.UseCompatibleStateImageBehavior = false;
             this.exListView2.View = System.Windows.Forms.View.Details;
             // 
-            // checkBox1
+            // columnHeader6
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(98, 324);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(120, 16);
-            this.checkBox1.TabIndex = 14;
-            this.checkBox1.Text = "是否使用代理模型";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.columnHeader6.Text = "0";
+            this.columnHeader6.Width = 0;
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "评估方法";
+            this.columnHeader7.Width = 113;
             // 
             // YouhuaMethod
             // 
@@ -629,6 +1098,16 @@ namespace Yixing.UserControl.Youhua
             this.panel3.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.dailiModule.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
@@ -674,7 +1153,7 @@ namespace Yixing.UserControl.Youhua
                     this.exListView2.Items.Add(elvi);
                 }
                 this.comboBox4.Text = this.comboBox4.Items[0].ToString();
-            
+                this.tabControl1.Controls.Remove(this.dailiModule);
         }
 
         private void exListView1_DoubleClick(object sender, EventArgs e)
@@ -724,15 +1203,114 @@ namespace Yixing.UserControl.Youhua
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox c = (CheckBox)sender;
-          
-            this.tabControl1.Controls.Remove(this.tabPage2);
+
+            this.tabControl1.Controls.Remove(this.dailiModule);
             if (c.Checked)
             {
-                this.tabControl1.Controls.Add(this.tabPage2);
+                this.tabControl1.Controls.Add(this.dailiModule);
             }
         }
 
-       
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton c = (RadioButton)sender;
+            if (c.Checked)
+            {
+                this.textBox11.Enabled = true;
+                this.button4.Enabled = true;
+                this.textBox10.Enabled = false;
+                this.button3.Enabled = false;
+            }
+            else
+            {
+                this.textBox11.Enabled = false;
+                this.button4.Enabled =false;
+                this.textBox10.Enabled = true;
+                this.button3.Enabled = true;
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.textBox11.Text = FileDialogUtil.getSelectFileName(new OpenFileDialog());
+
+        }
+
+        private void textBox12_TextChanged(object sender, EventArgs e)
+        {
+            TextBox t = (TextBox)sender;
+            String text = t.Text;
+            double ds;
+            if (double.TryParse(text, out ds))
+            {
+                if (ds < 1 || ds > 20)
+                {
+                    MessageBox.Show("间隔代数大于1，且小于20！");
+                }
+            }
+            else
+            {
+                MessageBox.Show("间隔代数必须为数字！");
+            }
+           
+        }
+
+        private void textBox13_TextChanged(object sender, EventArgs e)
+        {
+            
+            TextBox t = (TextBox)sender;
+            String text = t.Text;
+            double ds;
+            if (double.TryParse(text, out ds))
+            {
+                if (ds < 0 || ds > 1)
+                {
+                    MessageBox.Show("校核比例大于0，且小于1！");
+                }
+            }
+            else
+            {
+                MessageBox.Show("校核比例必须为数字！");
+            }
+        }
+
+        private void comboBox8_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox c = (ComboBox)sender;
+            if (c.Text.Equals("紧耦合优化"))
+            {
+                this.groupBox7.Enabled = true;
+            }
+            else
+            {
+                this.groupBox7.Enabled = false;
+            }
+        }
+
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton c = (RadioButton)sender;
+            if (c.Checked)
+            {
+                this.comboBox8.Enabled = true;
+
+            }
+            else
+            {
+                this.comboBox8.Enabled = false;
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 100; i=i+10)
+            {
+                this.chart1.Series[0].Points.Add(new DataPoint(i/10, i));
+            }
+
+            ListViewItem item = (ListViewItem)this.exListView5.Items[1];
+            item.SubItems[0].ForeColor =  Color.Red;
+        }
        
     }
 }

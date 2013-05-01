@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Yixing.UserTool;
 using Yixing.Dialog;
+using Yixing.model;
 
 namespace Yixing.UserControl.Youhua
 {
@@ -42,6 +43,7 @@ namespace Yixing.UserControl.Youhua
         private Label label11;
         private TextBox textBox7;
         private Label label10;
+        private Label label12;
         private System.Windows.Forms.Panel panel1;
     
         public Model()
@@ -53,6 +55,10 @@ namespace Yixing.UserControl.Youhua
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -78,10 +84,7 @@ namespace Yixing.UserControl.Youhua
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -111,6 +114,38 @@ namespace Yixing.UserControl.Youhua
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(785, 122);
             this.panel3.TabIndex = 3;
+            // 
+            // textBox8
+            // 
+            this.textBox8.Location = new System.Drawing.Point(387, 78);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(100, 21);
+            this.textBox8.TabIndex = 4;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(263, 83);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(119, 12);
+            this.label11.TabIndex = 3;
+            this.label11.Text = "并行计算的翼型数量:";
+            // 
+            // textBox7
+            // 
+            this.textBox7.Location = new System.Drawing.Point(108, 82);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(100, 21);
+            this.textBox7.TabIndex = 2;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(20, 84);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(89, 12);
+            this.label10.TabIndex = 1;
+            this.label10.Text = "并行计算核数：";
             // 
             // groupBox2
             // 
@@ -201,6 +236,7 @@ namespace Yixing.UserControl.Youhua
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.label12);
             this.panel2.Controls.Add(this.button4);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.label4);
@@ -221,6 +257,7 @@ namespace Yixing.UserControl.Youhua
             this.button4.TabIndex = 10;
             this.button4.Text = "删除";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // label5
             // 
@@ -292,7 +329,7 @@ namespace Yixing.UserControl.Youhua
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 22);
+            this.label1.Location = new System.Drawing.Point(6, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 12);
             this.label1.TabIndex = 6;
@@ -300,7 +337,7 @@ namespace Yixing.UserControl.Youhua
             // 
             // textBox6
             // 
-            this.textBox6.Location = new System.Drawing.Point(117, 17);
+            this.textBox6.Location = new System.Drawing.Point(101, 17);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(55, 21);
             this.textBox6.TabIndex = 7;
@@ -326,14 +363,14 @@ namespace Yixing.UserControl.Youhua
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(117, 83);
+            this.textBox2.Location = new System.Drawing.Point(101, 83);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(55, 21);
             this.textBox2.TabIndex = 4;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(117, 49);
+            this.textBox1.Location = new System.Drawing.Point(101, 49);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(55, 21);
             this.textBox1.TabIndex = 3;
@@ -345,7 +382,7 @@ namespace Yixing.UserControl.Youhua
             this.comboBox1.Items.AddRange(new object[] {
             "定迎角",
             "定升力系数"});
-            this.comboBox1.Location = new System.Drawing.Point(29, 85);
+            this.comboBox1.Location = new System.Drawing.Point(13, 84);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(82, 20);
             this.comboBox1.TabIndex = 2;
@@ -353,43 +390,20 @@ namespace Yixing.UserControl.Youhua
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(70, 52);
+            this.label2.Location = new System.Drawing.Point(54, 52);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(41, 12);
             this.label2.TabIndex = 1;
             this.label2.Text = "马赫数";
             // 
-            // label10
+            // label12
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(20, 84);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(89, 12);
-            this.label10.TabIndex = 1;
-            this.label10.Text = "并行计算核数：";
-            // 
-            // textBox7
-            // 
-            this.textBox7.Location = new System.Drawing.Point(108, 82);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(100, 21);
-            this.textBox7.TabIndex = 2;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(263, 83);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(119, 12);
-            this.label11.TabIndex = 3;
-            this.label11.Text = "并行计算的翼型数量:";
-            // 
-            // textBox8
-            // 
-            this.textBox8.Location = new System.Drawing.Point(387, 78);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(100, 21);
-            this.textBox8.TabIndex = 4;
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(162, 23);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(17, 12);
+            this.label12.TabIndex = 9;
+            this.label12.Text = "万";
             // 
             // Model
             // 
@@ -409,6 +423,9 @@ namespace Yixing.UserControl.Youhua
             this.ResumeLayout(false);
 
         }
+        //用于记录添加的状态数
+        Dictionary<int, Status> ztDic = new Dictionary<int, Status>();
+        int ztkey = 0;
 
         private void control_Load(object sender, EventArgs e)
         {
@@ -557,7 +574,8 @@ namespace Yixing.UserControl.Youhua
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Texingpingu t = new Texingpingu();
+            
+            Texingpingu t = new Texingpingu(ztDic);
             t.ShowDialog();
 
         }
@@ -607,8 +625,6 @@ namespace Yixing.UserControl.Youhua
             }
         }
 
-
-
         private void button2_Click(object sender, EventArgs e)
         {
             String ma = this.textBox1.Text;
@@ -619,7 +635,13 @@ namespace Yixing.UserControl.Youhua
                 return;
             }
             EXListViewItem item = new EXListViewItem(ma);
-            
+
+            ztkey++;
+            Status st = new Status();
+            st.mahe = Convert.ToDouble(ma);
+            st.dslxs = Convert.ToDouble(al);
+            this.ztDic.Add(ztkey, st);
+            item.Tag = ztkey;
             item.SubItems.Add(al);
             for (int i = 0; i < 6; i++)
             {
@@ -640,6 +662,17 @@ namespace Yixing.UserControl.Youhua
         private void label7_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            for (int i = this.exListView1.SelectedItems.Count - 1; i >= 0; i--)
+            {
+                ListViewItem item = this.exListView2.SelectedItems[i];
+                String ztKeyStr = item.Tag.ToString();
+                ztDic.Remove(Convert.ToInt32(ztKeyStr));
+                this.exListView2.Items.Remove(item);
+            }
         }
 
        
