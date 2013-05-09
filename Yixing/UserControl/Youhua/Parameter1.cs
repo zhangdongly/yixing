@@ -7,6 +7,8 @@ using Yixing.UserTool;
 using System.Windows.Forms;
 using Yixing.Dialog;
 using System.Windows.Forms.DataVisualization.Charting;
+using Yixing.model;
+using NVelocity.Runtime;
 
 namespace Yixing.UserControl.Youhua
 {
@@ -37,6 +39,14 @@ namespace Yixing.UserControl.Youhua
         private RadioButton radioButton2;
         private RadioButton radioButton1;
         private System.Windows.Forms.Panel panel1;
+
+        /**
+         * 
+         * user struct
+         * */
+        private FFDModel ffdModel;
+
+        private HicksHenneModel hicksHenneModel;
     
         public Parameter1()
         {
@@ -418,8 +428,10 @@ namespace Yixing.UserControl.Youhua
                     EXListViewItem item = new EXListViewItem(i + "");
                     item.SubItems.Add("x" + i);
                     EXControlListViewSubItem lower = new EXControlListViewSubItem();
+                  
                     TextBox t = new TextBox();
                     t.Text = begin.ToString();
+                    lower.Tag = t;
                     item.SubItems.Add(lower);
                     this.exListView1.AddControlToSubItem(t, lower);
 
@@ -429,6 +441,7 @@ namespace Yixing.UserControl.Youhua
 
                     TextBox c = new TextBox();
                     c.Text = currentValue.ToString();
+                    current.Tag = c;
                     item.SubItems.Add(current);
                     this.exListView1.AddControlToSubItem(c, current);
 
@@ -437,6 +450,7 @@ namespace Yixing.UserControl.Youhua
                     EXControlListViewSubItem up = new EXControlListViewSubItem();
                     TextBox u = new TextBox();
                     u.Text = end.ToString();
+                    up.Tag = u;
                     item.SubItems.Add(up);
                     this.exListView1.AddControlToSubItem(u, up);
 
@@ -476,9 +490,10 @@ namespace Yixing.UserControl.Youhua
 
                 if (f.ShowDialog() == DialogResult.OK)
                 {
-                    this.varCount =Convert.ToInt32(f.count.ToString());
+                    this.varCount =Convert.ToInt32(f.count.ToString());                    
                     this.addParameter(-0.02, 0.02, 0);
                 }
+                this.addFFDModel(f);
             }
             else if (this.comboBox1.Text.Equals("CST"))
             {
@@ -496,13 +511,39 @@ namespace Yixing.UserControl.Youhua
                         this.varCount =Convert.ToInt32( x.count.ToString());
                         this.addParameter(0,1, 0);
                     }
+                    this.addHicksHenneModel(x);
                
             }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            if (this.comboBox1.Text.Equals("FFD"))
+            {
+                if (this.ffdModel == null)
+                {
+                    MessageBox.Show("请先完成FFD相关设置");
+                    return;
+                }
+                this.ffdModel.ducList = this.getDUC();
+                this.ffdModel.write2File(RuntimeConstants.FILE_RESOURCE_LOADER_PATH+"parasetting.inp");
+            }
+            else if (this.comboBox1.Text.Equals("CST"))
+            {
+               
+            }
+            else
+            {
+                if (this.hicksHenneModel == null)
+                {
+                    MessageBox.Show("请先完成Hicks Henne相关设置");
+                }
+                this.hicksHenneModel.ducList = this.getDUC();
+                this.hicksHenneModel.write2File(RuntimeConstants.FILE_RESOURCE_LOADER_PATH+"parasetting.inp");
 
+            }
+
+            MessageBox.Show("保存完成");
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
@@ -532,6 +573,82 @@ namespace Yixing.UserControl.Youhua
             }
         }
 
-       
+        private void addFFDModel(FFD1 f)
+        {
+            if (this.ffdModel == null)
+            {
+                ffdModel = new FFDModel();
+            }
+            ffdModel.type = 1;
+            ffdModel.upCount = f.upCount;
+            ffdModel.downCount = f.downCount;
+
+            ffdModel.upPoint = this.addPointList(f.exListView1, f.upMax + 0.005);
+
+            ffdModel.downPoint = this.addPointList(f.exListView2, f.downMax - 0.005);
+
+
+        }
+
+        private List<DataPoint> addPointList(EXListView e, double y)
+        {
+            List<DataPoint> list = new List<DataPoint>();
+
+            list.Add(new DataPoint(0, y));
+            foreach(EXListViewItem item in e.Items)
+            {
+                list.Add(new DataPoint(Double.Parse(((TextBox)item.SubItems[1].Tag).Text),y));
+            }
+            list.Add(new DataPoint(1,y));
+            return list;
+        }
+
+
+        private void addHicksHenneModel(XK xk)
+        {
+            if (this.hicksHenneModel == null)
+            {
+                this.hicksHenneModel = new HicksHenneModel();
+            }
+
+            this.hicksHenneModel.type = 3;
+            this.hicksHenneModel.upCount = xk.upCount;
+            this.hicksHenneModel.downCount = xk.downCount;
+            this.hicksHenneModel.downValueList = this.getHicksHenneValueList(xk.exListView2);
+            this.hicksHenneModel.upValueList = this.getHicksHenneValueList(xk.exListView1);
+        }
+
+        private List<Double> getHicksHenneValueList(EXListView e)
+        {
+            List<Double> list = new List<Double>();
+            foreach (EXListViewItem item in e.Items)
+            {
+                list.Add(Double.Parse(((TextBox)item.SubItems[1].Tag).Text));
+            }
+            return list;
+        }
+
+        private List<ParasettingDUC> getDUC()
+        {
+            List<ParasettingDUC> ducList = new List<ParasettingDUC>();
+            try
+            {
+                foreach (EXListViewItem item in this.exListView1.Items)
+                {
+                   
+                    double down = Double.Parse(((TextBox)item.SubItems[2].Tag).Text);
+                    double current = Double.Parse(((TextBox)item.SubItems[4].Tag).Text);
+                    double up = Double.Parse(((TextBox)item.SubItems[6].Tag).Text);
+                    ParasettingDUC duc = new ParasettingDUC(down, current, up);
+                    ducList.Add(duc);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            return ducList;
+        }
     }
 }

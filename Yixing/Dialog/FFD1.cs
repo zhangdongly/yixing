@@ -193,6 +193,7 @@ namespace Yixing.Dialog
                     EXControlListViewSubItem exc = new EXControlListViewSubItem();
                     double value = 1.0 / (upNumber + 1) * (i + 1);
                     t.Text = string.Format("{0:#0.0000}", value);
+                    exc.Tag = t;
                     item.SubItems.Add(exc);
                     ex.AddControlToSubItem(t, exc);
                     item.Tag = this.addPoint(value, y, this.series);
@@ -286,6 +287,8 @@ namespace Yixing.Dialog
         private void button3_Click(object sender, EventArgs e)
         {
             count = this.exListView1.Items.Count + this.exListView2.Items.Count;
+            upCount = this.exListView1.Items.Count;
+            downCount = this.exListView2.Items.Count;
             this.DialogResult = DialogResult.OK;
             this.Close();
         }

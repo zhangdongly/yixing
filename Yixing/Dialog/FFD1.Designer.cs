@@ -220,7 +220,7 @@ namespace Yixing.Dialog
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private UserTool.EXListView exListView1;
+        public UserTool.EXListView exListView1;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Panel panel2;
@@ -229,13 +229,14 @@ namespace Yixing.Dialog
         private int operatorType = 0;
         private Series series;
         private DataPoint selectedPoint;
-        private List<DataPoint> selectedPointList;
         public int count = 0;
-        private double upMax;
-        private double downMax;
+        public int upCount = 0;
+        public int downCount = 0;
+        public double upMax;
+        public double downMax;
         private Label label5;
         private Label label4;
-        private EXListView exListView2;
+        public EXListView exListView2;
         private Label label7;
         private TextBox textBox3;
         private Label label6;

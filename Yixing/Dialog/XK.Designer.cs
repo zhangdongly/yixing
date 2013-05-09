@@ -222,12 +222,14 @@ namespace Yixing.Dialog
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         public int count;
+        public int downCount;
+        public int upCount;
         private GroupBox groupBox1;
         private Panel panel1;
-        private UserTool.EXListView exListView1;
+        public UserTool.EXListView exListView1;
         private GroupBox groupBox2;
         private Panel panel2;
-        private UserTool.EXListView exListView2;
+        public UserTool.EXListView exListView2;
         private TextBox textBox1;
         private Label label3;
         private Label label1;

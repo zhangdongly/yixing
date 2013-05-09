@@ -75,6 +75,7 @@ namespace Yixing.Dialog
                     EXControlListViewSubItem exc = new EXControlListViewSubItem();
                     double value = 1.0 / (upNumber + 1) * (i + 1);
                     t.Text = string.Format("{0:#0.0000}", value);
+                    exc.Tag = t;
                     item.SubItems.Add(exc);
                     ex.AddControlToSubItem(t, exc);
                    ex.Items.Add(item);
