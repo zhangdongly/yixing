@@ -45,7 +45,7 @@ namespace Yixing.UserControl.Youhua
         private Label label10;
         private Label label12;
         private System.Windows.Forms.Panel panel1;
-    
+        private ImageList iList ;
         public Model()
         {
             this.InitializeComponent();
@@ -91,6 +91,12 @@ namespace Yixing.UserControl.Youhua
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
+
+            //user
+            iList= new ImageList();
+            iList.ImageSize = new Size(1, 35);
+    
+
             // 
             // panel1
             // 
@@ -308,6 +314,7 @@ namespace Yixing.UserControl.Youhua
             this.exListView1.TabIndex = 1;
             this.exListView1.UseCompatibleStateImageBehavior = false;
             this.exListView1.View = System.Windows.Forms.View.Details;
+            this.exListView1.SmallImageList = iList;
             // 
             // groupBox1
             // 
@@ -443,7 +450,7 @@ namespace Yixing.UserControl.Youhua
             this.comboBox1.Text = this.comboBox1.Items[0].ToString();
 
             this.exListView2.Columns.Add("目标",100);
-            this.exListView2.Columns.Add("表达式", 570);
+            this.exListView2.Columns.Add("表达式", 575);
             this.exListView2.Columns.Add("", 50);
             ImageList iList = new ImageList();
             iList.ImageSize = new Size(1, 150);
@@ -466,8 +473,7 @@ namespace Yixing.UserControl.Youhua
             listView.Columns.Add("",20);
             listView.Columns.Add("删除");
             listView.Tag = item;
-            ImageList iList = new ImageList();
-            iList.ImageSize = new Size(1, 35);
+           
             listView.SmallImageList = iList;
             listView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             
@@ -481,8 +487,17 @@ namespace Yixing.UserControl.Youhua
             Button b = new Button();
             b.Text = "增加";
             b.Tag = listView;
+           
+             b.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            b.FlatAppearance.BorderSize = 0;
+            b.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            b.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            b.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            b.FlatStyle = System.Windows.Forms.FlatStyle.Flat;  
             b.Click += new EventHandler(this.add_Click);
+            
             EXControlListViewSubItem exc = new EXControlListViewSubItem();
+            
             item.SubItems.Add(exc);
             this.exListView2.AddControlToSubItem(b, exc);
             this.exListView2.Items.Add(item);
@@ -535,11 +550,11 @@ namespace Yixing.UserControl.Youhua
              ComboBox y = new ComboBox();
              y.Items.AddRange(new object[]{
             "无约束",
-            "",
+           
             "约束上限和下限",
-           "" ,
+          
             "约束上限",
-            "",
+            
             "约束下限"});
              y.SelectedIndexChanged += new EventHandler(this.selectChanged);
              y.Text = y.Items[0].ToString();
