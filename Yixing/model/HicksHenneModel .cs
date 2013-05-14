@@ -16,7 +16,7 @@ namespace Yixing.model
         {
             FileStream fs = new FileStream(filePath, FileMode.Create);
             StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.UTF8);
-            sw.WriteLine("参数化方法");
+            sw.WriteLine("参数化方法(编号说明该：1-FFD方法，2-CST，3-HicksHenne）");
             sw.WriteLine(this.type);
             sw.WriteLine("上下表面设计变量的个数");
             sw.WriteLine(this.upCount + "\t" + this.downCount);
@@ -25,7 +25,7 @@ namespace Yixing.model
             {
                 sw.WriteLine(duc.down + "\t" + duc.up + "\t" + duc.current);
             }
-
+            sw.WriteLine("上下表面xk 坐标");
             foreach (double d in this.upValueList)
             {
                 sw.WriteLine(d);

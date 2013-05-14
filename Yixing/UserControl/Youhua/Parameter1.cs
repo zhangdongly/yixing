@@ -45,6 +45,7 @@ namespace Yixing.UserControl.Youhua
          * user struct
          * */
         private FFDModel ffdModel;
+        private FolderBrowserDialog folderBrowserDialog1;
 
         private HicksHenneModel hicksHenneModel;
     
@@ -81,6 +82,7 @@ namespace Yixing.UserControl.Youhua
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -136,8 +138,8 @@ namespace Yixing.UserControl.Youhua
             this.chart1.BorderlineColor = System.Drawing.Color.LightGray;
             this.chart1.BorderSkin.BorderWidth = 2;
             this.chart1.BorderSkin.SkinStyle = System.Windows.Forms.DataVisualization.Charting.BorderSkinStyle.Emboss;
-            chartArea1.Name = "ChartArea1";
             chartArea1.AxisX.LabelStyle.Format = "{0.00}";
+            chartArea1.Name = "ChartArea1";
             this.chart1.ChartAreas.Add(chartArea1);
             this.chart1.Location = new System.Drawing.Point(470, 3);
             this.chart1.Name = "chart1";
@@ -518,6 +520,11 @@ namespace Yixing.UserControl.Youhua
 
         private void button3_Click(object sender, EventArgs e)
         {
+            String path = FileDialogUtil.getSelectFolder(this.folderBrowserDialog1)+"/";
+            if (path == null)
+            {
+                path = RuntimeConstants.FILE_RESOURCE_LOADER_PATH;
+            }
             if (this.comboBox1.Text.Equals("FFD"))
             {
                 if (this.ffdModel == null)
@@ -526,7 +533,7 @@ namespace Yixing.UserControl.Youhua
                     return;
                 }
                 this.ffdModel.ducList = this.getDUC();
-                this.ffdModel.write2File(RuntimeConstants.FILE_RESOURCE_LOADER_PATH+"parasetting.inp");
+                this.ffdModel.write2File(path+"parasetting.inp");
             }
             else if (this.comboBox1.Text.Equals("CST"))
             {
@@ -539,7 +546,7 @@ namespace Yixing.UserControl.Youhua
                     MessageBox.Show("请先完成Hicks Henne相关设置");
                 }
                 this.hicksHenneModel.ducList = this.getDUC();
-                this.hicksHenneModel.write2File(RuntimeConstants.FILE_RESOURCE_LOADER_PATH+"parasetting.inp");
+                this.hicksHenneModel.write2File(path+"parasetting.inp");
 
             }
 
