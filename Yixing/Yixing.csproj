@@ -240,6 +240,7 @@
     <Compile Include="model\DCYixing.cs" />
     <Compile Include="model\FFDModel.cs" />
     <Compile Include="model\HicksHenneModel .cs" />
+    <Compile Include="model\InitialAirfoilModel.cs" />
     <Compile Include="model\Parasetting.cs" />
     <Compile Include="model\ParasettingDUC.cs" />
     <Compile Include="model\ResultModel.cs" />

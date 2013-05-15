@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using Yixing.model;
 using Yixing.UserTool;
 namespace Yixing.Dialog
 {
@@ -241,5 +242,7 @@ namespace Yixing.Dialog
         private TextBox textBox3;
         private Label label6;
         private TextBox textBox2;
+        public InitialAirfoilModel initialAirforlModel;
+       
     }
 }
