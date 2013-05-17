@@ -9,6 +9,7 @@ using Yixing.Dialog;
 using System.Windows.Forms.DataVisualization.Charting;
 using Yixing.model;
 using NVelocity.Runtime;
+using System.Drawing;
 
 namespace Yixing.UserControl.Youhua
 {
@@ -369,6 +370,9 @@ namespace Yixing.UserControl.Youhua
             this.exListView1.Columns.Add("当前值",100);
             this.exListView1.Columns.Add("",50);
             this.exListView1.Columns.Add("上限",100);
+            ImageList ilist = new ImageList();
+            ilist.ImageSize = new Size(25, 25);
+            this.exListView1.SmallImageList = ilist;
             this.comboBox1.Text = this.comboBox1.Items[0].ToString();
         }
 
@@ -526,7 +530,7 @@ namespace Yixing.UserControl.Youhua
                     if (x.ShowDialog() == DialogResult.OK)
                     {
                         this.varCount =Convert.ToInt32( x.count.ToString());
-                        this.addParameter(0,1, 0);
+                        this.addParameter(-0.01,0.01, 0);
                     }
                     this.addHicksHenneModel(x);
                
@@ -548,7 +552,7 @@ namespace Yixing.UserControl.Youhua
                     return;
                 }
                 this.ffdModel.ducList = this.getDUC();
-                this.ffdModel.write2File(path+"parasetting.inp");
+                this.ffdModel.write2File(path+"parasetting.dat");
             }
             else if (this.comboBox1.Text.Equals("CST"))
             {
@@ -561,7 +565,7 @@ namespace Yixing.UserControl.Youhua
                     MessageBox.Show("请先完成Hicks Henne相关设置");
                 }
                 this.hicksHenneModel.ducList = this.getDUC();
-                this.hicksHenneModel.write2File(path+"parasetting.inp");
+                this.hicksHenneModel.write2File(path+"parasetting.dat");
 
             }
 
