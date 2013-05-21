@@ -8,6 +8,9 @@ using System.Windows.Forms;
 using Yixing.UserTool;
 using Yixing.Dialog;
 using Yixing.model;
+using Yixing.model.mubiaohans;
+using Yixing.util;
+using System.IO;
 
 namespace Yixing.UserControl.Youhua
 {
@@ -46,6 +49,7 @@ namespace Yixing.UserControl.Youhua
         private Label label12;
         private System.Windows.Forms.Panel panel1;
         private System.ComponentModel.IContainer components;
+        private Button button5;
         private ImageList iList ;
         public Model()
         {
@@ -69,7 +73,6 @@ namespace Yixing.UserControl.Youhua
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
-            this.exListView2 = new Yixing.UserTool.EXListView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
@@ -77,7 +80,6 @@ namespace Yixing.UserControl.Youhua
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
-            this.exListView1 = new Yixing.UserTool.EXListView();
             this.iList = new System.Windows.Forms.ImageList(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -88,6 +90,9 @@ namespace Yixing.UserControl.Youhua
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.exListView2 = new Yixing.UserTool.EXListView();
+            this.exListView1 = new Yixing.UserTool.EXListView();
+            this.button5 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -97,6 +102,7 @@ namespace Yixing.UserControl.Youhua
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button5);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.exListView2);
@@ -224,19 +230,6 @@ namespace Yixing.UserControl.Youhua
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // exListView2
-            // 
-            this.exListView2.ControlPadding = 4;
-            this.exListView2.FullRowSelect = true;
-            this.exListView2.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.exListView2.Location = new System.Drawing.Point(15, 186);
-            this.exListView2.Name = "exListView2";
-            this.exListView2.OwnerDraw = true;
-            this.exListView2.Size = new System.Drawing.Size(762, 241);
-            this.exListView2.TabIndex = 1;
-            this.exListView2.UseCompatibleStateImageBehavior = false;
-            this.exListView2.View = System.Windows.Forms.View.Details;
-            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.label12);
@@ -307,20 +300,6 @@ namespace Yixing.UserControl.Youhua
             this.button2.Text = "添加";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // exListView1
-            // 
-            this.exListView1.ControlPadding = 4;
-            this.exListView1.FullRowSelect = true;
-            this.exListView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.exListView1.Location = new System.Drawing.Point(257, 32);
-            this.exListView1.Name = "exListView1";
-            this.exListView1.OwnerDraw = true;
-            this.exListView1.Size = new System.Drawing.Size(517, 136);
-            this.exListView1.SmallImageList = this.iList;
-            this.exListView1.TabIndex = 1;
-            this.exListView1.UseCompatibleStateImageBehavior = false;
-            this.exListView1.View = System.Windows.Forms.View.Details;
             // 
             // iList
             // 
@@ -415,6 +394,43 @@ namespace Yixing.UserControl.Youhua
             this.label2.TabIndex = 1;
             this.label2.Text = "马赫数";
             // 
+            // exListView2
+            // 
+            this.exListView2.ControlPadding = 4;
+            this.exListView2.FullRowSelect = true;
+            this.exListView2.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.exListView2.Location = new System.Drawing.Point(15, 186);
+            this.exListView2.Name = "exListView2";
+            this.exListView2.OwnerDraw = true;
+            this.exListView2.Size = new System.Drawing.Size(762, 241);
+            this.exListView2.TabIndex = 1;
+            this.exListView2.UseCompatibleStateImageBehavior = false;
+            this.exListView2.View = System.Windows.Forms.View.Details;
+            // 
+            // exListView1
+            // 
+            this.exListView1.ControlPadding = 4;
+            this.exListView1.FullRowSelect = true;
+            this.exListView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.exListView1.Location = new System.Drawing.Point(257, 32);
+            this.exListView1.Name = "exListView1";
+            this.exListView1.OwnerDraw = true;
+            this.exListView1.Size = new System.Drawing.Size(517, 136);
+            this.exListView1.SmallImageList = this.iList;
+            this.exListView1.TabIndex = 1;
+            this.exListView1.UseCompatibleStateImageBehavior = false;
+            this.exListView1.View = System.Windows.Forms.View.Details;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(299, 433);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 4;
+            this.button5.Text = "导出优化参数";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // Model
             // 
             this.Controls.Add(this.panel1);
@@ -455,10 +471,11 @@ namespace Yixing.UserControl.Youhua
             this.exListView2.Columns.Add("目标",100);
             this.exListView2.Columns.Add("表达式", 575);
             this.exListView2.Columns.Add("", 50);
+            this.exListView2.Columns.Add("", 70);
             ImageList iList = new ImageList();
             iList.ImageSize = new Size(1, 150);
             this.exListView2.SmallImageList = iList;
-            this.addTarget();
+            //this.addTarget();
         }
 
         private void addTarget()
@@ -501,6 +518,7 @@ namespace Yixing.UserControl.Youhua
 
             Button up = new Button();
             up.BackgroundImage = Yixing.Properties.Resources.up;
+            up.BackgroundImageLayout = ImageLayout.Center;
             up.Tag = "up";
 
             up.FlatAppearance.BorderColor = System.Drawing.Color.White;
@@ -516,12 +534,18 @@ namespace Yixing.UserControl.Youhua
             EXControlListViewSubItem exc2 = new EXControlListViewSubItem();
             item.SubItems.Add(exc);
             this.exListView2.AddControlToSubItem(b, exc);
+            item.SubItems.Add(exc2);
             this.exListView2.AddControlToSubItem(up, exc2);
             this.exListView2.Items.Add(item);
         }
 
         private void addExpression(EXListView inner, EXListViewItem outer, Boolean isFirst)
         {
+            if (this.ztDic.Count == 0)
+            {
+                MessageBox.Show("添加目标时，必须有已定义的状态！");
+                return;
+            }
              EXListViewItem item ;
              if (isFirst)
              {
@@ -534,10 +558,12 @@ namespace Yixing.UserControl.Youhua
              item.Tag = inner;
             
             ComboBox c = new ComboBox();
-             c.Items.AddRange(new object[] {
-            "状态1",
-            "状态2"});
-            
+            object[] obj = orzZtNmae();
+            if (obj.Length > 0)
+            {
+                c.Items.AddRange(obj);
+                c.Text = (String)obj[0];
+            }
             
              EXControlListViewSubItem status = new EXControlListViewSubItem();
 
@@ -615,7 +641,6 @@ namespace Yixing.UserControl.Youhua
             Button b = (Button)sender;
             EXListView listView =(EXListView) b.Tag;
             this.addExpression(listView, null, false);
-
         }
 
         private void up_click(object sender, EventArgs e)
@@ -726,8 +751,244 @@ namespace Yixing.UserControl.Youhua
             }
         }
 
-       
+        private object[] orzZtNmae()
+        {
+            object[] obj = new object[ztDic.Count];
+            int i = 0;
+            foreach (int ztkey in ztDic.Keys)
+            {
+                Status st = ztDic[ztkey];
+                obj[i] = getZtName(st);
+                i++;
+            }
+            return obj;
+        }
 
-        
+        //获取选中的状态的序数,这个序数是zt的key 用于反查listview中 取那个上限的
+        private int getindex(String exp)
+        {
+            object[] objs = this.orzZtNmae();
+            foreach (int ztkey in ztDic.Keys)
+            {
+                Status st = ztDic[ztkey];
+                String res = getZtName(st);
+                if (res.Equals(exp))
+                {
+                    return ztkey;
+                }
+            }
+            return 0;
+        }
+
+        private String getZtName(Status st)
+        {
+            String mahe = string.Format("{0:0.000}", st.mahe);
+            mahe = "m" + mahe.Replace(".", "");
+
+            String yj = string.Format("{0:0.000}", st.dslxs);
+            yj = yj.Replace(".", "");
+            if (st.isyj)
+            {
+                yj = "a" + yj;
+            }
+            else
+            {
+                yj = "cl" + yj;
+            }
+           return mahe + "_" + yj;
+        }
+
+        private String getZtoutPath(Status st)
+        {
+            String mahe = string.Format("{0:0.000}", st.mahe);
+            mahe = "m" + mahe.Replace(".", "");
+
+            String yj = string.Format("{0:0.000}", st.dslxs);
+            yj = yj.Replace(".", "");
+            if (st.isyj)
+            {
+                yj = "a" + yj;
+            }
+            else
+            {
+                yj = "cl" + yj;
+            }
+            return mahe + "/" + yj;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            List<Aim> aimList = new List<Aim>();
+            int aimcount = this.exListView2.Items.Count;
+            #region
+            for (int i = 0; i < aimcount; i++)
+            {
+                Aim aim = new Aim();
+                aim.index = i+1;
+                ListViewItem item = this.exListView2.Items[i];
+                EXControlListViewSubItem subitem = (EXControlListViewSubItem)item.SubItems[3];
+                Button b = (Button)subitem.MyControl;
+                aim.upordown = 2;
+                if (b.Tag.Equals("up"))
+                {
+                    aim.upordown=2;
+                }
+
+                //表达式的listview
+                EXControlListViewSubItem subitemLv = (EXControlListViewSubItem)item.SubItems[1];
+                EXListView expression= (EXListView)subitemLv.MyControl;
+                List<AimExpression> expressList = new List<AimExpression>();
+                int expressioncount = expression.Items.Count;
+                for (int j = 0; j < expressioncount; j++)
+                {
+                    AimExpression exp = new AimExpression();
+
+                    int cfxs;
+                    int.TryParse(this.textBox4.Text,out cfxs);
+                    exp.cfxs = cfxs;
+
+                    ListViewItem expitem = expression.Items[j];
+                    EXControlListViewSubItem subitemindex = (EXControlListViewSubItem)expitem.SubItems[1];
+                    ComboBox indexc = (ComboBox)subitemindex.MyControl;
+                    String ztstr = indexc.Text;
+                    int index = this.getindex(ztstr);
+                    exp.index = index;
+                    int listview1Count = this.exListView1.Items.Count;
+                    //这个是选中状态的，在lv1 中的item
+                    ListViewItem lv1item = null;
+                    for (int k = 0; k < listview1Count; k++)
+                    {
+                        lv1item = this.exListView1.Items[k];
+                        int tag = (int)lv1item.Tag;
+                        if (tag == index)
+                            break;
+                    }
+
+                    EXControlListViewSubItem subitemqdtx = (EXControlListViewSubItem)expitem.SubItems[4];
+                    ComboBox qdtxc = (ComboBox)subitemqdtx.MyControl;
+                    exp.qdtx = 2;
+                    EXControlListViewSubItem cldown=null;
+                    EXControlListViewSubItem clup = null;
+                    if (qdtxc.Text.Equals("cl"))
+                    {
+                        exp.qdtx = 1;
+                        if (lv1item != null)
+                        {
+                            cldown = (EXControlListViewSubItem)lv1item.SubItems[2];
+
+                            clup = (EXControlListViewSubItem)lv1item.SubItems[3];
+
+                        }
+                    }
+                    else
+                    {
+                        if (lv1item != null)
+                        {
+                            cldown = (EXControlListViewSubItem)lv1item.SubItems[4];
+
+                            clup = (EXControlListViewSubItem)lv1item.SubItems[5];
+
+                        }
+                    }
+
+                    TextBox downtxt = (TextBox)cldown.MyControl;
+                    TextBox uptxt = (TextBox)clup.MyControl;
+                    if (downtxt.Text.Trim().Equals(""))
+                    {
+                        exp.limitdown = -10000;
+                    }
+                    else
+                    {
+                        int dowlimit = -10000;
+                        int.TryParse(downtxt.Text, out dowlimit);
+                        exp.limitdown = dowlimit;
+                    }
+                    if (downtxt.Text.Trim().Equals(""))
+                    {
+                        exp.limitup = 10000;
+                    }
+                    else
+                    {
+                        int uplimit = 10000;
+                        int.TryParse(uptxt.Text, out uplimit);
+                        exp.limitup = uplimit;
+                    }
+                    expressList.Add(exp);
+                }
+                aim.expressionList = expressList;
+
+                aimList.Add(aim);
+            }
+            #endregion
+
+            //根据aimList 组织templte
+            gentemplate(aimList);
+            MessageBox.Show("导出完成");
+
+        }
+
+        private void gentemplate(List<Aim> aimList){
+            FileStream fs = new FileStream(@"d://Objsetting.dat", FileMode.Create);
+            StreamWriter sw = new StreamWriter(fs);
+            //TemplateHelper tp = new TemplateHelper(@"./template");
+            //tp.Put("ztc",this.ztDic.Count);
+            sw.WriteLine("计算状态个数");
+            sw.WriteLine(this.ztDic.Count);
+           // tp.Put("aimc", aimList.Count);
+            sw.WriteLine("目标函数个数");
+            sw.WriteLine(aimList.Count);
+            int ysc=0;
+            //目标函数最大最小化的定义
+            String upordown = "";
+            //表达式定义，段
+            String exp ="";
+            foreach (Aim aim in aimList)
+            {
+                ysc += aim.expressionList.Count;
+                upordown += aim.index + "    " + aim.upordown + "\r\n";
+                List<AimExpression> explist = aim.expressionList;
+                if (explist != null && explist.Count > 0)
+                {
+                    foreach (AimExpression expression in explist)
+                    {
+                        exp += aim.index + "  " + expression.index + "  " + expression.qdtx + " "
+                                + expression.limitdown + "  " + expression.limitup + "  " + expression.cfxs + "\r\n";
+                    }
+                }
+            }
+           
+           // tp.Put("upordown",upordown);
+           // tp.Put("ysc",ysc);
+
+            String ouptlj="";
+            //这个本来应该是前缀从配置中来的
+            String prefix = @"d:\\";
+            foreach (int ztkey in ztDic.Keys)
+            {
+                Status st = ztDic[ztkey];
+                String outPath = getZtoutPath(st);
+                ouptlj += prefix + outPath + "\r\n";
+            }
+            //tp.Put("ouptlj", ouptlj);
+            sw.WriteLine("元素个数");
+            sw.WriteLine(ysc);
+            sw.WriteLine("计算路径");
+            sw.Write(ouptlj);
+            sw.WriteLine("目标函数最大化最小化定义");
+            sw.Write(upordown);
+            sw.WriteLine("目标函数表达式定义，顺序为：目标序号，计算状态序号，气动特性编号，范围下限，范围上限，惩罚系数 ");
+            sw.Write(exp);
+
+            String s = this.textBox3.Text + "  " + this.textBox5.Text;
+            sw.WriteLine(s);
+            sw.WriteLine("计算一个状态的线程数，并行计算的状态数");
+            String strxc = this.textBox7.Text + "  " + this.textBox8.Text;
+            sw.WriteLine(strxc);
+            //清空缓冲区、关闭流
+            fs.Flush();
+            sw.Flush();
+            sw.Close();
+            fs.Close();
+        }
     }
 }
