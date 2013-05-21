@@ -30,7 +30,6 @@
         {
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.exListView1 = new Yixing.UserTool.EXListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -47,6 +46,12 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.button4 = new System.Windows.Forms.Button();
+            this.rtb_info = new System.Windows.Forms.RichTextBox();
+            this.exListView1 = new Yixing.UserTool.EXListView();
+            this.状态 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -54,7 +59,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(27, 346);
+            this.button1.Location = new System.Drawing.Point(20, 387);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 3;
@@ -64,30 +69,13 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(177, 346);
+            this.button2.Location = new System.Drawing.Point(170, 387);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 4;
             this.button2.Text = "取消";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // exListView1
-            // 
-            this.exListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3});
-            this.exListView1.ControlPadding = 4;
-            this.exListView1.FullRowSelect = true;
-            this.exListView1.Location = new System.Drawing.Point(12, 13);
-            this.exListView1.Name = "exListView1";
-            this.exListView1.OwnerDraw = true;
-            this.exListView1.Size = new System.Drawing.Size(282, 97);
-            this.exListView1.TabIndex = 11;
-            this.exListView1.UseCompatibleStateImageBehavior = false;
-            this.exListView1.View = System.Windows.Forms.View.Details;
-            this.exListView1.SelectedIndexChanged += new System.EventHandler(this.exListView1_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -238,13 +226,64 @@
             this.radioButton1.Text = "Roe";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(46, 346);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(171, 23);
+            this.button4.TabIndex = 13;
+            this.button4.Text = "初始翼型计算";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // rtb_info
+            // 
+            this.rtb_info.Location = new System.Drawing.Point(306, 12);
+            this.rtb_info.Name = "rtb_info";
+            this.rtb_info.Size = new System.Drawing.Size(454, 398);
+            this.rtb_info.TabIndex = 14;
+            this.rtb_info.Text = "";
+            // 
+            // exListView1
+            // 
+            this.exListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.状态,
+            this.columnHeader4,
+            this.columnHeader5});
+            this.exListView1.ControlPadding = 4;
+            this.exListView1.FullRowSelect = true;
+            this.exListView1.Location = new System.Drawing.Point(12, 13);
+            this.exListView1.Name = "exListView1";
+            this.exListView1.OwnerDraw = true;
+            this.exListView1.Size = new System.Drawing.Size(281, 97);
+            this.exListView1.TabIndex = 15;
+            this.exListView1.UseCompatibleStateImageBehavior = false;
+            this.exListView1.View = System.Windows.Forms.View.Details;
+            // 
+            // 状态
+            // 
+            this.状态.Text = "状态";
+            this.状态.Width = 100;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "马赫数";
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "迎角/升力系数";
+            this.columnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader5.Width = 100;
+            // 
             // Texingpingu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(312, 383);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(778, 443);
             this.Controls.Add(this.exListView1);
+            this.Controls.Add(this.rtb_info);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Name = "Texingpingu";
@@ -264,7 +303,6 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private UserTool.EXListView exListView1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
@@ -281,5 +319,11 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.RichTextBox rtb_info;
+        private UserTool.EXListView exListView1;
+        private System.Windows.Forms.ColumnHeader 状态;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
     }
 }

@@ -16,7 +16,7 @@ namespace Yixing.util
             //用于记录Ngrid下面那个数的值
             int grid = 0;
             StreamReader objReader = new StreamReader(filePath);
-            String newPath = filePath.Substring(0, filePath.IndexOf(".")) + ".vm";
+            String newPath = filePath.Substring(0, filePath.LastIndexOf(".")) + ".vm";
             FileStream fs = new FileStream(newPath, FileMode.Create);
             
             StreamWriter sw = new StreamWriter(fs);

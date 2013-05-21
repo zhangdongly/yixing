@@ -532,11 +532,13 @@
     <Content Include="Pic\Symbol16.bmp" />
     <Content Include="Pic\true.png" />
     <Content Include="resources\16.png" />
+    <None Include="resources\down.png" />
     <Content Include="resources\fangda.jpg" />
     <Content Include="resources\file.bmp" />
     <Content Include="resources\openFile.ico" />
     <Content Include="resources\suoxiao.jpeg" />
     <Content Include="resources\tu.png" />
+    <None Include="resources\up.png" />
     <Content Include="resources\xiyingfenxi.bmp" />
     <Content Include="resources\yixing.bmp" />
     <Content Include="resources\qidong.bmp" />

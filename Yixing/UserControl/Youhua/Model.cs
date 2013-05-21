@@ -45,6 +45,7 @@ namespace Yixing.UserControl.Youhua
         private Label label10;
         private Label label12;
         private System.Windows.Forms.Panel panel1;
+        private System.ComponentModel.IContainer components;
         private ImageList iList ;
         public Model()
         {
@@ -53,6 +54,7 @@ namespace Yixing.UserControl.Youhua
 
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.textBox8 = new System.Windows.Forms.TextBox();
@@ -69,12 +71,14 @@ namespace Yixing.UserControl.Youhua
             this.button3 = new System.Windows.Forms.Button();
             this.exListView2 = new Yixing.UserTool.EXListView();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label12 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.exListView1 = new Yixing.UserTool.EXListView();
+            this.iList = new System.Windows.Forms.ImageList(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox6 = new System.Windows.Forms.TextBox();
@@ -84,19 +88,12 @@ namespace Yixing.UserControl.Youhua
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-
-            //user
-            iList= new ImageList();
-            iList.ImageSize = new Size(1, 35);
-    
-
             // 
             // panel1
             // 
@@ -255,6 +252,15 @@ namespace Yixing.UserControl.Youhua
             this.panel2.Size = new System.Drawing.Size(791, 177);
             this.panel2.TabIndex = 0;
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(162, 23);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(17, 12);
+            this.label12.TabIndex = 9;
+            this.label12.Text = "万";
+            // 
             // button4
             // 
             this.button4.Location = new System.Drawing.Point(192, 96);
@@ -311,10 +317,16 @@ namespace Yixing.UserControl.Youhua
             this.exListView1.Name = "exListView1";
             this.exListView1.OwnerDraw = true;
             this.exListView1.Size = new System.Drawing.Size(517, 136);
+            this.exListView1.SmallImageList = this.iList;
             this.exListView1.TabIndex = 1;
             this.exListView1.UseCompatibleStateImageBehavior = false;
             this.exListView1.View = System.Windows.Forms.View.Details;
-            this.exListView1.SmallImageList = iList;
+            // 
+            // iList
+            // 
+            this.iList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.iList.ImageSize = new System.Drawing.Size(1, 35);
+            this.iList.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // groupBox1
             // 
@@ -403,15 +415,6 @@ namespace Yixing.UserControl.Youhua
             this.label2.TabIndex = 1;
             this.label2.Text = "马赫数";
             // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(162, 23);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(17, 12);
-            this.label12.TabIndex = 9;
-            this.label12.Text = "万";
-            // 
             // Model
             // 
             this.Controls.Add(this.panel1);
@@ -488,21 +491,33 @@ namespace Yixing.UserControl.Youhua
             b.Text = "增加";
             b.Tag = listView;
            
-             b.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            b.FlatAppearance.BorderColor = System.Drawing.Color.White;
             b.FlatAppearance.BorderSize = 0;
             b.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
             b.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             b.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             b.FlatStyle = System.Windows.Forms.FlatStyle.Flat;  
             b.Click += new EventHandler(this.add_Click);
-            
+
+            Button up = new Button();
+            up.BackgroundImage = Yixing.Properties.Resources.up;
+            up.Tag = "up";
+
+            up.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            up.FlatAppearance.BorderSize = 0;
+            up.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            up.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            up.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            up.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            up.Click += new EventHandler(this.up_click);
+
             EXControlListViewSubItem exc = new EXControlListViewSubItem();
-            
+
+            EXControlListViewSubItem exc2 = new EXControlListViewSubItem();
             item.SubItems.Add(exc);
             this.exListView2.AddControlToSubItem(b, exc);
+            this.exListView2.AddControlToSubItem(up, exc2);
             this.exListView2.Items.Add(item);
-           
-
         }
 
         private void addExpression(EXListView inner, EXListViewItem outer, Boolean isFirst)
@@ -603,6 +618,22 @@ namespace Yixing.UserControl.Youhua
 
         }
 
+        private void up_click(object sender, EventArgs e)
+        {
+            Button b = (Button)sender;
+            String tag =(String)b.Tag;
+            if (tag.Equals("up"))
+            {
+                b.BackgroundImage = Yixing.Properties.Resources.down;
+                b.Tag = "down";
+            }
+            else
+            {
+                b.Tag = "up";
+                b.BackgroundImage = Yixing.Properties.Resources.up;
+            }
+        }
+
         private void selectChanged(object sender,EventArgs e){
             ComboBox com = (ComboBox)sender;
            // MessageBox.Show(com.SelectedIndex+"");
@@ -653,8 +684,13 @@ namespace Yixing.UserControl.Youhua
 
             ztkey++;
             Status st = new Status();
-            st.mahe = Convert.ToDouble(ma);
-            st.dslxs = Convert.ToDouble(al);
+            st.mahe =(float)Convert.ToDouble(ma);
+            st.dslxs = (float)Convert.ToDouble(al);
+            st.isyj = false;
+            if (this.comboBox1.Text.Equals("定迎角"))
+            {
+                st.isyj = true;
+            }
             this.ztDic.Add(ztkey, st);
             item.Tag = ztkey;
             item.SubItems.Add(al);
