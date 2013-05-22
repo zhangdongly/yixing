@@ -14,5 +14,23 @@ namespace Yixing.model
         public float dslxs { get; set; }
 
         public Boolean isyj { get; set; }
+
+        public String getZtName()
+        {
+            String mahe = string.Format("{0:0.000}", this.mahe);
+            mahe = "m" + mahe.Replace(".", "");
+
+            String yj = string.Format("{0:0.000}", dslxs);
+            yj = yj.Replace(".", "");
+            if (isyj)
+            {
+                yj = "a" + yj;
+            }
+            else
+            {
+                yj = "cl" + yj;
+            }
+            return mahe + "_" + yj;
+        }
     }
 }
