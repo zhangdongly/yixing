@@ -87,9 +87,10 @@ namespace Yixing
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.qidong = new Yixing.UserControl.Qidong();
             this.youhua = new Yixing.UserControl.Youhua.Youhua();
-            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -490,6 +491,10 @@ namespace Yixing
             this.panel1.Size = new System.Drawing.Size(945, 620);
             this.panel1.TabIndex = 2;
             // 
+            // folderBrowserDialog1
+            // 
+            this.folderBrowserDialog1.Description = "请选择或重新创建优化工程 ";
+            // 
             // qidong
             // 
             this.qidong.Location = new System.Drawing.Point(0, 0);
@@ -503,10 +508,6 @@ namespace Yixing
             this.youhua.Name = "youhua";
             this.youhua.Size = new System.Drawing.Size(930, 600);
             this.youhua.TabIndex = 0;
-            // 
-            // folderBrowserDialog1
-            // 
-            this.folderBrowserDialog1.Description = "请选择或重新创建优化工程 ";
             // 
             // Form1
             // 
@@ -586,6 +587,7 @@ namespace Yixing
         private SkinEngine skinEngine1=new SkinEngine();
         private ToolStripMenuItem 文件保存路径ToolStripMenuItem;
         private FolderBrowserDialog folderBrowserDialog1;
+        private SaveFileDialog saveFileDialog1;
         
     }
 }

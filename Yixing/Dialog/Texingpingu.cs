@@ -162,6 +162,7 @@ namespace Yixing.Dialog
             #endregion
 
             #region 选择输出路径
+            /**
             FolderBrowserDialog folderDlg = new FolderBrowserDialog();
             String lastFileFolder = Properties.Settings.Default.defaultFileFolder;
             if (!String.IsNullOrWhiteSpace(lastFileFolder))
@@ -179,8 +180,11 @@ namespace Yixing.Dialog
                 MessageBox.Show("你必须选中一个输出路径,否则不进行计算");
                 return;
             }
+             * */
+            
             #endregion
-
+            Properties.Settings.Default.defaultFileFolder = Yixing.Properties.Settings.Default.currentProjectFolder;
+            Properties.Settings.Default.Save();
             #region 处理翼型，此处翼型本该由上层传递下来，但是暂时虚拟一个
             yx.type = 1;
             yx.name="cfl3d.inp";

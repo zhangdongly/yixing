@@ -466,7 +466,7 @@ namespace Yixing.UserControl.Youhua
             this.exListView1.Columns.Add("上限");
             this.exListView1.Columns.Add("下限");
             this.exListView1.Columns.Add("上限");
-            this.exListView1.Columns.Add("转捩");
+          //  this.exListView1.Columns.Add("转捩");
 
             this.comboBox1.Text = this.comboBox1.Items[0].ToString();
 
@@ -487,10 +487,10 @@ namespace Yixing.UserControl.Youhua
             EXListView listView = new EXListView();
             listView.Tag = item;
             listView.Columns.Add("",20);
-            listView.Columns.Add("状态",100);
-            listView.Columns.Add("",100);
+            listView.Columns.Add("状态",170);
+            listView.Columns.Add("",50);
             listView.Columns.Add("", 20);
-            listView.Columns.Add("",100);
+            listView.Columns.Add("",80);
             listView.Columns.Add("约束条件",140);
             listView.Columns.Add("",20);
             listView.Columns.Add("删除");
@@ -584,7 +584,7 @@ namespace Yixing.UserControl.Youhua
 
              ComboBox m = new ComboBox();
 
-             m.Items.AddRange(new object[] { "cl", "cd" });
+             m.Items.AddRange(new object[] { "cl", "cd","cm","k" });
 
              EXControlListViewSubItem mc = new EXControlListViewSubItem();
              item.SubItems.Add(mc);
@@ -732,8 +732,8 @@ namespace Yixing.UserControl.Youhua
             check.Checked = true;
             check.ImageAlign = ContentAlignment.MiddleCenter;
             EXControlListViewSubItem checkE = new EXControlListViewSubItem();
-            item.SubItems.Add(checkE);
-            this.exListView1.AddControlToSubItem(check, checkE);
+            //item.SubItems.Add(checkE);
+            //this.exListView1.AddControlToSubItem(check, checkE);
             this.exListView1.Items.Add(item);
         }
 
