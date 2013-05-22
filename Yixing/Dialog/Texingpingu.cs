@@ -21,9 +21,11 @@ namespace Yixing.Dialog
     {
         private Dictionary<int, Status> ztDic;
 
-        private DCGaoji gj;
+        private Dictionary<int, DCGaoji> gjDic = new Dictionary<int,DCGaoji>();
 
-        private bool isgjOpened = false;
+        int gjkey = 0;
+
+        private EXListViewItem selectitem;
 
         private int znCl = 1;
         //用于判定进程是否结束
@@ -53,12 +55,27 @@ namespace Yixing.Dialog
             {
                 EXListViewItem item = new EXListViewItem("状态" +i);
                 Status s = ztDic[key];
+                s.iszn = false;
+                gjkey++;
+                s.gjKey = gjkey;
+                DCGaoji gj = new DCGaoji();
+                gj.cfl = 2;
+                gj.onedd = 1000;
+                gj.secdd = 1000;
+                gj.thirdd = 600;
+                gjDic.Add(gjkey, gj);
+                s.gjKey = gjkey;
+                s.lsgs = Constant.LSGS_ROE;
+                s.dlmx = Constant.DLMX_SA;
+                //ztDic.Add(key,s);
+
                 item.SubItems.Add(s.mahe + "");
                 item.SubItems.Add(s.dslxs + "");
+                item.Tag = key;
                 this.exListView1.Items.Add(item);
                 i++;
             }
-            
+            this.groupBox1.Enabled = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -89,43 +106,63 @@ namespace Yixing.Dialog
 
         private void button3_Click(object sender, EventArgs e)
         {
+
+            Status s = getSelectedStatus();
+       
+            int gkey = s.gjKey;
+            DCGaoji gj = gjDic[gkey];
+
             DingChangGaoji dcgj;
-            if (isgjOpened)
-            {
-                dcgj = new DingChangGaoji(gj, new StatusEditAble());
-            }
-            else
-            {
-                gj = new DCGaoji();
-                gj.cfl = 2;
-                gj.onedd = 1000;
-                gj.secdd = 1000;
-                gj.thirdd = 600;
-                if (this.checkBox1.Checked)
-                    gj.thirdd = 2500;
-                gj.xzs = 0;
-                dcgj = new DingChangGaoji(gj, new StatusEditAble());
-            }
+            dcgj = new DingChangGaoji(gj, new StatusEditAble());
+            //if (isgjOpened)
+            //{
+            //    dcgj = new DingChangGaoji(gj, new StatusEditAble());
+            //}
+            //else
+            //{
+            //    gj = new DCGaoji();
+            //    gj.cfl = 2;
+            //    gj.onedd = 1000;
+            //    gj.secdd = 1000;
+            //    gj.thirdd = 600;
+            //    if (this.checkBox1.Checked)
+            //        gj.thirdd = 2500;
+            //    gj.xzs = 0;
+            //    dcgj = new DingChangGaoji(gj, new StatusEditAble());
+            //}
             if (dcgj.ShowDialog() == DialogResult.OK)
             {
-                isgjOpened = true;
-                gj = new DCGaoji();
                 gj.cfl = dcgj.cfl;
                 gj.onedd = dcgj.onedd;
                 gj.secdd = dcgj.secdd;
                 gj.thirdd = dcgj.thirdd;
                 gj.xzs = dcgj.xzs;
+               // gjDic.Add(gkey, gj);
             }
         }
 
         private void exListView1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //这个当切换的时候 会有个lose焦点的过程，所以会触发两次，一次选中条为0，另一次才是正常选中
+            int count = this.exListView1.SelectedItems.Count;
+            if (count > 0)
+            {
+                selectitem = (EXListViewItem)this.exListView1.SelectedItems[0];
+            }
+            else
+            {
+                return;
+            }
+            
             //更改颜色。
             foreach (EXListViewItem i in this.exListView1.Items)
             {
                 i.BackColor = Color.White;
             }
-            this.exListView1.SelectedItems[0].BackColor = Color.DodgerBlue;
+            selectitem.BackColor = Color.DodgerBlue;
+            this.groupBox1.Enabled = true;
+            Status s = getSelectedStatus();
+            initgroup1(s);
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -249,32 +286,12 @@ namespace Yixing.Dialog
                 {
                     dcs.dslxs = s.dslxs;
                 }
-                if (this.radioButton1.Checked)
-                {
-                    dcs.lsgs = Constant.LSGS_ROE;
-                }
-                else
-                {
-                    dcs.lsgs = Constant.LSGS_LEER;
-                }
-                if (this.checkBox1.Checked)
-                {
-                    //如果选择了转涅，这个断流模型只能选择sst 所以值为7
-                    dcs.dlmx = 7;
-                }
-                else
-                {
-                    if (this.radioButton3.Checked)
-                    {
-                        dcs.dlmx = Constant.DLMX_SA;
-                    }
-                    else
-                    {
-                        dcs.dlmx = Constant.DLMX_SST;
-                    }
-                }
+                dcs.lsgs = s.lsgs;
+                dcs.dlmx = s.dlmx;
+              
                 #endregion 
-
+                int gkey = s.gjKey;
+                DCGaoji gj = gjDic[gkey];
                 if (gj == null)
                 {
                     gj = new DCGaoji();
@@ -573,6 +590,102 @@ namespace Yixing.Dialog
             //关闭流
             sw.Close();
             fs.Close();
+        }
+
+        private Status getSelectedStatus()
+        {
+            int skey = (int)selectitem.Tag;
+            Status s = ztDic[skey];
+            return s;
+        }
+
+        private int getSelectedStatuskey()
+        {
+            int skey = (int)selectitem.Tag;
+            return skey;
+        }
+
+        private void initgroup1(Status s){
+            if (s.iszn)
+            {
+                this.checkBox1.Checked = true;
+            }
+            else
+            {
+                this.checkBox1.Checked = false;
+            }
+
+            if (s.lsgs == Constant.LSGS_ROE)
+            {
+                this.radioButton1.Checked = true;
+                this.radioButton2.Checked = false;
+            }
+            else
+            {
+                this.radioButton2.Checked = true;
+                this.radioButton1.Checked = false;
+            }
+
+            if (s.dlmx == Constant.DLMX_SA)
+            {
+                this.radioButton3.Checked = true;
+                this.radioButton4.Checked = false;
+            }
+            else
+            {
+                this.radioButton4.Checked = true;
+                this.radioButton3.Checked = false;
+            }
+        }
+
+        //离散格式修改时切换状态
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton ls = (RadioButton)sender;
+            Status s = this.getSelectedStatus();
+            if (s == null)
+            {
+                return;
+            }
+            if (ls.Checked)
+            {
+                s.lsgs = Constant.LSGS_ROE;
+            }
+            else { s.lsgs = Constant.LSGS_LEER; }
+            int key = this.getSelectedStatuskey();
+            //ztDic.Add(key, s);
+        }
+
+        //端流模型切换
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton ls = (RadioButton)sender;
+            Status s = this.getSelectedStatus();
+            if (s == null)
+            {
+                return;
+            }
+            if (ls.Checked)
+            {
+                s.dlmx = Constant.DLMX_SA;
+            }
+            else { s.dlmx = Constant.DLMX_SST; }
+            //int key = this.getSelectedStatuskey();
+            //ztDic.Add(key, s);
+        }
+
+        private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
+        {
+            CheckBox ls = (CheckBox)sender;
+            Status s = this.getSelectedStatus();
+            if (s == null)
+            {
+                return;
+            }
+            s.iszn = ls.Checked;
+
+            int key = this.getSelectedStatuskey();
+           // ztDic.Add(key, s);
         }
     }
 }

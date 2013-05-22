@@ -14,5 +14,16 @@ namespace Yixing.model
         public float dslxs { get; set; }
 
         public Boolean isyj { get; set; }
+
+        //空间离散格式
+        public float lsgs { get; set; }
+        //端流模型
+        public float dlmx { get; set; }
+
+        //转涅相关
+        public Boolean iszn { get; set; }
+
+        //高级相关
+        public int gjKey { get; set; }
     }
 }
