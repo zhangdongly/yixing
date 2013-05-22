@@ -50,6 +50,7 @@ namespace Yixing.UserControl.Youhua
         private System.Windows.Forms.Panel panel1;
         private System.ComponentModel.IContainer components;
         private Button button5;
+        private FolderBrowserDialog folderBrowserDialog1;
         private ImageList iList ;
         public Model()
         {
@@ -60,6 +61,7 @@ namespace Yixing.UserControl.Youhua
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button5 = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -92,7 +94,7 @@ namespace Yixing.UserControl.Youhua
             this.label2 = new System.Windows.Forms.Label();
             this.exListView2 = new Yixing.UserTool.EXListView();
             this.exListView1 = new Yixing.UserTool.EXListView();
-            this.button5 = new System.Windows.Forms.Button();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -111,6 +113,16 @@ namespace Yixing.UserControl.Youhua
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(800, 587);
             this.panel1.TabIndex = 0;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(299, 433);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 4;
+            this.button5.Text = "导出优化参数";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // panel3
             // 
@@ -420,16 +432,6 @@ namespace Yixing.UserControl.Youhua
             this.exListView1.TabIndex = 1;
             this.exListView1.UseCompatibleStateImageBehavior = false;
             this.exListView1.View = System.Windows.Forms.View.Details;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(299, 433);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "导出优化参数";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // Model
             // 
@@ -921,15 +923,15 @@ namespace Yixing.UserControl.Youhua
             }
             #endregion
 
-            //根据aimList 组织templte
-            gentemplate(aimList);
+            //根据aimList 组织templte           
+            gentemplate(aimList,Yixing.Properties.Settings.Default.currentProjectFolder);
             MessageBox.Show("导出完成");
 
         }
 
-        private void gentemplate(List<Aim> aimList){
-            FileStream fs = new FileStream(@"d://Objsetting.dat", FileMode.Create);
-            StreamWriter sw = new StreamWriter(fs);
+        private void gentemplate(List<Aim> aimList,String path){
+            FileStream fs = new FileStream(path+"Objsetting.dat", FileMode.Create);
+            StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.UTF8);
             //TemplateHelper tp = new TemplateHelper(@"./template");
             //tp.Put("ztc",this.ztDic.Count);
             sw.WriteLine("计算状态个数");
@@ -962,7 +964,7 @@ namespace Yixing.UserControl.Youhua
 
             String ouptlj="";
             //这个本来应该是前缀从配置中来的
-            String prefix = @"d:\\";
+            String prefix = Yixing.Properties.Settings.Default.currentProjectFolder;
             foreach (int ztkey in ztDic.Keys)
             {
                 Status st = ztDic[ztkey];

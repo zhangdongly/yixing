@@ -461,6 +461,7 @@ namespace Yixing.Dialog
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
             }
             return true;
         }

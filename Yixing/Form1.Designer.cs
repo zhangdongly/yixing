@@ -57,6 +57,7 @@ namespace Yixing
             this.汽动特性评估ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.翼型优化设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.优化ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.文件保存路径ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.视图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cFD计算ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cFD绘图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -88,7 +89,7 @@ namespace Yixing
             this.panel1 = new System.Windows.Forms.Panel();
             this.qidong = new Yixing.UserControl.Qidong();
             this.youhua = new Yixing.UserControl.Youhua.Youhua();
-            this.文件保存路径ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -236,20 +237,27 @@ namespace Yixing
             // 汽动特性评估ToolStripMenuItem
             // 
             this.汽动特性评估ToolStripMenuItem.Name = "汽动特性评估ToolStripMenuItem";
-            this.汽动特性评估ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.汽动特性评估ToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.汽动特性评估ToolStripMenuItem.Text = "CFD计算状态 ";
             // 
             // 翼型优化设置ToolStripMenuItem
             // 
             this.翼型优化设置ToolStripMenuItem.Name = "翼型优化设置ToolStripMenuItem";
-            this.翼型优化设置ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.翼型优化设置ToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.翼型优化设置ToolStripMenuItem.Text = "翼型优化参数";
             // 
             // 优化ToolStripMenuItem
             // 
             this.优化ToolStripMenuItem.Name = "优化ToolStripMenuItem";
-            this.优化ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.优化ToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.优化ToolStripMenuItem.Text = "优化过程显示";
+            // 
+            // 文件保存路径ToolStripMenuItem
+            // 
+            this.文件保存路径ToolStripMenuItem.Name = "文件保存路径ToolStripMenuItem";
+            this.文件保存路径ToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.文件保存路径ToolStripMenuItem.Text = "文件保存路径";
+            this.文件保存路径ToolStripMenuItem.Click += new System.EventHandler(this.文件保存路径ToolStripMenuItem_Click);
             // 
             // 视图ToolStripMenuItem
             // 
@@ -496,12 +504,9 @@ namespace Yixing
             this.youhua.Size = new System.Drawing.Size(930, 600);
             this.youhua.TabIndex = 0;
             // 
-            // 文件保存路径ToolStripMenuItem
+            // folderBrowserDialog1
             // 
-            this.文件保存路径ToolStripMenuItem.Name = "文件保存路径ToolStripMenuItem";
-            this.文件保存路径ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.文件保存路径ToolStripMenuItem.Text = "文件保存路径";
-            this.文件保存路径ToolStripMenuItem.Click += new System.EventHandler(this.文件保存路径ToolStripMenuItem_Click);
+            this.folderBrowserDialog1.Description = "请选择或重新创建优化工程 ";
             // 
             // Form1
             // 
@@ -580,6 +585,7 @@ namespace Yixing
         private ToolStripButton toolStripLabel5;
         private SkinEngine skinEngine1=new SkinEngine();
         private ToolStripMenuItem 文件保存路径ToolStripMenuItem;
+        private FolderBrowserDialog folderBrowserDialog1;
         
     }
 }
