@@ -20,16 +20,18 @@ namespace Yixing.model
             String mahe = string.Format("{0:0.000}", this.mahe);
             mahe = "m" + mahe.Replace(".", "");
 
-            String yj = string.Format("{0:0.000}", dslxs);
-            yj = yj.Replace(".", "");
+            String yj = null;
+           
+           
             if (isyj)
             {
-                yj = "a" + yj;
+                yj = "a" + string.Format("{0:00.00}", dslxs); ;
             }
             else
             {
-                yj = "cl" + yj;
+                yj = "cl" + string.Format("{0:0.000}", dslxs); ;
             }
+            yj = yj.Replace(".", "");
             return mahe + "_" + yj;
         }
     }

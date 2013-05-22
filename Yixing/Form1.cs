@@ -91,7 +91,7 @@ namespace Yixing
             {
                 folderPath = FileDialogUtil.createNewProject(this.saveFileDialog1);
             }
-            Yixing.Properties.Settings.Default.currentProjectFolder = folderPath+"/"; 
+            Yixing.Properties.Settings.Default.currentProjectFolder = folderPath+"\\"; 
             this.panel1.Controls.Add(youhua);
         }
 
