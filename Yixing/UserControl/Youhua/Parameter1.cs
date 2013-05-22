@@ -584,7 +584,7 @@ namespace Yixing.UserControl.Youhua
 
         private void button5_Click(object sender, EventArgs e)
         {
-            this.textBox3.Text = FileDialogUtil.getSelectFileName(this.openFileDialog1);
+            this.textBox4.Text = FileDialogUtil.getSelectFileName(this.openFileDialog1);
         }
 
         private void showJihetu(InitialAirfoilModel initialAirFoilModel)

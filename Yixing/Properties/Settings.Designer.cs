@@ -70,5 +70,17 @@ namespace Yixing.Properties {
                 this["statusSaveFolder"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string currentProjectFolder {
+            get {
+                return ((string)(this["currentProjectFolder"]));
+            }
+            set {
+                this["currentProjectFolder"] = value;
+            }
+        }
     }
 }

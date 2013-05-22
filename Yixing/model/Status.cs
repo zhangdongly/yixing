@@ -17,6 +17,7 @@ namespace Yixing.model
 
         //空间离散格式
         public float lsgs { get; set; }
+
         //端流模型
         public float dlmx { get; set; }
 
@@ -25,5 +26,23 @@ namespace Yixing.model
 
         //高级相关
         public int gjKey { get; set; }
+
+        public String getZtName()
+        {
+            String mahe = string.Format("{0:0.000}", this.mahe);
+            mahe = "m" + mahe.Replace(".", "");
+
+            String yj = string.Format("{0:0.000}", dslxs);
+            yj = yj.Replace(".", "");
+            if (isyj)
+            {
+                yj = "a" + yj;
+            }
+            else
+            {
+                yj = "cl" + yj;
+            }
+            return mahe + "_" + yj;
+        }
     }
 }

@@ -85,6 +85,13 @@ namespace Yixing
         private void toolStripLabel5_Click(object sender, EventArgs e)
         {
             this.panel1.Controls.Clear();
+            String folderPath = FileDialogUtil.createNewProject(this.saveFileDialog1);
+           
+            while (String.IsNullOrWhiteSpace(folderPath))
+            {
+                folderPath = FileDialogUtil.createNewProject(this.saveFileDialog1);
+            }
+            Yixing.Properties.Settings.Default.currentProjectFolder = folderPath+"/"; 
             this.panel1.Controls.Add(youhua);
         }
 
