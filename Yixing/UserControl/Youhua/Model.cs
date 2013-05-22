@@ -131,7 +131,7 @@ namespace Yixing.UserControl.Youhua
             this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel7.Location = new System.Drawing.Point(260, 6);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(219, 29);
+            this.panel7.Size = new System.Drawing.Size(215, 29);
             this.panel7.TabIndex = 13;
             // 
             // button5
@@ -270,7 +270,7 @@ namespace Yixing.UserControl.Youhua
             this.exListView2.Location = new System.Drawing.Point(15, 186);
             this.exListView2.Name = "exListView2";
             this.exListView2.OwnerDraw = true;
-            this.exListView2.Size = new System.Drawing.Size(776, 241);
+            this.exListView2.Size = new System.Drawing.Size(762, 241);
             this.exListView2.TabIndex = 1;
             this.exListView2.UseCompatibleStateImageBehavior = false;
             this.exListView2.View = System.Windows.Forms.View.Details;
@@ -294,9 +294,9 @@ namespace Yixing.UserControl.Youhua
             // 
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel6.Controls.Add(this.label3);
-            this.panel6.Location = new System.Drawing.Point(680, 3);
+            this.panel6.Location = new System.Drawing.Point(677, 3);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(108, 28);
+            this.panel6.Size = new System.Drawing.Size(94, 28);
             this.panel6.TabIndex = 12;
             // 
             // label3
@@ -312,7 +312,7 @@ namespace Yixing.UserControl.Youhua
             // 
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel5.Controls.Add(this.label4);
-            this.panel5.Location = new System.Drawing.Point(574, 3);
+            this.panel5.Location = new System.Drawing.Point(571, 3);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(105, 28);
             this.panel5.TabIndex = 12;
@@ -330,7 +330,7 @@ namespace Yixing.UserControl.Youhua
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel4.Controls.Add(this.label5);
-            this.panel4.Location = new System.Drawing.Point(478, 4);
+            this.panel4.Location = new System.Drawing.Point(473, 4);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(98, 28);
             this.panel4.TabIndex = 11;
@@ -381,7 +381,7 @@ namespace Yixing.UserControl.Youhua
             this.exListView1.Location = new System.Drawing.Point(257, 32);
             this.exListView1.Name = "exListView1";
             this.exListView1.OwnerDraw = true;
-            this.exListView1.Size = new System.Drawing.Size(531, 136);
+            this.exListView1.Size = new System.Drawing.Size(517, 136);
             this.exListView1.SmallImageList = this.iList;
             this.exListView1.TabIndex = 1;
             this.exListView1.UseCompatibleStateImageBehavior = false;
@@ -511,7 +511,7 @@ namespace Yixing.UserControl.Youhua
         private void control_Load(object sender, EventArgs e)
         {
             
-            this.exListView1.Columns.Add("状态",120);
+            this.exListView1.Columns.Add("状态",115);
             this.exListView1.Columns.Add("March",50);
             this.exListView1.Columns.Add("a/cl",50);
             this.exListView1.Columns.Add("下限", 50);
@@ -892,6 +892,7 @@ namespace Yixing.UserControl.Youhua
             {
                 yj = "cl" + string.Format("{0:0.000}", st.dslxs); ;
             }
+            yj = yj.Replace(".", "");
             return mahe + "\\" + yj;
         }
 
@@ -920,12 +921,7 @@ namespace Yixing.UserControl.Youhua
                 int expressioncount = expression.Items.Count;
                 for (int j = 0; j < expressioncount; j++)
                 {
-                    AimExpression exp = new AimExpression();
-
-                    int cfxs;
-                    int.TryParse(this.textBox4.Text,out cfxs);
-                    exp.cfxs = cfxs;
-
+                    AimExpression exp = new AimExpression();                
                     ListViewItem expitem = expression.Items[j];
                     EXControlListViewSubItem subitemindex = (EXControlListViewSubItem)expitem.SubItems[1];
                     ComboBox indexc = (ComboBox)subitemindex.MyControl;
@@ -943,36 +939,62 @@ namespace Yixing.UserControl.Youhua
                             break;
                     }
 
+                   
+                    //获取"惩罚系数"  就是X前面的那个值 
+                    EXControlListViewSubItem subitemcfxs = (EXControlListViewSubItem)expitem.SubItems[2];
+                    TextBox cfsxTextBox = (TextBox)subitemcfxs.MyControl;
+                    int cfxs;
+                    int.TryParse(cfsxTextBox.Text, out cfxs);
+                    exp.cfxs = cfxs;
+
                     EXControlListViewSubItem subitemqdtx = (EXControlListViewSubItem)expitem.SubItems[4];
                     ComboBox qdtxc = (ComboBox)subitemqdtx.MyControl;
-                    exp.qdtx = 2;
+                   // MessageBox.Show(qdtxc.Text);
                     EXControlListViewSubItem cldown=null;
                     EXControlListViewSubItem clup = null;
-                    if (qdtxc.Text.Equals("cl"))
+                    if (qdtxc.Text.Equals("cl")) //升力系数
                     {
                         exp.qdtx = 1;
                         if (lv1item != null)
                         {
-                            cldown = (EXControlListViewSubItem)lv1item.SubItems[2];
+                            cldown = (EXControlListViewSubItem)lv1item.SubItems[7];
+                            clup = (EXControlListViewSubItem)lv1item.SubItems[8];
+                        }
+                    }
+                    else if (qdtxc.Text.Equals("cd"))
+                    {
+                        exp.qdtx = 2;
+                        if (lv1item != null)
+                        {
+                            cldown = (EXControlListViewSubItem)lv1item.SubItems[5];
 
-                            clup = (EXControlListViewSubItem)lv1item.SubItems[3];
+                            clup = (EXControlListViewSubItem)lv1item.SubItems[6];
+
+                        }
+                    }
+                    else if (qdtxc.Text.Equals("cm"))
+                    {
+                        exp.qdtx = 3;
+                        if (lv1item != null)
+                        {
+                            cldown = (EXControlListViewSubItem)lv1item.SubItems[3];
+
+                            clup = (EXControlListViewSubItem)lv1item.SubItems[4];
 
                         }
                     }
                     else
                     {
-                        if (lv1item != null)
-                        {
-                            cldown = (EXControlListViewSubItem)lv1item.SubItems[4];
-
-                            clup = (EXControlListViewSubItem)lv1item.SubItems[5];
-
-                        }
+                        exp.qdtx = 4;
+                        // 这个时候只能是k。但是k是没有上下限的。所以暂时没有clup和cldown
                     }
 
-                    TextBox downtxt = (TextBox)cldown.MyControl;
-                    TextBox uptxt = (TextBox)clup.MyControl;
-                    if (downtxt.Text.Trim().Equals(""))
+                   
+
+                    TextBox downtxt = cldown!=null?(TextBox)cldown.MyControl:null;
+                    TextBox uptxt = clup!=null?(TextBox)clup.MyControl:null;
+                    //MessageBox.Show(downtxt+"\t"+uptxt);
+                    if (downtxt==null||downtxt.Text.Trim().Equals(""))
                     {
                         exp.limitdown = -10000;
                     }
@@ -982,7 +1004,7 @@ namespace Yixing.UserControl.Youhua
                         int.TryParse(downtxt.Text, out dowlimit);
                         exp.limitdown = dowlimit;
                     }
-                    if (downtxt.Text.Trim().Equals(""))
+                    if (uptxt==null||uptxt.Text.Trim().Equals(""))
                     {
                         exp.limitup = 10000;
                     }
@@ -1024,14 +1046,14 @@ namespace Yixing.UserControl.Youhua
             foreach (Aim aim in aimList)
             {
                 ysc += aim.expressionList.Count;
-                upordown += aim.index + "    " + aim.upordown + "\r\n";
+                upordown += aim.index + "\t" + aim.upordown + "\r\n";
                 List<AimExpression> explist = aim.expressionList;
                 if (explist != null && explist.Count > 0)
                 {
                     foreach (AimExpression expression in explist)
                     {
-                        exp += aim.index + "  " + expression.index + "  " + expression.qdtx + " "
-                                + expression.limitdown + "  " + expression.limitup + "  " + expression.cfxs + "\r\n";
+                        exp += aim.index + "\t" + expression.index + "\t" + expression.qdtx + "\t"
+                                + expression.limitdown + "\t" + expression.limitup + "\t" + expression.cfxs + "\r\n";
                     }
                 }
             }
@@ -1046,6 +1068,7 @@ namespace Yixing.UserControl.Youhua
             {
                 Status st = ztDic[ztkey];
                 String outPath = getZtoutPath(st);
+              //  MessageBox.Show(prefix);
                 ouptlj += prefix + outPath + "\r\n";
             }
             //tp.Put("ouptlj", ouptlj);
@@ -1058,10 +1081,10 @@ namespace Yixing.UserControl.Youhua
             sw.WriteLine("目标函数表达式定义，顺序为：目标序号，计算状态序号，气动特性编号，范围下限，范围上限，惩罚系数 ");
             sw.Write(exp);
 
-            String s = this.textBox3.Text + "  " + this.textBox5.Text;
+            String s = this.textBox3.Text + "\t" + this.textBox5.Text+"\t"+this.textBox4.Text;
             sw.WriteLine(s);
             sw.WriteLine("计算一个状态的线程数，并行计算的状态数");
-            String strxc = this.textBox7.Text + "  " + this.textBox8.Text;
+            String strxc = this.textBox7.Text + "\t" + this.textBox8.Text;
             sw.WriteLine(strxc);
             //清空缓冲区、关闭流
             fs.Flush();
