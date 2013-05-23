@@ -940,12 +940,7 @@ namespace Yixing.UserControl.Youhua
                     }
 
                    
-                    //获取"惩罚系数"  就是X前面的那个值 
-                    EXControlListViewSubItem subitemcfxs = (EXControlListViewSubItem)expitem.SubItems[2];
-                    TextBox cfsxTextBox = (TextBox)subitemcfxs.MyControl;
-                    int cfxs;
-                    int.TryParse(cfsxTextBox.Text, out cfxs);
-                    exp.cfxs = cfxs;
+                    
 
                     EXControlListViewSubItem subitemqdtx = (EXControlListViewSubItem)expitem.SubItems[4];
                     ComboBox qdtxc = (ComboBox)subitemqdtx.MyControl;
@@ -1000,8 +995,8 @@ namespace Yixing.UserControl.Youhua
                     }
                     else
                     {
-                        int dowlimit = -10000;
-                        int.TryParse(downtxt.Text, out dowlimit);
+                        double dowlimit = -10000;
+                        double.TryParse(downtxt.Text, out dowlimit);
                         exp.limitdown = dowlimit;
                     }
                     if (uptxt==null||uptxt.Text.Trim().Equals(""))
@@ -1010,9 +1005,23 @@ namespace Yixing.UserControl.Youhua
                     }
                     else
                     {
-                        int uplimit = 10000;
-                        int.TryParse(uptxt.Text, out uplimit);
+                        double uplimit = 10000;
+                        double.TryParse(uptxt.Text, out uplimit);
                         exp.limitup = uplimit;
+                    }
+
+                    //获取"惩罚系数"  就是X前面的那个值 
+                    if (exp.limitdown == -10000 && exp.limitup == 10000)
+                    {
+                        exp.cfxs = 0;
+                    }
+                    else
+                    {
+                        EXControlListViewSubItem subitemcfxs = (EXControlListViewSubItem)expitem.SubItems[2];
+                        TextBox cfsxTextBox = (TextBox)subitemcfxs.MyControl;
+                        double cfxs;
+                        double.TryParse(cfsxTextBox.Text, out cfxs);
+                        exp.cfxs = cfxs;
                     }
                     expressList.Add(exp);
                 }
@@ -1053,7 +1062,7 @@ namespace Yixing.UserControl.Youhua
                     foreach (AimExpression expression in explist)
                     {
                         exp += aim.index + "\t" + expression.index + "\t" + expression.qdtx + "\t"
-                                + expression.limitdown + "\t" + expression.limitup + "\t" + expression.cfxs + "\r\n";
+                                + String.Format("{0:0.000000}", expression.limitdown) + "\t" + String.Format("{0:0.000000}", expression.limitup) + "\t" +  String.Format("{0:0.000000}",expression.cfxs) + "\r\n";
                     }
                 }
             }
