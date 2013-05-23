@@ -898,30 +898,37 @@ namespace Yixing.UserControl.Youhua
 
         private void button5_Click(object sender, EventArgs e)
         {
+            List<Aim> aimList = this.getAimList();
+            //根据aimList 组织templte           
+            gentemplate(aimList,Yixing.Properties.Settings.Default.currentProjectFolder);
+            MessageBox.Show("导出完成");
+
+        }
+
+        public List<Aim> getAimList()
+        {
             List<Aim> aimList = new List<Aim>();
             int aimcount = this.exListView2.Items.Count;
-            #region
             for (int i = 0; i < aimcount; i++)
             {
                 Aim aim = new Aim();
-                aim.index = i+1;
+                aim.index = i + 1;
                 ListViewItem item = this.exListView2.Items[i];
                 EXControlListViewSubItem subitem = (EXControlListViewSubItem)item.SubItems[1];
                 Button b = (Button)subitem.MyControl;
                 aim.upordown = 2;
                 if (b.Tag.Equals("up"))
                 {
-                    aim.upordown=2;
+                    aim.upordown = 2;
                 }
-
                 //表达式的listview
                 EXControlListViewSubItem subitemLv = (EXControlListViewSubItem)item.SubItems[2];
-                EXListView expression= (EXListView)subitemLv.MyControl;
+                EXListView expression = (EXListView)subitemLv.MyControl;
                 List<AimExpression> expressList = new List<AimExpression>();
                 int expressioncount = expression.Items.Count;
                 for (int j = 0; j < expressioncount; j++)
                 {
-                    AimExpression exp = new AimExpression();                
+                    AimExpression exp = new AimExpression();
                     ListViewItem expitem = expression.Items[j];
                     EXControlListViewSubItem subitemindex = (EXControlListViewSubItem)expitem.SubItems[1];
                     ComboBox indexc = (ComboBox)subitemindex.MyControl;
@@ -938,14 +945,10 @@ namespace Yixing.UserControl.Youhua
                         if (tag == index)
                             break;
                     }
-
-                   
-                    
-
                     EXControlListViewSubItem subitemqdtx = (EXControlListViewSubItem)expitem.SubItems[4];
                     ComboBox qdtxc = (ComboBox)subitemqdtx.MyControl;
-                   // MessageBox.Show(qdtxc.Text);
-                    EXControlListViewSubItem cldown=null;
+                    // MessageBox.Show(qdtxc.Text);
+                    EXControlListViewSubItem cldown = null;
                     EXControlListViewSubItem clup = null;
                     if (qdtxc.Text.Equals("cl")) //升力系数
                     {
@@ -962,9 +965,7 @@ namespace Yixing.UserControl.Youhua
                         if (lv1item != null)
                         {
                             cldown = (EXControlListViewSubItem)lv1item.SubItems[5];
-
                             clup = (EXControlListViewSubItem)lv1item.SubItems[6];
-
                         }
                     }
                     else if (qdtxc.Text.Equals("cm"))
@@ -973,9 +974,7 @@ namespace Yixing.UserControl.Youhua
                         if (lv1item != null)
                         {
                             cldown = (EXControlListViewSubItem)lv1item.SubItems[3];
-
                             clup = (EXControlListViewSubItem)lv1item.SubItems[4];
-
                         }
                     }
                     else
@@ -983,13 +982,10 @@ namespace Yixing.UserControl.Youhua
                         exp.qdtx = 4;
                         // 这个时候只能是k。但是k是没有上下限的。所以暂时没有clup和cldown
                     }
-
-                   
-
-                    TextBox downtxt = cldown!=null?(TextBox)cldown.MyControl:null;
-                    TextBox uptxt = clup!=null?(TextBox)clup.MyControl:null;
+                    TextBox downtxt = cldown != null ? (TextBox)cldown.MyControl : null;
+                    TextBox uptxt = clup != null ? (TextBox)clup.MyControl : null;
                     //MessageBox.Show(downtxt+"\t"+uptxt);
-                    if (downtxt==null||downtxt.Text.Trim().Equals(""))
+                    if (downtxt == null || downtxt.Text.Trim().Equals(""))
                     {
                         exp.limitdown = -10000;
                     }
@@ -999,7 +995,7 @@ namespace Yixing.UserControl.Youhua
                         double.TryParse(downtxt.Text, out dowlimit);
                         exp.limitdown = dowlimit;
                     }
-                    if (uptxt==null||uptxt.Text.Trim().Equals(""))
+                    if (uptxt == null || uptxt.Text.Trim().Equals(""))
                     {
                         exp.limitup = 10000;
                     }
@@ -1029,12 +1025,8 @@ namespace Yixing.UserControl.Youhua
 
                 aimList.Add(aim);
             }
-            #endregion
-
-            //根据aimList 组织templte           
-            gentemplate(aimList,Yixing.Properties.Settings.Default.currentProjectFolder);
-            MessageBox.Show("导出完成");
-
+            return aimList;
+           
         }
 
         private void gentemplate(List<Aim> aimList,String path){

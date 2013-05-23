@@ -250,6 +250,7 @@
     <Compile Include="model\SanweiStatusModel.cs" />
     <Compile Include="model\Status.cs" />
     <Compile Include="model\StatusEditAble.cs" />
+    <Compile Include="model\StatusForMethod.cs" />
     <Compile Include="model\StautsSerializeObj.cs" />
     <Compile Include="model\User.cs" />
     <Compile Include="Dialog\Jihetexing.cs">

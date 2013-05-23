@@ -135,6 +135,7 @@ namespace Yixing.UserControl.Youhua
             // 
             // p
             // 
+            this.p.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.p.Location = new System.Drawing.Point(0, 0);
             this.p.Name = "p";
             this.p.Size = new System.Drawing.Size(800, 500);
@@ -238,7 +239,6 @@ namespace Yixing.UserControl.Youhua
             current -= 1;
             if (current < 0)
             {
-                
                 return;
             }
             if (current <= 0)
@@ -281,6 +281,14 @@ namespace Yixing.UserControl.Youhua
             current = index;
             item.SelectedItems[0].BackColor = Color.DodgerBlue;
             this.panel1.Controls.Clear();
+
+            if (current == 2)
+            {
+                Model m = (Model)this.youhuaSteps[1];
+                YouhuaMethod y = (YouhuaMethod)this.youhuaSteps[2];
+                y.aimList = m.getAimList();
+            }
+
             this.panel1.Controls.Add((System.Windows.Forms.UserControl)this.youhuaSteps[current]);
             
         }
@@ -299,6 +307,8 @@ namespace Yixing.UserControl.Youhua
         {
 
         }
+
+       
 
        
        

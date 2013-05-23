@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using Yixing.Dialog;
+using Yixing.model.mubiaohans;
 using Yixing.UserTool;
 
 namespace Yixing.UserControl.Youhua
@@ -96,6 +97,7 @@ namespace Yixing.UserControl.Youhua
         private ColumnHeader columnHeader6;
         private ColumnHeader columnHeader7;
         private System.Windows.Forms.Panel panel1;
+        public List<Aim> aimList;
     
         public YouhuaMethod()
         {
@@ -1120,8 +1122,7 @@ namespace Yixing.UserControl.Youhua
         }
         private void control_Load(object sender, EventArgs e)
         {
-            this.exListView1.Columns.Add("优化算法", 100);
-           
+            this.exListView1.Columns.Add("优化算法", 100);          
             ImageList iList = new ImageList();
             iList.ImageSize = new Size(1, 45);
             this.exListView1.SmallImageList = iList;
@@ -1207,7 +1208,14 @@ namespace Yixing.UserControl.Youhua
             this.tabControl1.Controls.Remove(this.dailiModule);
             if (c.Checked)
             {
+                if (this.aimList == null || this.aimList.Count <= 0)
+                {
+                    MessageBox.Show("请先进行目标函数定义");
+                    c.Checked = false;
+                    return;
+                }
                 this.tabControl1.Controls.Add(this.dailiModule);
+
             }
         }
 
