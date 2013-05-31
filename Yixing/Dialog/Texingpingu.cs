@@ -53,8 +53,9 @@ namespace Yixing.Dialog
             int i = 1;
             foreach (int key in ztDic.Keys)
             {
-                EXListViewItem item = new EXListViewItem("状态" +i);
+               
                 Status s = ztDic[key];
+                EXListViewItem item = new EXListViewItem(s.getZtName());
                 s.iszn = false;
                 gjkey++;
                 s.gjKey = gjkey;

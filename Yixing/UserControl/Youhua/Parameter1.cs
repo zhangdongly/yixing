@@ -658,8 +658,7 @@ namespace Yixing.UserControl.Youhua
             try
             {
                 foreach (EXListViewItem item in this.exListView1.Items)
-                {
-                   
+                {                  
                     double down = Double.Parse(((TextBox)item.SubItems[2].Tag).Text);
                     double current = Double.Parse(((TextBox)item.SubItems[4].Tag).Text);
                     double up = Double.Parse(((TextBox)item.SubItems[6].Tag).Text);
