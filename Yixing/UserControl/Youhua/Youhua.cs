@@ -286,7 +286,8 @@ namespace Yixing.UserControl.Youhua
             {
                 Model m = (Model)this.youhuaSteps[1];
                 YouhuaMethod y = (YouhuaMethod)this.youhuaSteps[2];
-                y.aimList = m.getAimList();
+                y.ztDic = m.ztDic;
+                y.aim2qdtx(m.getAimList());
             }
 
             this.panel1.Controls.Add((System.Windows.Forms.UserControl)this.youhuaSteps[current]);

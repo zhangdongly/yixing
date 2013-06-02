@@ -245,6 +245,7 @@
     <Compile Include="model\mubiaohans\AimExpression.cs" />
     <Compile Include="model\Parasetting.cs" />
     <Compile Include="model\ParasettingDUC.cs" />
+    <Compile Include="model\QDTXMethodModel.cs" />
     <Compile Include="model\ResultModel.cs" />
     <Compile Include="model\SanweiModel.cs" />
     <Compile Include="model\SanweiStatusModel.cs" />
@@ -261,6 +262,7 @@
     </Compile>
     <Compile Include="model\YixingModel.cs" />
     <Compile Include="model\DCZhuannie.cs" />
+    <Compile Include="model\QDTXMethodList.cs" />
     <Compile Include="UserControl\Qidong\Dingchang.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -319,7 +321,9 @@
     <Compile Include="util\JSONUtil.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="util\StatusUtil.cs" />
     <Compile Include="util\TemplateHelper.cs" />
+    <Compile Include="util\YouhuaMethodUtil.cs" />
     <EmbeddedResource Include="Dialog\AddStatus.resx">
       <DependentUpon>AddStatus.cs</DependentUpon>
     </EmbeddedResource>

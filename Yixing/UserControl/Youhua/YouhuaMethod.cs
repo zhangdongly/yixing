@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using Yixing.Dialog;
+using Yixing.model;
 using Yixing.model.mubiaohans;
 using Yixing.UserTool;
+using Yixing.util;
 
 namespace Yixing.UserControl.Youhua
 {
@@ -97,7 +100,10 @@ namespace Yixing.UserControl.Youhua
         private ColumnHeader columnHeader6;
         private ColumnHeader columnHeader7;
         private System.Windows.Forms.Panel panel1;
-        public List<Aim> aimList;
+        private Dictionary<int, QDTXMethodList> qdtxmethodMap;
+        private Button button6;
+        public Dictionary<int, Status> ztDic;
+        private String yangbenPath;
     
         public YouhuaMethod()
         {
@@ -120,25 +126,22 @@ namespace Yixing.UserControl.Youhua
             "BP神经网络",
             "BP神经网络",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("CL");
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("CD");
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("CM");
-            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("K");
-            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
             "状态1",
             "0.02",
             "2",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem(new string[] {
             "状态2",
             "0.02",
             "3",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem(new string[] {
             "状态3",
             "0.04",
             "0.65"}, -1);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button6 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label14 = new System.Windows.Forms.Label();
@@ -188,8 +191,9 @@ namespace Yixing.UserControl.Youhua
             this.button5 = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.exListView5 = new Yixing.UserTool.EXListView();
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.exListView4 = new Yixing.UserTool.EXListView();
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.exListView3 = new Yixing.UserTool.EXListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -204,6 +208,7 @@ namespace Yixing.UserControl.Youhua
             this.textBox10 = new System.Windows.Forms.TextBox();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
@@ -219,8 +224,6 @@ namespace Yixing.UserControl.Youhua
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.exListView2 = new Yixing.UserTool.EXListView();
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -247,11 +250,22 @@ namespace Yixing.UserControl.Youhua
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button6);
             this.panel1.Controls.Add(this.tabControl1);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 560);
+            this.panel1.Size = new System.Drawing.Size(800, 571);
             this.panel1.TabIndex = 0;
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(373, 539);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.TabIndex = 1;
+            this.button6.Text = "保存";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // tabControl1
             // 
@@ -359,14 +373,22 @@ namespace Yixing.UserControl.Youhua
             // comboBox3
             // 
             this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3"});
             this.comboBox3.Location = new System.Drawing.Point(113, 240);
             this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(105, 20);
+            this.comboBox3.Size = new System.Drawing.Size(100, 20);
             this.comboBox3.TabIndex = 13;
             // 
             // comboBox2
             // 
             this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3"});
             this.comboBox2.Location = new System.Drawing.Point(113, 144);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(100, 20);
@@ -375,6 +397,10 @@ namespace Yixing.UserControl.Youhua
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3"});
             this.comboBox1.Location = new System.Drawing.Point(113, 108);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(100, 20);
@@ -544,7 +570,7 @@ namespace Yixing.UserControl.Youhua
             "直接搜索算法",
             "梯度搜索算法",
             "多目标遗传算法"});
-            this.comboBox4.Location = new System.Drawing.Point(85, 138);
+            this.comboBox4.Location = new System.Drawing.Point(97, 138);
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(228, 22);
             this.comboBox4.TabIndex = 2;
@@ -553,7 +579,7 @@ namespace Yixing.UserControl.Youhua
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(20, 141);
+            this.label15.Location = new System.Drawing.Point(28, 141);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(65, 12);
             this.label15.TabIndex = 1;
@@ -734,7 +760,7 @@ namespace Yixing.UserControl.Youhua
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(613, 69);
+            this.button5.Location = new System.Drawing.Point(616, 75);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(95, 23);
             this.button5.TabIndex = 8;
@@ -775,29 +801,30 @@ namespace Yixing.UserControl.Youhua
             this.exListView5.TabIndex = 12;
             this.exListView5.UseCompatibleStateImageBehavior = false;
             this.exListView5.View = System.Windows.Forms.View.Details;
+            this.exListView5.SelectedIndexChanged += new System.EventHandler(this.exListView5_SelectedIndexChanged);
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "0";
+            this.columnHeader6.Width = 0;
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "评估方法";
+            this.columnHeader7.Width = 113;
             // 
             // exListView4
             // 
-            this.exListView4.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader4});
             this.exListView4.ControlPadding = 4;
             this.exListView4.FullRowSelect = true;
-            this.exListView4.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem4,
-            listViewItem5,
-            listViewItem6,
-            listViewItem7});
             this.exListView4.Location = new System.Drawing.Point(355, 15);
             this.exListView4.Name = "exListView4";
             this.exListView4.OwnerDraw = true;
-            this.exListView4.Size = new System.Drawing.Size(94, 97);
+            this.exListView4.Size = new System.Drawing.Size(109, 97);
             this.exListView4.TabIndex = 11;
             this.exListView4.UseCompatibleStateImageBehavior = false;
             this.exListView4.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "气动特性";
+            this.exListView4.SelectedIndexChanged += new System.EventHandler(this.exListView4_SelectedIndexChanged);
             // 
             // exListView3
             // 
@@ -808,9 +835,9 @@ namespace Yixing.UserControl.Youhua
             this.exListView3.ControlPadding = 4;
             this.exListView3.FullRowSelect = true;
             this.exListView3.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem8,
-            listViewItem9,
-            listViewItem10});
+            listViewItem4,
+            listViewItem5,
+            listViewItem6});
             this.exListView3.Location = new System.Drawing.Point(76, 20);
             this.exListView3.Name = "exListView3";
             this.exListView3.OwnerDraw = true;
@@ -818,18 +845,22 @@ namespace Yixing.UserControl.Youhua
             this.exListView3.TabIndex = 10;
             this.exListView3.UseCompatibleStateImageBehavior = false;
             this.exListView3.View = System.Windows.Forms.View.Details;
+            this.exListView3.SelectedIndexChanged += new System.EventHandler(this.exListView3_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
             this.columnHeader1.Text = "状态";
+            this.columnHeader1.Width = 107;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "Ma";
+            this.columnHeader2.Width = 43;
             // 
             // columnHeader3
             // 
             this.columnHeader3.Text = "a/cl";
+            this.columnHeader3.Width = 44;
             // 
             // label19
             // 
@@ -865,13 +896,13 @@ namespace Yixing.UserControl.Youhua
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(91, 23);
             this.button4.TabIndex = 6;
-            this.button4.Text = "……";
+            this.button4.Text = "浏览...";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(432, 25);
+            this.button3.Location = new System.Drawing.Point(432, 28);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(91, 23);
             this.button3.TabIndex = 5;
@@ -897,7 +928,7 @@ namespace Yixing.UserControl.Youhua
             // 
             // textBox10
             // 
-            this.textBox10.Location = new System.Drawing.Point(242, 25);
+            this.textBox10.Location = new System.Drawing.Point(242, 30);
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(170, 21);
             this.textBox10.TabIndex = 2;
@@ -925,6 +956,11 @@ namespace Yixing.UserControl.Youhua
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "随机生成";
             this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "气动特性";
+            this.columnHeader4.Width = 87;
             // 
             // tabPage2
             // 
@@ -1070,16 +1106,6 @@ namespace Yixing.UserControl.Youhua
             this.exListView2.UseCompatibleStateImageBehavior = false;
             this.exListView2.View = System.Windows.Forms.View.Details;
             // 
-            // columnHeader6
-            // 
-            this.columnHeader6.Text = "0";
-            this.columnHeader6.Width = 0;
-            // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Text = "评估方法";
-            this.columnHeader7.Width = 113;
-            // 
             // YouhuaMethod
             // 
             this.Controls.Add(this.panel1);
@@ -1155,6 +1181,8 @@ namespace Yixing.UserControl.Youhua
                 }
                 this.comboBox4.Text = this.comboBox4.Items[0].ToString();
                 this.tabControl1.Controls.Remove(this.dailiModule);
+                this.exListView4.Columns.Add("",0);
+                this.exListView4.Columns.Add("评估方法",100);
         }
 
         private void exListView1_DoubleClick(object sender, EventArgs e)
@@ -1208,14 +1236,14 @@ namespace Yixing.UserControl.Youhua
             this.tabControl1.Controls.Remove(this.dailiModule);
             if (c.Checked)
             {
-                if (this.aimList == null || this.aimList.Count <= 0)
+                if (this.qdtxmethodMap == null || this.qdtxmethodMap.Count <= 0)
                 {
                     MessageBox.Show("请先进行目标函数定义");
                     c.Checked = false;
                     return;
                 }
+                this.addStatus();
                 this.tabControl1.Controls.Add(this.dailiModule);
-
             }
         }
 
@@ -1241,6 +1269,7 @@ namespace Yixing.UserControl.Youhua
         private void button4_Click(object sender, EventArgs e)
         {
             this.textBox11.Text = FileDialogUtil.getSelectFileName(new OpenFileDialog());
+            this.yangbenPath = this.textBox11.Text;
 
         }
 
@@ -1318,6 +1347,200 @@ namespace Yixing.UserControl.Youhua
 
             ListViewItem item = (ListViewItem)this.exListView5.Items[1];
             item.SubItems[0].ForeColor =  Color.Red;
+        }
+
+        public void aim2qdtx(List<Aim> aimList)
+        {
+            this.qdtxmethodMap = new Dictionary<int, QDTXMethodList>();
+            foreach (Aim aim in aimList)
+            {
+                foreach (AimExpression ae in aim.expressionList)
+                {
+                    QDTXMethodList ql;
+                    if (qdtxmethodMap.ContainsKey(ae.index))
+                    {
+                        ql = this.qdtxmethodMap[ae.index];
+                    }
+                    else
+                    {
+                        ql = new QDTXMethodList();
+                        this.qdtxmethodMap.Add(ae.index,ql);
+                    }
+                    ql.statusId = ae.index;
+                    QDTXMethodModel qm = new QDTXMethodModel();
+                    qm.statusIndex = ae.index;
+                    qm.qdtx = ae.qdtx;
+                    qm.recommendpgff = 2;
+                    ql.modelList.Add(qm);
+
+                }
+            }
+        }
+
+        private void addStatus()
+        {
+            this.exListView3.Items.Clear();
+            foreach (int key in this.qdtxmethodMap.Keys)
+            {
+                StatusUtil.addStatus2EXListView(this.ztDic[key], this.exListView3,key);
+            }
+        }
+
+        private void exListView3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.exListView4.Items.Clear();
+            this.exListView5.Items.Clear();
+            foreach (EXListViewItem item in this.exListView3.Items)
+            {
+                if (item.Selected)
+                {
+                    int statusIndex = (int)item.Tag;
+                    QDTXMethodList ql = this.qdtxmethodMap[statusIndex];
+         
+                    foreach (QDTXMethodModel qm in ql.modelList)
+                    {
+                        EXListViewItem i = new EXListViewItem(YouhuaMethodUtil.getQDTXName(qm.qdtx));
+                        i.Tag = qm;
+                        exListView4.Items.Add(i);
+                    }
+                    item.BackColor = Color.DodgerBlue;
+                }
+                else
+                {
+                    item.BackColor = Color.White; 
+                }
+
+            }
+        }
+
+        private void exListView4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.exListView5.Items.Clear();
+            foreach (EXListViewItem item in this.exListView4.Items)
+            {
+                if (item.Selected)
+                {
+                    item.BackColor = Color.DodgerBlue;
+                    QDTXMethodModel qm = (QDTXMethodModel)item.Tag;
+                    for (int i = 1; i <= 4; i++)
+                    {
+                        EXListViewItem it = new EXListViewItem("");
+                        it.Tag = qm;
+                        if (qm.pgff != 0 && qm.pgff == i)
+                        {
+                            EXListViewSubItem sub = new EXListViewSubItem(YouhuaMethodUtil.getDLFFName(i), Color.DodgerBlue, Color.White);
+                            it.SubItems.Add(sub);
+                        }
+                        else if (qm.recommendpgff == i)
+                        {
+                            EXListViewSubItem sub = new EXListViewSubItem(YouhuaMethodUtil.getDLFFName(i), Color.Red, Color.White);
+                            it.SubItems.Add(sub);
+                        }
+                        else 
+                        {
+                            it.SubItems.Add(YouhuaMethodUtil.getDLFFName(i));
+                        }
+                        this.exListView5.Items.Add(it);
+                    }
+                }
+                else
+                {
+                    item.BackColor = Color.White;
+                }
+            }
+        }
+
+        private void exListView5_SelectedIndexChanged(object sender, EventArgs e)
+        {            
+            foreach (EXListViewItem item in this.exListView5.Items)
+            {
+                if (item.Selected)
+                {
+                    item.SubItems[1].BackColor = Color.DodgerBlue;
+                    QDTXMethodModel qm = (QDTXMethodModel)item.Tag;
+                    qm.pgff = this.exListView5.Items.IndexOf(item) + 1;
+                }
+                else
+                {
+                    item.SubItems[1].BackColor = Color.White;
+                }
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            String path = Yixing.Properties.Settings.Default.currentProjectFolder;
+            FileStream fs = new FileStream(path + "optsetting.dat", FileMode.Create);
+            StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.UTF8);
+            try
+            {
+                sw.WriteLine("优化算法1为直接搜索算法  2为梯度搜索算法  3 为遗传算法  4为使用代理");
+                int algorithmNumber = YouhuaMethodUtil.getYouhuaMethodNumber(this.comboBox4.Text, this.checkBox1);
+                sw.WriteLine(algorithmNumber);
+                if (algorithmNumber == 1 || algorithmNumber == 2)
+                {
+                    sw.WriteLine("目标1权重\t目标2权重 ");
+                    sw.WriteLine(this.textBox1.Text + "\t" + this.textBox2.Text);
+
+                }
+                else
+                {
+                    sw.WriteLine("种群规模\t遗传代数\t交叉方法\t选择策略\t交叉概率\t变异方法\t变异概率");
+                    sw.WriteLine(this.textBox3.Text + "\t" + this.textBox4.Text + "\t" + this.comboBox1.Text + "\t" + this.comboBox2.Text + "\t" +
+                        this.textBox5.Text + "\t" + this.comboBox3.Text + "\t" + this.textBox6.Text);
+                }
+
+                //第四行默认为1
+                sw.WriteLine("1");
+                #region 代理模型的设置
+                if (algorithmNumber == 4)
+                {
+                    sw.WriteLine("样本文件名");
+                    sw.WriteLine(this.yangbenPath);
+                    sw.WriteLine("代理模型设置");
+                    sw.WriteLine("优化用到的气动特性参数个数");
+                    List<String> qdtxmmList = YouhuaMethodUtil.getQDTXMMList(this.qdtxmethodMap);
+                    sw.WriteLine(qdtxmmList.Count); //"//这个参数具体怎么算起来了，暂时还不能确定"
+                    sw.WriteLine("状态\t气动特性\t代理模型");
+                    foreach (String s in qdtxmmList)
+                    {
+                        sw.WriteLine(s);
+                    }
+                    if (this.radioButton3.Checked)
+                    {
+                        sw.WriteLine("优化策略");
+                        sw.WriteLine(YouhuaMethodUtil.getYHCL(this.comboBox8.Text));
+                        sw.WriteLine("代理模型间隔代数   更新比率");
+                        int dai = 0;
+                        int.TryParse(textBox12.Text, out dai);
+                        if (dai < 1 || dai > 20)
+                        {
+                            throw new Exception("间隔代数为整数,且在[1,20]之间");
+                        }
+                        float jiaohe = 0;
+                        float.TryParse(textBox13.Text, out jiaohe);
+                        if (jiaohe <= 0 || jiaohe >= 1)
+                        {
+                            throw new Exception("校核比例为实数 (0,1) 之间");
+                        }
+                        sw.WriteLine(dai + "\t" + jiaohe);
+                    }
+
+                }
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                fs.Flush();
+                sw.Flush();
+                sw.Close();
+                fs.Close();
+            }
+           MessageBox.Show("保存成功");
         }
        
     }

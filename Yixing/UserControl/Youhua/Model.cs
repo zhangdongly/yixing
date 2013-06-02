@@ -56,6 +56,7 @@ namespace Yixing.UserControl.Youhua
         private Panel panel5;
         private Panel panel4;
         private ImageList iList ;
+        public Dictionary<int, Status> ztDic = new Dictionary<int, Status>();
         public Model()
         {
             this.InitializeComponent();
@@ -505,7 +506,7 @@ namespace Yixing.UserControl.Youhua
 
         }
         //用于记录添加的状态数
-        Dictionary<int, Status> ztDic = new Dictionary<int, Status>();
+       
         int ztkey = 0;
 
         private void control_Load(object sender, EventArgs e)
@@ -1028,6 +1029,10 @@ namespace Yixing.UserControl.Youhua
             return aimList;
            
         }
+
+
+
+
 
         private void gentemplate(List<Aim> aimList,String path){
             FileStream fs = new FileStream(path+"Objsetting.dat", FileMode.Create);
