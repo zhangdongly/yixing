@@ -1371,7 +1371,19 @@ namespace Yixing.UserControl.Youhua
                     qm.statusIndex = ae.index;
                     qm.qdtx = ae.qdtx;
                     qm.recommendpgff = 2;
-                    ql.modelList.Add(qm);
+                    int flag=0;
+                    foreach (QDTXMethodModel tmpQM in ql.modelList)
+                    {
+                        if (tmpQM.qdtx == qm.qdtx)
+                        {
+                            flag = 1;
+                            break;
+                        }
+                    }
+                    if (flag == 0)
+                    {
+                        ql.modelList.Add(qm);
+                    }
 
                 }
             }
