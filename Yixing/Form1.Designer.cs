@@ -1,7 +1,9 @@
 ﻿using Sunisoft.IrisSkin;
 using System.Collections;
+using System.Collections.Generic;
 using System.Threading;
 using System.Windows.Forms;
+using Yixing.model.mubiaohans;
 using Yixing.UserControl;
 using Yixing.UserControl.Youhua;
 using Yixing.UserTool;
@@ -87,9 +89,10 @@ namespace Yixing
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.qidong = new Yixing.UserControl.Qidong();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.youhua = new Yixing.UserControl.Youhua.Youhua();
+            this.j = new Jiankong(); 
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -491,16 +494,16 @@ namespace Yixing
             this.panel1.Size = new System.Drawing.Size(945, 620);
             this.panel1.TabIndex = 2;
             // 
-            // folderBrowserDialog1
-            // 
-            this.folderBrowserDialog1.Description = "请选择或重新创建优化工程 ";
-            // 
             // qidong
             // 
             this.qidong.Location = new System.Drawing.Point(0, 0);
             this.qidong.Name = "qidong";
             this.qidong.Size = new System.Drawing.Size(940, 600);
             this.qidong.TabIndex = 0;
+            // 
+            // folderBrowserDialog1
+            // 
+            this.folderBrowserDialog1.Description = "请选择或重新创建优化工程 ";
             // 
             // youhua
             // 
@@ -542,6 +545,7 @@ namespace Yixing
         private Panel panel1;
         private Qidong qidong;
         private Youhua youhua;
+        Jiankong j;
         private ToolStripMenuItem 新增用户ToolStripMenuItem;
         private ToolStripMenuItem 查看用户ToolStripMenuItem;
         private ToolStripMenuItem 关于ToolStripMenuItem;
@@ -588,6 +592,7 @@ namespace Yixing
         private ToolStripMenuItem 文件保存路径ToolStripMenuItem;
         private FolderBrowserDialog folderBrowserDialog1;
         private SaveFileDialog saveFileDialog1;
+       
         
     }
 }

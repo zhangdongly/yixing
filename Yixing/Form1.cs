@@ -42,7 +42,8 @@ namespace Yixing
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            Jiankong j = new Jiankong();
+           
+            j.update(youhua.m.getAimList(), youhua.p.getDUC(), youhua.m.ztDic);            
             this.panel1.Controls.Clear();
             this.panel1.Controls.Add(j);
            
@@ -100,7 +101,15 @@ namespace Yixing
 
         private void toolStripLabel6_Click(object sender, EventArgs e)
         {
-            Jiankong j = new Jiankong();
+            try
+            {
+                j.update(youhua.m.getAimList(),youhua.p.getDUC(),youhua.m.ztDic);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
             this.panel1.Controls.Clear();
             this.panel1.Controls.Add(j);
            

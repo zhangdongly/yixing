@@ -652,7 +652,7 @@ namespace Yixing.UserControl.Youhua
             return list;
         }
 
-        private List<ParasettingDUC> getDUC()
+        public List<ParasettingDUC> getDUC()
         {
             List<ParasettingDUC> ducList = new List<ParasettingDUC>();
             try

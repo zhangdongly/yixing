@@ -1314,6 +1314,8 @@ namespace Yixing.UserControl.Youhua
         private void comboBox8_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox c = (ComboBox)sender;
+            
+
             if (c.Text.Equals("紧耦合优化"))
             {
                 this.groupBox7.Enabled = true;

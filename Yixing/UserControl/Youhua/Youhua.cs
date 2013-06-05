@@ -17,8 +17,9 @@ namespace Yixing.UserControl.Youhua
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.SplitContainer splitContainer1;
 
-        private Parameter1 p;
-        private Model m;
+        public Parameter1 p;
+        public Model m;
+        public YouhuaMethod ym;
         private Panel panel1;
         private Jiankong j;
         private Chuli c;
@@ -27,7 +28,7 @@ namespace Yixing.UserControl.Youhua
 
         private Button button2;
         private Button button1;
-        private YouhuaMethod ym;
+       
         private int current = 0;
     
         public Youhua()

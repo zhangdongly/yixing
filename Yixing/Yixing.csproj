@@ -241,6 +241,7 @@
     <Compile Include="model\FFDModel.cs" />
     <Compile Include="model\HicksHenneModel .cs" />
     <Compile Include="model\InitialAirfoilModel.cs" />
+    <Compile Include="model\JiankongParamModel.cs" />
     <Compile Include="model\mubiaohans\Aim.cs" />
     <Compile Include="model\mubiaohans\AimExpression.cs" />
     <Compile Include="model\Parasetting.cs" />

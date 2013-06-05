@@ -5,7 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Yixing.Dialog;
+using Yixing.model;
+using Yixing.model.mubiaohans;
 using Yixing.UserTool;
+using Yixing.util;
 
 namespace Yixing.UserControl.Youhua
 {
@@ -50,6 +53,12 @@ namespace Yixing.UserControl.Youhua
         private CheckBox checkBox8;
         private ComboBox comboBox1;
         private Label label1;
+        public List<ParasettingDUC> PDUCList;
+        public List<Aim> aimList;
+        public Dictionary<int, Status> ztDic;
+        public Dictionary<String, JiankongParamModel> paramMap;
+        private Button button9;
+        private Button button10;
         private System.Windows.Forms.Panel panel1;
     
         public Jiankong()
@@ -67,7 +76,7 @@ namespace Yixing.UserControl.Youhua
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.button9 = new System.Windows.Forms.Button();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
@@ -76,6 +85,8 @@ namespace Yixing.UserControl.Youhua
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
@@ -83,6 +94,7 @@ namespace Yixing.UserControl.Youhua
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.button10 = new System.Windows.Forms.Button();
             this.listBox3 = new System.Windows.Forms.ListBox();
             this.label4 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
@@ -99,7 +111,6 @@ namespace Yixing.UserControl.Youhua
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -175,6 +186,7 @@ namespace Yixing.UserControl.Youhua
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.button9);
             this.panel3.Controls.Add(this.listBox2);
             this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.button3);
@@ -187,24 +199,20 @@ namespace Yixing.UserControl.Youhua
             this.panel3.Size = new System.Drawing.Size(648, 265);
             this.panel3.TabIndex = 3;
             // 
-            // comboBox1
+            // button9
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "2",
-            "3"});
-            this.comboBox1.Location = new System.Drawing.Point(458, 30);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 20);
-            this.comboBox1.TabIndex = 7;
+            this.button9.Location = new System.Drawing.Point(199, 205);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(75, 23);
+            this.button9.TabIndex = 7;
+            this.button9.Text = "清除";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // listBox2
             // 
             this.listBox2.FormattingEnabled = true;
             this.listBox2.ItemHeight = 12;
-            this.listBox2.Items.AddRange(new object[] {
-            "状态1 CD",
-            "目标2"});
             this.listBox2.Location = new System.Drawing.Point(339, 44);
             this.listBox2.Name = "listBox2";
             this.listBox2.Size = new System.Drawing.Size(139, 184);
@@ -260,7 +268,9 @@ namespace Yixing.UserControl.Youhua
             "目标1",
             "目标2"});
             this.listBox1.Location = new System.Drawing.Point(18, 44);
+            this.listBox1.MultiColumn = true;
             this.listBox1.Name = "listBox1";
+            this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.listBox1.Size = new System.Drawing.Size(153, 184);
             this.listBox1.TabIndex = 1;
             // 
@@ -285,6 +295,26 @@ namespace Yixing.UserControl.Youhua
             this.groupBox1.Size = new System.Drawing.Size(648, 64);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(365, 36);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(89, 12);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "每行显示图数：";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "2",
+            "3"});
+            this.comboBox1.Location = new System.Drawing.Point(458, 30);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 20);
+            this.comboBox1.TabIndex = 7;
             // 
             // checkBox4
             // 
@@ -351,6 +381,7 @@ namespace Yixing.UserControl.Youhua
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.button10);
             this.panel5.Controls.Add(this.listBox3);
             this.panel5.Controls.Add(this.label4);
             this.panel5.Controls.Add(this.button6);
@@ -363,13 +394,20 @@ namespace Yixing.UserControl.Youhua
             this.panel5.Size = new System.Drawing.Size(648, 265);
             this.panel5.TabIndex = 3;
             // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(201, 205);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(75, 23);
+            this.button10.TabIndex = 7;
+            this.button10.Text = "清除";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
             // listBox3
             // 
             this.listBox3.FormattingEnabled = true;
             this.listBox3.ItemHeight = 12;
-            this.listBox3.Items.AddRange(new object[] {
-            "状态1 CD",
-            "目标2"});
             this.listBox3.Location = new System.Drawing.Point(339, 44);
             this.listBox3.Name = "listBox3";
             this.listBox3.Size = new System.Drawing.Size(139, 184);
@@ -418,12 +456,6 @@ namespace Yixing.UserControl.Youhua
             // 
             this.listBox4.FormattingEnabled = true;
             this.listBox4.ItemHeight = 12;
-            this.listBox4.Items.AddRange(new object[] {
-            "状态1 CD",
-            "状态1 CM",
-            "状态2 CM",
-            "目标1",
-            "目标2"});
             this.listBox4.Location = new System.Drawing.Point(18, 44);
             this.listBox4.Name = "listBox4";
             this.listBox4.Size = new System.Drawing.Size(153, 184);
@@ -498,15 +530,6 @@ namespace Yixing.UserControl.Youhua
             this.tabPage3.Text = "位置";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(365, 36);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(89, 12);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "每行显示图数：";
-            // 
             // Jiankong
             // 
             this.Controls.Add(this.panel1);
@@ -553,8 +576,14 @@ namespace Yixing.UserControl.Youhua
             }
             else
             {
-                String item = this.listBox1.SelectedItem.ToString();
-                this.listBox2.Items.Add(item);
+                for (int i = 0; i < this.listBox1.SelectedItems.Count; i++)
+                {
+                    String value = this.listBox1.SelectedItems[i].ToString();
+                    if (!this.listBox2.Items.Contains(value))
+                    {
+                        this.listBox2.Items.Add(value);
+                    }
+                }
             }
           
         }
@@ -588,8 +617,14 @@ namespace Yixing.UserControl.Youhua
             }
             else
             {
-                String item = this.listBox4.SelectedItem.ToString();
-                this.listBox3.Items.Add(item);
+                for (int i = 0; i < this.listBox4.SelectedItems.Count; i++)
+                {
+                    String value = this.listBox4.SelectedItems[i].ToString();
+                    if (!this.listBox3.Items.Contains(value))
+                    {
+                        this.listBox3.Items.Add(value);
+                    }
+                }
             }
         }
 
@@ -616,6 +651,79 @@ namespace Yixing.UserControl.Youhua
 
         }
 
+        public void update(List<Aim> aimList,List<ParasettingDUC> PDUCList,Dictionary<int, Status> ztDic)
+        {
+            if (PDUCList == null || PDUCList.Count <= 0)
+            {
+                throw new Exception("需要先进行参数化设置");
+            }
+
+            if (ztDic == null || ztDic.Count <= 0)
+            {
+                throw new Exception("需要先添加状态");
+            }
+
+            if (aimList == null||aimList.Count<=0)
+            {
+                throw new Exception("需要先设定目标函数");
+            }
+                   
+            this.aimList = aimList;
+            this.PDUCList = PDUCList;
+            this.ztDic = ztDic;
+            aimList2Param();
+        }
+
+        private void aimList2Param()
+        {
+            paramMap = new Dictionary<String, JiankongParamModel>();
+            if (this.aimList.Count == 1)
+            {
+                paramMap.Add("目标函数", null);
+                foreach (AimExpression ae in aimList[0].expressionList)
+                {
+                    String key = ztDic[ae.index].getZtName() + "_" + YouhuaMethodUtil.getQDTXName(ae.qdtx);
+                    if (!paramMap.ContainsKey(key))
+                    {
+                        paramMap.Add(key, null);
+                    }
+                }
+            }
+            else
+            {
+                for (int i=0;i<aimList.Count;i++ )
+                {
+                    paramMap.Add("目标函数"+(i+1),null);
+                    foreach (AimExpression ae in aimList[i].expressionList)
+                    {
+                        String key = ztDic[ae.index].getZtName() + "_" + YouhuaMethodUtil.getQDTXName(ae.qdtx);
+                        if (!paramMap.ContainsKey(key))
+                        {
+                            paramMap.Add(key, null);
+                        }
+                     }
+                }
+            }
+
+            this.listBox1.Items.Clear();
+
+            foreach (String value in paramMap.Keys)
+            {
+                this.listBox1.Items.Add(value);
+                this.listBox4.Items.Add(value);
+            }
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            this.listBox2.Items.Clear();
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            this.listBox3.Items.Clear();
+        }
         
     }
 }
