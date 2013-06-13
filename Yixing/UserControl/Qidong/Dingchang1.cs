@@ -760,6 +760,7 @@ namespace Yixing.UserControl
             String vmname = Path.GetFileName(vmpath);
             String yxname = yx.name.Substring(0, yx.name.IndexOf("."));
             string outpath = Yixing.Properties.Settings.Default.defaultFileFolder + "/" + yxname;
+           //string outpath = Yixing.Properties.Settings.Default.defaultFileFolder ;
             if (!Directory.Exists(outpath))
             {
                 Directory.CreateDirectory(outpath);
