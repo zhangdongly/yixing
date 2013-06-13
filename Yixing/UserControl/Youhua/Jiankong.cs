@@ -261,12 +261,6 @@ namespace Yixing.UserControl.Youhua
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 12;
-            this.listBox1.Items.AddRange(new object[] {
-            "状态1 CD",
-            "状态1 CM",
-            "状态2 CM",
-            "目标1",
-            "目标2"});
             this.listBox1.Location = new System.Drawing.Point(18, 44);
             this.listBox1.MultiColumn = true;
             this.listBox1.Name = "listBox1";
