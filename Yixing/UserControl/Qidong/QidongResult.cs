@@ -66,12 +66,12 @@ namespace Yixing.UserControl
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.rtb_info = new System.Windows.Forms.RichTextBox();
+            this.exListView1 = new Yixing.UserTool.EXListView();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.exListView1 = new Yixing.UserTool.EXListView();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -99,20 +99,22 @@ namespace Yixing.UserControl
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.Color.Red;
             this.label4.Location = new System.Drawing.Point(310, 15);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(131, 12);
             this.label4.TabIndex = 2;
-            this.label4.Text = "计算失败失败状态数：4";
+            this.label4.Text = "计算失败失败状态数：0";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.Color.Lime;
             this.label3.Location = new System.Drawing.Point(178, 15);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(101, 12);
+            this.label3.Size = new System.Drawing.Size(95, 12);
             this.label3.TabIndex = 1;
-            this.label3.Text = "已完成状态数：10";
+            this.label3.Text = "已完成状态数：0";
             // 
             // label2
             // 
@@ -143,9 +145,22 @@ namespace Yixing.UserControl
             this.rtb_info.TabIndex = 6;
             this.rtb_info.Text = "";
             // 
+            // exListView1
+            // 
+            this.exListView1.ControlPadding = 4;
+            this.exListView1.FullRowSelect = true;
+            this.exListView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.exListView1.Location = new System.Drawing.Point(8, 47);
+            this.exListView1.Name = "exListView1";
+            this.exListView1.OwnerDraw = true;
+            this.exListView1.Size = new System.Drawing.Size(760, 364);
+            this.exListView1.TabIndex = 4;
+            this.exListView1.UseCompatibleStateImageBehavior = false;
+            this.exListView1.View = System.Windows.Forms.View.Details;
+            // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(592, 555);
+            this.button5.Location = new System.Drawing.Point(322, 555);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 3;
@@ -161,6 +176,7 @@ namespace Yixing.UserControl
             this.button4.TabIndex = 2;
             this.button4.Text = "保存结果";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Visible = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // label1
@@ -177,19 +193,6 @@ namespace Yixing.UserControl
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
-            // exListView1
-            // 
-            this.exListView1.ControlPadding = 4;
-            this.exListView1.FullRowSelect = true;
-            this.exListView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.exListView1.Location = new System.Drawing.Point(8, 47);
-            this.exListView1.Name = "exListView1";
-            this.exListView1.OwnerDraw = true;
-            this.exListView1.Size = new System.Drawing.Size(760, 364);
-            this.exListView1.TabIndex = 4;
-            this.exListView1.UseCompatibleStateImageBehavior = false;
-            this.exListView1.View = System.Windows.Forms.View.Details;
             // 
             // QidongResult
             // 
@@ -279,7 +282,7 @@ namespace Yixing.UserControl
             {
                 CalcResult re = new CalcResult();
                 CalcModel cm = cmList[i];
-                this.setCalcStatus("", "" + (i + 1), "", "" + cm.mahe, "" + cm.yj);
+                this.setCalcStatus("", "", "", "" + cm.mahe, "" + cm.yj);
                 String inpPath = cm.inpPath;
                 Boolean iszn = cm.isZn;
                 String path = Path.GetDirectoryName(inpPath);
@@ -302,20 +305,14 @@ namespace Yixing.UserControl
                 }
 
                 #region 处理输出结果文件
-                if (!isSucess || !File.Exists(path + "/" + inpNameWithout + ".res"))
-                {
-                    failedcount++;
-                    MessageBox.Show("Ma:="+cm.mahe+" alpha:="+cm.yj + "没有生成结果文件，该状态自动忽略");
-                    continue;
-                }
 
                 EXListViewItem item = new EXListViewItem(""+(i+1));
-                item.SubItems.Add("" + cm.mahe);
+                item.SubItems.Add("" + cm.mahe.ToString("0.000"));
                 re.ma = cm.mahe;
                 #region 处理alpha
                 if (cm.isyj)
                 {
-                    item.SubItems.Add("" + cm.yj.ToString("E5"));
+                    item.SubItems.Add("" + cm.yj.ToString("0.000"));
                     re.alpha = cm.yj;
                 }
                 else
@@ -326,9 +323,29 @@ namespace Yixing.UserControl
                         String line = alphaList[alphaList.Count - 1];
                         List<String> lineList = this.processLine(line);
                         String str = lineList[4];
-                        item.SubItems.Add(Convert.ToDouble(str).ToString("E5"));
+                        item.SubItems.Add(Convert.ToDouble(str).ToString("0.000"));
                         re.alpha = Convert.ToDouble(str);
                     }
+                }
+                if (!isSucess || !File.Exists(path + "/" + inpNameWithout + ".res"))
+                {
+                    failedcount++;
+                    // MessageBox.Show("Ma:="+cm.mahe+" alpha:="+cm.yj + "没有生成结果文件，该状态计算失败");
+                    this.setCalcStatus("", "", "" + failedcount, "", "");
+                    item.SubItems.Add("0");
+                    item.SubItems.Add("0");
+                    item.SubItems.Add("0");
+                    item.SubItems.Add("0");
+                    if (iszn)
+                    {
+                        item.SubItems.Add("是");
+                    }
+                    else
+                    {
+                        item.SubItems.Add("否");
+                    }
+                    item.SubItems.Add("否");
+                    continue;
                 }
                 #endregion
                 List<String> resList = InpFactory.readFile(path + "/" + inpNameWithout + ".res");
@@ -353,10 +370,10 @@ namespace Yixing.UserControl
                     }
                     cl = cl / znCl;
                     cd = cd / znCl;
-                    item.SubItems.Add(cl.ToString("E5"));
-                    item.SubItems.Add(cd.ToString("E5"));
-                    item.SubItems.Add((cmz / znCl).ToString("E5"));
-                    item.SubItems.Add((cl / cd).ToString("E5"));
+                    item.SubItems.Add(cl.ToString("0.00000"));
+                    item.SubItems.Add(cd.ToString("0.00000"));
+                    item.SubItems.Add((cmz / znCl).ToString("0.00000"));
+                    item.SubItems.Add((cl / cd).ToString("0.00"));
                     re.cl = cl;
                     re.cd = cd;
                     re.cm = cmz;
@@ -367,20 +384,22 @@ namespace Yixing.UserControl
                 if (iszn)
                 {
                     re.transe = 0;
-                    item.SubItems.Add("0");
+                    item.SubItems.Add("是");
                 }
                 else
                 {
                     re.transe = 1;
-                    item.SubItems.Add("1");
+                    item.SubItems.Add("否");
                 }
-                item.SubItems.Add("0");
+                item.SubItems.Add("是");
                 re.sucess = 0;
                 this.setItem(item);
-                this.setCalcStatus("" , "", "" + failedcount, "", "");
+                int complet = i+1-failedcount;
+                this.setCalcStatus("" , ""+complet, "" , "", "");
                 resultList.Add(re);
             }
             processResult(resultList);
+            MessageBox.Show("所有状态计算完成");
             if(t.IsAlive)
                 t.Abort(); 
         }
@@ -416,8 +435,8 @@ namespace Yixing.UserControl
                     File.Create(yxpath).Close();
                     this.writeLine(yxpath, "Ma   alpha   Cl   Cd    Cm    K    transe  sucess");
                 }
-                String line = result.ma+"  "+ result.alpha +"  "+result.cl +"  "
-                    +result.cd +"  "+result.cm +"  "+result.k +"  "+result.transe +"  "+result.sucess;
+                String line = result.ma.ToString("0.0000") + "  " + result.alpha.ToString("0.0000") + "  " + result.cl.ToString("0.000000") + "  "
+                    + result.cd.ToString("0.000000") + "  " + result.cm.ToString("0.000000") + "  " + result.k.ToString("0.000") + "  " + result.transe + "  " + result.sucess;
                 this.writeLine(mapath, line);
                 this.writeLine(yxpath, line);
             }

@@ -46,7 +46,7 @@ namespace Yixing.Dialog
             {
                 this.flowLayoutPanel1.Controls.Clear();
             }
-            
+            int count = this.flowLayoutPanel1.Controls.Count;
                 //绘制在一张图中
                 Chart chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
                 System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
@@ -58,6 +58,7 @@ namespace Yixing.Dialog
                 chartArea1.CursorX.IsUserSelectionEnabled = true;
                 chartArea1.CursorY.IsUserEnabled = true;
                 chartArea1.CursorY.IsUserSelectionEnabled = true;
+                chartArea1.BorderColor = Color.Red;
                 chart1.ChartAreas.Add(chartArea1);
                 legend1.Name = "Legend1";
                 chart1.Legends.Add(legend1);
@@ -74,12 +75,42 @@ namespace Yixing.Dialog
                     series1.Legend = "Legend1";
                     series1.Name = "数据" + (i + 1);
                     series1.ChartType = SeriesChartType.Line;
+                  
                     chart1.Series.Add(series1);
                     List<double> xList = resultModelList[i].resultMap[x];
                     List<double> yList = resultModelList[i].resultMap[y];
                     for (int j = 0; j < xList.Count; j++)
                     {
-                        series1.Points.Add(new DataPoint(xList[j], yList[j]));
+                        DataPoint point = new DataPoint(xList[j], yList[j]);
+                        point.MarkerStyle = MarkerStyle.Circle;
+                        point.BorderWidth = 4;
+                        point.MarkerSize = 10;
+                        if (count % 5 == 0)
+                        {
+                             point.BorderColor = Color.Black;
+                             series1.Color = Color.Black;
+                        }
+                        else if (count % 5 == 1)
+                        {
+                             point.BorderColor = Color.Red;
+                             series1.Color = Color.Red;
+                        }
+                        else if (count % 5 == 2)
+                        {
+                             point.BorderColor = Color.Green;
+                             series1.Color = Color.Green;
+                        }
+                        else if (count % 5 == 3)
+                        {
+                             point.BorderColor = Color.Blue;
+                             series1.Color = Color.Blue;
+                        }
+                        else
+                        {
+                             point.BorderColor= Color.Purple;
+                             series1.Color = Color.Purple;
+                        }
+                        series1.Points.Add(point);
                     }
                 }
                 this.flowLayoutPanel1.Controls.Add(chart1);

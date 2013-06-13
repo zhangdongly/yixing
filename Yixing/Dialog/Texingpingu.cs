@@ -575,8 +575,8 @@ namespace Yixing.Dialog
                     File.Create(yxpath).Close();
                     this.writeLine(yxpath, "Ma   alpha   Cl   Cd    Cm    K");
                 }
-                String line = result.ma.ToString("E5") + "  " + result.alpha.ToString("E5") + "  " + result.cl.ToString("E5") + "  "
-                    + result.cd.ToString("E5") + "  " + result.cm.ToString("E5") + "  " + result.k.ToString("E5");
+                String line = result.ma.ToString("0.0000") + "  " + result.alpha.ToString("0.0000") + "  " + result.cl.ToString("0.000000") + "  "
+                    + result.cd.ToString("0.000000") + "  " + result.cm.ToString("0.000000") + "  " + result.k.ToString("0.000") + "  " + result.transe + "  " + result.sucess;
                 //this.writeLine(mapath, line);
                 this.writeLine(yxpath, line);
             }

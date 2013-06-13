@@ -15,10 +15,6 @@ namespace Yixing.model
         public String name;
         public string[] varsArray ;
         public Dictionary<string, List<double>> resultMap;
-
-
-
-
         private ResultModel()
         {
         }
