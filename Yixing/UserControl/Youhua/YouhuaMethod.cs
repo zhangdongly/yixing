@@ -104,6 +104,8 @@ namespace Yixing.UserControl.Youhua
         private Button button6;
         public Dictionary<int, Status> ztDic;
         private String yangbenPath;
+
+        public YouhuaMethodModel youhuaMethodModel;
     
         public YouhuaMethod()
         {
@@ -1556,6 +1558,21 @@ namespace Yixing.UserControl.Youhua
             }
            MessageBox.Show("保存成功");
         }
-       
+
+        public YouhuaMethodModel getYouhuaMethodModel()
+        {
+            if (this.youhuaMethodModel == null)
+            {
+                this.youhuaMethodModel = new YouhuaMethodModel();
+            }
+            youhuaMethodModel.algorithm = this.comboBox4.Text;
+            youhuaMethodModel.isUseDaili = this.checkBox1.Checked;
+            youhuaMethodModel.isDefaultDailiModel = this.radioButton4.Checked;
+            youhuaMethodModel.optimizingStrategy = this.comboBox8.Text;
+            return this.youhuaMethodModel;
+        }
+      
     }
+
+    
 }

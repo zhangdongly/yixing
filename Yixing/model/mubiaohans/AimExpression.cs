@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Yixing.model.mubiaohans
 {
-    class AimExpression
+   public class AimExpression
     {
         //气动特性编号，升力 cl-1，阻力 cd-2 3表示力矩，4表示升阻比
         public double qdtx { get; set; }

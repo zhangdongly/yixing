@@ -1,14 +1,20 @@
-﻿using System;
+﻿using NVelocity.Runtime;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using Yixing.model;
 using Yixing.UserTool;
+using Yixing.util;
 
 namespace Yixing.UserControl
 {
@@ -24,8 +30,19 @@ namespace Yixing.UserControl
            String fileName = FileDialogUtil.getSelectFileName(this.openFileDialog1);
            if (!String.IsNullOrWhiteSpace(fileName))
            {
-               this.addFile(fileName);
+               String path = System.Environment.CurrentDirectory + "\\resources\\ExecutableFile\\";      
+               List<String> infoList=new List<String>();
+               infoList.Add(fileName);
+               FileUtil.write2File(path + "foilfilename.dat", infoList);
+               this.processCommand("foilanalysis", path);
+               JiheTexingModel j = JiheTexingModel.createByFile(path + "charcteristic.dat");
+               j.fileName = fileName.Substring(fileName.LastIndexOf("\\") + 1);
+               //读完了之后就可以删除了
+               File.Delete(path + "foilfilename.dat");
+               File.Delete(path + "charcteristic.dat");
+               this.addFile(fileName, j);
            }
+           this.reAddItem();
         }
 
         private void Jihetexing_Load(object sender, EventArgs e)
@@ -34,8 +51,8 @@ namespace Yixing.UserControl
             this.exListView1.Columns.Add("数据名",100);
             this.exListView1.Columns.Add("最大厚度", 100);
             this.exListView1.Columns.Add("最大厚度位置", 150);
-            this.exListView1.Columns.Add("最大宽度", 100);
-            this.exListView1.Columns.Add("最大宽度位置", 150);
+            this.exListView1.Columns.Add("最大弯度", 100);
+            this.exListView1.Columns.Add("最大弯度位置", 150);
 
             this.exListView2.Columns.Add("文件路径",550);
             this.exListView2.Columns.Add("", 50);
@@ -48,34 +65,43 @@ namespace Yixing.UserControl
 
           //  this.addItem("数据1");
             //this.addItem("数据2");
-            
-            String[] names = { "几何外形","厚度分布","弯度分布"};
-            String[] ys = { "Y", "厚度", "弯度" };
-            for (int i=0;i<3;i++) 
+                     
+        }
+
+        private void reAddItem()
+        {
+            String[] names = { "厚度分布", "弯度分布" };
+            String[] ys = { "厚度", "弯度" };
+
+            flowLayoutPanel1.Controls.Clear();
+            for (int i = 0; i < names.Length; i++)
             {
-                this.addChart(names[i],ys[i]);
+                this.addChart(names[i], ys[i]);
             }
         }
 
-        private void addItem(String name){
+        private void addItem(String name, JiheTexingModel j)
+        {
 
             EXListViewItem item = new EXListViewItem();
+            item.Tag = j;
             TextBox t = new TextBox();
             t.Text = name;
             EXControlListViewSubItem exc = new EXControlListViewSubItem();
             item.SubItems.Add(exc);
             this.exListView1.AddControlToSubItem(t, exc);
-            item.SubItems.Add(0.09+"");
-            item.SubItems.Add(0.20+"");
-            item.SubItems.Add("0.01");
-            item.SubItems.Add("0.25");
+            item.SubItems.Add(j.MaxThickness+"");
+            item.SubItems.Add(j.MaxThicknessLocation+"");
+            item.SubItems.Add(j.Maxcamber+"");
+            item.SubItems.Add(j.MaxcamberLocation+"");
             this.exListView1.Items.Add(item);
 
         }
 
-        private void addFile(String filePath)
+        private void addFile(String filePath,JiheTexingModel j)
         {
             EXListViewItem item = new EXListViewItem(filePath);
+            item.Tag = j;
             Button up = new Button();
             up.Text = "上移";
             up.Tag = item;
@@ -94,9 +120,8 @@ namespace Yixing.UserControl
             item.SubItems.Add(downExc);
             this.exListView2.AddControlToSubItem(down, downExc);
             this.exListView2.Items.Add(item);
-            String fileName = filePath.Substring(filePath.LastIndexOf("\\"));
-            this.addItem(fileName);
-
+            String fileName = filePath.Substring(filePath.LastIndexOf("\\")+1);
+            this.addItem(fileName,j);
 
         }
 
@@ -116,6 +141,7 @@ namespace Yixing.UserControl
                         this.exListView1.Items.Insert(index-1, tmp1);
 
                     }
+                    this.reAddItem();
                 
         }
 
@@ -135,7 +161,7 @@ namespace Yixing.UserControl
                 this.exListView1.Items.Insert(index+1 , tmp1);
 
             }
-
+            this.reAddItem();
         }
 
         private void addChart(String name,String y)
@@ -146,7 +172,7 @@ namespace Yixing.UserControl
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             chartArea1.Name = "ChartArea1";
-
+            chartArea1.AxisX.LabelStyle.Format = "{0.0000}";
             chartArea1.AxisX.Title = "X";
             chartArea1.AxisY.Title = y;
             chartArea1.CursorX.IsUserEnabled = true;
@@ -155,9 +181,6 @@ namespace Yixing.UserControl
             chartArea1.CursorY.IsUserSelectionEnabled = true;
             chart1.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
-            //legend1.IsDockedInsideChartArea = true;
-            //legend1.Alignment = System.Drawing.StringAlignment.Near;
-            //legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
             legend1.Alignment = StringAlignment.Center;
             chart1.Legends.Add(legend1);
             //chart1.Legends.
@@ -172,24 +195,88 @@ namespace Yixing.UserControl
             chart1.BorderlineWidth = 2;
             chart1.BorderlineColor = Color.Gray;
             chart1.BorderlineDashStyle = ChartDashStyle.Solid;
-
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "数据";
-            series1.ChartType = SeriesChartType.Line;
-            for (int i = 0; i < 10; i++)
+            try
             {
-                series1.Points.Add(new DataPoint(rd.Next(100),rd.Next(100)));
+                this.getSeries(y, chart1);
             }
-
-            //chart1.DoubleClick += new EventHandler(this.chart_DoubleClick);
-
-            chart1.Series.Add(series1);
-           
-
+            catch (Exception ex)
+            {
+                MessageBox.Show("重复的newfoil名："+ex.Message);
+            }
             this.flowLayoutPanel1.Controls.Add(chart1);
           
         }
+
+        public void getSeries(String y,Chart c)
+        {
+
+            List<Series> sList = new List<Series>();
+            foreach (EXListViewItem item in this.exListView2.Items)
+            {
+                JiheTexingModel j = (JiheTexingModel)item.Tag;
+                Series series1 = new Series();
+                series1.ChartArea = "ChartArea1";
+                series1.Legend = "Legend1";
+                series1.LabelBorderWidth = 10;
+                //series1.MarkerStyle = MarkerStyle.Circle;
+                //series1.CustomProperties = "PointWidth=10";
+                series1.BorderWidth = 5;
+                String name = j.fileName;
+                if (item.Index < 5)
+                {
+                    series1.Color=colors[item.Index];
+                }
+                int number = 1;
+                while(c.Series.IndexOf(name)>=0){
+                    name = j.fileName + number++;
+                }
+                series1.Name = name;
+                series1.ChartType = SeriesChartType.Line;
+                if ("厚度".Equals(y))
+                {
+                    for (int i = 0; i < j.xList.Count; i++)
+                    {
+                        series1.Points.Add(new DataPoint(j.xList[i], j.thicknessList[i]));
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < j.xList.Count; i++)
+                    {
+                        series1.Points.Add(new DataPoint(j.xList[i], j.camberList[i]));
+                    }
+                }
+
+                c.Series.Add(series1);
+            }            
+
+        }
+
+        private void processCommand(String command,String path)
+        {
+            Process cmd = new Process();
+            try
+            {
+                cmd.StartInfo.FileName = @"foilanalysis.exe";
+                cmd.StartInfo.Arguments = command;
+                cmd.StartInfo.RedirectStandardOutput = true;
+                cmd.StartInfo.RedirectStandardInput = true;
+                cmd.StartInfo.UseShellExecute = false;
+                cmd.StartInfo.CreateNoWindow = true;
+                cmd.StartInfo.WorkingDirectory = path;
+                cmd.EnableRaisingEvents = true;
+                cmd.Start();              
+                String info = cmd.StandardOutput.ReadToEnd();
+                cmd.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+              
+
+        }
+
+       
     }
 }

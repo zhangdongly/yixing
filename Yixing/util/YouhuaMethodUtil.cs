@@ -17,19 +17,19 @@ namespace Yixing.util
             
             if (number == 1)
             {
-                return "cl";
+                return "Cl";
             }
             if (number == 2)
             {
-                return "cd";
+                return "Cd";
             }
             if (number == 3)
             {
-                return "cm";
+                return "Cm";
             }
             if (number == 4)
             {
-                return "k";
+                return "K";
             }
 
             return "error number";

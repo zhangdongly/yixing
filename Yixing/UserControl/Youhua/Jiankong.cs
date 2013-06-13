@@ -21,7 +21,6 @@ namespace Yixing.UserControl.Youhua
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.TabPage tabPage3;
@@ -48,7 +47,6 @@ namespace Yixing.UserControl.Youhua
         private Label label5;
         private GroupBox groupBox2;
         private CheckBox checkBox5;
-        private CheckBox checkBox6;
         private CheckBox checkBox7;
         private CheckBox checkBox8;
         private ComboBox comboBox1;
@@ -56,6 +54,10 @@ namespace Yixing.UserControl.Youhua
         public List<ParasettingDUC> PDUCList;
         public List<Aim> aimList;
         public Dictionary<int, Status> ztDic;
+        //监控图相关的数据
+        public JiankongModel jiankongPicture;
+        //监控表相关的数据 
+        public JiankongModel jiankongSheet;
         public Dictionary<String, JiankongParamModel> paramMap;
         private Button button9;
         private Button button10;
@@ -88,7 +90,6 @@ namespace Yixing.UserControl.Youhua
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -104,7 +105,6 @@ namespace Yixing.UserControl.Youhua
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
             this.checkBox7 = new System.Windows.Forms.CheckBox();
             this.checkBox8 = new System.Windows.Forms.CheckBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -282,7 +282,6 @@ namespace Yixing.UserControl.Youhua
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.comboBox1);
             this.groupBox1.Controls.Add(this.checkBox4);
-            this.groupBox1.Controls.Add(this.checkBox3);
             this.groupBox1.Controls.Add(this.checkBox2);
             this.groupBox1.Location = new System.Drawing.Point(27, 73);
             this.groupBox1.Name = "groupBox1";
@@ -293,7 +292,7 @@ namespace Yixing.UserControl.Youhua
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(365, 36);
+            this.label1.Location = new System.Drawing.Point(363, 31);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 12);
             this.label1.TabIndex = 8;
@@ -305,7 +304,7 @@ namespace Yixing.UserControl.Youhua
             this.comboBox1.Items.AddRange(new object[] {
             "2",
             "3"});
-            this.comboBox1.Location = new System.Drawing.Point(458, 30);
+            this.comboBox1.Location = new System.Drawing.Point(458, 26);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 20);
             this.comboBox1.TabIndex = 7;
@@ -319,16 +318,6 @@ namespace Yixing.UserControl.Youhua
             this.checkBox4.TabIndex = 2;
             this.checkBox4.Text = "输出";
             this.checkBox4.UseVisualStyleBackColor = true;
-            // 
-            // checkBox3
-            // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(150, 31);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(48, 16);
-            this.checkBox3.TabIndex = 1;
-            this.checkBox3.Text = "约束";
-            this.checkBox3.UseVisualStyleBackColor = true;
             // 
             // checkBox2
             // 
@@ -467,7 +456,6 @@ namespace Yixing.UserControl.Youhua
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.checkBox5);
-            this.groupBox2.Controls.Add(this.checkBox6);
             this.groupBox2.Controls.Add(this.checkBox7);
             this.groupBox2.Location = new System.Drawing.Point(27, 73);
             this.groupBox2.Name = "groupBox2";
@@ -484,16 +472,6 @@ namespace Yixing.UserControl.Youhua
             this.checkBox5.TabIndex = 2;
             this.checkBox5.Text = "输出";
             this.checkBox5.UseVisualStyleBackColor = true;
-            // 
-            // checkBox6
-            // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.Location = new System.Drawing.Point(150, 31);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(54, 16);
-            this.checkBox6.TabIndex = 1;
-            this.checkBox6.Text = "约束 ";
-            this.checkBox6.UseVisualStyleBackColor = true;
             // 
             // checkBox7
             // 
@@ -717,6 +695,50 @@ namespace Yixing.UserControl.Youhua
         private void button10_Click(object sender, EventArgs e)
         {
             this.listBox3.Items.Clear();
+        }
+
+        public JiankongModel getJiankongPicture()
+        {
+            if (this.jiankongPicture == null)
+            {
+                this.jiankongPicture = new JiankongModel();
+                this.jiankongPicture.type = 1;
+            }
+
+            this.jiankongPicture.isShowPareto = this.checkBox1.Checked;
+            this.jiankongPicture.isShowIn = this.checkBox2.Checked;
+            this.jiankongPicture.isShowOut = this.checkBox4.Checked;
+            int numbersOfEachRow = 2;
+            Int32.TryParse(this.comboBox1.Text, out numbersOfEachRow);
+            this.jiankongPicture.numbersOfEachRow = numbersOfEachRow;
+            this.jiankongPicture.showJiankongList = this.getJiankongParamModelList(this.listBox2);
+           
+            return this.jiankongPicture;
+        }
+
+        private List<JiankongParamModel> getJiankongParamModelList(ListBox l)
+        {
+            List<JiankongParamModel> list = new List<JiankongParamModel>();
+            foreach (Object o in l.Items)
+            {
+                list.Add(this.paramMap[o.ToString()]);
+            }
+            return list;
+        }
+
+        public JiankongModel getJiankongSheet()
+        {
+            if (this.jiankongSheet == null)
+            {
+                this.jiankongSheet = new JiankongModel();
+                this.jiankongSheet.type = 2;
+            }
+
+            this.jiankongSheet.isShowQingying = this.checkBox8.Checked;
+            this.jiankongSheet.isShowIn = this.checkBox7.Checked;
+            this.jiankongSheet.isShowOut = this.checkBox5.Checked;
+            this.jiankongSheet.showJiankongList = this.getJiankongParamModelList(this.listBox3);
+            return this.jiankongSheet;
         }
         
     }

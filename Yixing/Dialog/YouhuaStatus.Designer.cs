@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms.DataVisualization.Charting;
+using Yixing.model;
+using Yixing.model.mubiaohans;
 using Yixing.UserTool;
 namespace Yixing.Dialog
 {
@@ -343,5 +345,13 @@ namespace Yixing.Dialog
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
+
+        public YouhuaMethodModel youhuaMethod;
+        public JiankongModel jiankongPicture;
+        public JiankongModel jiankongSheet;
+        public List<Aim> aimList;
+        public Dictionary<int, Status> ztDic;
+
+
     }
 }

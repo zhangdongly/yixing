@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Yixing.model.mubiaohans
 {
-    class Aim
+   public class Aim
     {
         //目标函数的，序数
         public int index { get; set; }

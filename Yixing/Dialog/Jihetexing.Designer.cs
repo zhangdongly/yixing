@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 namespace Yixing.UserControl
 {
     partial class Jihetexing
@@ -181,5 +182,6 @@ namespace Yixing.UserControl
         private Random rd = new Random();
         private UserTool.EXListView exListView2;
         private System.Windows.Forms.Button button2;
+        private Color[] colors ={Color.Red,Color.Black,Color.Yellow,Color.Green,Color.Blue}; 
     }
 }
