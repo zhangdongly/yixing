@@ -35,8 +35,7 @@ namespace Yixing.UserControl
                infoList.Add(fileName);
                FileUtil.write2File(path + "foilfilename.dat", infoList);
                this.processCommand("foilanalysis", path);
-               JiheTexingModel j = JiheTexingModel.createByFile(path + "charcteristic.dat");
-               j.fileName = fileName.Substring(fileName.LastIndexOf("\\") + 1);
+               JiheTexingModel j = JiheTexingModel.createByFile(path + "charcteristic.dat",fileName);           
                //读完了之后就可以删除了
                File.Delete(path + "foilfilename.dat");
                File.Delete(path + "charcteristic.dat");
@@ -70,8 +69,8 @@ namespace Yixing.UserControl
 
         private void reAddItem()
         {
-            String[] names = { "厚度分布", "弯度分布" };
-            String[] ys = { "厚度", "弯度" };
+            String[] names = { "几何外形比较", "厚度分布", "弯度分布" };
+            String[] ys = { "Y","厚度", "弯度" };
 
             flowLayoutPanel1.Controls.Clear();
             for (int i = 0; i < names.Length; i++)
@@ -218,8 +217,6 @@ namespace Yixing.UserControl
                 series1.ChartArea = "ChartArea1";
                 series1.Legend = "Legend1";
                 series1.LabelBorderWidth = 10;
-                //series1.MarkerStyle = MarkerStyle.Circle;
-                //series1.CustomProperties = "PointWidth=10";
                 series1.BorderWidth = 5;
                 String name = j.fileName;
                 if (item.Index < 5)
@@ -239,11 +236,18 @@ namespace Yixing.UserControl
                         series1.Points.Add(new DataPoint(j.xList[i], j.thicknessList[i]));
                     }
                 }
-                else
+                else if ("弯度".Equals(y))
                 {
                     for (int i = 0; i < j.xList.Count; i++)
                     {
                         series1.Points.Add(new DataPoint(j.xList[i], j.camberList[i]));
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < j.sourceXList.Count; i++)
+                    {
+                        series1.Points.Add(new DataPoint(j.sourceXList[i], j.sourceYList[i]));
                     }
                 }
 
