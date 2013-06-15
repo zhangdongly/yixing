@@ -30,7 +30,6 @@ namespace Yixing.UserControl
            String fileName = FileDialogUtil.getSelectFileName(this.openFileDialog1);
            if (!String.IsNullOrWhiteSpace(fileName))
            {
-               String path = System.Environment.CurrentDirectory + "\\resources\\ExecutableFile\\";      
                List<String> infoList=new List<String>();
                infoList.Add(fileName);
                FileUtil.write2File(path + "foilfilename.dat", infoList);
@@ -89,10 +88,10 @@ namespace Yixing.UserControl
             EXControlListViewSubItem exc = new EXControlListViewSubItem();
             item.SubItems.Add(exc);
             this.exListView1.AddControlToSubItem(t, exc);
-            item.SubItems.Add(j.MaxThickness+"");
-            item.SubItems.Add(j.MaxThicknessLocation+"");
-            item.SubItems.Add(j.Maxcamber+"");
-            item.SubItems.Add(j.MaxcamberLocation+"");
+            item.SubItems.Add(String.Format("{0:0.0000}",j.MaxThickness));
+            item.SubItems.Add(String.Format("{0:0.0000}",j.MaxThicknessLocation));
+            item.SubItems.Add(String.Format("{0:0.0000}",j.Maxcamber));
+            item.SubItems.Add(String.Format("{0:0.0000}",j.MaxcamberLocation));
             this.exListView1.Items.Add(item);
 
         }
@@ -167,7 +166,7 @@ namespace Yixing.UserControl
         {
 
             //绘制在一张图中
-            Chart chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            Chart chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();            
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             chartArea1.Name = "ChartArea1";
@@ -183,10 +182,11 @@ namespace Yixing.UserControl
             legend1.Alignment = StringAlignment.Center;
             chart1.Legends.Add(legend1);
             //chart1.Legends.
-            chart1.Location = new System.Drawing.Point(3, 3);
+            chart1.Location = new System.Drawing.Point(30, 3);
+            
             chart1.Name = name;
             
-            chart1.Size = new System.Drawing.Size(630, 280);
+            chart1.Size = new System.Drawing.Size(700, 280);
             chart1.TabIndex = 0;
 
             chart1.Titles.Add(new Title(name));
@@ -216,8 +216,8 @@ namespace Yixing.UserControl
                 Series series1 = new Series();
                 series1.ChartArea = "ChartArea1";
                 series1.Legend = "Legend1";
-                series1.LabelBorderWidth = 10;
-                series1.BorderWidth = 5;
+                series1.LabelBorderWidth = 5;
+                series1.BorderWidth = 2;
                 String name = j.fileName;
                 if (item.Index < 5)
                 {
@@ -261,7 +261,7 @@ namespace Yixing.UserControl
             Process cmd = new Process();
             try
             {
-                cmd.StartInfo.FileName = @"foilanalysis.exe";
+                cmd.StartInfo.FileName = path+"foilanalysis.exe";
                 cmd.StartInfo.Arguments = command;
                 cmd.StartInfo.RedirectStandardOutput = true;
                 cmd.StartInfo.RedirectStandardInput = true;
@@ -279,6 +279,20 @@ namespace Yixing.UserControl
             }
               
 
+        }
+
+        private void toolStripButton5_Click(object sender, EventArgs e)
+        {
+            foreach (EXListViewItem item in this.exListView2.Items)
+            {
+                if (item.Selected)
+                {
+                    int index = item.Index;
+                    this.exListView1.Items.RemoveAt(index);
+                    this.exListView2.Items.RemoveAt(index);
+                }
+            }
+            this.reAddItem();
         }
 
        

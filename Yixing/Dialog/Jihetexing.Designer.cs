@@ -30,21 +30,27 @@ namespace Yixing.UserControl
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Jihetexing));
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.exListView2 = new Yixing.UserTool.EXListView();
             this.exListView1 = new Yixing.UserTool.EXListView();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -59,17 +65,18 @@ namespace Yixing.UserControl
             // panel3
             // 
             this.panel3.Controls.Add(this.flowLayoutPanel1);
-            this.panel3.Location = new System.Drawing.Point(12, 348);
+            this.panel3.Location = new System.Drawing.Point(32, 348);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(776, 411);
+            this.panel3.Size = new System.Drawing.Size(740, 411);
             this.panel3.TabIndex = 1;
             // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(770, 405);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(776, 411);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // panel2
@@ -82,10 +89,8 @@ namespace Yixing.UserControl
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.panel4);
             this.groupBox1.Controls.Add(this.exListView2);
-            this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.button5);
-            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.exListView1);
             this.groupBox1.Location = new System.Drawing.Point(16, 3);
             this.groupBox1.Name = "groupBox1";
@@ -94,37 +99,57 @@ namespace Yixing.UserControl
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "添加翼型数据";
             // 
-            // button2
+            // panel4
             // 
-            this.button2.Location = new System.Drawing.Point(235, 19);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "删除";
-            this.button2.UseVisualStyleBackColor = true;
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.toolStrip1);
+            this.panel4.Location = new System.Drawing.Point(7, 21);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(730, 34);
+            this.panel4.TabIndex = 6;
             // 
-            // button5
+            // toolStrip1
             // 
-            this.button5.Location = new System.Drawing.Point(78, 19);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 2;
-            this.button5.Text = "添加";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton4,
+            this.toolStripSeparator3,
+            this.toolStripButton5,
+            this.toolStripSeparator4});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(728, 32);
+            this.toolStrip1.TabIndex = 6;
             // 
-            // button1
+            // toolStripButton4
             // 
-            this.button1.Location = new System.Drawing.Point(405, 19);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "翼型显示";
-            this.button1.UseVisualStyleBackColor = true;
+            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
+            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton4.Name = "toolStripButton4";
+            this.toolStripButton4.Size = new System.Drawing.Size(23, 29);
+            this.toolStripButton4.Text = "新增计算翼型";
+            this.toolStripButton4.Click += new System.EventHandler(this.button5_Click);
             // 
-            // openFileDialog1
+            // toolStripSeparator3
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 32);
+            // 
+            // toolStripButton5
+            // 
+            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
+            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton5.Name = "toolStripButton5";
+            this.toolStripButton5.Size = new System.Drawing.Size(23, 29);
+            this.toolStripButton5.Text = "删除计算翼型";
+            this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 32);
             // 
             // exListView2
             // 
@@ -134,7 +159,7 @@ namespace Yixing.UserControl
             this.exListView2.Location = new System.Drawing.Point(6, 55);
             this.exListView2.Name = "exListView2";
             this.exListView2.OwnerDraw = true;
-            this.exListView2.Size = new System.Drawing.Size(731, 119);
+            this.exListView2.Size = new System.Drawing.Size(731, 143);
             this.exListView2.TabIndex = 4;
             this.exListView2.UseCompatibleStateImageBehavior = false;
             this.exListView2.View = System.Windows.Forms.View.Details;
@@ -151,6 +176,10 @@ namespace Yixing.UserControl
             this.exListView1.UseCompatibleStateImageBehavior = false;
             this.exListView1.View = System.Windows.Forms.View.Details;
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // Jihetexing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -164,6 +193,10 @@ namespace Yixing.UserControl
             this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -174,14 +207,19 @@ namespace Yixing.UserControl
         private System.Windows.Forms.Panel panel2;
         private UserTool.EXListView exListView1;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private Random rd = new Random();
         private UserTool.EXListView exListView2;
-        private System.Windows.Forms.Button button2;
-        private Color[] colors ={Color.Red,Color.Black,Color.Yellow,Color.Green,Color.Blue}; 
+        private Color[] colors ={Color.Red,Color.Black,Color.DarkBlue,Color.Green,Color.Blue};
+        String path = System.Environment.CurrentDirectory + "\\resources\\ExecutableFile\\";
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton toolStripButton4;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripButton toolStripButton5;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;      
+
     }
 }
