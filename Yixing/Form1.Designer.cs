@@ -92,11 +92,13 @@ namespace Yixing
             this.qidong = new Yixing.UserControl.Qidong();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.youhua = new Yixing.UserControl.Youhua.Youhua();
-            this.j = new Jiankong(); 
+            this.j = new Yixing.UserControl.Youhua.Jiankong();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -488,7 +490,7 @@ namespace Yixing
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.qidong);
+            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Location = new System.Drawing.Point(17, 71);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(945, 620);
@@ -512,6 +514,22 @@ namespace Yixing
             this.youhua.Size = new System.Drawing.Size(930, 600);
             this.youhua.TabIndex = 0;
             // 
+            // j
+            // 
+            this.j.Location = new System.Drawing.Point(0, 0);
+            this.j.Name = "j";
+            this.j.Size = new System.Drawing.Size(800, 550);
+            this.j.TabIndex = 0;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(935, 610);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -530,6 +548,7 @@ namespace Yixing
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -592,6 +611,7 @@ namespace Yixing
         private ToolStripMenuItem 文件保存路径ToolStripMenuItem;
         private FolderBrowserDialog folderBrowserDialog1;
         private SaveFileDialog saveFileDialog1;
+        private PictureBox pictureBox1;
        
         
     }

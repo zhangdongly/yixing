@@ -643,7 +643,7 @@ namespace Yixing.UserControl.Youhua
 
              ComboBox m = new ComboBox();
 
-             m.Items.AddRange(new object[] { "cl", "cd","cm","k" });
+             m.Items.AddRange(new object[] { "Cl", "Cd","Cm","k" });
 
              EXControlListViewSubItem mc = new EXControlListViewSubItem();
              item.SubItems.Add(mc);
@@ -951,7 +951,7 @@ namespace Yixing.UserControl.Youhua
                     // MessageBox.Show(qdtxc.Text);
                     EXControlListViewSubItem cldown = null;
                     EXControlListViewSubItem clup = null;
-                    if (qdtxc.Text.Equals("cl")) //升力系数
+                    if (qdtxc.Text.Equals("Cl")) //升力系数
                     {
                         exp.qdtx = 1;
                         if (lv1item != null)
@@ -960,7 +960,7 @@ namespace Yixing.UserControl.Youhua
                             clup = (EXControlListViewSubItem)lv1item.SubItems[8];
                         }
                     }
-                    else if (qdtxc.Text.Equals("cd"))
+                    else if (qdtxc.Text.Equals("Cd"))
                     {
                         exp.qdtx = 2;
                         if (lv1item != null)
@@ -969,7 +969,7 @@ namespace Yixing.UserControl.Youhua
                             clup = (EXControlListViewSubItem)lv1item.SubItems[6];
                         }
                     }
-                    else if (qdtxc.Text.Equals("cm"))
+                    else if (qdtxc.Text.Equals("Cm"))
                     {
                         exp.qdtx = 3;
                         if (lv1item != null)

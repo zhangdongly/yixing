@@ -29,7 +29,7 @@ namespace Yixing.util
             }
             if (number == 4)
             {
-                return "K";
+                return "k";
             }
 
             return "error number";

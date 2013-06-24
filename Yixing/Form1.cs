@@ -22,9 +22,7 @@ namespace Yixing
         {
             InitializeComponent();
             
-           // this.skinEngine1.SkinFile = "MP10.ssk";
-           //String a = Yixing.Properties.Resources.defaultYixingFolder;
-          //  System.Resources.ResourceManager rs = new System.Resources.ResourceManager(typeof(Form1));
+         
            
         }
 
