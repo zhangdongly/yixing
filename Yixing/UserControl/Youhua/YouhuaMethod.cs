@@ -116,32 +116,7 @@ namespace Yixing.UserControl.Youhua
         {
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
-            "RBF代理模型",
-            "RBF代理模型",
-            " a"}, -1, System.Drawing.SystemColors.MenuHighlight, System.Drawing.Color.Empty, null);
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
-            "Kriging代理模型",
-            "Kriging代理模型",
-            ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
-            "BP神经网络",
-            "BP神经网络",
-            ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
-            "状态1",
-            "0.02",
-            "2",
-            ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem(new string[] {
-            "状态2",
-            "0.02",
-            "3",
-            ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem(new string[] {
-            "状态3",
-            "0.04",
-            "0.65"}, -1);
+            
             this.panel1 = new System.Windows.Forms.Panel();
             this.button6 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -258,6 +233,7 @@ namespace Yixing.UserControl.Youhua
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(800, 571);
             this.panel1.TabIndex = 0;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // button6
             // 
@@ -791,11 +767,7 @@ namespace Yixing.UserControl.Youhua
             this.columnHeader6,
             this.columnHeader7});
             this.exListView5.ControlPadding = 4;
-            this.exListView5.FullRowSelect = true;
-            this.exListView5.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2,
-            listViewItem3});
+            this.exListView5.FullRowSelect = true;         
             this.exListView5.Location = new System.Drawing.Point(556, 15);
             this.exListView5.Name = "exListView5";
             this.exListView5.OwnerDraw = true;
@@ -835,11 +807,7 @@ namespace Yixing.UserControl.Youhua
             this.columnHeader2,
             this.columnHeader3});
             this.exListView3.ControlPadding = 4;
-            this.exListView3.FullRowSelect = true;
-            this.exListView3.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem4,
-            listViewItem5,
-            listViewItem6});
+            this.exListView3.FullRowSelect = true;          
             this.exListView3.Location = new System.Drawing.Point(76, 20);
             this.exListView3.Name = "exListView3";
             this.exListView3.OwnerDraw = true;
@@ -1400,6 +1368,7 @@ namespace Yixing.UserControl.Youhua
             {
                 StatusUtil.addStatus2EXListView(this.ztDic[key], this.exListView3,key);
             }
+            this.exListView3.Items[0].Selected = true;
         }
 
         private void exListView3_SelectedIndexChanged(object sender, EventArgs e)
@@ -1419,6 +1388,7 @@ namespace Yixing.UserControl.Youhua
                         i.Tag = qm;
                         exListView4.Items.Add(i);
                     }
+                    this.exListView4.Items[0].Selected = true;
                     item.BackColor = Color.DodgerBlue;
                 }
                 else
@@ -1570,6 +1540,11 @@ namespace Yixing.UserControl.Youhua
             youhuaMethodModel.isDefaultDailiModel = this.radioButton4.Checked;
             youhuaMethodModel.optimizingStrategy = this.comboBox8.Text;
             return this.youhuaMethodModel;
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
       
     }

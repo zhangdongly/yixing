@@ -128,14 +128,15 @@ namespace Yixing.UserControl.Youhua
             this.panel1.Controls.Add(this.button5);
             this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.tabControl1);
+            this.panel1.ForeColor = System.Drawing.SystemColors.Desktop;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(819, 547);
+            this.panel1.Size = new System.Drawing.Size(924, 600);
             this.panel1.TabIndex = 0;
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(467, 496);
+            this.button5.Location = new System.Drawing.Point(506, 554);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 2;
@@ -144,7 +145,7 @@ namespace Yixing.UserControl.Youhua
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(113, 504);
+            this.button4.Location = new System.Drawing.Point(283, 554);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 1;
@@ -157,10 +158,11 @@ namespace Yixing.UserControl.Youhua
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(3, 3);
+            this.tabControl1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.tabControl1.Location = new System.Drawing.Point(68, 41);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(744, 486);
+            this.tabControl1.Size = new System.Drawing.Size(791, 486);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -169,23 +171,26 @@ namespace Yixing.UserControl.Youhua
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(736, 460);
+            this.tabPage1.Size = new System.Drawing.Size(783, 460);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "图";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
+            this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Controls.Add(this.groupBox1);
             this.panel2.Controls.Add(this.checkBox1);
             this.panel2.Location = new System.Drawing.Point(15, 21);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(702, 420);
+            this.panel2.Size = new System.Drawing.Size(762, 420);
             this.panel2.TabIndex = 0;
             // 
             // panel3
             // 
+            this.panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel3.Controls.Add(this.button9);
             this.panel3.Controls.Add(this.listBox2);
             this.panel3.Controls.Add(this.label3);
@@ -201,7 +206,7 @@ namespace Yixing.UserControl.Youhua
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(199, 205);
+            this.button9.Location = new System.Drawing.Point(269, 195);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(75, 23);
             this.button9.TabIndex = 7;
@@ -213,7 +218,7 @@ namespace Yixing.UserControl.Youhua
             // 
             this.listBox2.FormattingEnabled = true;
             this.listBox2.ItemHeight = 12;
-            this.listBox2.Location = new System.Drawing.Point(339, 44);
+            this.listBox2.Location = new System.Drawing.Point(458, 44);
             this.listBox2.Name = "listBox2";
             this.listBox2.Size = new System.Drawing.Size(139, 184);
             this.listBox2.TabIndex = 6;
@@ -221,7 +226,7 @@ namespace Yixing.UserControl.Youhua
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(337, 16);
+            this.label3.Location = new System.Drawing.Point(456, 16);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 5;
@@ -229,7 +234,7 @@ namespace Yixing.UserControl.Youhua
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(199, 160);
+            this.button3.Location = new System.Drawing.Point(269, 150);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 4;
@@ -239,9 +244,9 @@ namespace Yixing.UserControl.Youhua
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(200, 109);
+            this.button2.Location = new System.Drawing.Point(270, 99);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(74, 23);
             this.button2.TabIndex = 3;
             this.button2.Text = "全选";
             this.button2.UseVisualStyleBackColor = true;
@@ -249,9 +254,9 @@ namespace Yixing.UserControl.Youhua
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(201, 58);
+            this.button1.Location = new System.Drawing.Point(271, 48);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(73, 23);
             this.button1.TabIndex = 2;
             this.button1.Text = "添加";
             this.button1.UseVisualStyleBackColor = true;
@@ -262,7 +267,6 @@ namespace Yixing.UserControl.Youhua
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 12;
             this.listBox1.Location = new System.Drawing.Point(18, 44);
-            this.listBox1.MultiColumn = true;
             this.listBox1.Name = "listBox1";
             this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.listBox1.Size = new System.Drawing.Size(153, 184);
@@ -283,7 +287,9 @@ namespace Yixing.UserControl.Youhua
             this.groupBox1.Controls.Add(this.comboBox1);
             this.groupBox1.Controls.Add(this.checkBox4);
             this.groupBox1.Controls.Add(this.checkBox2);
-            this.groupBox1.Location = new System.Drawing.Point(27, 73);
+            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.groupBox1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.groupBox1.Location = new System.Drawing.Point(27, 82);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(648, 64);
             this.groupBox1.TabIndex = 2;
@@ -328,6 +334,7 @@ namespace Yixing.UserControl.Youhua
             this.checkBox2.TabIndex = 0;
             this.checkBox2.Text = "输入";
             this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
             // checkBox1
             // 
@@ -347,7 +354,7 @@ namespace Yixing.UserControl.Youhua
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(736, 460);
+            this.tabPage2.Size = new System.Drawing.Size(783, 460);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "表";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -359,7 +366,7 @@ namespace Yixing.UserControl.Youhua
             this.panel4.Controls.Add(this.checkBox8);
             this.panel4.Location = new System.Drawing.Point(17, 20);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(702, 420);
+            this.panel4.Size = new System.Drawing.Size(760, 420);
             this.panel4.TabIndex = 1;
             // 
             // panel5
@@ -482,6 +489,7 @@ namespace Yixing.UserControl.Youhua
             this.checkBox7.TabIndex = 0;
             this.checkBox7.Text = "输入 ";
             this.checkBox7.UseVisualStyleBackColor = true;
+            this.checkBox7.CheckedChanged += new System.EventHandler(this.checkBox7_CheckedChanged);
             // 
             // checkBox8
             // 
@@ -497,7 +505,7 @@ namespace Yixing.UserControl.Youhua
             // 
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(736, 460);
+            this.tabPage3.Size = new System.Drawing.Size(783, 460);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "位置";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -506,7 +514,7 @@ namespace Yixing.UserControl.Youhua
             // 
             this.Controls.Add(this.panel1);
             this.Name = "Jiankong";
-            this.Size = new System.Drawing.Size(800, 550);
+            this.Size = new System.Drawing.Size(930, 600);
             this.Load += new System.EventHandler(this.control_Load);
             this.panel1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
@@ -676,13 +684,17 @@ namespace Yixing.UserControl.Youhua
                      }
                 }
             }
-
             this.listBox1.Items.Clear();
+            addParamMap(this.listBox1);
+            addParamMap(this.listBox4);
+           
+        }
 
+        private void addParamMap(ListBox listBox)
+        {
             foreach (String value in paramMap.Keys)
             {
-                this.listBox1.Items.Add(value);
-                this.listBox4.Items.Add(value);
+                listBox.Items.Add(value);
             }
 
         }
@@ -739,6 +751,39 @@ namespace Yixing.UserControl.Youhua
             this.jiankongSheet.isShowOut = this.checkBox5.Checked;
             this.jiankongSheet.showJiankongList = this.getJiankongParamModelList(this.listBox3);
             return this.jiankongSheet;
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            this.listBox1.Items.Clear();
+            this.addParamMap(this.listBox1);
+            CheckBox c = (CheckBox)sender;
+            if (c.Checked)
+            {
+
+                this.addDUC2ListBox(this.listBox1);
+            }           
+           
+        }
+
+        private void addDUC2ListBox(ListBox listBox)
+        {
+            foreach (ParasettingDUC pDuc in this.PDUCList)
+            {
+                listBox.Items.Add(pDuc.name);
+            }
+        }
+
+        private void checkBox7_CheckedChanged(object sender, EventArgs e)
+        {
+            this.listBox4.Items.Clear();
+            this.addParamMap(this.listBox4);
+            CheckBox c = (CheckBox)sender;
+            if (c.Checked)
+            {
+
+                this.addDUC2ListBox(this.listBox4);
+            }   
         }
         
     }

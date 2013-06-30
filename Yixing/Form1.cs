@@ -130,7 +130,7 @@ namespace Yixing
 
         private void toolStripLabel9_Click(object sender, EventArgs e)
         {
-            ShowResult sr = new ShowResult();
+            ShowResult1 sr = new ShowResult1();
             sr.ShowDialog();
         }
 

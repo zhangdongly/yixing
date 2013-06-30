@@ -241,10 +241,10 @@ namespace Yixing.UserControl
             this.exListView1.Columns.Add("No");
             this.exListView1.Columns.Add("Mach");
             this.exListView1.Columns.Add("alpha");
-            this.exListView1.Columns.Add("cl",100);
-            this.exListView1.Columns.Add("cd",100);
-            this.exListView1.Columns.Add("cm",100);
-            this.exListView1.Columns.Add("k",100);
+            this.exListView1.Columns.Add("Cl",100);
+            this.exListView1.Columns.Add("Cd",100);
+            this.exListView1.Columns.Add("Cm",100);
+            this.exListView1.Columns.Add("K",100);
             this.exListView1.Columns.Add("是否转捩", 100);
             this.exListView1.Columns.Add("计算是否成功",200);
             ts = new ThreadStart(this.startCalc);

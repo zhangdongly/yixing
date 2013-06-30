@@ -11,6 +11,7 @@ namespace Yixing.model
          * 参数化的上限，下限和当前值
          * 
          * */
+        public string name { get; set; }
 
         public double down { get; set; }
 
@@ -18,11 +19,12 @@ namespace Yixing.model
 
         public double current { get; set; }
 
-        public ParasettingDUC(double down, double current, double up)
+        public ParasettingDUC(double down, double current, double up,string name)
         {
             this.down = down;
             this.up = up;
             this.current = current;
+            this.name = name;
         }
     }
 }

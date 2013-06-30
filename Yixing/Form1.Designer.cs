@@ -89,12 +89,12 @@ namespace Yixing
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.qidong = new Yixing.UserControl.Qidong();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.qidong = new Yixing.UserControl.Qidong();
             this.youhua = new Yixing.UserControl.Youhua.Youhua();
             this.j = new Yixing.UserControl.Youhua.Jiankong();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -401,9 +401,10 @@ namespace Yixing
             // toolStripLabel6
             // 
             this.toolStripLabel6.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.toolStripLabel6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripLabel6.Image")));
+            this.toolStripLabel6.Margin = new System.Windows.Forms.Padding(2, 1, 2, 2);
             this.toolStripLabel6.Name = "toolStripLabel6";
-            this.toolStripLabel6.Size = new System.Drawing.Size(27, 22);
-            this.toolStripLabel6.Text = "P1";
+            this.toolStripLabel6.Size = new System.Drawing.Size(16, 22);
             this.toolStripLabel6.Click += new System.EventHandler(this.toolStripLabel6_Click);
             // 
             // toolStripSeparator8
@@ -414,15 +415,17 @@ namespace Yixing
             // toolStripLabel7
             // 
             this.toolStripLabel7.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.toolStripLabel7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripLabel7.Image")));
+            this.toolStripLabel7.Margin = new System.Windows.Forms.Padding(2, 1, 2, 2);
             this.toolStripLabel7.Name = "toolStripLabel7";
-            this.toolStripLabel7.Size = new System.Drawing.Size(17, 22);
-            this.toolStripLabel7.Text = "E";
+            this.toolStripLabel7.Size = new System.Drawing.Size(16, 22);
             this.toolStripLabel7.Click += new System.EventHandler(this.toolStripLabel7_Click);
             // 
             // toolStripSeparator9
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
             this.toolStripSeparator9.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator9.Visible = false;
             // 
             // toolStripLabel8
             // 
@@ -430,6 +433,7 @@ namespace Yixing
             this.toolStripLabel8.Name = "toolStripLabel8";
             this.toolStripLabel8.Size = new System.Drawing.Size(17, 22);
             this.toolStripLabel8.Text = "F";
+            this.toolStripLabel8.Visible = false;
             this.toolStripLabel8.Click += new System.EventHandler(this.toolStripLabel8_Click);
             // 
             // toolStripSeparator10
@@ -456,9 +460,10 @@ namespace Yixing
             // toolStripLabel2
             // 
             this.toolStripLabel2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.toolStripLabel2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripLabel2.Image")));
+            this.toolStripLabel2.Margin = new System.Windows.Forms.Padding(2, 1, 2, 2);
             this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(31, 22);
-            this.toolStripLabel2.Text = "▇C";
+            this.toolStripLabel2.Size = new System.Drawing.Size(16, 22);
             // 
             // toolStripSeparator2
             // 
@@ -468,9 +473,10 @@ namespace Yixing
             // toolStripLabel3
             // 
             this.toolStripLabel3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.toolStripLabel3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripLabel3.Image")));
+            this.toolStripLabel3.Margin = new System.Windows.Forms.Padding(2, 1, 2, 2);
             this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(33, 22);
-            this.toolStripLabel3.Text = "▇O";
+            this.toolStripLabel3.Size = new System.Drawing.Size(16, 22);
             // 
             // toolStripSeparator3
             // 
@@ -496,16 +502,25 @@ namespace Yixing
             this.panel1.Size = new System.Drawing.Size(945, 620);
             this.panel1.TabIndex = 2;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(-2, 5);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(935, 610);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
+            // folderBrowserDialog1
+            // 
+            this.folderBrowserDialog1.Description = "请选择或重新创建优化工程 ";
+            // 
             // qidong
             // 
             this.qidong.Location = new System.Drawing.Point(0, 0);
             this.qidong.Name = "qidong";
             this.qidong.Size = new System.Drawing.Size(940, 600);
             this.qidong.TabIndex = 0;
-            // 
-            // folderBrowserDialog1
-            // 
-            this.folderBrowserDialog1.Description = "请选择或重新创建优化工程 ";
             // 
             // youhua
             // 
@@ -520,15 +535,6 @@ namespace Yixing
             this.j.Name = "j";
             this.j.Size = new System.Drawing.Size(800, 550);
             this.j.TabIndex = 0;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(935, 610);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 

@@ -12,7 +12,8 @@ namespace Yixing.model
     class ResultModel
     {
 
-        public String name;
+        public String name {set;get;}
+        public String path { set; get; }
         public string[] varsArray ;
         public Dictionary<string, List<double>> resultMap;
         private ResultModel()
@@ -23,6 +24,8 @@ namespace Yixing.model
         {
             ResultModel rm = new ResultModel();
             StreamReader sr = File.OpenText(fileName);
+            rm.path = fileName;
+            rm.name = fileName.Substring(fileName.LastIndexOf("\\"));
             String line = null;
             int lineNumber = 0;
             while ((line = sr.ReadLine()) != null)

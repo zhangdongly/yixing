@@ -15,9 +15,9 @@ using Yixing.UserTool;
 
 namespace Yixing.Dialog
 {
-    public partial class ShowResult : Form
+    public partial class ShowResult1 : Form
     {
-        public ShowResult()
+        public ShowResult1()
         {
             InitializeComponent();
         }
@@ -27,10 +27,12 @@ namespace Yixing.Dialog
         private void ShowResult_Load(object sender, EventArgs e)
         {
             this.resultModelList = new List<ResultModel>();
-            this.exListView1.Columns.Add("数据名",100);
-            this.exListView1.Columns.Add("是否绘制");
-            this.listView1.Columns.Add("文件名",180);
-            this.listView1.View = View.Details;
+            this.exListView1.Columns.Add("数据名",50);
+            this.exListView1.Columns.Add("文件路径",245);
+            this.exListView1.Columns.Add("是否绘制",70);
+            ImageList list = new ImageList();
+            list.ImageSize = new Size(1, 25);
+            this.exListView1.SmallImageList = list;
             this.radioButton1.Checked = true;
             this.toolStripMenuItem1.Click += new EventHandler(this.delete);
         }
@@ -45,8 +47,12 @@ namespace Yixing.Dialog
             if (this.radioButton1.Checked)
             {
                 this.flowLayoutPanel1.Controls.Clear();
+                Size s = new Size(175, 350);
+                Panel p = new Panel();
+                p.Size = s;
+                this.flowLayoutPanel1.Controls.Add(p);
             }
-            int count = this.flowLayoutPanel1.Controls.Count;
+               int count = this.flowLayoutPanel1.Controls.Count;
                 //绘制在一张图中
                 Chart chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
                 System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
@@ -62,26 +68,31 @@ namespace Yixing.Dialog
                 chart1.ChartAreas.Add(chartArea1);
                 legend1.Name = "Legend1";
                 chart1.Legends.Add(legend1);
-                // this.chart1.Location = new System.Drawing.Point(3, 3);
+               
                 chart1.Name = "chart1";
                 chart1.Size = new System.Drawing.Size(350, 300);
                 chart1.TabIndex = 0;
                 chart1.Text = x+"_"+y;
                 chart1.DoubleClick += new EventHandler(this.chartDoubleClick);
-                for (int i = 0; i < resultModelList.Count; i++)
+                foreach (EXListViewItem item in this.exListView1.Items)
                 {
+                    CheckBox c = (CheckBox)item.SubItems[2].Tag;
+                    if (!c.Checked)
+                    {
+                        continue;
+                    }
                     System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
                     series1.ChartArea = "ChartArea1";
                     series1.Legend = "Legend1";
-                    series1.Name = "翼型" + (i + 1);
+                    series1.Name = "翼型" + (item.Index + 1);
                     series1.ChartType = SeriesChartType.Line;
                   
                     chart1.Series.Add(series1);
-                    List<double> xList = resultModelList[i].resultMap[x];
-                    List<double> yList = resultModelList[i].resultMap[y];
+                    List<double> xList = ((ResultModel)item.Tag).resultMap[x];
+                    List<double> yList = ((ResultModel)item.Tag).resultMap[y];
                     for (int j = 0; j < xList.Count; j++)
                     {
-                        count=(i);
+                        count=item.Index;
                         DataPoint point = new DataPoint(xList[j], yList[j]);
                         point.MarkerStyle = MarkerStyle.Circle;
                         point.BorderWidth = 4;
@@ -114,7 +125,9 @@ namespace Yixing.Dialog
                         series1.Points.Add(point);
                     }
                 }
+               
                 this.flowLayoutPanel1.Controls.Add(chart1);
+            
                   
         }
 
@@ -128,8 +141,7 @@ namespace Yixing.Dialog
 
         private void button4_Click(object sender, EventArgs e)
         {
-           // this.openFileDialog1.InitialDirectory="D://";
-            //this.openFileDialog1.Filter = "所有文件(*.*)";
+          
             this.openFileDialog1.FileName = null;
             if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -137,14 +149,14 @@ namespace Yixing.Dialog
               
                 ResultModel rm = ResultModel.createResultModel(fileName);
                 if (rm != null)
-                {
-                    this.listView1.Items.Add(fileName);
+                {                   
                     this.resultModelList.Add(rm);
                     if (this.comboBox3.Items.Count <= 0)
                     {
                         this.comboBox3.Items.AddRange(resultModelList[0].varsArray);
                         this.comboBox4.Items.AddRange(resultModelList[0].varsArray);
                     }
+                    this.addItems();
                 }
 
             }
@@ -160,6 +172,24 @@ namespace Yixing.Dialog
                 c.Checked = true;
                 EXControlListViewSubItem ec = new EXControlListViewSubItem();
                 item.SubItems.Add(ec);
+                this.exListView1.AddControlToSubItem(c, ec);
+                this.exListView1.Items.Add(item);
+            }
+        }
+
+        public void addItems()
+        {
+            this.exListView1.Items.Clear();
+            for (int i = 0; i < this.resultModelList.Count; i++)
+            {
+                EXListViewItem item = new EXListViewItem("翼型" + (i + 1));
+                item.Tag = this.resultModelList[i];
+               item.SubItems.Add(this.resultModelList[i].path);
+                CheckBox c = new CheckBox();
+                c.Checked = true;
+                EXControlListViewSubItem ec = new EXControlListViewSubItem();
+                ec.Tag = c;
+                item.SubItems.Add(ec);            
                 this.exListView1.AddControlToSubItem(c, ec);
                 this.exListView1.Items.Add(item);
             }
@@ -183,6 +213,11 @@ namespace Yixing.Dialog
                 chart.Size = new Size(350, 300);
                 chart.Tag = null;
             }
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
 
         }
 

@@ -60,7 +60,7 @@ namespace Yixing.UserControl
             iList.ImageSize = new Size(1, 30);
             this.exListView1.SmallImageList = iList;
             this.exListView2.SmallImageList = iList;
-
+            this.reAddItem();
           //  this.addItem("数据1");
             //this.addItem("数据2");
                      
@@ -177,6 +177,7 @@ namespace Yixing.UserControl
             chartArea1.CursorX.IsUserSelectionEnabled = true;
             chartArea1.CursorY.IsUserEnabled = true;
             chartArea1.CursorY.IsUserSelectionEnabled = true;
+            
             chart1.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             legend1.Alignment = StringAlignment.Center;
@@ -209,50 +210,69 @@ namespace Yixing.UserControl
         public void getSeries(String y,Chart c)
         {
 
-            List<Series> sList = new List<Series>();
-            foreach (EXListViewItem item in this.exListView2.Items)
+           // List<Series> sList = new List<Series>();
+            if (this.exListView2.Items.Count > 0)
             {
-                JiheTexingModel j = (JiheTexingModel)item.Tag;
-                Series series1 = new Series();
-                series1.ChartArea = "ChartArea1";
-                series1.Legend = "Legend1";
-                series1.LabelBorderWidth = 5;
-                series1.BorderWidth = 2;
-                String name = j.fileName;
-                if (item.Index < 5)
+                foreach (EXListViewItem item in this.exListView2.Items)
                 {
-                    series1.Color=colors[item.Index];
-                }
-                int number = 1;
-                while(c.Series.IndexOf(name)>=0){
-                    name = j.fileName + number++;
-                }
-                series1.Name = name;
-                series1.ChartType = SeriesChartType.Line;
-                if ("厚度".Equals(y))
-                {
-                    for (int i = 0; i < j.xList.Count; i++)
+                    JiheTexingModel j = (JiheTexingModel)item.Tag;
+                    Series series1 = new Series();
+                    series1.ChartArea = "ChartArea1";
+                    series1.Legend = "Legend1";
+                    series1.LabelBorderWidth = 5;
+                    series1.BorderWidth = 2;
+                    String name = j.fileName;
+                    if (item.Index < 5)
                     {
-                        series1.Points.Add(new DataPoint(j.xList[i], j.thicknessList[i]));
+                        series1.Color = colors[item.Index];
                     }
-                }
-                else if ("弯度".Equals(y))
-                {
-                    for (int i = 0; i < j.xList.Count; i++)
+                    int number = 1;
+                    while (c.Series.IndexOf(name) >= 0)
                     {
-                        series1.Points.Add(new DataPoint(j.xList[i], j.camberList[i]));
+                        name = j.fileName + number++;
                     }
-                }
-                else
-                {
-                    for (int i = 0; i < j.sourceXList.Count; i++)
+                    series1.Name = name;
+                    series1.ChartType = SeriesChartType.Line;
+                    if ("厚度".Equals(y))
                     {
-                        series1.Points.Add(new DataPoint(j.sourceXList[i], j.sourceYList[i]));
+                        for (int i = 0; i < j.xList.Count; i++)
+                        {
+                            series1.Points.Add(new DataPoint(j.xList[i], j.thicknessList[i]));
+                        }
                     }
-                }
+                    else if ("弯度".Equals(y))
+                    {
+                        for (int i = 0; i < j.xList.Count; i++)
+                        {
+                            series1.Points.Add(new DataPoint(j.xList[i], j.camberList[i]));
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 0; i < j.sourceXList.Count; i++)
+                        {
+                            series1.Points.Add(new DataPoint(j.sourceXList[i], j.sourceYList[i]));
+                        }
+                    }
 
+                    c.Series.Add(series1);
+                }
+            }
+            else
+            {
+                Series series1 = new Series();
+              //  series1.ChartArea = "ChartArea1";
+               // series1.Legend = "Legend1";
+                //series1.LabelBorderWidth = 5;
+                //series1.BorderWidth = 2;
+                c.ChartAreas[0].AxisX.MajorGrid.LineWidth = 0;
+                c.ChartAreas[0].AxisY.MajorGrid.LineWidth = 0;
+                series1.ChartType = SeriesChartType.Point;
+                series1.IsVisibleInLegend = false;
+                series1.Points.Add(new DataPoint(0,0));
                 c.Series.Add(series1);
-            }            
+
+            }
 
         }
 

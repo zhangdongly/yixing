@@ -391,7 +391,7 @@ namespace Yixing.UserControl.Youhua
             // iList
             // 
             this.iList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.iList.ImageSize = new System.Drawing.Size(1, 35);
+            this.iList.ImageSize = new System.Drawing.Size(1, 30);
             this.iList.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // groupBox1
@@ -643,7 +643,7 @@ namespace Yixing.UserControl.Youhua
 
              ComboBox m = new ComboBox();
 
-             m.Items.AddRange(new object[] { "Cl", "Cd","Cm","k" });
+             m.Items.AddRange(new object[] { "Cl", "Cd","Cm","K" });
 
              EXControlListViewSubItem mc = new EXControlListViewSubItem();
              item.SubItems.Add(mc);
