@@ -57,7 +57,10 @@ namespace Yixing.Dialog
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             chartArea1.Name = "ChartArea1";
             chartArea1.AxisX.Title = name;
+            //chartArea1.AxisX.T
             chartArea1.AxisY.Title = "Y";
+            chartArea1.AxisX.Minimum = 0;
+            chartArea1.AxisX.Maximum = 1;
             chartArea1.CursorX.IsUserEnabled = true;
             chartArea1.CursorX.IsUserSelectionEnabled = true;
             chartArea1.CursorY.IsUserEnabled = true;
@@ -68,7 +71,7 @@ namespace Yixing.Dialog
             //legend1.Alignment = System.Drawing.StringAlignment.Near;
             legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
             legend1.Alignment = StringAlignment.Center;
-            chart1.Legends.Add(legend1);
+           // chart1.Legends.Add(legend1);
             //chart1.Legends.
             chart1.Location = new System.Drawing.Point(3, 3);
             chart1.Name = "chart1";

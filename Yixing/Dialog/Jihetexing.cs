@@ -172,6 +172,8 @@ namespace Yixing.UserControl
             chartArea1.Name = "ChartArea1";
             chartArea1.AxisX.LabelStyle.Format = "{0.0000}";
             chartArea1.AxisX.Title = "X";
+            chartArea1.AxisX.Maximum = 1;
+            chartArea1.AxisX.Minimum = 0;
             chartArea1.AxisY.Title = y;
             chartArea1.CursorX.IsUserEnabled = true;
             chartArea1.CursorX.IsUserSelectionEnabled = true;

@@ -46,11 +46,17 @@ namespace Yixing.Dialog
         {
             if (this.radioButton1.Checked)
             {
-                this.flowLayoutPanel1.Controls.Clear();
-                Size s = new Size(175, 350);
-                Panel p = new Panel();
-                p.Size = s;
+                this.flowLayoutPanel1.Controls.Clear();            
                 this.flowLayoutPanel1.Controls.Add(p);
+            }
+
+            else
+            {
+                if (this.flowLayoutPanel1.Controls.Contains(p))
+                {
+                    this.flowLayoutPanel1.Controls.Remove(p);
+                }
+
             }
                int count = this.flowLayoutPanel1.Controls.Count;
                 //绘制在一张图中

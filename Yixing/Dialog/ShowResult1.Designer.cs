@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Yixing.model;
 using Yixing.UserTool;
+using System.Drawing;
+using System.Windows.Forms;
 namespace Yixing.Dialog
 {
     partial class ShowResult1
@@ -39,7 +41,6 @@ namespace Yixing.Dialog
             this.button3 = new System.Windows.Forms.Button();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.exListView1 = new Yixing.UserTool.EXListView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.button6 = new System.Windows.Forms.Button();
@@ -48,6 +49,13 @@ namespace Yixing.Dialog
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.exListView1 = new Yixing.UserTool.EXListView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button2 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -55,21 +63,15 @@ namespace Yixing.Dialog
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -108,10 +110,10 @@ namespace Yixing.Dialog
             this.radioButton2.AutoSize = true;
             this.radioButton2.Location = new System.Drawing.Point(20, 63);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(83, 16);
+            this.radioButton2.Size = new System.Drawing.Size(71, 16);
             this.radioButton2.TabIndex = 1;
             this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "显示多张图";
+            this.radioButton2.Text = "多图显示";
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
             // radioButton1
@@ -119,25 +121,11 @@ namespace Yixing.Dialog
             this.radioButton1.AutoSize = true;
             this.radioButton1.Location = new System.Drawing.Point(20, 30);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(107, 16);
+            this.radioButton1.Size = new System.Drawing.Size(71, 16);
             this.radioButton1.TabIndex = 0;
             this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "显示在一张图中";
+            this.radioButton1.Text = "单图显示";
             this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // exListView1
-            // 
-            this.exListView1.ControlPadding = 4;
-            this.exListView1.FullRowSelect = true;
-            this.exListView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.exListView1.LabelEdit = true;
-            this.exListView1.Location = new System.Drawing.Point(16, 19);
-            this.exListView1.Name = "exListView1";
-            this.exListView1.OwnerDraw = true;
-            this.exListView1.Size = new System.Drawing.Size(370, 104);
-            this.exListView1.TabIndex = 0;
-            this.exListView1.UseCompatibleStateImageBehavior = false;
-            this.exListView1.View = System.Windows.Forms.View.Details;
             // 
             // groupBox3
             // 
@@ -216,6 +204,72 @@ namespace Yixing.Dialog
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "选择文件";
             // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.toolStrip1);
+            this.panel2.Location = new System.Drawing.Point(16, 123);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(370, 31);
+            this.panel2.TabIndex = 1;
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton4,
+            this.toolStripSeparator3,
+            this.toolStripButton5,
+            this.toolStripSeparator4});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(368, 29);
+            this.toolStrip1.TabIndex = 7;
+            // 
+            // toolStripButton4
+            // 
+            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
+            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton4.Name = "toolStripButton4";
+            this.toolStripButton4.Size = new System.Drawing.Size(23, 26);
+            this.toolStripButton4.Text = "新增计算翼型";
+            this.toolStripButton4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 29);
+            // 
+            // toolStripButton5
+            // 
+            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
+            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton5.Name = "toolStripButton5";
+            this.toolStripButton5.Size = new System.Drawing.Size(23, 26);
+            this.toolStripButton5.Text = "删除计算翼型";
+            this.toolStripButton5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 29);
+            // 
+            // exListView1
+            // 
+            this.exListView1.ControlPadding = 4;
+            this.exListView1.FullRowSelect = true;
+            this.exListView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.exListView1.LabelEdit = true;
+            this.exListView1.Location = new System.Drawing.Point(16, 19);
+            this.exListView1.Name = "exListView1";
+            this.exListView1.OwnerDraw = true;
+            this.exListView1.Size = new System.Drawing.Size(370, 104);
+            this.exListView1.TabIndex = 0;
+            this.exListView1.UseCompatibleStateImageBehavior = false;
+            this.exListView1.View = System.Windows.Forms.View.Details;
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.button2);
@@ -272,58 +326,10 @@ namespace Yixing.Dialog
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // panel2
-            // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.toolStrip1);
-            this.panel2.Location = new System.Drawing.Point(16, 123);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(370, 31);
-            this.panel2.TabIndex = 1;
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton4,
-            this.toolStripSeparator3,
-            this.toolStripButton5,
-            this.toolStripSeparator4});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(368, 29);
-            this.toolStrip1.TabIndex = 7;
-            // 
-            // toolStripButton4
-            // 
-            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
-            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(23, 26);
-            this.toolStripButton4.Text = "新增计算翼型";
-            this.toolStripButton4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 29);
-            // 
-            // toolStripButton5
-            // 
-            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(23, 26);
-            this.toolStripButton5.Text = "删除计算翼型";
-            this.toolStripButton5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 29);
+
+            s= new Size(175, 350);
+                p = new Panel();
+                p.Size = s;
             // 
             // ShowResult1
             // 
@@ -341,12 +347,12 @@ namespace Yixing.Dialog
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.contextMenuStrip1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -381,6 +387,8 @@ namespace Yixing.Dialog
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton toolStripButton5;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private Size s;
+        private Panel p;
         
        
     }

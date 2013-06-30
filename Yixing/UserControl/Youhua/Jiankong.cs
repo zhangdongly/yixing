@@ -221,6 +221,7 @@ namespace Yixing.UserControl.Youhua
             this.listBox2.Location = new System.Drawing.Point(458, 44);
             this.listBox2.Name = "listBox2";
             this.listBox2.Size = new System.Drawing.Size(139, 184);
+            this.listBox2.Sorted = true;
             this.listBox2.TabIndex = 6;
             // 
             // label3
@@ -270,6 +271,7 @@ namespace Yixing.UserControl.Youhua
             this.listBox1.Name = "listBox1";
             this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.listBox1.Size = new System.Drawing.Size(153, 184);
+            this.listBox1.Sorted = true;
             this.listBox1.TabIndex = 1;
             // 
             // label2
@@ -401,6 +403,7 @@ namespace Yixing.UserControl.Youhua
             this.listBox3.Location = new System.Drawing.Point(339, 44);
             this.listBox3.Name = "listBox3";
             this.listBox3.Size = new System.Drawing.Size(139, 184);
+            this.listBox3.Sorted = true;
             this.listBox3.TabIndex = 6;
             // 
             // label4
@@ -449,6 +452,7 @@ namespace Yixing.UserControl.Youhua
             this.listBox4.Location = new System.Drawing.Point(18, 44);
             this.listBox4.Name = "listBox4";
             this.listBox4.Size = new System.Drawing.Size(153, 184);
+            this.listBox4.Sorted = true;
             this.listBox4.TabIndex = 1;
             // 
             // label5

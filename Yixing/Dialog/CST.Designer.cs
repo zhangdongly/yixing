@@ -117,6 +117,7 @@ namespace Yixing.Dialog
             this.label3.Size = new System.Drawing.Size(112, 14);
             this.label3.TabIndex = 9;
             this.label3.Text = "设计变量个数：";
+            this.label3.Visible = false;
             // 
             // textBox2
             // 
