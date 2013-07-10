@@ -47,9 +47,9 @@
             this.label1.Font = new System.Drawing.Font("幼圆", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(103, 73);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(346, 24);
+            this.label1.Size = new System.Drawing.Size(334, 24);
             this.label1.TabIndex = 0;
-            this.label1.Text = "旋翼翼型优化设计软件 1.0版本";
+            this.label1.Text = "旋翼翼型优化设计软件1.0版本";
             // 
             // panel1
             // 
@@ -146,7 +146,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
             this.Name = "Login";
-            this.Text = "旋翼翼型优化设计软件 1.0版本";
+            this.Text = "   ";
             this.Leave += new System.EventHandler(this.Login_Leave);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
