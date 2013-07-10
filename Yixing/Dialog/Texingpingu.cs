@@ -70,8 +70,15 @@ namespace Yixing.Dialog
                 s.dlmx = Constant.DLMX_SA;
                 //ztDic.Add(key,s);
 
-                item.SubItems.Add(s.mahe + "");
-                item.SubItems.Add(s.dslxs + "");
+                item.SubItems.Add(TexingUtil.getMaheString(s.mahe));
+                if (s.isyj)
+                {
+                    item.SubItems.Add(TexingUtil.getDyjString(s.dslxs));
+                }
+                else
+                {
+                    item.SubItems.Add(TexingUtil.getDslxs(s.dslxs));
+                }
                 item.Tag = key;
                 this.exListView1.Items.Add(item);
                 i++;

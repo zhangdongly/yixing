@@ -100,7 +100,9 @@ namespace Yixing.Dialog
 
         public AddStatus(List<DCYixing> yxList1,Dictionary<int, DCGaoji> gjDic)
         {
+            
             InitializeComponent();
+            this.Text = "添加计算状态";
             this.radioButton4.Checked = true;
             yxList = yxList1;
             foreach(DCYixing yx in yxList){

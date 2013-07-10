@@ -59,6 +59,8 @@ namespace Yixing.Dialog
             series.MarkerSize = 10;
             series.Color = System.Drawing.Color.Red;
             series.Name = "Default";
+            this.chart1.ChartAreas[0].AxisX.LabelStyle.Format = "{0.00}";
+           
             //this.addPoint(series);
             this.addItem(this.exListView1, this.textBox2, upMax + 0.005);
 
@@ -250,6 +252,7 @@ namespace Yixing.Dialog
 
             // Calculate new Y value from current cursor position
             double yValue = this.chart1.ChartAreas["Default"].AxisY.PixelPositionToValue(coordinate);
+            this.chart1.ChartAreas["Default"].AxisX.Maximum = 1;
             yValue = Math.Min(yValue, this.chart1.ChartAreas["Default"].AxisY.Maximum);
             yValue = Math.Max(yValue, this.chart1.ChartAreas["Default"].AxisY.Minimum);
             coordinate = Math.Max(e.X,0);

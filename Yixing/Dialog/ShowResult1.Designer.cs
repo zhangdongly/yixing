@@ -63,6 +63,8 @@ namespace Yixing.Dialog
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.p = new System.Windows.Forms.Panel();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -87,6 +89,7 @@ namespace Yixing.Dialog
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.checkBox1);
             this.panel3.Controls.Add(this.button3);
             this.panel3.Controls.Add(this.radioButton2);
             this.panel3.Controls.Add(this.radioButton1);
@@ -97,7 +100,7 @@ namespace Yixing.Dialog
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(52, 104);
+            this.button3.Location = new System.Drawing.Point(20, 122);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 9;
@@ -326,10 +329,23 @@ namespace Yixing.Dialog
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-
-            s= new Size(175, 350);
-                p = new Panel();
-                p.Size = s;
+            // 
+            // p
+            // 
+            this.p.Location = new System.Drawing.Point(0, 0);
+            this.p.Name = "p";
+            this.p.Size = new System.Drawing.Size(175, 350);
+            this.p.TabIndex = 0;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(20, 98);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(90, 16);
+            this.checkBox1.TabIndex = 10;
+            this.checkBox1.Text = "翻转Y轴方向";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // ShowResult1
             // 
@@ -389,6 +405,7 @@ namespace Yixing.Dialog
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private Size s;
         private Panel p;
+        private CheckBox checkBox1;
         
        
     }

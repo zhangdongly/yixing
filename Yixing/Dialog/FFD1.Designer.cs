@@ -130,12 +130,14 @@ namespace Yixing.Dialog
             // chart1
             // 
             chartArea1.Name = "Default";
+            
             this.chart1.ChartAreas.Add(chartArea1);
             this.chart1.Location = new System.Drawing.Point(3, 3);
             this.chart1.Name = "chart1";
             this.chart1.Size = new System.Drawing.Size(531, 467);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
+
             this.chart1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.chart1_MouseMove);
             this.chart1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.chart1_MouseUp);
             // 

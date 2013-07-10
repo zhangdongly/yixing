@@ -532,7 +532,7 @@ namespace Yixing.UserControl.Youhua
             this.exListView2.Columns.Add("", 50);
             this.exListView2.Columns.Add("", 70);
             ImageList iList = new ImageList();
-            iList.ImageSize = new Size(1, 150);
+            iList.ImageSize = new Size(1, 100);
             this.exListView2.SmallImageList = iList;
             //this.addTarget();
         }

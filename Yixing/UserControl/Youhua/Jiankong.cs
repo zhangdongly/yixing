@@ -326,6 +326,7 @@ namespace Yixing.UserControl.Youhua
             this.checkBox4.TabIndex = 2;
             this.checkBox4.Text = "输出";
             this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
             // 
             // checkBox2
             // 
@@ -483,6 +484,7 @@ namespace Yixing.UserControl.Youhua
             this.checkBox5.TabIndex = 2;
             this.checkBox5.Text = "输出";
             this.checkBox5.UseVisualStyleBackColor = true;
+            this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBox5_CheckedChanged);
             // 
             // checkBox7
             // 
@@ -664,6 +666,7 @@ namespace Yixing.UserControl.Youhua
             if (this.aimList.Count == 1)
             {
                 paramMap.Add("目标函数", null);
+                /**
                 foreach (AimExpression ae in aimList[0].expressionList)
                 {
                     String key = ztDic[ae.index].getZtName() + "_" + YouhuaMethodUtil.getQDTXName(ae.qdtx);
@@ -672,12 +675,14 @@ namespace Yixing.UserControl.Youhua
                         paramMap.Add(key, null);
                     }
                 }
+                 * */
             }
             else
             {
                 for (int i=0;i<aimList.Count;i++ )
                 {
                     paramMap.Add("目标函数"+(i+1),null);
+                   /**
                     foreach (AimExpression ae in aimList[i].expressionList)
                     {
                         String key = ztDic[ae.index].getZtName() + "_" + YouhuaMethodUtil.getQDTXName(ae.qdtx);
@@ -686,7 +691,16 @@ namespace Yixing.UserControl.Youhua
                             paramMap.Add(key, null);
                         }
                      }
+                    * */
                 }
+            }
+            //现在要求改为，只要有状态，就全部添加cl,cd,cm,k。
+            foreach (Status status in this.ztDic.Values)
+            {
+                paramMap.Add(status.getZtName()+"_Cl", null);
+                paramMap.Add(status.getZtName() + "_Cd", null);
+                paramMap.Add(status.getZtName() + "_Cm", null);
+                paramMap.Add(status.getZtName() + "_Ck", null);
             }
             this.listBox1.Items.Clear();
             addParamMap(this.listBox1);
@@ -696,9 +710,29 @@ namespace Yixing.UserControl.Youhua
 
         private void addParamMap(ListBox listBox)
         {
+            Boolean showAll;
+            if (this.listBox1 == listBox)
+            {
+                showAll = this.checkBox4.Checked;
+            }
+            else
+            {
+                showAll = this.checkBox5.Checked;
+            }
             foreach (String value in paramMap.Keys)
             {
-                listBox.Items.Add(value);
+
+                if (value.Contains("目标函数"))
+                {
+                    listBox.Items.Add(value);
+                }
+                else
+                {
+                    if (showAll)
+                    {
+                        listBox.Items.Add(value);
+                    }
+                }
             }
 
         }
@@ -788,6 +822,30 @@ namespace Yixing.UserControl.Youhua
 
                 this.addDUC2ListBox(this.listBox4);
             }   
+        }
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            this.listBox1.Items.Clear();
+            this.addParamMap(this.listBox1);
+            if (this.checkBox2.Checked)
+            {
+
+                this.addDUC2ListBox(this.listBox1);
+            }   
+
+        }
+
+        private void checkBox5_CheckedChanged(object sender, EventArgs e)
+        {
+            this.listBox4.Items.Clear();
+            this.addParamMap(this.listBox4);
+            if (this.checkBox7.Checked)
+            {
+
+                this.addDUC2ListBox(this.listBox4);
+            } 
+
         }
         
     }

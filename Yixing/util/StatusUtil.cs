@@ -13,15 +13,15 @@ namespace Yixing.util
         public static void addStatus2EXListView(Status st,EXListView exListView,int index)
         {
             EXListViewItem item = new EXListViewItem(st.getZtName());
-            item.SubItems.Add(""+st.mahe);
+            item.SubItems.Add(TexingUtil.getMaheString(st.mahe));
             if (st.isyj)
             {
                 st.isyj = true;
-                item.SubItems.Add(""+st.dslxs);
+                item.SubItems.Add(TexingUtil .getDyjString( st.dslxs));
             }
             else
             {
-                EXListViewSubItem sub = new EXListViewSubItem(""+st.dslxs, Color.Red, Color.White);
+                EXListViewSubItem sub = new EXListViewSubItem(TexingUtil.getDslxs(st.dslxs), Color.Red, Color.White);
                 item.SubItems.Add(sub);
             }
             item.Tag = index;

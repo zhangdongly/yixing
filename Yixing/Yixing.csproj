@@ -344,6 +344,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="util\StatusUtil.cs" />
     <Compile Include="util\TemplateHelper.cs" />
+    <Compile Include="util\TexingUtil.cs" />
     <Compile Include="util\YouhuaMethodUtil.cs" />
     <EmbeddedResource Include="Dialog\AddStatus.resx">
       <DependentUpon>AddStatus.cs</DependentUpon>
