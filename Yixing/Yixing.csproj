@@ -72,6 +72,8 @@
     </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="NVelocity, Version=0.4.2.8580, Culture=neutral, PublicKeyToken=44382d1b57473eda">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\NVelocity.dll</HintPath>
@@ -93,6 +95,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="constant\Constant .cs" />
+    <Compile Include="DataSourceOperate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataSourceOperate.Designer.cs">
+      <DependentUpon>DataSourceOperate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialog\AddStatus.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -283,6 +291,9 @@
     <Compile Include="model\DCZhuannie.cs" />
     <Compile Include="model\QDTXMethodList.cs" />
     <Compile Include="model\YouhuaMethodModel.cs" />
+    <Compile Include="UserControl\DataSourceOperate\Search.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UserControl\Qidong\Dingchang.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -346,6 +357,9 @@
     <Compile Include="util\TemplateHelper.cs" />
     <Compile Include="util\TexingUtil.cs" />
     <Compile Include="util\YouhuaMethodUtil.cs" />
+    <EmbeddedResource Include="DataSourceOperate.resx">
+      <DependentUpon>DataSourceOperate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialog\AddStatus.resx">
       <DependentUpon>AddStatus.cs</DependentUpon>
     </EmbeddedResource>
@@ -436,6 +450,9 @@
     </Compile>
     <EmbeddedResource Include="Dialog\Jihetexing.resx">
       <DependentUpon>Jihetexing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\DataSourceOperate\Search.resx">
+      <DependentUpon>Search.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControl\Qidong\Dingchang.resx">
       <DependentUpon>Dingchang.cs</DependentUpon>

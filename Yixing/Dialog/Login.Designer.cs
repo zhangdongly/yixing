@@ -45,11 +45,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("幼圆", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(103, 73);
+            this.label1.Location = new System.Drawing.Point(85, 73);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(334, 24);
+            this.label1.Size = new System.Drawing.Size(406, 24);
             this.label1.TabIndex = 0;
-            this.label1.Text = "旋翼翼型优化设计软件1.0版本";
+            this.label1.Text = "旋翼翼型优化设计与评估软件1.0版本";
             // 
             // panel1
             // 

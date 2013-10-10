@@ -151,6 +151,12 @@ namespace Yixing
             s.ShowDialog();
         }
 
+        private void 翼型数据库ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DataSourceOperate dso = new DataSourceOperate();
+            dso.Show();
+        }
+
        
     }
 }
