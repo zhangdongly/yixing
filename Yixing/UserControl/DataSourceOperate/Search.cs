@@ -40,6 +40,14 @@ namespace Yixing.UserControl.DataSourceOperate
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Search));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.exListView2 = new Yixing.UserTool.EXListView();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
@@ -49,19 +57,11 @@ namespace Yixing.UserControl.DataSourceOperate
             this.exListView1 = new Yixing.UserTool.EXListView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.exListView2 = new Yixing.UserTool.EXListView();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -77,6 +77,88 @@ namespace Yixing.UserControl.DataSourceOperate
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(861, 423);
             this.panel1.TabIndex = 1;
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(576, 394);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(75, 23);
+            this.button7.TabIndex = 5;
+            this.button7.Text = "翼型生成";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Visible = false;
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(427, 394);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(87, 23);
+            this.button6.TabIndex = 4;
+            this.button6.Text = "翼型几何外形";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Visible = false;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(288, 394);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 3;
+            this.button5.Text = "压力分布";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Visible = false;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(135, 394);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(95, 23);
+            this.button4.TabIndex = 2;
+            this.button4.Text = "厚度弯度分布";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Visible = false;
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.button3);
+            this.panel4.Controls.Add(this.button2);
+            this.panel4.Location = new System.Drawing.Point(3, 353);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(851, 34);
+            this.panel4.TabIndex = 1;
+            // 
+            // button3
+            // 
+            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
+            this.button3.Location = new System.Drawing.Point(423, 3);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(71, 23);
+            this.button3.TabIndex = 1;
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
+            this.button2.Location = new System.Drawing.Point(299, 4);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 0;
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // exListView2
+            // 
+            this.exListView2.ControlPadding = 4;
+            this.exListView2.FullRowSelect = true;
+            this.exListView2.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.exListView2.Location = new System.Drawing.Point(3, 3);
+            this.exListView2.Name = "exListView2";
+            this.exListView2.OwnerDraw = true;
+            this.exListView2.Size = new System.Drawing.Size(851, 351);
+            this.exListView2.TabIndex = 0;
+            this.exListView2.UseCompatibleStateImageBehavior = false;
+            this.exListView2.View = System.Windows.Forms.View.Details;
             // 
             // flowLayoutPanel1
             // 
@@ -172,84 +254,6 @@ namespace Yixing.UserControl.DataSourceOperate
             this.label1.TabIndex = 0;
             this.label1.Text = "检索条件";
             // 
-            // exListView2
-            // 
-            this.exListView2.ControlPadding = 4;
-            this.exListView2.FullRowSelect = true;
-            this.exListView2.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.exListView2.Location = new System.Drawing.Point(3, 3);
-            this.exListView2.Name = "exListView2";
-            this.exListView2.OwnerDraw = true;
-            this.exListView2.Size = new System.Drawing.Size(851, 351);
-            this.exListView2.TabIndex = 0;
-            this.exListView2.UseCompatibleStateImageBehavior = false;
-            this.exListView2.View = System.Windows.Forms.View.Details;
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Controls.Add(this.button3);
-            this.panel4.Controls.Add(this.button2);
-            this.panel4.Location = new System.Drawing.Point(3, 353);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(851, 34);
-            this.panel4.TabIndex = 1;
-            // 
-            // button2
-            // 
-            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.Location = new System.Drawing.Point(299, 4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 0;
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
-            this.button3.Location = new System.Drawing.Point(423, 3);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(71, 23);
-            this.button3.TabIndex = 1;
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(135, 394);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(95, 23);
-            this.button4.TabIndex = 2;
-            this.button4.Text = "厚度弯度分布";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(288, 394);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 3;
-            this.button5.Text = "压力分布";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(427, 394);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(87, 23);
-            this.button6.TabIndex = 4;
-            this.button6.Text = "翼型几何外形";
-            this.button6.UseVisualStyleBackColor = true;
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(576, 394);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(75, 23);
-            this.button7.TabIndex = 5;
-            this.button7.Text = "翼型生成";
-            this.button7.UseVisualStyleBackColor = true;
-            // 
             // Search
             // 
             this.Controls.Add(this.flowLayoutPanel1);
@@ -258,12 +262,12 @@ namespace Yixing.UserControl.DataSourceOperate
             this.Size = new System.Drawing.Size(924, 574);
             this.Load += new System.EventHandler(this.Search_Load);
             this.panel1.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -277,7 +281,7 @@ namespace Yixing.UserControl.DataSourceOperate
             this.exListView1.SmallImageList = iList;
             this.exListView1.Columns.Add("",5);
             this.exListView1.Columns.Add("",50);
-            this.exListView1.Columns.Add("",50);
+            this.exListView1.Columns.Add("",100);
             this.exListView1.Columns.Add("");
             this.exListView1.Columns.Add("");
             this.exListView1.Columns.Add("");
@@ -301,6 +305,8 @@ namespace Yixing.UserControl.DataSourceOperate
             this.exListView2.Columns.Add("Cd", 50);
             this.exListView2.Columns.Add("Cm", 50);
             this.exListView2.Columns.Add("K", 50);
+            this.exListView2.Columns.Add("创建时间",100);
+            this.exListView2.Columns.Add("创建人", 100);
             this.exListView2.Columns.Add("选择", 50);
         }
 

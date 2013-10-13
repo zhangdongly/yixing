@@ -127,12 +127,13 @@
             this.重点翼型数据库ToolStripMenuItem.Name = "重点翼型数据库ToolStripMenuItem";
             this.重点翼型数据库ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.重点翼型数据库ToolStripMenuItem.Text = "重点翼型数据库";
+            this.重点翼型数据库ToolStripMenuItem.Click += new System.EventHandler(this.重点翼型数据库ToolStripMenuItem_Click);
             // 
             // 风洞实现数据库ToolStripMenuItem
             // 
             this.风洞实现数据库ToolStripMenuItem.Name = "风洞实现数据库ToolStripMenuItem";
             this.风洞实现数据库ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.风洞实现数据库ToolStripMenuItem.Text = "风洞实现数据库";
+            this.风洞实现数据库ToolStripMenuItem.Text = "风洞试验数据库";
             // 
             // 输入输出ToolStripMenuItem
             // 
@@ -186,24 +187,28 @@
             this.修改翼型宽度与厚度ToolStripMenuItem.Name = "修改翼型宽度与厚度ToolStripMenuItem";
             this.修改翼型宽度与厚度ToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
             this.修改翼型宽度与厚度ToolStripMenuItem.Text = "修改翼型宽度与厚度";
+            this.修改翼型宽度与厚度ToolStripMenuItem.Click += new System.EventHandler(this.修改翼型宽度与厚度ToolStripMenuItem_Click);
             // 
             // 混何两个翼型ToolStripMenuItem
             // 
             this.混何两个翼型ToolStripMenuItem.Name = "混何两个翼型ToolStripMenuItem";
             this.混何两个翼型ToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
             this.混何两个翼型ToolStripMenuItem.Text = "混何两个翼型";
+            this.混何两个翼型ToolStripMenuItem.Click += new System.EventHandler(this.混何两个翼型ToolStripMenuItem_Click);
             // 
             // 不同翼型上下表面混合ToolStripMenuItem
             // 
             this.不同翼型上下表面混合ToolStripMenuItem.Name = "不同翼型上下表面混合ToolStripMenuItem";
             this.不同翼型上下表面混合ToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
             this.不同翼型上下表面混合ToolStripMenuItem.Text = "不同翼型上下表面混合";
+            this.不同翼型上下表面混合ToolStripMenuItem.Click += new System.EventHandler(this.不同翼型上下表面混合ToolStripMenuItem_Click);
             // 
             // 采用不同翼型厚度与弯度分布构靠翼型ToolStripMenuItem
             // 
             this.采用不同翼型厚度与弯度分布构靠翼型ToolStripMenuItem.Name = "采用不同翼型厚度与弯度分布构靠翼型ToolStripMenuItem";
             this.采用不同翼型厚度与弯度分布构靠翼型ToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
             this.采用不同翼型厚度与弯度分布构靠翼型ToolStripMenuItem.Text = "采用不同翼型厚度与弯度分布构靠翼型";
+            this.采用不同翼型厚度与弯度分布构靠翼型ToolStripMenuItem.Click += new System.EventHandler(this.采用不同翼型厚度与弯度分布构靠翼型ToolStripMenuItem_Click);
             // 
             // 采用指定的厚度与弯度构造翼型ToolStripMenuItem
             // 
@@ -252,6 +257,7 @@
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Size = new System.Drawing.Size(32, 33);
             this.toolStripButton1.Text = "插入";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // toolStripSeparator1
             // 
@@ -357,6 +363,7 @@
             this.toolStripButton8.Name = "toolStripButton8";
             this.toolStripButton8.Size = new System.Drawing.Size(36, 33);
             this.toolStripButton8.Text = "气动特性显示";
+            this.toolStripButton8.Click += new System.EventHandler(this.toolStripButton8_Click);
             // 
             // toolStripSeparator8
             // 

@@ -291,8 +291,50 @@
     <Compile Include="model\DCZhuannie.cs" />
     <Compile Include="model\QDTXMethodList.cs" />
     <Compile Include="model\YouhuaMethodModel.cs" />
+    <Compile Include="UserControl\DataSourceOperate\AddAirfoil.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControl\DataSourceOperate\AddAirfoil.Designer.cs">
+      <DependentUpon>AddAirfoil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\DataSourceOperate\Mixture2Airfoil.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControl\DataSourceOperate\Mixture2Airfoil.Designer.cs">
+      <DependentUpon>Mixture2Airfoil.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\DataSourceOperate\Search.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\DataSourceOperate\ComplexAirfoil.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\DataSourceOperate\ComplexAirfoilDetail.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\DataSourceOperate\SelectAirfoil.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControl\DataSourceOperate\SelectAirfoil.Designer.cs">
+      <DependentUpon>SelectAirfoil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\DataSourceOperate\UpdateCamberAndThickness.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControl\DataSourceOperate\UpdateCamberAndThickness.Designer.cs">
+      <DependentUpon>UpdateCamberAndThickness.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\DataSourceOperate\MixtureUpAndDownAirfoil.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControl\DataSourceOperate\MixtureUpAndDownAirfoil.Designer.cs">
+      <DependentUpon>MixtureUpAndDownAirfoil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\DataSourceOperate\MixtureCamberAndThicknessAirfoil.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControl\DataSourceOperate\MixtureCamberAndThicknessAirfoil.Designer.cs">
+      <DependentUpon>MixtureCamberAndThicknessAirfoil.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControl\Qidong\Dingchang.cs">
       <SubType>UserControl</SubType>
@@ -451,8 +493,32 @@
     <EmbeddedResource Include="Dialog\Jihetexing.resx">
       <DependentUpon>Jihetexing.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\DataSourceOperate\AddAirfoil.resx">
+      <DependentUpon>AddAirfoil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\DataSourceOperate\Mixture2Airfoil.resx">
+      <DependentUpon>Mixture2Airfoil.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControl\DataSourceOperate\Search.resx">
       <DependentUpon>Search.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\DataSourceOperate\ComplexAirfoil.resx">
+      <DependentUpon>ComplexAirfoil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\DataSourceOperate\ComplexAirfoilDetail.resx">
+      <DependentUpon>ComplexAirfoilDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\DataSourceOperate\SelectAirfoil.resx">
+      <DependentUpon>SelectAirfoil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\DataSourceOperate\UpdateCamberAndThickness.resx">
+      <DependentUpon>UpdateCamberAndThickness.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\DataSourceOperate\MixtureUpAndDownAirfoil.resx">
+      <DependentUpon>MixtureUpAndDownAirfoil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\DataSourceOperate\MixtureCamberAndThicknessAirfoil.resx">
+      <DependentUpon>MixtureCamberAndThicknessAirfoil.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControl\Qidong\Dingchang.resx">
       <DependentUpon>Dingchang.cs</DependentUpon>
