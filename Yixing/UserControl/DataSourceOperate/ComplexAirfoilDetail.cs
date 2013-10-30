@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using Yixing.UserTool;
 
 namespace Yixing.UserControl.DataSourceOperate
@@ -344,8 +345,22 @@ namespace Yixing.UserControl.DataSourceOperate
            exListView.Columns.Add("压力分布");
            exListView.Columns.Add("创建时间");
            exListView.Columns.Add("维护人");
-          
 
+           Series series1 = new Series();
+           //  series1.ChartArea = "ChartArea1";
+           // series1.Legend = "Legend1";
+           //series1.LabelBorderWidth = 5;
+           //series1.BorderWidth = 2;
+           this.chart1.ChartAreas[0].AxisX.MajorGrid.LineWidth = 0;
+           this.chart1.ChartAreas[0].AxisY.MajorGrid.LineWidth = 0;
+           this.chart1.ChartAreas[0].AxisX.Maximum = 1;
+           this.chart1.ChartAreas[0].AxisX.Name = "X";
+           this.chart1.ChartAreas[0].AxisY.Name = "Y";
+           series1.ChartType = SeriesChartType.Point;
+           series1.IsVisibleInLegend = false;
+           series1.Points.Add(new DataPoint(0, 0));
+           
+           this.chart1.Series.Add(series1);
          
            
        }

@@ -66,5 +66,11 @@ namespace Yixing
             MixtureCamberAndThicknessAirfoil mcta = new MixtureCamberAndThicknessAirfoil();
             mcta.ShowDialog();
         }
+
+        private void 导入ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Inport inport = new Inport();
+            inport.ShowDialog();
+        }
     }
 }

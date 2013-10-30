@@ -74,6 +74,9 @@
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Data, Version=6.7.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Data.Entity, Version=6.7.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Web, Version=6.7.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="NVelocity, Version=0.4.2.8580, Culture=neutral, PublicKeyToken=44382d1b57473eda">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\NVelocity.dll</HintPath>
@@ -259,6 +262,8 @@
     </Compile>
     <Compile Include="model\CalcModel.cs" />
     <Compile Include="model\CalcResult.cs" />
+    <Compile Include="model\database\DCalResult.cs" />
+    <Compile Include="model\database\DAirfoil.cs" />
     <Compile Include="model\DCGaoji.cs" />
     <Compile Include="model\DCStatus.cs" />
     <Compile Include="model\DCYixing.cs" />
@@ -296,6 +301,12 @@
     </Compile>
     <Compile Include="UserControl\DataSourceOperate\AddAirfoil.Designer.cs">
       <DependentUpon>AddAirfoil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\DataSourceOperate\Inport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControl\DataSourceOperate\Inport.Designer.cs">
+      <DependentUpon>Inport.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControl\DataSourceOperate\Mixture2Airfoil.cs">
       <SubType>Form</SubType>
@@ -390,11 +401,14 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="util\CheckEdit.cs" />
+    <Compile Include="util\DAirfoilUtil.cs" />
+    <Compile Include="util\DataBaseUtil.cs" />
     <Compile Include="util\FileUtil.cs" />
     <Compile Include="util\InpFactory.cs" />
     <Compile Include="util\JSONUtil.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="util\RegexUtil.cs" />
     <Compile Include="util\StatusUtil.cs" />
     <Compile Include="util\TemplateHelper.cs" />
     <Compile Include="util\TexingUtil.cs" />
@@ -495,6 +509,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControl\DataSourceOperate\AddAirfoil.resx">
       <DependentUpon>AddAirfoil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\DataSourceOperate\Inport.resx">
+      <DependentUpon>Inport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControl\DataSourceOperate\Mixture2Airfoil.resx">
       <DependentUpon>Mixture2Airfoil.cs</DependentUpon>

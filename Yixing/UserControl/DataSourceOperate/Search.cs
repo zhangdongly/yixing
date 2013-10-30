@@ -1,19 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Yixing.model.database;
 using Yixing.UserTool;
+using Yixing.util;
 
 namespace Yixing.UserControl.DataSourceOperate
 {
-   public class Search: System.Windows.Forms.UserControl
+    public class Search : System.Windows.Forms.UserControl
     {
 
-       public Search()
-       {
-           this.InitializeComponent();
-       }
+        public Search()
+        {
+            this.InitializeComponent();
+        }
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button button1;
@@ -22,9 +25,11 @@ namespace Yixing.UserControl.DataSourceOperate
         private System.Windows.Forms.CheckBox checkBox1;
         private UserTool.EXListView exListView1;
         private System.Windows.Forms.Panel panel1;
-        private object[] conditions = new object[] {"Ma","Re","Alpha","Cl", "Cd", "Cm", "K","Tickenss" };
-        private object [] operators=new object[]{">",">=","<","<=","="};
-        private object[] linkOperators = new object[] { "或","与"};
+        private object[] conditions = new object[] { "Ma", "Re", "Alpha", "Cl", "Cd", "Cm", "K", "thickness" };
+        private object[] operators = new object[] { ">", ">=", "<", "<=", "=" };
+        private object[] linkOperators = new object[] { "或", "与" };
+        private String SQL_PRE = "select name,max_thickness,re,ma,alpha,cl,cd,cm,k,cal_result.gmt_create,cal_result.user_create from airfoil,cal_result where cal_result.airfoil_id=airfoil.id";
+        private String LAST_SQL = "";
         private Panel panel2;
         private Label label1;
         private EXListView exListView2;
@@ -192,6 +197,7 @@ namespace Yixing.UserControl.DataSourceOperate
             this.button1.Size = new System.Drawing.Size(60, 23);
             this.button1.TabIndex = 3;
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // checkBox3
             // 
@@ -279,9 +285,9 @@ namespace Yixing.UserControl.DataSourceOperate
             this.iList.ImageSize = new System.Drawing.Size(1, 30);
             this.iList.TransparentColor = System.Drawing.Color.Transparent;
             this.exListView1.SmallImageList = iList;
-            this.exListView1.Columns.Add("",5);
-            this.exListView1.Columns.Add("",50);
-            this.exListView1.Columns.Add("",100);
+            this.exListView1.Columns.Add("", 5);
+            this.exListView1.Columns.Add("", 50);
+            this.exListView1.Columns.Add("", 100);
             this.exListView1.Columns.Add("");
             this.exListView1.Columns.Add("");
             this.exListView1.Columns.Add("");
@@ -296,102 +302,260 @@ namespace Yixing.UserControl.DataSourceOperate
         private void addResultHeader()
         {
             this.exListView2.SmallImageList = iList;
-            this.exListView2.Columns.Add("翼型名称",100);
-            this.exListView2.Columns.Add("厚度",50);
-            this.exListView2.Columns.Add("Re", 50);
-            this.exListView2.Columns.Add("Alpha", 50);
+            this.exListView2.Columns.Add("翼型名称", 100);
+            this.exListView2.Columns.Add("厚度", 50);
+            this.exListView2.Columns.Add("Re(万)", 50);
             this.exListView2.Columns.Add("Ma", 50);
-            this.exListView2.Columns.Add("Cl", 50);
-            this.exListView2.Columns.Add("Cd", 50);
-            this.exListView2.Columns.Add("Cm", 50);
+            this.exListView2.Columns.Add("Alpha", 50);
+            this.exListView2.Columns.Add("Cl", 100);
+            this.exListView2.Columns.Add("Cd", 100);
+            this.exListView2.Columns.Add("Cm", 100);
             this.exListView2.Columns.Add("K", 50);
-            this.exListView2.Columns.Add("创建时间",100);
+            this.exListView2.Columns.Add("创建时间", 100);
             this.exListView2.Columns.Add("创建人", 100);
             this.exListView2.Columns.Add("选择", 50);
+            initData();
         }
 
-         private void addExpression(Boolean isFirst)
+        private void initData()
         {
-           
-             EXListViewItem item ;
-             if (isFirst)
-             {
-                 item = new EXListViewItem("");
-                 item.SubItems.Add("");
-             }
-             else
-             {
+            String SQL = SQL_PRE;
+            initDataBySQL(SQL);
 
-                 item = new EXListViewItem(" ");
-                 ComboBox link=new ComboBox();
-                 link.Items.AddRange(this.linkOperators);
-                 link.Text=(String)this.linkOperators[0];
-                 EXControlListViewSubItem linkItem=new EXControlListViewSubItem();
-                 item.SubItems.Add(linkItem);
-                 this.exListView1.AddControlToSubItem(link,linkItem);
 
-             }
-            
+        }
+
+        private void initDataBySQL(String SQL)
+        {
+            DataSet ds = DataBaseUtil.GetDataSet(CommandType.Text, SQL, null);
+            addData2Table(ds);
+        }
+
+        public void addData2Table(DataSet ds)
+        {
+            this.exListView2.Items.Clear();
+            foreach (DataRow mDr in ds.Tables[0].Rows)
+            {
+                String name = mDr[0].ToString();
+                if (String.IsNullOrWhiteSpace(name))
+                {
+                    name = ""+(this.exListView2.Items.Count + 1);
+                }
+                EXListViewItem item = new EXListViewItem(name);                               
+                    for (int i = 1; i < 11; i++)
+                    {
+                        if (i == 6 || i == 7)
+                        {
+                            item.SubItems.Add(string.Format("{0:0.000}", Convert.ToDouble(mDr[i].ToString())));
+                        }
+                        else
+                        {
+                            item.SubItems.Add(mDr[i].ToString());
+                        }
+                    }
+                    CheckBox checkBox = new CheckBox();
+                    checkBox.Tag = item;
+                    EXControlListViewSubItem check = new EXControlListViewSubItem();
+                    item.SubItems.Add(check);
+                    this.exListView2.AddControlToSubItem(checkBox, check);
+                    this.exListView2.Items.Add(item);
+                
+            }
+        }
+
+        public void addData2Table(DAirfoil da)
+        {
+            if (da.dCalResultList != null)
+            {
+                foreach (DCalResult dc in da.dCalResultList)
+                {
+                    EXListViewItem item = new EXListViewItem(da.name);
+                    item.SubItems.Add(string.Format("{0:0.000}", Convert.ToDouble(da.maxThickness)));
+                    item.SubItems.Add(string.Format("{0:0.000}", Convert.ToDouble(dc.re)));
+                    item.SubItems.Add(string.Format("{0:0.000}", Convert.ToDouble(dc.ma)));
+                    item.SubItems.Add(string.Format("{0:00.00}", Convert.ToDouble(dc.alpha)));
+                    item.SubItems.Add(string.Format("{0:0.000}", Convert.ToDouble(dc.cl)));
+                    item.SubItems.Add(string.Format("{0:0.000}", Convert.ToDouble(dc.cd)));
+                    item.SubItems.Add(string.Format("{0:0.000}", Convert.ToDouble(dc.cm)));
+                    item.SubItems.Add(string.Format("{0:0.000}", Convert.ToDouble(dc.k)));
+                    item.SubItems.Add(dc.gmtCreate.ToString("yyyy-MM-dd"));
+                    item.SubItems.Add(dc.manageUser);
+                    CheckBox checkBox = new CheckBox();
+                    checkBox.Tag = item;
+                    EXControlListViewSubItem check = new EXControlListViewSubItem();
+                    item.SubItems.Add(check);
+                    this.exListView2.AddControlToSubItem(checkBox, check);
+                    this.exListView2.Items.Add(item);
+                }
+            }
+        }
+
+        private void addExpression(Boolean isFirst)
+        {
+
+            EXListViewItem item;
+            if (isFirst)
+            {
+                item = new EXListViewItem("");
+                item.SubItems.Add("");
+            }
+            else
+            {
+
+                item = new EXListViewItem(" ");
+                ComboBox link = new ComboBox();
+                link.Items.AddRange(this.linkOperators);
+                link.Text = (String)this.linkOperators[0];
+                EXControlListViewSubItem linkItem = new EXControlListViewSubItem();
+                item.SubItems.Add(linkItem);
+                this.exListView1.AddControlToSubItem(link, linkItem);
+
+            }
+
             ComboBox c = new ComboBox();
-          
+
             c.Items.AddRange(this.conditions);
             c.Text = (String)conditions[0];
-           
-             EXControlListViewSubItem status = new EXControlListViewSubItem();
 
-             item.SubItems.Add(status);
-             this.exListView1.AddControlToSubItem(c, status);
+            EXControlListViewSubItem status = new EXControlListViewSubItem();
 
-             ComboBox operate = new ComboBox();
-             operate.Items.AddRange(this.operators);
-             operate.Text = (String)operators[0];
+            item.SubItems.Add(status);
+            this.exListView1.AddControlToSubItem(c, status);
 
-             EXControlListViewSubItem oper = new EXControlListViewSubItem();
-             item.SubItems.Add(oper);
-             this.exListView1.AddControlToSubItem(operate, oper);
+            ComboBox operate = new ComboBox();
+            operate.Items.AddRange(this.operators);
+            operate.Text = (String)operators[0];
 
-             TextBox t = new TextBox();
+            EXControlListViewSubItem oper = new EXControlListViewSubItem();
+            item.SubItems.Add(oper);
+            this.exListView1.AddControlToSubItem(operate, oper);
 
-             EXControlListViewSubItem text = new EXControlListViewSubItem();
-             item.SubItems.Add(text);
-             this.exListView1.AddControlToSubItem(t, text);
+            TextBox t = new TextBox();
 
-             Button add = new Button();
-             add.Text = "添加";
-             add.Tag = item;
-             add.Click += new EventHandler(this.add_Click);
-             add.Size = new System.Drawing.Size(123, 23);
-             EXControlListViewSubItem addItem = new EXControlListViewSubItem();
-             item.SubItems.Add(addItem);
-             this.exListView1.AddControlToSubItem(add, addItem);
+            EXControlListViewSubItem text = new EXControlListViewSubItem();
+            item.SubItems.Add(text);
+            this.exListView1.AddControlToSubItem(t, text);
 
-             if (!isFirst)
-             {
-                 Button delete = new Button();
-                 delete.Text = "删除";
-                 delete.Tag = item;
-                 delete.Click += new EventHandler(this.del_Click);
-                 delete.Size = new System.Drawing.Size(123, 23);
-                 EXControlListViewSubItem deleteItem = new EXControlListViewSubItem();
-                 item.SubItems.Add(deleteItem);
-                 this.exListView1.AddControlToSubItem(delete, deleteItem);
+            Button add = new Button();
+            add.Text = "添加";
+            add.Tag = item;
+            add.Click += new EventHandler(this.add_Click);
+            add.Size = new System.Drawing.Size(123, 23);
+            EXControlListViewSubItem addItem = new EXControlListViewSubItem();
+            item.SubItems.Add(addItem);
+            this.exListView1.AddControlToSubItem(add, addItem);
 
-             }
+            if (!isFirst)
+            {
+                Button delete = new Button();
+                delete.Text = "删除";
+                delete.Tag = item;
+                delete.Click += new EventHandler(this.del_Click);
+                delete.Size = new System.Drawing.Size(123, 23);
+                EXControlListViewSubItem deleteItem = new EXControlListViewSubItem();
+                item.SubItems.Add(deleteItem);
+                this.exListView1.AddControlToSubItem(delete, deleteItem);
 
-             this.exListView1.Items.Add(item);
-        
+            }
+
+            this.exListView1.Items.Add(item);
+
         }
 
-         private void del_Click(object sender, EventArgs e)
-         {
-             Button b = (Button)sender;
-             EXListViewItem item = (EXListViewItem)b.Tag;
-             this.exListView1.Items.Remove(item);
-         }
+        private void del_Click(object sender, EventArgs e)
+        {
+            Button b = (Button)sender;
+            EXListViewItem item = (EXListViewItem)b.Tag;
+            this.exListView1.Items.Remove(item);
+        }
 
-         private void add_Click(object sender, EventArgs e)
-         {
-             this.addExpression(false);
-         }
+        private void add_Click(object sender, EventArgs e)
+        {
+            this.addExpression(false);
+        }
+
+        private void addData2Table(String[] data)
+        {
+            EXListViewItem item = new EXListViewItem(data[0]);
+            for (int i = 1; i < data.Length; i++)
+            {
+                if (i == 6 || i == 7)
+                {
+                    item.SubItems.Add(string.Format("{0:0.000}", Convert.ToDouble(data[i])));
+                }
+                else
+                {
+                    item.SubItems.Add(data[i]);
+                }
+            }
+            CheckBox checkBox = new CheckBox();
+            checkBox.Tag = item;
+            EXControlListViewSubItem check = new EXControlListViewSubItem();
+            item.SubItems.Add(check);
+            this.exListView2.AddControlToSubItem(checkBox, check);
+            this.exListView2.Items.Add(item);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            String sqlStr = " ";
+            foreach (EXListViewItem item in this.exListView1.Items)
+            {
+                if (item.Index == 0)
+                {
+                    sqlStr += " and (";
+                }
+                else
+                {
+                    EXControlListViewSubItem subitem = (EXControlListViewSubItem)item.SubItems[1];
+                    ComboBox b = (ComboBox)subitem.MyControl;
+                    if ("或".Equals(b.Text))
+                    {
+                        sqlStr += " or ";
+                    }
+                    else
+                    {
+                        sqlStr += " and ";
+                    }
+                }
+
+                EXControlListViewSubItem param = (EXControlListViewSubItem)item.SubItems[2];
+                ComboBox p = (ComboBox)param.MyControl;
+
+                EXControlListViewSubItem operate = (EXControlListViewSubItem)item.SubItems[3];
+                ComboBox o = (ComboBox)operate.MyControl;
+
+                EXControlListViewSubItem value = (EXControlListViewSubItem)item.SubItems[4];
+                TextBox v = (TextBox)value.MyControl;
+
+                if (String.IsNullOrWhiteSpace(v.Text))
+                {
+                    MessageBox.Show("检索值不能为空");
+                    return;
+                }
+
+                if ("thickness".Equals(p.Text))
+                {
+                    sqlStr += "max_thickness" + o.Text + v.Text;
+                }
+                else
+                {
+                    sqlStr += p.Text + o.Text + v.Text;
+                }
+      
+
+            }
+            sqlStr += ")";
+           
+            if (this.checkBox3.Checked)
+            {
+                sqlStr = LAST_SQL + sqlStr;
+            }
+
+            LAST_SQL = sqlStr;
+
+            MessageBox.Show(SQL_PRE + sqlStr);
+            this.initDataBySQL(SQL_PRE + sqlStr);
+        }
     }
 }

@@ -27,9 +27,11 @@ namespace Yixing.UserControl.DataSourceOperate
             //series1.BorderWidth = 2;
             this.chart1.ChartAreas[0].AxisX.MajorGrid.LineWidth = 0;
             this.chart1.ChartAreas[0].AxisY.MajorGrid.LineWidth = 0;
+            this.chart1.ChartAreas[0].AxisX.Maximum = 1;
             series1.ChartType = SeriesChartType.Point;
             series1.IsVisibleInLegend = false;
             series1.Points.Add(new DataPoint(0, 0));
+            
             this.chart1.Series.Add(series1);
         }
 

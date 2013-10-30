@@ -69,6 +69,7 @@
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton10 = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.导入ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -93,7 +94,8 @@
             this.删除ToolStripMenuItem,
             this.更新ToolStripMenuItem,
             this.重点翼型数据库ToolStripMenuItem,
-            this.风洞实现数据库ToolStripMenuItem});
+            this.风洞实现数据库ToolStripMenuItem,
+            this.导入ToolStripMenuItem});
             this.数据库操作ToolStripMenuItem.Name = "数据库操作ToolStripMenuItem";
             this.数据库操作ToolStripMenuItem.Size = new System.Drawing.Size(80, 21);
             this.数据库操作ToolStripMenuItem.Text = "数据库操作";
@@ -403,6 +405,13 @@
             this.panel1.Size = new System.Drawing.Size(930, 580);
             this.panel1.TabIndex = 2;
             // 
+            // 导入ToolStripMenuItem
+            // 
+            this.导入ToolStripMenuItem.Name = "导入ToolStripMenuItem";
+            this.导入ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.导入ToolStripMenuItem.Text = "导入";
+            this.导入ToolStripMenuItem.Click += new System.EventHandler(this.导入ToolStripMenuItem_Click);
+            // 
             // DataSourceOperate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -466,5 +475,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripButton toolStripButton10;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ToolStripMenuItem 导入ToolStripMenuItem;
     }
 }

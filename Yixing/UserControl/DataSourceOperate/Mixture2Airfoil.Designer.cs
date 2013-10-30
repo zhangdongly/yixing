@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
@@ -91,7 +91,7 @@
             this.groupBox1.Controls.Add(this.trackBar1);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Location = new System.Drawing.Point(43, 124);
+            this.groupBox1.Location = new System.Drawing.Point(34, 126);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(665, 70);
             this.groupBox1.TabIndex = 10;
@@ -118,7 +118,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(24, 21);
+            this.label5.Location = new System.Drawing.Point(7, 21);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(77, 12);
             this.label5.TabIndex = 0;
@@ -126,14 +126,14 @@
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(126, 102);
+            this.textBox4.Location = new System.Drawing.Point(126, 93);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(450, 21);
             this.textBox4.TabIndex = 9;
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(126, 75);
+            this.textBox3.Location = new System.Drawing.Point(126, 66);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(450, 21);
             this.textBox3.TabIndex = 8;
@@ -141,7 +141,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(45, 108);
+            this.label4.Location = new System.Drawing.Point(41, 96);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(71, 12);
             this.label4.TabIndex = 7;
@@ -150,7 +150,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(43, 78);
+            this.label3.Location = new System.Drawing.Point(41, 69);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(77, 12);
             this.label3.TabIndex = 6;
@@ -193,7 +193,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(43, 43);
+            this.label2.Location = new System.Drawing.Point(41, 43);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 12);
             this.label2.TabIndex = 1;
@@ -234,7 +234,7 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(527, 12);
             this.label9.TabIndex = 9;
-            this.label9.Text = "翼型B： 最大百度：         最大厚度位置              最大弯度              最大弯度位置";
+            this.label9.Text = "翼型B： 最大厚度：         最大厚度位置              最大弯度              最大弯度位置";
             // 
             // label8
             // 
@@ -243,7 +243,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(527, 12);
             this.label8.TabIndex = 8;
-            this.label8.Text = "翼型A： 最大百度：         最大厚度位置              最大弯度              最大弯度位置";
+            this.label8.Text = "翼型A： 最大厚度：         最大厚度位置              最大弯度              最大弯度位置";
             // 
             // label7
             // 
@@ -254,18 +254,18 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(527, 12);
             this.label7.TabIndex = 7;
-            this.label7.Text = "新翼型：最大百度：         最大厚度位置              最大弯度              最大弯度位置";
+            this.label7.Text = "新翼型：最大厚度：         最大厚度位置              最大弯度              最大弯度位置";
             // 
             // chart1
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
             this.chart1.Location = new System.Drawing.Point(26, 41);
             this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chart1.Series.Add(series2);
             this.chart1.Size = new System.Drawing.Size(714, 284);
             this.chart1.TabIndex = 6;
             this.chart1.Text = "chart1";
