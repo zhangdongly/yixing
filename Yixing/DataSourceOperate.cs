@@ -19,8 +19,9 @@ namespace Yixing
 
         private void DataSourceOperate_Load(object sender, EventArgs e)
         {
-            Search search = new Search();
-            this.panel1.Controls.Add(search);
+            this.KeyPreview = true;
+           
+           
         }
 
         private void 重点翼型数据库ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -32,7 +33,14 @@ namespace Yixing
 
         private void toolStripButton8_Click(object sender, EventArgs e)
         {
-            ComplexAirfoilDetail cad = new ComplexAirfoilDetail();
+           
+            if (search == null)
+            {
+                MessageBox.Show("请选择翼型");
+                return;
+            }
+             ComplexAirfoilDetail cad = new ComplexAirfoilDetail();
+            cad.airfoilIdList = search.getSelectedAirfoil();
             this.panel1.Controls.Clear();
             this.panel1.Controls.Add(cad);
         }
@@ -71,6 +79,16 @@ namespace Yixing
         {
             Inport inport = new Inport();
             inport.ShowDialog();
+        }
+
+        private void 检索ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.search == null)
+            {
+                this.search = new Search();           
+            }
+            this.panel1.Controls.Clear();
+            this.panel1.Controls.Add(search);
         }
     }
 }

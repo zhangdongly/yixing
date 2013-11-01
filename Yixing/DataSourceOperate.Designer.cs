@@ -1,4 +1,5 @@
-﻿namespace Yixing
+﻿using Yixing.UserControl.DataSourceOperate;
+namespace Yixing
 {
     partial class DataSourceOperate
     {
@@ -37,6 +38,7 @@
             this.更新ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.重点翼型数据库ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.风洞实现数据库ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.导入ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.输入输出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.翼型几何数据输入ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.翼型几何数据输出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,7 +71,6 @@
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton10 = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.导入ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -111,6 +112,7 @@
             this.检索ToolStripMenuItem.Name = "检索ToolStripMenuItem";
             this.检索ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.检索ToolStripMenuItem.Text = "检索";
+            this.检索ToolStripMenuItem.Click += new System.EventHandler(this.检索ToolStripMenuItem_Click);
             // 
             // 删除ToolStripMenuItem
             // 
@@ -136,6 +138,13 @@
             this.风洞实现数据库ToolStripMenuItem.Name = "风洞实现数据库ToolStripMenuItem";
             this.风洞实现数据库ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.风洞实现数据库ToolStripMenuItem.Text = "风洞试验数据库";
+            // 
+            // 导入ToolStripMenuItem
+            // 
+            this.导入ToolStripMenuItem.Name = "导入ToolStripMenuItem";
+            this.导入ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.导入ToolStripMenuItem.Text = "导入";
+            this.导入ToolStripMenuItem.Click += new System.EventHandler(this.导入ToolStripMenuItem_Click);
             // 
             // 输入输出ToolStripMenuItem
             // 
@@ -405,13 +414,6 @@
             this.panel1.Size = new System.Drawing.Size(930, 580);
             this.panel1.TabIndex = 2;
             // 
-            // 导入ToolStripMenuItem
-            // 
-            this.导入ToolStripMenuItem.Name = "导入ToolStripMenuItem";
-            this.导入ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.导入ToolStripMenuItem.Text = "导入";
-            this.导入ToolStripMenuItem.Click += new System.EventHandler(this.导入ToolStripMenuItem_Click);
-            // 
             // DataSourceOperate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -420,6 +422,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
+            this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "DataSourceOperate";
             this.Text = "翼型数据库";
@@ -476,5 +479,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButton10;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStripMenuItem 导入ToolStripMenuItem;
+        private Search search;
     }
 }

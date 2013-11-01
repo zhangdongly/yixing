@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using Yixing.model.database;
 using Yixing.UserTool;
+using Yixing.util;
 
 namespace Yixing.UserControl.DataSourceOperate
 {
@@ -26,13 +28,8 @@ namespace Yixing.UserControl.DataSourceOperate
         private GroupBox groupBox2;
         private Panel panel2;
         private FlowLayoutPanel flowLayoutPanel1;
-        private Panel panel3;
-        private EXListView exListView1;
-        private Label label1;
-        private Panel panel4;
-        private EXListView exListView2;
-        private Label label2;
         private ImageList iList;
+        public List<int> airfoilIdList;
 
        public ComplexAirfoilDetail()
        {
@@ -47,12 +44,6 @@ namespace Yixing.UserControl.DataSourceOperate
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.exListView1 = new Yixing.UserTool.EXListView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.exListView2 = new Yixing.UserTool.EXListView();
-            this.label2 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel7 = new System.Windows.Forms.Panel();
@@ -68,9 +59,6 @@ namespace Yixing.UserControl.DataSourceOperate
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -110,73 +98,10 @@ namespace Yixing.UserControl.DataSourceOperate
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.Controls.Add(this.panel3);
-            this.flowLayoutPanel1.Controls.Add(this.panel4);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(4, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(867, 550);
             this.flowLayoutPanel1.TabIndex = 0;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.exListView1);
-            this.panel3.Controls.Add(this.label1);
-            this.panel3.Location = new System.Drawing.Point(3, 3);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(857, 187);
-            this.panel3.TabIndex = 0;
-            // 
-            // exListView1
-            // 
-            this.exListView1.ControlPadding = 4;
-            this.exListView1.FullRowSelect = true;
-            this.exListView1.Location = new System.Drawing.Point(3, 22);
-            this.exListView1.Name = "exListView1";
-            this.exListView1.OwnerDraw = true;
-            this.exListView1.Scrollable = false;
-            this.exListView1.Size = new System.Drawing.Size(851, 162);
-            this.exListView1.TabIndex = 1;
-            this.exListView1.UseCompatibleStateImageBehavior = false;
-            this.exListView1.View = System.Windows.Forms.View.Details;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 6);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(131, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "翼型名称：NASA_NIF_11";
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.exListView2);
-            this.panel4.Controls.Add(this.label2);
-            this.panel4.Location = new System.Drawing.Point(3, 196);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(857, 195);
-            this.panel4.TabIndex = 1;
-            // 
-            // exListView2
-            // 
-            this.exListView2.ControlPadding = 4;
-            this.exListView2.FullRowSelect = true;
-            this.exListView2.Location = new System.Drawing.Point(3, 27);
-            this.exListView2.Name = "exListView2";
-            this.exListView2.OwnerDraw = true;
-            this.exListView2.Size = new System.Drawing.Size(854, 149);
-            this.exListView2.TabIndex = 1;
-            this.exListView2.UseCompatibleStateImageBehavior = false;
-            this.exListView2.View = System.Windows.Forms.View.Details;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 7);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(131, 12);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "翼型名称：NASA_NIF_12";
             // 
             // panel5
             // 
@@ -303,11 +228,6 @@ namespace Yixing.UserControl.DataSourceOperate
             this.panel1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
@@ -326,12 +246,34 @@ namespace Yixing.UserControl.DataSourceOperate
             this.iList.TransparentColor = System.Drawing.Color.Transparent;
             this.flowLayoutPanel1.AutoScroll = true;
             this.panel2.AutoScroll = true;
-            this.initData(this.exListView1);
-            this.initData(this.exListView2);
+            Series series1 = new Series();
+            //  series1.ChartArea = "ChartArea1";
+            // series1.Legend = "Legend1";
+            //series1.LabelBorderWidth = 5;
+            //series1.BorderWidth = 2;
+            this.chart1.ChartAreas[0].AxisX.MajorGrid.LineWidth = 0;
+            this.chart1.ChartAreas[0].AxisY.MajorGrid.LineWidth = 0;
+            this.chart1.ChartAreas[0].AxisX.Maximum = 1;
+            this.chart1.ChartAreas[0].AxisX.Name = "X";
+            this.chart1.ChartAreas[0].AxisY.Name = "Y";
+            series1.ChartType = SeriesChartType.Point;
+            series1.IsVisibleInLegend = false;
+            series1.Points.Add(new DataPoint(0, 0));
+
+            this.chart1.Series.Add(series1);
+            foreach (int airfoilId in this.airfoilIdList)
+            {
+                DAirfoil d = DAirfoilUtil.getFullDAirfoil(airfoilId);              
+                this.initData(d);
+            }
+            
+          
 
         }
 
-       private void initData(EXListView exListView){
+       private void initData(DAirfoil dAirfoil){
+           EXListView exListView = new EXListView();
+           exListView.Size = new System.Drawing.Size(854, 149);
            exListView.Columns.Add("NO");
            exListView.Columns.Add("Re");
            exListView.Columns.Add("Ma");
@@ -345,24 +287,33 @@ namespace Yixing.UserControl.DataSourceOperate
            exListView.Columns.Add("压力分布");
            exListView.Columns.Add("创建时间");
            exListView.Columns.Add("维护人");
+           int i = 1;
+           foreach (DCalResult dc in dAirfoil.dCalResultList)
+           {
+               EXListViewItem item = new EXListViewItem(""+i++);
+              
+               item.SubItems.Add(string.Format("{0:0.000}", Convert.ToDouble(dc.re)));
+               item.SubItems.Add(string.Format("{0:0.000}", Convert.ToDouble(dc.ma)));
+              // item.SubItems.Add(string.Format("{0:00.00}", Convert.ToDouble(dc.alpha)));
+               item.SubItems.Add(string.Format("{0:0.000}", Convert.ToDouble(dc.cl)));
+               item.SubItems.Add(string.Format("{0:0.000}", Convert.ToDouble(dc.cd)));
+               item.SubItems.Add(string.Format("{0:0.000}", Convert.ToDouble(dc.cm)));
+               item.SubItems.Add(string.Format("{0:0.000}", Convert.ToDouble(dc.k)));
+               item.SubItems.Add(string.Format("{0:0.000}", Convert.ToDouble(dc.scheme)));
+               item.SubItems.Add(string.Format("{0:0.000}", Convert.ToDouble(dc.turble)));
+               item.SubItems.Add(string.Format("{0:0.000}", Convert.ToDouble(dc.grid)));
+               item.SubItems.Add("压力分布");
+               item.SubItems.Add(dc.gmtCreate.ToString("yyyy-MM-dd"));
+               item.SubItems.Add(dc.manageUser);
+               exListView.Items.Add(item);
 
-           Series series1 = new Series();
-           //  series1.ChartArea = "ChartArea1";
-           // series1.Legend = "Legend1";
-           //series1.LabelBorderWidth = 5;
-           //series1.BorderWidth = 2;
-           this.chart1.ChartAreas[0].AxisX.MajorGrid.LineWidth = 0;
-           this.chart1.ChartAreas[0].AxisY.MajorGrid.LineWidth = 0;
-           this.chart1.ChartAreas[0].AxisX.Maximum = 1;
-           this.chart1.ChartAreas[0].AxisX.Name = "X";
-           this.chart1.ChartAreas[0].AxisY.Name = "Y";
-           series1.ChartType = SeriesChartType.Point;
-           series1.IsVisibleInLegend = false;
-           series1.Points.Add(new DataPoint(0, 0));
-           
-           this.chart1.Series.Add(series1);
-         
-           
+           }
+           Label l = new Label();
+           l.Text = "翼型名称:" + dAirfoil.name+dAirfoil.id;
+           l.Size = new System.Drawing.Size(200, 20);       
+           this.flowLayoutPanel1.Controls.Add(l);
+           this.flowLayoutPanel1.Controls.Add(exListView);
+          
        }
 
        

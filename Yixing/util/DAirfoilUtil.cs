@@ -224,5 +224,18 @@ namespace Yixing.util
                 dAirFoilList.Add(da);
             }
         }
+
+        public static DAirfoil getFullDAirfoil(int id)
+        {
+            String SQL = "select * from airfoil where id=" + id;
+           DataSet ds= DataBaseUtil.GetDataSet(CommandType.Text, SQL, null);
+           List<DAirfoil> list = DAirfoil.getFromDateSet(ds);
+           if (list.Count < 1)
+           {
+               return null;
+           }
+           DAirfoil d = list[0];     
+            return d;
+        }
     }
 }

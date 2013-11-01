@@ -28,7 +28,7 @@ namespace Yixing.UserControl.DataSourceOperate
         private object[] conditions = new object[] { "Ma", "Re", "Alpha", "Cl", "Cd", "Cm", "K", "thickness" };
         private object[] operators = new object[] { ">", ">=", "<", "<=", "=" };
         private object[] linkOperators = new object[] { "或", "与" };
-        private String SQL_PRE = "select name,max_thickness,re,ma,alpha,cl,cd,cm,k,cal_result.gmt_create,cal_result.user_create from airfoil,cal_result where cal_result.airfoil_id=airfoil.id";
+        private String SQL_PRE = "select name,max_thickness,re,ma,alpha,cl,cd,cm,k,cal_result.gmt_create,cal_result.user_create,airfoil.id from airfoil,cal_result where cal_result.airfoil_id=airfoil.id";
         private String LAST_SQL = "";
         private Panel panel2;
         private Label label1;
@@ -267,6 +267,7 @@ namespace Yixing.UserControl.DataSourceOperate
             this.Name = "Search";
             this.Size = new System.Drawing.Size(924, 574);
             this.Load += new System.EventHandler(this.Search_Load);
+           
             this.panel1.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
@@ -280,6 +281,7 @@ namespace Yixing.UserControl.DataSourceOperate
 
         private void Search_Load(object sender, EventArgs e)
         {
+            
             this.iList = new ImageList();
             this.iList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
             this.iList.ImageSize = new System.Drawing.Size(1, 30);
@@ -295,6 +297,7 @@ namespace Yixing.UserControl.DataSourceOperate
             this.exListView1.Columns.Add("");
             this.addExpression(true);
             this.addResultHeader();
+            ParentForm.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Search_KeyPress);
 
 
         }
@@ -355,12 +358,21 @@ namespace Yixing.UserControl.DataSourceOperate
                     }
                     CheckBox checkBox = new CheckBox();
                     checkBox.Tag = item;
+                    checkBox.Click += new EventHandler(this.select_Click);
+                    item.Tag = mDr[11].ToString();
                     EXControlListViewSubItem check = new EXControlListViewSubItem();
                     item.SubItems.Add(check);
                     this.exListView2.AddControlToSubItem(checkBox, check);
                     this.exListView2.Items.Add(item);
                 
             }
+        }
+
+        private void select_Click(object sender, EventArgs e)
+        {
+            CheckBox c = (CheckBox)sender;
+            EXListViewItem item = (EXListViewItem)c.Tag;
+            item.Selected = c.Checked ;
         }
 
         public void addData2Table(DAirfoil da)
@@ -557,5 +569,58 @@ namespace Yixing.UserControl.DataSourceOperate
             MessageBox.Show(SQL_PRE + sqlStr);
             this.initDataBySQL(SQL_PRE + sqlStr);
         }
+
+        private void Search_KeyPress(object sender, KeyEventArgs e)
+        {
+            if (e.Control && (e.KeyCode == Keys.A))
+            {
+                foreach (EXListViewItem item in this.exListView2.Items)
+                {
+                    EXControlListViewSubItem sumItem = (EXControlListViewSubItem)item.SubItems[item.SubItems.Count - 1];
+                    CheckBox c = (CheckBox)sumItem.MyControl;
+                    c.Checked = true;
+                    item.Selected = true;
+                }
+            }
+        }
+
+        /**
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            MessageBox.Show(keyData.ToString());
+            MessageBox.Show(((Keys)Shortcut.CtrlA).ToString());
+
+            if (keyData == (Keys)Shortcut.CtrlA)
+            {
+              
+                foreach (EXListViewItem item in this.exListView2.Items)
+                {
+                    EXControlListViewSubItem sumItem = (EXControlListViewSubItem)item.SubItems[item.SubItems.Count - 1];
+                    CheckBox c = (CheckBox)sumItem.MyControl;
+                    c.Checked = true;
+                }
+            }
+            if (keyData == (Keys.Control | Keys.A))
+            {
+                MessageBox.Show("Ctr+A");
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+         * */
+
+        public List<int> getSelectedAirfoil()
+        {
+            List<int> selectedAirfoil = new List<int>();
+            foreach (EXListViewItem item in this.exListView2.Items)
+            {
+                if (item.Selected)
+                {
+                    selectedAirfoil.Add(Convert.ToInt32(item.Tag));
+                }
+            }
+            return selectedAirfoil;
+        }
+
+       
     }
 }
