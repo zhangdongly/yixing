@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using Yixing.UserTool;
+using Yixing.util;
 
 namespace Yixing.UserControl.DataSourceOperate
 {
@@ -25,6 +28,8 @@ namespace Yixing.UserControl.DataSourceOperate
         private Label label1;
         private Button button1;
         private ImageList iList;
+        private String SQL_PRE = "select name,remark,points_value,max_thickness,max_thickness_location,max_width,max_width_location from airfoil where ";
+
 
        public ComplexAirfoil()
        {
@@ -46,10 +51,10 @@ namespace Yixing.UserControl.DataSourceOperate
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.exListView1 = new Yixing.UserTool.EXListView();
             this.panel3 = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.exListView1 = new Yixing.UserTool.EXListView();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
@@ -112,7 +117,8 @@ namespace Yixing.UserControl.DataSourceOperate
             // chart1
             // 
             chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);      
+                        chartArea1.AxisX.LabelStyle.Format = "{0.00}";
+            this.chart1.ChartAreas.Add(chartArea1);
             this.chart1.Location = new System.Drawing.Point(12, 3);
             this.chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
@@ -175,18 +181,6 @@ namespace Yixing.UserControl.DataSourceOperate
             this.panel4.Size = new System.Drawing.Size(499, 442);
             this.panel4.TabIndex = 1;
             // 
-            // exListView1
-            // 
-            this.exListView1.ControlPadding = 4;
-            this.exListView1.FullRowSelect = true;
-            this.exListView1.Location = new System.Drawing.Point(3, 3);
-            this.exListView1.Name = "exListView1";
-            this.exListView1.OwnerDraw = true;
-            this.exListView1.Size = new System.Drawing.Size(493, 436);
-            this.exListView1.TabIndex = 0;
-            this.exListView1.UseCompatibleStateImageBehavior = false;
-            this.exListView1.View = System.Windows.Forms.View.Details;
-            // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -203,6 +197,7 @@ namespace Yixing.UserControl.DataSourceOperate
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(221, 21);
             this.textBox1.TabIndex = 1;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label1
             // 
@@ -213,6 +208,18 @@ namespace Yixing.UserControl.DataSourceOperate
             this.label1.Size = new System.Drawing.Size(67, 14);
             this.label1.TabIndex = 0;
             this.label1.Text = "翼型名称";
+            // 
+            // exListView1
+            // 
+            this.exListView1.ControlPadding = 4;
+            this.exListView1.FullRowSelect = true;
+            this.exListView1.Location = new System.Drawing.Point(3, 3);
+            this.exListView1.Name = "exListView1";
+            this.exListView1.OwnerDraw = true;
+            this.exListView1.Size = new System.Drawing.Size(493, 436);
+            this.exListView1.TabIndex = 0;
+            this.exListView1.UseCompatibleStateImageBehavior = false;
+            this.exListView1.View = System.Windows.Forms.View.Details;
             // 
             // ComplexAirfoil
             // 
@@ -243,6 +250,7 @@ namespace Yixing.UserControl.DataSourceOperate
             this.exListView1.Columns.Add("翼型名",150);
             this.exListView1.Columns.Add("备注",250);
             this.exListView1.Columns.Add("选择",100);
+            
             this.initData();
 
         }
@@ -277,6 +285,65 @@ namespace Yixing.UserControl.DataSourceOperate
        {
            ComplexAirfoilDetail cad = new ComplexAirfoilDetail();
            cad.Show();
+       }
+
+       private void textBox1_TextChanged(object sender, EventArgs e)
+       {
+           String namePre = this.textBox1.Text;
+           String SQL = SQL_PRE + " name like \"" + namePre + "%\" ;";
+           DataSet ds = DataBaseUtil.GetDataSet(CommandType.Text, SQL, null);
+           addData2Table(ds);
+       }
+
+       public void addData2Table(DataSet ds)
+       {
+           this.exListView1.Items.Clear();
+           foreach (DataRow mDr in ds.Tables[0].Rows)
+           {
+               String name = mDr[0].ToString();
+               if (String.IsNullOrWhiteSpace(name))
+               {
+                   name = "" + (this.exListView1.Items.Count + 1);
+               }
+               EXListViewItem item = new EXListViewItem(name);
+               item.Tag = mDr;
+               item.SubItems.Add(mDr[1].ToString());           
+               CheckBox checkBox = new CheckBox();
+               checkBox.Tag = item;
+               checkBox.Click += new EventHandler(this.select_Click);              
+               EXControlListViewSubItem check = new EXControlListViewSubItem();
+               item.SubItems.Add(check);
+               this.exListView1.AddControlToSubItem(checkBox, check);
+               this.exListView1.Items.Add(item);
+
+           }
+       }
+
+       private void select_Click(object sender, EventArgs e)
+       {
+           CheckBox c = (CheckBox)sender;
+           EXListViewItem item = (EXListViewItem)c.Tag;
+           DataRow mDr = (DataRow)item.Tag;
+           this.label3.Text = "最大厚度为：" + mDr[5].ToString() + ",位于" + mDr[6].ToString();
+           this.label4.Text = "最大弯度为：" + mDr[3].ToString() + ",位于" + mDr[4].ToString();
+           String points = mDr[2].ToString();
+           addPoint(points,mDr[0].ToString());
+       }
+
+       private void addPoint(String points,String name)
+       {
+           this.chart1.Series.Clear();
+           Series s = new Series();           
+           s.Name = name;
+           s.ChartType = SeriesChartType.Line;
+           String[] pointArray = points.Split(';');
+           foreach (String pointXY in pointArray)
+           {
+               String []pointDeailArray = pointXY.Split(':');
+               DataPoint d = new DataPoint(Convert.ToDouble(pointDeailArray[0]), Convert.ToDouble(pointDeailArray[1]));
+               s.Points.Add(d);
+           }
+           this.chart1.Series.Add(s);
        }
 
        

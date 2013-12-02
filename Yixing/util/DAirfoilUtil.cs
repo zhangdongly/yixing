@@ -29,7 +29,7 @@ namespace Yixing.util
             List<String> foilticStringList = FileUtil.readFile(foilticFile);
             initNameFile(nameStringList, dAirFoilList);
             initPointsFile(pointsStringList, dAirFoilList);
-            for (int i = 0; i < 300; i++)
+            for (int i = 0; i < dAirFoilList.Count; i++)
             {
                 if (i % 100 == 0)
                 {
@@ -37,7 +37,7 @@ namespace Yixing.util
                 }
             }
             initFoilticFile(foilticStringList, dAirFoilList);
-            for (int i = 0; i < 300; i++)
+            for (int i = 0; i < dAirFoilList.Count; i++)
             {
                 if (i % 100 == 0)
                 {
@@ -45,7 +45,7 @@ namespace Yixing.util
                 }
             }
             initCalResultFile(calResultStringList, dAirFoilList);
-            for (int i = 0; i < 300; i++)
+            for (int i = 0; i < dAirFoilList.Count; i++)
             {
                 if (i % 100 == 0)
                 {
@@ -127,6 +127,10 @@ namespace Yixing.util
 
         private static void initFoilticFile(List<String> foilticStringList, List<DAirfoil> dAirFoilList)
         {
+            if (foilticStringList.Count <= 0)
+            {
+                return;
+            }
             //第0行为"foil num"，第一行为count，第二行为当前翼型需要
             int index = 2;
             int airFoilCount = 0;

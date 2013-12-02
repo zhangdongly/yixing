@@ -30,6 +30,8 @@ namespace Yixing.UserControl.DataSourceOperate
         private FlowLayoutPanel flowLayoutPanel1;
         private ImageList iList;
         public List<int> airfoilIdList;
+        private object[] conditions = new object[] { "Cl", "Cd", "Cm", "K", "Alpha", "Ma" };
+
 
        public ComplexAirfoilDetail()
        {
@@ -256,6 +258,7 @@ namespace Yixing.UserControl.DataSourceOperate
             this.chart1.ChartAreas[0].AxisX.Maximum = 1;
             this.chart1.ChartAreas[0].AxisX.Name = "X";
             this.chart1.ChartAreas[0].AxisY.Name = "Y";
+
             series1.ChartType = SeriesChartType.Point;
             series1.IsVisibleInLegend = false;
             series1.Points.Add(new DataPoint(0, 0));
@@ -266,8 +269,8 @@ namespace Yixing.UserControl.DataSourceOperate
                 DAirfoil d = DAirfoilUtil.getFullDAirfoil(airfoilId);              
                 this.initData(d);
             }
-            
-          
+            this.comboBox1.Items.AddRange(conditions);
+            this.comboBox2.Items.AddRange(conditions);
 
         }
 

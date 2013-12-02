@@ -24,7 +24,12 @@ namespace Yixing.util
 
         public static List<String> readFile(String fileName)
         {
+
             List<String> infoList = new List<String>();
+            if (string.IsNullOrWhiteSpace(fileName))
+            {
+                return infoList;
+            }
             StreamReader sr = File.OpenText(fileName);
             String line = null;
             while ((line = sr.ReadLine()) != null)
