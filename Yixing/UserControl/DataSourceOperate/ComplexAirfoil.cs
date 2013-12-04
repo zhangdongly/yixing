@@ -29,7 +29,7 @@ namespace Yixing.UserControl.DataSourceOperate
         private Button button1;
         private ImageList iList;
         private String SQL_PRE = "select name,remark,points_value,max_thickness,max_thickness_location,max_width,max_width_location from airfoil where ";
-
+        private String LAST_SQL_SIMPLE = null;
 
        public ComplexAirfoil()
        {
@@ -51,10 +51,10 @@ namespace Yixing.UserControl.DataSourceOperate
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.exListView1 = new Yixing.UserTool.EXListView();
             this.panel3 = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.exListView1 = new Yixing.UserTool.EXListView();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
@@ -116,8 +116,8 @@ namespace Yixing.UserControl.DataSourceOperate
             // 
             // chart1
             // 
+            chartArea1.AxisX.LabelStyle.Format = "{0.00}";
             chartArea1.Name = "ChartArea1";
-                        chartArea1.AxisX.LabelStyle.Format = "{0.00}";
             this.chart1.ChartAreas.Add(chartArea1);
             this.chart1.Location = new System.Drawing.Point(12, 3);
             this.chart1.Name = "chart1";
@@ -172,6 +172,7 @@ namespace Yixing.UserControl.DataSourceOperate
             this.comboBox1.Size = new System.Drawing.Size(189, 20);
             this.comboBox1.TabIndex = 2;
             this.comboBox1.Text = "按名称排序";
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // panel4
             // 
@@ -180,6 +181,18 @@ namespace Yixing.UserControl.DataSourceOperate
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(499, 442);
             this.panel4.TabIndex = 1;
+            // 
+            // exListView1
+            // 
+            this.exListView1.ControlPadding = 4;
+            this.exListView1.FullRowSelect = true;
+            this.exListView1.Location = new System.Drawing.Point(3, 3);
+            this.exListView1.Name = "exListView1";
+            this.exListView1.OwnerDraw = true;
+            this.exListView1.Size = new System.Drawing.Size(493, 436);
+            this.exListView1.TabIndex = 0;
+            this.exListView1.UseCompatibleStateImageBehavior = false;
+            this.exListView1.View = System.Windows.Forms.View.Details;
             // 
             // panel3
             // 
@@ -208,18 +221,6 @@ namespace Yixing.UserControl.DataSourceOperate
             this.label1.Size = new System.Drawing.Size(67, 14);
             this.label1.TabIndex = 0;
             this.label1.Text = "翼型名称";
-            // 
-            // exListView1
-            // 
-            this.exListView1.ControlPadding = 4;
-            this.exListView1.FullRowSelect = true;
-            this.exListView1.Location = new System.Drawing.Point(3, 3);
-            this.exListView1.Name = "exListView1";
-            this.exListView1.OwnerDraw = true;
-            this.exListView1.Size = new System.Drawing.Size(493, 436);
-            this.exListView1.TabIndex = 0;
-            this.exListView1.UseCompatibleStateImageBehavior = false;
-            this.exListView1.View = System.Windows.Forms.View.Details;
             // 
             // ComplexAirfoil
             // 
@@ -290,8 +291,24 @@ namespace Yixing.UserControl.DataSourceOperate
        private void textBox1_TextChanged(object sender, EventArgs e)
        {
            String namePre = this.textBox1.Text;
-           String SQL = SQL_PRE + " name like \"" + namePre + "%\" ;";
+           String SQL = SQL_PRE + " name like \"" + namePre + "%\"";
+           LAST_SQL_SIMPLE = SQL;
+           if ("按名称排序".Equals(this.comboBox1.Text))
+           {
+               SQL += " order by name";
+           }
+           else
+           {
+               SQL += "order by gmt_create";
+           }
+           flushBySQL(SQL);
+       }
+
+       private void flushBySQL(String SQL)
+       {
            DataSet ds = DataBaseUtil.GetDataSet(CommandType.Text, SQL, null);
+          
+           this.label2.Text = "翼型数量：" + ds.Tables[0].Rows.Count;
            addData2Table(ds);
        }
 
@@ -344,6 +361,23 @@ namespace Yixing.UserControl.DataSourceOperate
                s.Points.Add(d);
            }
            this.chart1.Series.Add(s);
+       }
+
+       private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+       {
+           if (LAST_SQL_SIMPLE != null)
+           {
+               String SQL = LAST_SQL_SIMPLE;
+               if ("按名称排序".Equals(this.comboBox1.Text))
+               {
+                   SQL += " order by name";
+               }
+               else
+               {
+                   SQL += "order by gmt_create";
+               }
+               flushBySQL(SQL);
+           }
        }
 
        

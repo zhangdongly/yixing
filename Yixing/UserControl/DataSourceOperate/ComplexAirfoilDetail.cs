@@ -131,7 +131,7 @@ namespace Yixing.UserControl.DataSourceOperate
             this.panel7.Controls.Add(this.chart1);
             this.panel7.Location = new System.Drawing.Point(313, 10);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(455, 234);
+            this.panel7.Size = new System.Drawing.Size(583, 234);
             this.panel7.TabIndex = 1;
             // 
             // chart1
@@ -144,7 +144,7 @@ namespace Yixing.UserControl.DataSourceOperate
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(449, 228);
+            this.chart1.Size = new System.Drawing.Size(577, 228);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
@@ -170,6 +170,7 @@ namespace Yixing.UserControl.DataSourceOperate
             this.button1.TabIndex = 6;
             this.button1.Text = "绘图";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // comboBox2
             // 
@@ -258,7 +259,7 @@ namespace Yixing.UserControl.DataSourceOperate
             this.chart1.ChartAreas[0].AxisX.Maximum = 1;
             this.chart1.ChartAreas[0].AxisX.Name = "X";
             this.chart1.ChartAreas[0].AxisY.Name = "Y";
-
+            
             series1.ChartType = SeriesChartType.Point;
             series1.IsVisibleInLegend = false;
             series1.Points.Add(new DataPoint(0, 0));
@@ -290,11 +291,12 @@ namespace Yixing.UserControl.DataSourceOperate
            exListView.Columns.Add("压力分布");
            exListView.Columns.Add("创建时间");
            exListView.Columns.Add("维护人");
+           exListView.Tag = dAirfoil;
            int i = 1;
            foreach (DCalResult dc in dAirfoil.dCalResultList)
            {
                EXListViewItem item = new EXListViewItem(""+i++);
-              
+               item.Tag = dc;
                item.SubItems.Add(string.Format("{0:0.000}", Convert.ToDouble(dc.re)));
                item.SubItems.Add(string.Format("{0:0.000}", Convert.ToDouble(dc.ma)));
               // item.SubItems.Add(string.Format("{0:00.00}", Convert.ToDouble(dc.alpha)));
@@ -317,6 +319,94 @@ namespace Yixing.UserControl.DataSourceOperate
            this.flowLayoutPanel1.Controls.Add(l);
            this.flowLayoutPanel1.Controls.Add(exListView);
           
+       }
+
+       private void button1_Click(object sender, EventArgs e)
+       {
+           String xValue = this.comboBox1.Text;
+           String yValue = this.comboBox2.Text;
+           this.chart1.Series.Clear();
+           this.chart1.Legends.Clear();
+           Legend le = new Legend();
+          
+           le.LegendStyle = LegendStyle.Table;
+           le.IsDockedInsideChartArea = true;
+           le.DockedToChartArea = "ChartArea1";
+           this.chart1.Legends.Add(le);
+           for(int i=0;i<this.flowLayoutPanel1.Controls.Count;i+=2){
+            EXListView exListView=(EXListView)this.flowLayoutPanel1.Controls[i+1];
+            DAirfoil d = (DAirfoil)exListView.Tag;
+            Series series = new Series();
+            series.MarkerStyle = MarkerStyle.Circle;
+            series.Name = d.name+i;           
+            series.LegendText = series.Name;         
+            series.ChartType = SeriesChartType.Line;
+            foreach (DCalResult dc in d.dCalResultList)
+            {
+                series.Points.Add(getDataPoint(xValue,yValue,dc));
+            }
+            this.chart1.Series.Add(series);
+           }
+       }
+
+       private DataPoint getDataPoint(String xValue, String yValue, DCalResult dc)
+       {
+           if (dc == null || string.IsNullOrWhiteSpace(xValue) || string.IsNullOrWhiteSpace(yValue))
+           {
+               return null;
+           }
+           double x=0, y=0;
+           if (xValue.Equals("Alpha"))
+           {
+               x=dc.alpha;
+           } 
+
+           if(xValue.Equals("Cl")){
+               x=dc.cl;
+           }
+           if (xValue.Equals("Cd"))
+           {
+               x = dc.cd;
+           }
+           if (xValue.Equals("Cm"))
+           {
+               x = dc.cm;
+           }
+           if (xValue.Equals("K"))
+           {
+               x = dc.k;
+           }
+           if (xValue.Equals("Ma"))
+           {
+               x = dc.ma;
+           }
+
+           if (yValue.Equals("Alpha"))
+           {
+               y = dc.alpha;
+           }
+
+           if (yValue.Equals("Cl"))
+           {
+               y = dc.cl;
+           }
+           if (yValue.Equals("Cd"))
+           {
+               y = dc.cd;
+           }
+           if (yValue.Equals("Cm"))
+           {
+               y = dc.cm;
+           }
+           if (yValue.Equals("K"))
+           {
+               y = dc.k;
+           }
+           if (yValue.Equals("Ma"))
+           {
+               y = dc.ma;
+           }
+           return new DataPoint(x, y) ;
        }
 
        
